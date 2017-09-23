@@ -1,0 +1,178 @@
+﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HopAmNhacThanh</title>
+
+    @*<environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>*@
+    @*<link href="~/lib/transposer/jquery.transposer.css" rel="stylesheet" />*@
+    @*<script src="~/lib/jtabify/jtabify.min.js"></script>*@
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    @Html.Raw(JavaScriptSnippet.FullScript)
+</head>
+<body style="background-color: #f1f4f9">
+    @*<environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+
+    </environment>*@
+    @*<script src="~/lib/transposer/jquery.transposer.js"></script>*@
+    @*<nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">HopAmNhacThanh</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                </ul>
+                @await Html.PartialAsync("_LoginPartial")
+            </div>
+        </div>
+    </nav>*@
+    <style>
+        .navbar-default {
+            background-color: #0099cd;
+            border-color: #0786c5;
+        }
+        .navbar-default .navbar-brand {
+            color: #ffffff;
+        }
+            .navbar-default .navbar-nav > li > a {
+                color: #ffffff;
+            }
+    </style>
+    <header class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://hopamviet.vn/">Hợp Âm Nhạc Thánh</a>
+            </div>
+            <nav class="collapse navbar-collapse bs-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book fa-fw fa-lg"></i> Thể loại <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="https://hopamviet.vn/chord/category/1/nhac-vang.html"><i class="fa fa-book"></i>&nbsp; Nhạc Vàng</a></li>
+                            <li><a href="https://hopamviet.vn/chord/category/2/nhac-tru-tinh.html"><i class="fa fa-book"></i>&nbsp; Nhạc Trữ tình</a></li>
+                            <li><a href="https://hopamviet.vn/chord/category/3/nhac-tre.html"><i class="fa fa-book"></i>&nbsp; Nhạc Trẻ</a></li>
+                            <li><a href="https://hopamviet.vn/chord/category/4/nhac-que-huong.html"><i class="fa fa-book"></i>&nbsp; Nhạc Quê hương</a></li>
+                            <li><a href="https://hopamviet.vn/chord/category/5/nhac-ngoai-loi-viet.html"><i class="fa fa-book"></i>&nbsp; Nhạc Ngoại lời Việt</a></li>
+                            <li><a href="https://hopamviet.vn/chord/category/6/nhac-do.html"><i class="fa fa-book"></i>&nbsp; Nhạc Đỏ</a></li>
+                            <li><a href="https://hopamviet.vn/chord/category/7/nhac-dan-ca.html"><i class="fa fa-book"></i>&nbsp; Nhạc Dân ca</a></li>
+                            <li><a href="https://hopamviet.vn/chord/category/8/nhac-quoc-te.html"><i class="fa fa-book"></i>&nbsp; Nhạc Quốc tế</a></li>
+                            <li><a href="https://hopamviet.vn/chord/category/9/nhac-hoc-tro.html"><i class="fa fa-book"></i>&nbsp; Nhạc Học trò</a></li>
+                            <li><a href="https://hopamviet.vn/chord/category/10/nhac-thieu-nhi.html"><i class="fa fa-book"></i>&nbsp; Nhạc Thiếu nhi</a></li>
+                            <li><a href="https://hopamviet.vn/chord/category/11/nhac-thanh-ca.html"><i class="fa fa-book"></i>&nbsp; Nhạc Thánh ca</a></li>
+                            <li><a href="https://hopamviet.vn/chord/category/12/nhac-phat-giao.html"><i class="fa fa-book"></i>&nbsp; Nhạc Phật giáo</a></li>
+                            <li><a href="https://hopamviet.vn/chord/category/13/nhac-che-vui.html"><i class="fa fa-book"></i>&nbsp; Nhạc Chế - Vui</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-music fa-fw fa-lg"></i> Điệu <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="https://hopamviet.vn/chord/rhythm/1/bolero.html"><i class="fa fa-music"></i>&nbsp; Boléro</a></li>
+                            <li><a href="https://hopamviet.vn/chord/rhythm/2/slow.html"><i class="fa fa-music"></i>&nbsp; Slow</a></li>
+                            <li><a href="https://hopamviet.vn/chord/rhythm/3/slow-rock.html"><i class="fa fa-music"></i>&nbsp; Slow Rock</a></li>
+                            <li><a href="https://hopamviet.vn/chord/rhythm/4/slow-surf.html"><i class="fa fa-music"></i>&nbsp; Slow Surf</a></li>
+                            <li><a href="https://hopamviet.vn/chord/rhythm/5/blues.html"><i class="fa fa-music"></i>&nbsp; Blues</a></li>
+                            <li><a href="https://hopamviet.vn/chord/rhythm/6/ballade.html"><i class="fa fa-music"></i>&nbsp; Ballade</a></li>
+                            <li><a href="https://hopamviet.vn/chord/rhythm/7/chachacha.html"><i class="fa fa-music"></i>&nbsp; Chachacha</a></li>
+                            <li><a href="https://hopamviet.vn/chord/rhythm/8/disco.html"><i class="fa fa-music"></i>&nbsp; Disco</a></li>
+                            <li><a href="https://hopamviet.vn/chord/rhythm/9/rhumba.html"><i class="fa fa-music"></i>&nbsp; Rhumba</a></li>
+                            <li><a href="https://hopamviet.vn/chord/rhythm/10/tango.html"><i class="fa fa-music"></i>&nbsp; Tango</a></li>
+                            <li><a href="https://hopamviet.vn/chord/rhythm/11/boston.html"><i class="fa fa-music"></i>&nbsp; Boston</a></li>
+                            <li><a href="https://hopamviet.vn/chord/rhythm/12/fox.html"><i class="fa fa-music"></i>&nbsp; Fox</a></li>
+                            <li><a href="https://hopamviet.vn/chord/rhythm/13/rock.html"><i class="fa fa-music"></i>&nbsp; Rock</a></li>
+                            <li><a href="https://hopamviet.vn/chord/rhythm/14/valse.html"><i class="fa fa-music"></i>&nbsp; Valse</a></li>
+                            <li><a href="https://hopamviet.vn/chord/rhythm/15/bossa-nova.html"><i class="fa fa-music"></i>&nbsp; Bossa Nova</a></li>
+                            <li><a href="https://hopamviet.vn/chord/rhythm/16/pop.html"><i class="fa fa-music"></i>&nbsp; Pop</a></li>
+                            <li><a href="https://hopamviet.vn/chord/rhythm/17/habanera.html"><i class="fa fa-music"></i>&nbsp; Habanera</a></li>
+                            <li><a href="https://hopamviet.vn/chord/rhythm/18/twist.html"><i class="fa fa-music"></i>&nbsp; Twist</a></li>
+                            <li><a href="https://hopamviet.vn/chord/rhythm/19/march.html"><i class="fa fa-music"></i>&nbsp; March</a></li>
+                            <li><a href="https://hopamviet.vn/chord/rhythm/20/pasodope.html"><i class="fa fa-music"></i>&nbsp; Pasodope</a></li>
+                            <li><a href="https://hopamviet.vn/chord/rhythm/21/slow-ballad.html"><i class="fa fa-music"></i>&nbsp; Slow Ballad</a></li>
+                            <li><a href="https://hopamviet.vn/chord/rhythm/22/rap.html"><i class="fa fa-music"></i>&nbsp; Rap</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="https://hopamviet.vn/user/likes.html"><i class="fa fa-star-o fa-fw fa-lg"></i> Yêu thích</a></li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-top-links navbar-right">
+                    <li><a href="https://hopamviet.vn/auth/register.html"><i class="fa fa-key fa-fw"></i> Đăng ký</a></li>
+                    <li><a href="https://hopamviet.vn/auth/login.html"><i class="fa fa-lock fa-fw"></i> Đăng nhập</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        @RenderBody()
+        <hr />
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="pull-left">
+                            &copy; 2014 - 2017 <a href="http://hopamviet.vn/">hopamviet.vn</a> /
+                            <a href="/about">Giới thiệu</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    @*<script type="text/javascript">
+        $(function () {
+            $("pre").transpose();
+        });
+    </script>*@
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
