@@ -20,6 +20,8 @@ namespace HopAmNhacThanh.Controllers
             return View();
         }
 
+
+
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
@@ -34,6 +36,11 @@ namespace HopAmNhacThanh.Controllers
         }
 
         public IActionResult Error()
+        {
+            return View();
+        }
+
+        public IActionResult Single2()
         {
             return View();
         }
