@@ -4,7 +4,7 @@
     }
 </style>
 <div class="sidebar-search">
-    <div id="hot-today" class="panel panel-default">
+    <div id="search-google" class="panel panel-default">
         <div class="panel-body">
             <h2 class="text-primary" style="font-size:larger; font-weight:bold">Tìm kiếm</h2><hr />
             <script defer>
@@ -44,28 +44,49 @@
     </div>
 </div>
 
-<div>
+<div id="rhythm" class="panel panel-default">
     <style>
-            .list-group-item {
-                /*border: 1px solid #337ab7;*/
-            }
-        </style>
-        <div class="list-group">
-            <a href="https://hopamviet.vn/chord/category/1/nhac-vang.html" class="list-group-item"><span class="badge">1698</span><i class="fa fa-book"></i> Nhạc Vàng</a>
-            <a href="https://hopamviet.vn/chord/category/2/nhac-tru-tinh.html" class="list-group-item"><span class="badge">4453</span><i class="fa fa-book"></i> Nhạc Trữ tình</a>
-            <a href="https://hopamviet.vn/chord/category/3/nhac-tre.html" class="list-group-item"><span class="badge">5808</span><i class="fa fa-book"></i> Nhạc Trẻ</a>
-            <a href="https://hopamviet.vn/chord/category/4/nhac-que-huong.html" class="list-group-item"><span class="badge">579</span><i class="fa fa-book"></i> Nhạc Quê hương</a>
-            <a href="https://hopamviet.vn/chord/category/5/nhac-ngoai-loi-viet.html" class="list-group-item"><span class="badge">810</span><i class="fa fa-book"></i> Nhạc Ngoại lời Việt</a>
-            <a href="https://hopamviet.vn/chord/category/6/nhac-do.html" class="list-group-item"><span class="badge">251</span><i class="fa fa-book"></i> Nhạc Đỏ</a>
-            <a href="https://hopamviet.vn/chord/category/7/nhac-dan-ca.html" class="list-group-item"><span class="badge">44</span><i class="fa fa-book"></i> Nhạc Dân ca</a>
-            <a href="https://hopamviet.vn/chord/category/8/nhac-quoc-te.html" class="list-group-item"><span class="badge">857</span><i class="fa fa-book"></i> Nhạc Quốc tế</a>
-            <a href="https://hopamviet.vn/chord/category/9/nhac-hoc-tro.html" class="list-group-item"><span class="badge">132</span><i class="fa fa-book"></i> Nhạc Học trò</a>
-            <a href="https://hopamviet.vn/chord/category/10/nhac-thieu-nhi.html" class="list-group-item"><span class="badge">183</span><i class="fa fa-book"></i> Nhạc Thiếu nhi</a>
-            <a href="https://hopamviet.vn/chord/category/11/nhac-thanh-ca.html" class="list-group-item"><span class="badge">267</span><i class="fa fa-book"></i> Nhạc Thánh ca</a>
-            <a href="https://hopamviet.vn/chord/category/12/nhac-phat-giao.html" class="list-group-item"><span class="badge">133</span><i class="fa fa-book"></i> Nhạc Phật giáo</a>
-            <a href="https://hopamviet.vn/chord/category/13/nhac-che-vui.html" class="list-group-item"><span class="badge">66</span><i class="fa fa-book"></i> Nhạc Chế - Vui</a>
+        .rhythm-item:hover {
+            text-decoration: none;
+            color: blue;
+        }
+        .rhythm-item {
+            white-space: nowrap;
+            background-color: #ddd;
+            padding: 10px 7px;
+            font-size: 12px;
+            line-height: 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            -webkit-transition: box-shadow .1s,background-color .1s;
+            -moz-transition: box-shadow .1s,background-color .1s;
+            -ms-transition: box-shadow .1s,background-color .1s;
+            -o-transition: box-shadow .1s,background-color .1s;
+            color: white;
+            text-decoration: none;
+            margin: 5px;
+            transition: box-shadow .1s,background-color .1s;
+            display: inline-block;
+        }
+    </style>
+    <div class="panel-body text-center">
+        <h2 class="text-primary" style="font-size:larger; font-weight:bold">Điệu bài hát</h2><hr />
+        
+        <div class="rhythm-list">
+            <a style="background-color: greenyellow" class="rhythm-item" data-rhythm="ballad" href="">
+                Điệu Ballad (3000 bài)
+            </a>
+            <a style="background-color: cornflowerblue" class="rhythm-item" data-rhythm="ballad" href="">
+                Điệu Ballad (3000 bài)
+            </a>
+            <a style="background-color: coral" class="rhythm-item" data-rhythm="ballad" href="">
+                Điệu Ballad (3000 bài)
+            </a>
+            <a class="rhythm-item" data-rhythm="ballad" href="">
+                Điệu Ballad (3000 bài)
+            </a>
         </div>
-
+    </div>
 </div>
 
 <div id="hot-today" class="panel panel-default">
@@ -131,9 +152,9 @@
                 <i class="fa fa-star"></i>
                 <span class="hot-today-view-count">3257</span>
             </span>
-            <a class="hot-today-item-song" href="/song/11185/chieu-hom-ay">
+            <a class="hot-today-item-song" asp-controller="home" asp-action="single">
                 1.
-                Chiều Hôm Ấy
+                Con cần cha
             </a>
             <span class="hot-today-item-singers">
                 <a href="/artist/23465/jayk">
@@ -149,7 +170,7 @@
             </span>
             <a class="hot-today-item-song" href="/song/8801/anh-nang-cua-anh">
                 2.
-                Ánh nắng của anh
+                Con cần cha
             </a>
             <span class="hot-today-item-singers">
                 <a href="/artist/21806/duc-phuc">
@@ -165,7 +186,7 @@
             </span>
             <a class="hot-today-item-song" href="/song/510/nguoi-ta-noi">
                 3.
-                Người Ta Nói
+                Con cần cha
             </a>
             <span class="hot-today-item-singers">
                 <a href="/artist/63/ung-hoang-phuc">
@@ -189,7 +210,7 @@
             </span>
             <a class="hot-today-item-song" href="/song/12118/tuy-am">
                 4.
-                Tuý Âm
+                Con cần cha
             </a>
             <span class="hot-today-item-singers">
                 <a href="/artist/23752/xesi">
@@ -205,7 +226,7 @@
             </span>
             <a class="hot-today-item-song" href="/song/1528/ngay-mai-em-di">
                 5.
-                Ngày Mai Em Đi
+                Con cần cha
             </a>
             <span class="hot-today-item-singers">
                 <a href="/artist/24/le-hieu">
@@ -233,7 +254,7 @@
             </span>
             <a class="hot-today-item-song" href="/song/1197/nguoi-tinh-mua-dong">
                 6.
-                Người Tình Mùa Đông
+                Con cần cha
             </a>
             <span class="hot-today-item-singers">
                 <a href="/artist/3273/nhu-quynh">
@@ -249,7 +270,7 @@
             </span>
             <a class="hot-today-item-song" href="/song/8503/phia-sau-mot-co-gai">
                 7.
-                Phía Sau Một Cô Gái
+                Con cần cha
             </a>
             <span class="hot-today-item-singers">
                 <a href="/artist/21504/soobin-hoang-son">
@@ -265,7 +286,7 @@
             </span>
             <a class="hot-today-item-song" href="/song/11490/xin-dung-lang-im-">
                 8.
-                Xin Đừng Lặng Im
+                Con cần cha
             </a>
             <span class="hot-today-item-singers">
                 <a href="/artist/21504/soobin-hoang-son">
@@ -281,7 +302,7 @@
             </span>
             <a class="hot-today-item-song" href="/song/11423/dau-chi-rieng-em">
                 9.
-                Đâu chỉ riêng em
+                Con cần cha
             </a>
             <span class="hot-today-item-singers">
                 <a href="/artist/54/my-tam">
@@ -297,7 +318,7 @@
             </span>
             <a class="hot-today-item-song" href="/song/5600/mot-nha-">
                 10.
-                Một Nhà
+                Con cần cha
             </a>
             <span class="hot-today-item-singers">
                 <a href="/artist/21395/da-lab">
@@ -348,3 +369,10 @@
     </div>
 </div>
 
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h2 class="text-primary" style="font-size: larger">Tìm chúng tôi trên facebook</h2>
+        <hr />
+        <div class="fb-page" data-href="https://www.facebook.com/H%E1%BB%A3p-%C3%A2m-Nh%E1%BA%A1c-Th%C3%A1nh-883153405186191/" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/H%E1%BB%A3p-%C3%A2m-Nh%E1%BA%A1c-Th%C3%A1nh-883153405186191/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/H%E1%BB%A3p-%C3%A2m-Nh%E1%BA%A1c-Th%C3%A1nh-883153405186191/">Hợp âm Nhạc Thánh</a></blockquote></div>
+    </div>
+</div>
