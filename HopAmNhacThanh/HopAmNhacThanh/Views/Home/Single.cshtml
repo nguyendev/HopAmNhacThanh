@@ -19,7 +19,7 @@
         </div>
         <div class="panel panel-default">
             <div class="panel-body">
-                <div class="ibar" id="15303">
+                <div>
                     <div class="row">
                         <h3 class="col-md-10">
                             Chạm lòng con Chúa ơi
@@ -27,38 +27,12 @@
                             </small>
                         </h3>
                         <div class="col-md-2">
-                            <h3 id="version" class="dropdown">
-                                <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">
-                                    Phiên bản
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Hợp âm Nguyễn Văn A</a></li>
-                                    <li><a href="#">Hợp âm Nguyễn Văn B</a></li>
-                                    <li><a href="#">Hợp âm Nguyễn Văn C</a></li>
-                                </ul>
+                            <h3 class="dropdown pull-right">
+                                <button class="btn btn-success btn-sm"  type="button" data-toggle="modal" data-target="#versionModel">Phiên bản</button>
                             </h3>
                         </div>
-                        
+                    </div>
 
-                        @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>*@
-                        
-                    </div>
-                    <div class="row">
-                        <div class="lid">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    adfjksjdafkjdf i love
-                                </div>
-                            </div>
-                        </div>
-                        <script>
-                            $('.lid').hide();
-                            jQuery('#version').hover(function () {
-                                $('.lid').toggle();
-                            });
-                        </script>
-                    </div>
                     <div class="row">
                         <div class="col-md-9" style="vertical-align: middle; padding-top: 5px; line-height: 1.5;
     border-radius: 3px">
@@ -70,52 +44,80 @@
                             <i title="Lượt xem" class="fa fa-eye"></i> 25
                         </div>
                         <div class="col-md-3">
-                            <div class="btn-group pull-right">
-                                <span id="fontsize" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="fa fa-font fa-1x"></i></span>
-
-                                <a href="https://hopamviet.vn/chord/printsong/chia-tay/W8IUUAC8.html" target="_blank" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="fa fa-print"></i></a>
-                                <span id="clone" class="btn btn-default btn-sm">x2</span>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
-                <br />
                 <style>
                     .transpose-keys a {
                         color: #333;
                         background-color: #fff;
                         border-color: #ccc;
                     }
+                    #lyric, #form-lyric, #intro {
+                        margin-top: 20px;
+                    }
+                    #intro {
+                        border: 1px dashed #969696;
+                        background-color: #fffce0;
+                        padding: 10px 10px;
+                        display: inline-block;
+                    }
                 </style>
-                <div id="lyric">
-                    <pre class="lyric" data-key="C" style="background-color: #ffffff; font-size:14px;">
-Intro: 
-C  Dm  F   C    F   G   C
+                <div id="form-lyric">
+                    <div class="btn-group">
+                        <div id="musicalKey" style="margin-right: 5px;" class="annotation btn-group"><span class="key btn btn-default btn-sm">G</span></div>
+                        <div class="btn-group">
+                            <span id="fontsize" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="fa fa-font fa-1x"></i></span>
+                            <a href="https://hopamviet.vn/chord/printsong/chia-tay/W8IUUAC8.html" target="_blank" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="fa fa-print"></i></a>
+                            <span id="clone" class="btn btn-default btn-sm">x2</span>
 
-     C                    Dm  
-1. Chạm lòng con chúa ơi ngay giờ này. 
-          F                 C  
-chạm lòng con để con không xa ngài.
-          C                  Dm 
-chạm lòng con chúa ơi ngay giờ này. 
-          F                 C
-chạm lòng con để con say mê ngài.
-             Am                           Em  
-vực con vươn lên, khỏi chốn tối tăm tuyệt vọng. 
-             F                       G   
-vực con vươn lên khỏi nghi sợ và sầu não. 
-           F                           Em     
-thì con sẽ hát chúc tán ngợi khen danh chúa.
-              Dm       G
-xin thần linh đến chạm vào con ngay chúa ơi
-                        </pre>
+                        </div>
+                    </div>
+                    <br />
+                    <div id="intro">
+                        Tone Xesi Cm; Capo 3 chơi <span class="chord">[Am]</span> <br />
+                        hợp âm chia ở tone <span class="chord">[Am]</span> <br />
+                        Intro: <span class="chord">[C]</span> <span class="chord">[F]</span> <span class="chord">[G]</span> <span class="chord">[C]</span>
+                    </div>
+                    <div id="lyric">
+                        1. Chạm lòng <span class="chord">[C]</span> con Chúa ơi, ngay giờ <span class="chord">[Dm]</span> này<br>
+                        Chạm lòng <span class="chord">[F]</span> con để <span class="chord">[E7]</span> con không xa <span class="chord">[Am]</span> Ngài<br>
+                        Chạm lòng <span class="chord">[G]</span> con Chúa <span class="chord">[A7]</span> ơi, ngay giờ <span class="chord">[Dm]</span> này<br>
+                        Chạm lòng <span class="chord">[F]</span> con để <span class="chord">[G7]</span> con say mê <span class="chord">[C]</span> Ngài. <br>
+                        <br>
+                        Vực con vươn <span class="chord">[C]</span> lên khỏi chốn tối tăm tuyệt <span class="chord">[G]</span> vọng <br>
+                        Vực con vươn <span class="chord">[Am]</span> lên khỏi <span class="chord">[D]</span> nghi sợ và sầu <span class="chord">[G]</span> não <span class="chord">[C]</span> <br>
+                        Thì con sẽ <span class="chord">[F]</span> hát chúc tán ngợi khen danh <span class="chord">[G]</span> Chúa <span class="chord">[A7]</span> <br>
+                        Xin thần linh <span class="chord">[Dm]</span> đến chạm <span class="chord">[G7]</span> vào con ngay Chúa <span class="chord">[C]</span> ơi. <br>
+                        <br>
+                        2. Chạm lòng <span class="chord">[C]</span> con Chúa ơi, ngay giờ <span class="chord">[Dm]</span> này<br>
+                        Chạm lòng <span class="chord">[F]</span> con để <span class="chord">[E7]</span> con luôn tin <span class="chord">[Am]</span> Ngài<br>
+                        Chạm lòng <span class="chord">[G]</span> con Chúa <span class="chord">[A7]</span> ơi, ngay giờ <span class="chord">[Dm]</span> này<br>
+                        Chạm lòng <span class="chord">[F]</span> con để <span class="chord">[G7]</span> con luôn yêu <span class="chord">[C]</span> Ngài. <span class="chord">[G]</span><br>
+                        <br>
+                        Vực con vươn <span class="chord">[C]</span> lên khỏi chốn tối tăm tuyệt <span class="chord">[G]</span> vọng<br>
+                        Vực con vươn <span class="chord">[Am]</span> lên khỏi <span class="chord">[D]</span> nghi sợ và sầu <span class="chord">[G]</span> não <span class="chord">[C]</span><br>
+                        Thì con sẽ <span class="chord">[F]</span> hát chúc tán ngợi khen danh <span class="chord">[G]</span> Chúa <span class="chord">[A7]</span><br>
+                        Xin thần linh <span class="chord">[Dm]</span> đến chạm <span class="chord">[G7]</span> vào con ngay Chúa <span class="chord">[C]</span> ơi. <br><br>
+                    </div>
+                    <div id="draw-chords"></div>
+                    
+                    <style>
+                        #draw-chords {
+                            background: #ffffff;
+                            display: none;
+                            border-radius: 10px;
+                            background: #fff;
+                            box-shadow: 0 1px 2px rgba(0,0,0,.3);
+                            text-align: center;
+                            transform: translate3d(0,0,0);
+                            user-select: none;
+                            outline-style: none;
+                        }
+                    </style>
+                    
                 </div>
-                <script type="text/javascript">
-                    $(function () {
-                        $("pre").transpose();
-                    });
-                </script>
-
                 <br />
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -130,67 +132,7 @@ xin thần linh đến chạm vào con ngay chúa ơi
                             <div class="tab-content">
                                 <div id="guitar" class="tab-pane fade in active">
                                     <div id="mytab"></div>
-                                    <script defer>
-                                    //Change Chords
-                                    function changeChords() {
-                                        var chords = [];
-                                        $('span.c').each(function () {
-
-                                            chords.push($(this).text());
-                                        });
-
-                                        //unique string
-                                        var unique = chords.filter(function (itm, i, chords) {
-                                            return i == chords.indexOf(itm);
-                                        });
-                                        var formatText = unique.toString();
-
-
-                                        //var repaceText = formatText.split(",").join(" ");
-                                        //var length = repaceText.length;
-                                        //var rowChords = Math.floor(length / 4);
-                                        //alert(rowChords);
-
-                                        //function myFunction(item, index) {
-                                        //    //demoP.innerHTML = demoP.innerHTML + "index[" + index + "]: " + item + "<br>";
-                                        //    $("#mytab").append('<div class="col-md-3">dfaadfads</div>');
-
-                                        //    jtab.render($('#mytab'), item);
-                                        //    alert(item);
-
-                                        //}
-                                        //alert(unique);
-                                        //unique.forEach(myFunction);
-                                        $("#mytab").empty();
-                                        for (var i = 0; i < unique.length; i++) {
-                                            $("#mytab").append('<span class="col-md-3 col-xs-6 jtab chordonly left">' + unique[i] + '</span>');
-                                        }
-                                        $("#mytab").append('<div class="clear"><div class="row"><span></span></div></div>');
-                                        jtab.renderimplicit();
-
-                                        //jtab.render($('#mytab'), repaceText);
-                                    }
-
-                                    $(document).ready(function () {
-                                        changeChords();
-                                        $("a").click(function () {
-                                            var $this = $(this);
-                                            if ($this.data('clicked')) {
-                                            }
-                                            else {
-                                                $this.data('clicked', true);
-                                                changeChords();
-                                            }
-                                        });
-                                    });
-                                    </script>
-                                    @*<i class="fa fa-book"> Guitar </i><input class="form-control" id="user_notation">
-                                    <div id="tab" class="col-md-12"><i></i></div>
-                                    <script type='text/javascript'>
-                                        $('#user_notation').keyup(function (e) {
-                                            jtab.render($('#tab'), $(this).val());
-                                        });
-                                    </script>*@
+                                   
                                 </div>
                                 <div id="ukulele" class="tab-pane fade">
                                     <p>Sẽ cập nhật sau </p>
@@ -209,102 +151,126 @@ xin thần linh đến chạm vào con ngay chúa ơi
         </div>
     </div>
     <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-body">
-
-                <h5>
-                    <strong>Nghe bài hát</strong>
-                </h5>
-                <div id="fullsong" style="overflow: auto;">
-                    <p>
-                        <i class="fa fa-music"></i>
-                        <a href="https://hopamviet.vn/chord/singer/Bùi Anh Tuấn"><strong style="color: #000">Nguyễn Đình Thông</strong></a>
-                        <span class="pull-right"><a href="https://hopamviet.vn/chord/download/W8IUABBO.html" title="Tải bài hát do ca sĩ Bùi Anh Tuấn thể hiện"><i class="fa fa-download"></i></a> <span class="label label-default">C</span></span>
-                    </p>
-                    <p>
-                        <audio controls preload="none"><source src="http://data.chiasenhac.com/downloads/1828/6/1827610-ae88aca0/128/Chia%20Tay%20-%20Bui%20Anh%20Tuan[MP3 128kbps].mp3" type="audio/mpeg">Your browser does not support the audio element. </audio>
-                    </p>
-                </div>
-                @*<div id="moresong" style="cursor:pointer" onclick="show_fullsong();" align="right"></div>*@
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <h5>
-                    <strong>Sheet music</strong>
-                </h5>
-            </div>
-            <div class=" text-center">
-                <p><label>Chưa có sheet, sẽ cập nhật sau</label></p>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading" style="background-color: white">
-                <h5 class="panel-title">
-                    <strong>Video liên quan</strong>
-                </h5>
-            </div>
-            <div class="panel-body text-center">
-                <iframe height="250px" src="https://www.youtube.com/embed/xL1V-85I_fM" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </div>
-
-        <a class="btn btn-info btn-block" href="https://hopamviet.vn/chord/request.html" role="button">Nhấn vào đây để yêu cầu hợp âm bài hát</a><br />
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <h5>
-                    <strong>Có thể bạn quan tâm</strong>
-                </h5>
-                <p> <a href="https://hopamviet.vn/chord/song/bat-tivi/W8IUW6C8.html"><i class="fa fa-music"></i> Tình yêu trong ý Chúa</a></p>
-                <p> <a href="https://hopamviet.vn/chord/song/canh-hoa-tan/W8IUWEEW.html"><i class="fa fa-music"></i> Lửa phục hưng</a></p>
-                <p> <a href="https://hopamviet.vn/chord/song/de-tron-doi-thuong-nho/W8IUW9BA.html"><i class="fa fa-music"></i> Hát như Đavít xưa</a></p>
-
-
-            </div>
-        </div>
+        @Html.Partial("SidebarSingle")
     </div>
 </div>
+@Html.Partial("ModelSingle")
 
-<div id="musicModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form action="https://hopamviet.vn/chord/insert_song" method="post">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4>Thêm bài hát mới</h4>
-                </div>
-                <div class="modal-body">
-                    Bạn chưa đăng nhập hoặc bài hát này không phải bạn đăng.
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
+<div id="fb-root"></div>
 
-
-<div id="sheetModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form action="https://hopamviet.vn/chord/insert_sheet" enctype="multipart/form-data" method="post">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4>Thêm sheet nhạc</h4>
-                </div>
-                <div class="modal-body">
-                    Bạn chưa đăng nhập hoặc bài hát này không phải của bạn đăng.
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
-
+@section Style {
+<link href="~/lib/ChordPro/css/chopro.css" rel="stylesheet" />
+}
+@section ScriptsHead {
+<script src="~/lib/ChordPro/js/elb.js"></script>
+@*<script src="~/lib/ChordPro/js/jquery-1.6.2.min.js"></script>*@
+<script src="~/lib/ChordPro/js/Transposer.js"></script>
 <script>
-    $(document).ready(function () {
-        $('#lyric').bind("cut copy paste", function (e) {
-            /* alert('Copy Paste is disabled');*/
-            e.preventDefault();
+        jQuery(document).ready(function () {
+            var ourKeyElement, ourTransposer;
+            ourKeyElement = jQuery("#musicalKey");
+            ourTransposer = ELB.Music.aTransposer(ourKeyElement);
+
         });
-    });
+</script>
+}
+
+@section Scripts {
+<script defer>
+        $('.chord').mouseover(function () {
+            //("#userblock").show();
+            var txtChords = $(this).text();
+            txtChords = txtChords.replace('[', '');
+            txtChords = txtChords.replace(']', '');
+            txtChords = txtChords.replace('♭', 'b');
+            txtChords = txtChords.replace('♯', '#');
+            $("#draw-chords").empty();
+            $("#draw-chords").append('<span class="col-md-3 col-xs-6 jtab chordonly left">' + txtChords + '</span>');
+            var showChords = $("#draw-chords");
+            var currentChords = $(this);
+            setTimeout(function () {
+                var positionChords = currentChords.offset();
+                showChords.css({
+                    position: "absolute",
+                    top: positionChords.top - 200 + "px",
+                    left: positionChords.left - 70 + "px",
+
+                }).show();
+
+                jtab.renderimplicit();
+            }, 300);
+
+        }).mouseleave(function () {
+            setTimeout(function () {
+                $("#draw-chords").hide();
+            }, 300);
+        });
+</script>
+<script defer>
+         //Change Chords
+         function changeChords() {
+             var chords = [];
+             $('span.chord').each(function () {
+                 var txtChords = $(this).text()
+                 txtChords = txtChords.replace('[', '');
+                 txtChords = txtChords.replace(']', '');
+                 txtChords = txtChords.replace('♭', 'b');
+                 txtChords = txtChords.replace('♯', '#');
+                 chords.push(txtChords);
+             });
+
+             //unique string
+             var unique = chords.filter(function (itm, i, chords) {
+                 return i == chords.indexOf(itm);
+             });
+             var formatText = unique.toString();
+
+
+             //var repaceText = formatText.split(",").join(" ");
+             //var length = repaceText.length;
+             //var rowChords = Math.floor(length / 4);
+             //alert(rowChords);
+
+             //function myFunction(item, index) {
+             //    //demoP.innerHTML = demoP.innerHTML + "index[" + index + "]: " + item + "<br>";
+             //    $("#mytab").append('<div class="col-md-3">dfaadfads</div>');
+
+             //    jtab.render($('#mytab'), item);
+             //    alert(item);
+
+             //}
+             //alert(unique);
+             //unique.forEach(myFunction);
+             $("#mytab").empty();
+             for (var i = 0; i < unique.length; i++) {
+                 $("#mytab").append('<span class="col-md-3 col-xs-6 jtab chordonly left">' + unique[i] + '</span>');
+             }
+             $("#mytab").append('<div class="clear"><div class="row"><span></span></div></div>');
+             jtab.renderimplicit();
+
+             //jtab.render($('#mytab'), repaceText);
+         }
+
+         $(document).ready(function () {
+             changeChords();
+             $(".tbutton").click(function () {
+                 //var $this = $(this);
+                 //if ($this.data('clicked')) {
+                 //}
+                 //else {
+                 //    $this.data('clicked', true);
+                 changeChords();
+                 //}
+             });
+         });
+</script>
+<script>
+         $(document).ready(function () {
+             $('#lyric').bind("cut copy paste", function (e) {
+                 /* alert('Copy Paste is disabled');*/
+                 e.preventDefault();
+             });
+         });
 </script>
 <script>
     ////tu dong truot
@@ -341,15 +307,13 @@ xin thần linh đến chạm vào con ngay chúa ơi
 
 
 </script>
-<div id="fb-root"></div>
 <script>
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.10&appId=1936754129675486";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-<script>
+         (function (d, s, id) {
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) return;
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.10&appId=1936754129675486";
+             fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));</script>
 
-</script>
+}

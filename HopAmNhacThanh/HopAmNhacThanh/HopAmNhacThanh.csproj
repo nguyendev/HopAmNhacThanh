@@ -6,13 +6,6 @@
     <UserSecretsId>aspnet-HopAmNhacThanh-2CB83202-6D13-49C7-B100-1D2DA8A0CBA6</UserSecretsId>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="wwwroot\lib\NewFolder\**" />
-    <Content Remove="wwwroot\lib\NewFolder\**" />
-    <EmbeddedResource Remove="wwwroot\lib\NewFolder\**" />
-    <None Remove="wwwroot\lib\NewFolder\**" />
-  </ItemGroup>
-
 
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
@@ -36,10 +29,6 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.1" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.1" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\lib\jtab-tardate\" />
   </ItemGroup>
 
 </Project>

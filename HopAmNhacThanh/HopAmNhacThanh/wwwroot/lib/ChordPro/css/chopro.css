@@ -1,0 +1,76 @@
+.chord,.key {
+/*  font-family: Incosolata,Consolas,monospace; */
+  font-family: Arial,Futura,Helvetica,sans-serif;
+  color: red;
+}
+.offKey {
+  color: orange;
+}
+
+/*a {color: cyan}*/
+a:visited {color: mediumpurple}
+
+html{
+  background-color: black;
+}
+
+body {
+  color: black;
+}
+
+table {
+  background: none;
+  color: white;
+}
+
+.lyric {
+    background: none;
+    color: black;
+    width: 75%
+}
+
+.annotation {
+  font-style: italic;
+  color: silver;
+}
+
+div.chorus {
+  margin-left:  3%;
+  color: white;
+}
+
+div.bridge {
+  margin-left:  3%;
+}
+
+div.tabulature {
+  font-family: Incosolata,Consolas,monospace;
+  white-space: pre;
+}
+#Gadgets {
+  float: right;
+}
+#Gadgets canvas {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+#Gadgets form {
+  text-align: center;
+}
+
+
+p.lyric {
+    line-height: 250%;
+    position: relative;
+    padding-top: 1em;
+}
+span.chord {
+    /*position: relative;*/
+    /*top: -1em;
+    width: 0;
+    display: inline-block;
+    
+    font-family: Arial;*/
+    color: blue;
+}

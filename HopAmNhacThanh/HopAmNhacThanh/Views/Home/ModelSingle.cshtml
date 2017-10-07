@@ -1,0 +1,145 @@
+﻿
+<div id="musicModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form action="https://hopamviet.vn/chord/insert_song" method="post">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4>Thêm bài hát mới</h4>
+                </div>
+                <div class="modal-body">
+                    Bạn chưa đăng nhập hoặc bài hát này không phải bạn đăng.
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div id="sheetModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form action="https://hopamviet.vn/chord/insert_sheet" enctype="multipart/form-data" method="post">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4>Thêm sheet nhạc</h4>
+                </div>
+                <div class="modal-body">
+                    Bạn chưa đăng nhập hoặc bài hát này không phải của bạn đăng.
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<style>
+    .version-model {
+        /*background-color: white;*/
+    }
+</style>
+<div class="modal fade version-model" id="versionModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">Tất cả phiên bản</h4>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <style>
+                        .table {
+                            color: black !important
+                        }
+                        tr.active {
+                            background-color: deepskyblue;
+                        }
+                        tr:hover {
+                            background-color: yellow;
+                        }
+                    </style>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Phiên bản</th>
+                                <th>Xếp loại</th>
+                                <th>Thông tin</th>
+                                <th>Tác giả</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a asp-controller="Home" asp-action="Single">Hợp âm nâng cao</a></td>
+                                <td><div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div></td>
+                                <td>Hợp âm nâng cao</td>
+                                <td>
+                                    <img src="https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.0-1/p40x40/15726586_1049327511879462_6901300413484871919_n.jpg?oh=0ae04013d348113dc3851e3b33cb43cb&oe=5A4137CB" width="20px" height="20px" />
+                                    <label>Nguyễn Văn Tèo</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a asp-controller="Home" asp-action="Single">Hợp âm nâng cao</a></td>
+                                <td><div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div></td>
+                                <td>Hợp âm nâng cao</td>
+                                <td>
+                                    <img src="https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.0-1/p40x40/15726586_1049327511879462_6901300413484871919_n.jpg?oh=0ae04013d348113dc3851e3b33cb43cb&oe=5A4137CB" width="20px" height="20px" />
+                                    <label>Nguyễn Văn Tèo</label>
+                                </td>
+                            </tr>
+                            <tr class="active">
+                                <td><a asp-controller="Home" asp-action="Single">Hợp âm nâng cao</a></td>
+                                <td><div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div></td>
+                                <td>Hợp âm nâng cao</td>
+                                <td>
+                                    <img src="https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.0-1/p40x40/15726586_1049327511879462_6901300413484871919_n.jpg?oh=0ae04013d348113dc3851e3b33cb43cb&oe=5A4137CB" width="20px" height="20px" />
+                                    <label>Nguyễn Văn Tèo</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a asp-controller="Home" asp-action="Single">Hợp âm nâng cao</a></td>
+                                <td><div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div></td>
+                                <td>Hợp âm nâng cao</td>
+                                <td>
+                                    <img src="https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.0-1/p40x40/15726586_1049327511879462_6901300413484871919_n.jpg?oh=0ae04013d348113dc3851e3b33cb43cb&oe=5A4137CB" width="20px" height="20px" />
+                                    <label>Nguyễn Văn Tèo</label>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+            <script>
+                //$('#myTable').on('click', '.clickable-row', function (event) {
+                //    if ($(this).hasClass('active')) {
+                //        $(this).removeClass('active');
+                //    } else {
+                //        $(this).addClass('active').siblings().removeClass('active');
+                //    }
+                //});
+            </script>
+        </div>
+
+        <style>
+            .active-version {
+                background-color: cornflowerblue;
+                font-weight: bold;
+                display: inline-block;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                vertical-align: middle;
+            }
+
+                .active-version a {
+                    color: white
+                }
+        </style>
+   
+    </div>
+</div>
+
+
+
