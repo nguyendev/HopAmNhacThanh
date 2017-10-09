@@ -64,7 +64,7 @@ namespace HopAmNhacThanh.Controllers
                 PhoneNumber = await _userManager.GetPhoneNumberAsync(user),
                 TwoFactor = await _userManager.GetTwoFactorEnabledAsync(user),
                 Logins = await _userManager.GetLoginsAsync(user),
-                BrowserRemembered = await _signInManager.IsTwoFactorClientRememberedAsync(user)
+                //BrowserReApplicationUsered = await _signInManager.IsTwoFactorClientReApplicationUseredAsync(user)
             };
             return View(model);
         }

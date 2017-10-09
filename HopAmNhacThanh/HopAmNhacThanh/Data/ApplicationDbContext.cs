@@ -22,5 +22,12 @@ namespace HopAmNhacThanh.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+        public DbSet<Song> Song { get; set; }
+        public DbSet<Category> Category { get; set; }
+        public DbSet<Chords> Chords { get; set; }
+        public DbSet<LinkSong> LinkSong { get; set; }
+        public DbSet<SingleSong> SingleSong { get; set; }
+        public DbSet<Style> Style { get; set; }
+        public DbSet<Video> Video { get; set; }
     }
 }

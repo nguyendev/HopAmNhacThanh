@@ -1,0 +1,69 @@
+﻿@model HopAmNhacThanh.Areas.WebManager.ViewModels.PostViewModels.CreatePostViewModel
+
+@{
+    ViewData["Title"] = "Tạo mới";
+    ViewData["Heading"] = "Tạo mới";
+    ViewData["SmallHeading"] = "";
+    ViewData["BreadcrumbOne"] = "Quản lý web";
+    ViewData["BreadcrumbTwo"] = "Bài viết";
+    ViewData["BreadcrumbThree"] = "Tạo mới";
+    ViewData["BoxTitle"] = "Tạo bài viết mới mới";
+    ViewData["Search"] = "Tìm bài viết";
+    Layout = "_CreateLayout";
+}
+<div class="form-horizontal">
+    <div class="row text-center">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Title" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Content" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="Content" class="ckeditor"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Slug" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Slug" class="form-control" />
+                <span asp-validation-for="Slug" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ImageID" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="ImageID" class="form-control" asp-items="ViewBag.ImageID">
+                    <option disabled selected>--- Chọn ---</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="TempTag" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="TempTag" class="form-control" />
+                <span asp-validation-for="TempTag" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Note" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Note" class="form-control" />
+                <span asp-validation-for="Note" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</div>
+

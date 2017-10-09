@@ -16,6 +16,6 @@ namespace HopAmNhacThanh.Models.ManageViewModels
 
         public bool TwoFactor { get; set; }
 
-        public bool BrowserRemembered { get; set; }
+        public bool BrowserReApplicationUsered { get; set; }
     }
 }

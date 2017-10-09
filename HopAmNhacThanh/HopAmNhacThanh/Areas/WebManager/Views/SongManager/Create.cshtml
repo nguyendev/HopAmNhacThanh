@@ -1,0 +1,81 @@
+@model HopAmNhacThanh.Models.Song
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>Song</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Name" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="OrtherName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="OrtherName" class="form-control" />
+                <span asp-validation-for="OrtherName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CategoryID" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="CategoryID" class ="form-control" asp-items="ViewBag.CategoryID"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="AuthorSongID" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="AuthorSongID" class ="form-control" asp-items="ViewBag.AuthorSongID"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="VietnameseLyric" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="VietnameseLyric" class="form-control" />
+                <span asp-validation-for="VietnameseLyric" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="YearPublish" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="YearPublish" class="form-control" />
+                <span asp-validation-for="YearPublish" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Views" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Views" class="form-control" />
+                <span asp-validation-for="Views" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+</body>
+</html>

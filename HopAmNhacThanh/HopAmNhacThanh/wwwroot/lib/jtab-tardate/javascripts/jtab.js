@@ -378,7 +378,7 @@ Array.prototype.max_chars = function() {
 
 //
 // define jtabChord class
-// public members:
+// public ApplicationUsers:
 //  isValid        = whether valid chord defined
 //  isCaged        = whether chord is CAGED type
 //  isCustom       = whether chord is a custom fingering

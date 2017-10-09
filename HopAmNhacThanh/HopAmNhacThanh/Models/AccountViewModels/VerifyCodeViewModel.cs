@@ -16,10 +16,10 @@ namespace HopAmNhacThanh.Models.AccountViewModels
 
         public string ReturnUrl { get; set; }
 
-        [Display(Name = "Remember this browser?")]
-        public bool RememberBrowser { get; set; }
+        [Display(Name = "ReApplicationUser this browser?")]
+        public bool ReApplicationUserBrowser { get; set; }
 
-        [Display(Name = "Remember me?")]
-        public bool RememberMe { get; set; }
+        [Display(Name = "ReApplicationUser me?")]
+        public bool ReApplicationUserMe { get; set; }
     }
 }

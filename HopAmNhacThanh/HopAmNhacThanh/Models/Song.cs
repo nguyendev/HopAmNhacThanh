@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,18 +9,33 @@ namespace HopAmNhacThanh.Models
 {
     public class Song : Base
     {
-        public int ID { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        public long ID { get; set; }
+        [StringLength(60, MinimumLength = 3)]
+        [Required]
+        [Display(Name =" Tên bài hát")]
+
         public string Name { get; set; }
+        [MaxLength(60)]
+        [Display(Name = " Tên khác")]
+        public string OrtherName { get; set; }
+        [Display(Name = " Thể loại")]
+        [Required]
         public int CategoryID { get; set; }
         public Category Category {get;set;}
+        [Display(Name = "Tác giả")]
         public int? AuthorSongID { get; set; }
         public AuthorSong AuthorSong { get; set; }
-        public int? SingleSongID { get; set; }
-        public SingleSong SingleSong { get; set; }
-
+        [Display(Name = "Lời việt")]
+        public int? VietnameseLyric { get; set; }
+        [Display(Name = "Năm xuất bản")]
         public string YearPublish { get; set; }
         public List<LinkSong> ListLinkSong { get; set; }
         public List<Chords> ListChords { get; set; }
+        public List<Video> ListVideos { get; set; }
+        [Display(Name= "Lượt xem")]
         public int Views { get; set; }
         //the se tinh sau
 

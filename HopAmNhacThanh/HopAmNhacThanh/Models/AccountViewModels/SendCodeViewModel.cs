@@ -14,6 +14,6 @@ namespace HopAmNhacThanh.Models.AccountViewModels
 
         public string ReturnUrl { get; set; }
 
-        public bool RememberMe { get; set; }
+        public bool ReApplicationUserMe { get; set; }
     }
 }

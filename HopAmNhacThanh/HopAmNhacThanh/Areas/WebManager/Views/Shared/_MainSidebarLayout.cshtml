@@ -1,0 +1,84 @@
+@using HopAmNhacThanh.Data
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject ApplicationDbContext _Context
+
+@{
+    var _user = _Context.Users.Where(p => p.Id == UserManager.GetUserId(User)).FirstOrDefault();
+}
+<!-- sidebar: style can be found in sidebar.less -->
+<section class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel">
+        <div class="pull-left image">
+            <img src="@_user.PictureBig" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+            <p>@_user.FullName</p>
+            <!-- Status -->
+            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+    </div>
+    <!-- search form (Optional) -->
+    <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search...">
+            <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+        </div>
+    </form>
+    <!-- /.search form -->
+    <!-- Sidebar Menu -->
+    <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">Danh mục câu hỏi</li>
+        <!-- Optionally, you can add icons to the links -->
+        <li>
+            <a asp-action="Index" asp-controller="Media" asp-area="WebManager">
+                <i class="fa fa-picture-o"></i>
+                <span class="">Thư viện hình ảnh</span>
+                @*<span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>*@
+            </a>
+        </li>
+        <li>
+            <a asp-action="Index" asp-controller="MultiPuzzle" asp-area="WebManager">
+                <i class="fa fa-puzzle-piece"></i>
+                <span class="">Câu đố đặc biệt</span>
+                @*<span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>*@
+            </a>
+        </li>
+        <li>
+            <a asp-action="Index" asp-controller="SinglePuzzles" asp-area="WebManager">
+                <i class="fa fa-puzzle-piece"></i>
+                <span class="">Câu đố theo ngày</span>
+                @*<span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>*@
+            </a>
+        </li>
+        <li>
+            <a asp-action="Index" asp-controller="Posts" asp-area="WebManager">
+                <i class="fa fa-file-word-o"></i>
+                <span class="">Bài viết</span>
+                @*<span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>*@
+            </a>
+        </li>
+        @if(User.IsInRole("Admin"))
+        {
+        <li class="header">Quản lý</li>
+        <li><a asp-area="WebManager" asp-controller="ApplicationUsers" asp-action="index"><i class="fa fa-book text-primary"></i> <span>Danh mục sách</span></a></li>
+        <li><a asp-area="WebManager" asp-controller="role" asp-action="index"><i class="fa fa-level-up text-danger"></i> <span>Phân quyền</span></a></li>
+        <li><a asp-area="WebManager" asp-controller="score" asp-action="index"><i class="fa fa-money text-yellow"></i> <span>Điểm số</span></a></li>
+        }
+    </ul>
+    <!-- /.sidebar-menu -->
+</section>
+<!-- /.sidebar -->

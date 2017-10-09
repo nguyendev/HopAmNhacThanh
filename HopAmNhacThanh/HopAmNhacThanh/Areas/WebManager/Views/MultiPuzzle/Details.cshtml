@@ -1,0 +1,176 @@
+﻿@model HopAmNhacThanh.Models.MultiPuzzle
+
+@{
+    ViewData["Title"] = "Chi tiết câu đố";
+    ViewData["Heading"] = "Câu đố đặc biệt";
+    ViewData["SmallHeading"] = "";
+    ViewData["BreadcrumbOne"] = "Quản lý web";
+    ViewData["BreadcrumbTwo"] = "Câu đố đặc biệt";
+    ViewData["BreadcrumbThree"] = "Chi tiết câu đố";
+    ViewData["BoxTitle"] = "Chi tiết câu đố";
+    ViewData["Search"] = "Tìm câu đố";
+    Layout = "_TableIndexLayout";
+    IEnumerable<SinglePuzzle> listSinglePuzzle = ViewData["ListSinglePuzzle"] as IEnumerable<SinglePuzzle>;
+}
+<div class="box-body">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Slug)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Slug)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberQuestion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NumberQuestion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Like)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Like)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Level)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Level)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Views)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Views)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDT)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateDT)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDT)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDT)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Approved)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Approved)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Author.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Image.ID)
+        </dd>
+    </dl>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Tiêu đề
+                        </th>
+                        <th>
+                            Slug
+                        </th>
+                        <th>
+                            Lượt thích
+                        </th>
+                        <th>
+                            Ngày tạo
+                        </th>
+                        <th>
+                            Đã duyệt
+                        </th>
+                        <th>
+                            Đã xóa
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in listSinglePuzzle)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Slug)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Like)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreateDT)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Approved)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsDeleted)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.ID" asp-controller="SinglePuzzles" class="btn btn-warning fa fa-edit"></a>
+                                <a asp-action="Details" asp-route-id="@item.ID" asp-controller="SinglePuzzles" class="btn btn-success fa fa-newspaper-o"></a>
+                                <a asp-action="Delete" asp-route-id="@item.ID" asp-controller="SinglePuzzles" class="btn btn-danger fa fa-remove"></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="box-footer">
+    <a class="btn btn-default pull-right" asp-action="Index">Quay lai</a>
+</div>
