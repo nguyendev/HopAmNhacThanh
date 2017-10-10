@@ -1,81 +1,217 @@
-@model HopAmNhacThanh.Models.Song
-
+﻿@model HopAmNhacThanh.Areas.WebManager.ViewModels.SongViewModels.CreateSongViewModels
 @{
-    Layout = null;
+    ViewData["Title"] = "Thêm mới";
+    ViewData["Heading"] = "Thêm mới";
+    ViewData["SmallHeading"] = "";
+    ViewData["BreadcrumbOne"] = "Quản lý web";
+    ViewData["BreadcrumbTwo"] = "Bài hát";
+    ViewData["BreadcrumbThree"] = "Tạo mới";
+    ViewData["BoxTitle"] = "Thêm bài hát mới";
+    ViewData["Search"] = "Tìm bài hát";
+    Layout = "_CreateLayout";
 }
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="OrtherName" class="control-label"></label>
+            <input asp-for="OrtherName" class="form-control" />
+            <span asp-validation-for="OrtherName" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label asp-for="CategoryID" class="control-label"></label>
+            <select asp-for="CategoryID" class="form-control" asp-items="ViewBag.CategoryID"></select>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label asp-for="AuthorSongID" class="control-label"></label>
+            <select asp-for="AuthorSongID" class="form-control" asp-items="ViewBag.AuthorSongID"></select>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label asp-for="VietnameseLyric" class="control-label"></label>
+            <input asp-for="VietnameseLyric" class="form-control" />
+            <span asp-validation-for="VietnameseLyric" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label asp-for="YearPublish" class="control-label"></label>
+            <input asp-for="YearPublish" class="form-control" />
+            <span asp-validation-for="YearPublish" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div id="version-lyric-list" class="version-lyric col-md-12">
+        <ul id="version-lyric-nav" class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#version-lyric-01">Mới nhất</a></li>
+        </ul>
 
-<!DOCTYPE html>
+        <div id="version-lyric-tab-content" class="tab-content">
+            <div id="version-lyric-01" class="tab-pane fade in active">
+                <div class="version-lyric-item">
+                    <div class="form-group">
+                        <label class="control-label">Vòng hợp âm và giới thiệu</label>
+                        <textarea rows="4" cols="3" class="form-control"></textarea>
+                        <span class="help-block"><em>Hợp âm phải bỏ trong dấu ngoặc vuông []</em></span>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label class="control-label">Lời và hợp âm</label>
+                        <textarea rows="10" cols="3" class="form-control"></textarea>
+                        <span class="help-block"><em>Hợp âm phải bỏ trong dấu ngoặc vuông []</em></span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
-</head>
-<body>
+    </div>
+</div>
 
-<form asp-action="Create">
-    <div class="form-horizontal">
-        <h4>Song</h4>
-        <hr />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="Name" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+<div style="margin-bottom: 20px;">
+    <a onclick="AddVersionLyricItem()" class="blue-link" id="add-version-lyric">
+        <i class="fa fa-plus"></i> Thêm bản hợp âm mới
+    </a>
+</div>
+<script type="text/javascript">
+    function AddVersionLyricItem() {
+        $("#version-lyric-nav").append('<li><a data-toggle="tab" href="#hot-week">Hot nhất trong tuần</a></li>');
+        $("#version-lyric-tab-content").append(
+            '<div id="hot-week" class="tab-pane fade">' +
+            '<div class="version-lyric-item">' +
+            '<div class="form-group">' +
+            '<label class="control-label">Vòng hợp âm và giới thiệu</label>' +
+            ' <textarea rows="4" cols="3" class="form-control"></textarea>' +
+            '<span class="help-block"><em>Hợp âm phải bỏ trong dấu ngoặc vuông []</em></span>' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label class="control-label">Lời và hợp âm</label>' +
+            '<textarea rows="10" cols="3" class="form-control"></textarea>' +
+            '<span class="help-block"><em>Hợp âm phải bỏ trong dấu ngoặc vuông []</em></span>' +
+            '</div>' +
+            '</div>' +
+            '</div>'
+        )
+    };
+</script>
+
+<div class="row">
+    <div id="link-song-list" class="version-lyric col-md-12">
+
+        <div class="link-song-item">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label">Tên ca sỹ</label>
+                    <select class="form-control" asp-items="ViewBag.AuthorSongID"></select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label">Tông chủ</label>
+                    <input class="form-control" />
+                    @*<span asp-validation-for="VietnameseLyric" class="text-danger"></span>*@
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">Link nhạc</label>
+                    <input class="form-control" />
+                    @*<span asp-validation-for="YearPublish" class="text-danger"></span>*@
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label asp-for="OrtherName" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="OrtherName" class="form-control" />
-                <span asp-validation-for="OrtherName" class="text-danger"></span>
+
+    </div>
+</div>
+<div class="">
+    <a onclick="AddVersionLyricItem()" class="blue-link" id="add-singer">
+        <i class="fa fa-plus"></i> Thêm ca sĩ
+    </a>
+</div>
+<script type="text/javascript">
+    function AddVersionLyricItem() {
+        $("#version-lyric-nav").append('<li><a data-toggle="tab" href="#hot-week">Hot nhất trong tuần</a></li>');
+        $("#version-lyric-tab-content").append(
+            '<div id="hot-week" class="tab-pane fade">' +
+            '<div class="version-lyric-item">' +
+            '<div class="form-group">' +
+            '<label class="control-label">Vòng hợp âm và giới thiệu</label>' +
+            ' <textarea rows="4" cols="3" class="form-control"></textarea>' +
+            '<span class="help-block"><em>Hợp âm phải bỏ trong dấu ngoặc vuông []</em></span>' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label class="control-label">Lời và hợp âm</label>' +
+            '<textarea rows="10" cols="3" class="form-control"></textarea>' +
+            '<span class="help-block"><em>Hợp âm phải bỏ trong dấu ngoặc vuông []</em></span>' +
+            '</div>' +
+            '</div>' +
+            '</div>'
+        )
+    };
+</script>
+<div class="row">
+    <div id="video-list" class="video col-md-12">
+
+        <div class="video-item">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label">Tên</label>
+                    @*<select class="form-control" asp-items="ViewBag.AuthorSongID"></select>*@
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="CategoryID" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <select asp-for="CategoryID" class ="form-control" asp-items="ViewBag.CategoryID"></select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="AuthorSongID" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <select asp-for="AuthorSongID" class ="form-control" asp-items="ViewBag.AuthorSongID"></select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="VietnameseLyric" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="VietnameseLyric" class="form-control" />
-                <span asp-validation-for="VietnameseLyric" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="YearPublish" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="YearPublish" class="form-control" />
-                <span asp-validation-for="YearPublish" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Views" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Views" class="form-control" />
-                <span asp-validation-for="Views" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="col-md-9">
+                <div class="form-group">
+                    <label class="control-label">Link video</label>
+                    <input class="form-control" />
+                    @*<span asp-validation-for="VietnameseLyric" class="text-danger"></span>*@
+                </div>
             </div>
         </div>
     </div>
-</form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+</div>
+<div class="">
+    <a onclick="AddVersionLyricItem()" class="blue-link" id="add-singer">
+        <i class="fa fa-plus"></i> Thêm ca sĩ
+    </a>
 </div>
 
-</body>
-</html>
+<div class="row">
+    <div id="sheet-music-list" class="sheet-music col-md-12">
+
+        <div class="sheet-music-item">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label">Đường dẫn</label>
+                    @*<select class="form-control" asp-items="ViewBag.AuthorSongID"></select>*@
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="form-group">
+                    <label class="control-label">Kiểu file</label>
+                    <input class="form-control" />
+                    @*<span asp-validation-for="VietnameseLyric" class="text-danger"></span>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="">
+    <a onclick="AddVersionLyricItem()" class="blue-link" id="add-singer">
+        <i class="fa fa-plus"></i> Thêm ca sĩ
+    </a>
+</div>
+

@@ -17,6 +17,10 @@ namespace HopAmNhacThanh.Models
         [Display(Name = "Tên phiên bản")]
         [Required]
         public string Version { get; set; }
+        [StringLength(30, MinimumLength = 3)]
+        [Display(Name = "Slug")]
+        [Required]
+        public string Slug { get; set; }
         [Display(Name = "Thông tin mô tả ngắn")]
         [StringLength(30, MinimumLength = 3)]
         [Required]

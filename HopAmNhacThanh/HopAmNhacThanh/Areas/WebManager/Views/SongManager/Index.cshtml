@@ -1,121 +1,216 @@
-@model IEnumerable<HopAmNhacThanh.Models.Song>
+﻿@model HopAmNhacThanh.Services.PaginatedList<HopAmNhacThanh.Models.Song>
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Index";
+    ViewData["Heading"] = "Danh sách bài hát";
+    ViewData["SmallHeading"] = "";
+    ViewData["BreadcrumbOne"] = "Quản lý web";
+    ViewData["BreadcrumbTwo"] = "Bài hát";
+    ViewData["BreadcrumbThree"] = "Danh sách bài hát";
+    ViewData["BoxTitle"] = "Danh sách bài hát";
+    ViewData["Search"] = "Tìm bài hát";
+    Layout = "_TableIndexLayout";
 }
 
-<!DOCTYPE html>
+<div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.OrtherName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.VietnameseLyric)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.YearPublish)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Views)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreateDT)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UpdateDT)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Approved)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Active)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IsDeleted)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Note)
-                </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Author)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AuthorSong)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrtherName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VietnameseLyric)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.YearPublish)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Views)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateDT)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdateDT)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Approved)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Active)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDeleted)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Note)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AuthorSong.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-</body>
-</html>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="dataTables_length" id="example1_length">
+                <form asp-action="Index" method="get">
+                    <label>
+                        Hiển thị
+                        <select asp-for="PageSize" asp-items="@(new SelectList(@ViewBag.SoLuong,"Value","Value"))" onchange="this.form.submit()" class="form-control input-sm"></select>
+
+                        phần tử
+                    </label>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-sm-4 text-center">
+            <a asp-action="Create" class="btn btn-primary">Tạo mới</a>
+        </div>
+        <div class="col-sm-4">
+            <div id="example1_filter" class="dataTables_filter">
+                <form asp-action="Index" method="get">
+                    <label>@ViewData["Search"]:<input type="search" name="SearchString" value="@ViewData["currentFilter"]" class="form-control input-sm" placeholder="" aria-controls="example1"></label>
+                    <input type="submit" value="Tìm kiếm" class="btn btn-danger" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["NameParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.t.Name)</a>
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.t.Slug)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.t.Views)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.t.CreateDT)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.t.Approved)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.t.IsDeleted)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Slug)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Views)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreateDT)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Approved)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsDeleted)
+                            </td>
+                            <td>
+                                @if (item.Approved != "A")
+                                {
+                                    <a asp-action="EditPublishDT" asp-route-id="@item.ID" class="btn btn-warning fa fa-clock-o"></a>
+                                    <a asp-action="EditPublishDT" asp-route-id="@item.ID" class="btn btn-default fa fa-newspaper-o"></a>
+                                }
+                                <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-warning fa fa-edit"></a>
+                                <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-success fa fa-newspaper-o"></a>
+                                <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger fa fa-remove"></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
+                @{
+                    int Min = (Model.PageIndex - 1) * Model.PageSize;
+                    int Max = (Model.PageIndex) * Model.PageSize;
+                }
+                Hiển thị @Min to @Max trong @Model.Count phần tử
+
+            </div>
+        </div>
+        <div class="col-sm-7">
+            <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                <ul class="pagination">
+                    @{
+                        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                    }
+
+
+
+                    <li class="paginate_button previous disabled" id="example1_previous">
+                        <a asp-action="Index"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-page="@(Model.PageIndex - 1)"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           asp-route-pageSize="@ViewData["CurrentSize"]"
+                           class="btn btn-default @prevDisabled btn">
+                            Trước
+                        </a>
+                    </li>
+                    <li class="paginate_button">
+                        @if (Model.PageIndex - 2 > 0)
+                        {
+                            <a asp-action="Index"
+                               asp-route-sortOrder="@ViewData["CurrentSort"]"
+                               asp-route-page="@(Model.PageIndex -2)"
+                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                               asp-route-pageSize="@ViewData["CurrentSize"]"
+                               class="btn btn-default @nextDisabled btn">
+                                @(Model.PageIndex - 2)
+                            </a>
+                        }
+                    </li>
+                    <li class="paginate_button ">
+                        @if (Model.PageIndex - 1 > 0)
+                        {
+                            <a asp-action="Index"
+                               asp-route-sortOrder="@ViewData["CurrentSort"]"
+                               asp-route-page="@(Model.PageIndex -1)"
+                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                               asp-route-pageSize="@ViewData["CurrentSize"]"
+                               class="btn btn-default @nextDisabled btn">
+                                @(Model.PageIndex - 1)
+                            </a>
+                        }
+                    </li>
+                    <li class="paginate_button active">
+                        <a asp-action="Index"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-page="@(Model.PageIndex)"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           asp-route-pageSize="@ViewData["CurrentSize"]"
+                           class="btn btn-default @nextDisabled btn">
+                            @(Model.PageIndex)
+                        </a>
+                    </li>
+                    <li class="paginate_button ">
+                        <a asp-action="Index"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-page="@(Model.PageIndex + 1)"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           asp-route-pageSize="@ViewData["CurrentSize"]"
+                           class="btn btn-default @nextDisabled btn">
+                            @(Model.PageIndex + 1)
+                        </a>
+                    </li>
+                    <li class="paginate_button ">
+                        <a asp-action="Index"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-page="@(Model.PageIndex + 2)"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           asp-route-pageSize="@ViewData["CurrentSize"]"
+                           class="btn btn-default @nextDisabled btn">
+                            @(Model.PageIndex + 2)
+                        </a>
+                    </li>
+                    <li class="paginate_button next" id="example1_next">
+                        <a asp-action="Index"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-page="@(Model.PageIndex + 1)"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           asp-route-pageSize="@ViewData["CurrentSize"]"
+                           class="btn btn-default @nextDisabled btn">
+                            Kế
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

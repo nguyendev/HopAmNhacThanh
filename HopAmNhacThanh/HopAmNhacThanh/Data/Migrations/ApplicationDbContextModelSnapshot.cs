@@ -16,6 +16,37 @@ namespace HopAmNhacThanh.Data.Migrations
                 .HasAnnotation("ProductVersion", "1.1.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("HopAmNhacThanh.Models.Album", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Active")
+                        .HasMaxLength(1);
+
+                    b.Property<string>("Approved")
+                        .HasMaxLength(1);
+
+                    b.Property<string>("AuthorID");
+
+                    b.Property<DateTime?>("CreateDT");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Note")
+                        .HasMaxLength(200);
+
+                    b.Property<DateTime?>("UpdateDT");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("AuthorID");
+
+                    b.ToTable("Album");
+                });
+
             modelBuilder.Entity("HopAmNhacThanh.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -189,6 +220,10 @@ namespace HopAmNhacThanh.Data.Migrations
                     b.Property<string>("Note")
                         .HasMaxLength(200);
 
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasMaxLength(30);
+
                     b.Property<int>("SongID");
 
                     b.Property<long?>("SongID1");
@@ -260,6 +295,43 @@ namespace HopAmNhacThanh.Data.Migrations
                     b.ToTable("LinkSong");
                 });
 
+            modelBuilder.Entity("HopAmNhacThanh.Models.SheetMusic", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Active")
+                        .HasMaxLength(1);
+
+                    b.Property<string>("Approved")
+                        .HasMaxLength(1);
+
+                    b.Property<string>("AuthorID");
+
+                    b.Property<DateTime?>("CreateDT");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Note")
+                        .HasMaxLength(200);
+
+                    b.Property<long>("SongID");
+
+                    b.Property<string>("Type");
+
+                    b.Property<DateTime?>("UpdateDT");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("AuthorID");
+
+                    b.HasIndex("SongID");
+
+                    b.ToTable("SheetMusic");
+                });
+
             modelBuilder.Entity("HopAmNhacThanh.Models.SingleSong", b =>
                 {
                     b.Property<int>("ID")
@@ -302,12 +374,16 @@ namespace HopAmNhacThanh.Data.Migrations
                     b.Property<string>("Active")
                         .HasMaxLength(1);
 
+                    b.Property<int?>("AlbumID")
+                        .IsRequired();
+
                     b.Property<string>("Approved")
                         .HasMaxLength(1);
 
                     b.Property<string>("AuthorID");
 
-                    b.Property<int?>("AuthorSongID");
+                    b.Property<int?>("AuthorSongID")
+                        .IsRequired();
 
                     b.Property<int>("CategoryID");
 
@@ -325,6 +401,10 @@ namespace HopAmNhacThanh.Data.Migrations
                     b.Property<string>("OrtherName")
                         .HasMaxLength(60);
 
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasMaxLength(30);
+
                     b.Property<DateTime?>("UpdateDT");
 
                     b.Property<int?>("VietnameseLyric");
@@ -334,6 +414,8 @@ namespace HopAmNhacThanh.Data.Migrations
                     b.Property<string>("YearPublish");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("AlbumID");
 
                     b.HasIndex("AuthorID");
 
@@ -487,6 +569,13 @@ namespace HopAmNhacThanh.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("HopAmNhacThanh.Models.Album", b =>
+                {
+                    b.HasOne("HopAmNhacThanh.Models.ApplicationUser", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorID");
+                });
+
             modelBuilder.Entity("HopAmNhacThanh.Models.AuthorSong", b =>
                 {
                     b.HasOne("HopAmNhacThanh.Models.ApplicationUser", "Author")
@@ -525,6 +614,18 @@ namespace HopAmNhacThanh.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("HopAmNhacThanh.Models.SheetMusic", b =>
+                {
+                    b.HasOne("HopAmNhacThanh.Models.ApplicationUser", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorID");
+
+                    b.HasOne("HopAmNhacThanh.Models.Song")
+                        .WithMany("ListSheetMusic")
+                        .HasForeignKey("SongID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("HopAmNhacThanh.Models.SingleSong", b =>
                 {
                     b.HasOne("HopAmNhacThanh.Models.ApplicationUser", "Author")
@@ -534,13 +635,19 @@ namespace HopAmNhacThanh.Data.Migrations
 
             modelBuilder.Entity("HopAmNhacThanh.Models.Song", b =>
                 {
+                    b.HasOne("HopAmNhacThanh.Models.Album", "Album")
+                        .WithMany()
+                        .HasForeignKey("AlbumID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("HopAmNhacThanh.Models.ApplicationUser", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorID");
 
                     b.HasOne("HopAmNhacThanh.Models.AuthorSong", "AuthorSong")
                         .WithMany()
-                        .HasForeignKey("AuthorSongID");
+                        .HasForeignKey("AuthorSongID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("HopAmNhacThanh.Models.Category", "Category")
                         .WithMany()

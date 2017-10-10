@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HopAmNhacThanh.Data;
 using HopAmNhacThanh.Models;
+using HopAmNhacThanh.Areas.WebManager.ViewModels;
+using HopAmNhacThanh.Areas.WebManager.Data;
 
 namespace HopAmNhacThanh.Areas.WebManager.Controllers
 {
@@ -14,17 +16,45 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
     public class SongManagerController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ISongManagerRepository _repository;
 
-        public SongManagerController(ApplicationDbContext context)
+        public SongManagerController(ApplicationDbContext context,
+            ISongManagerRepository repository)
         {
-            _context = context;    
+            _context = context;
+            _repository = repository;
         }
 
         // GET: WebManager/SongManager
-        public async Task<IActionResult> Index()
+        [Route("/quan-ly-web/bai-hat")]
+        public async Task<IActionResult> Index(string sortOrder,
+ string currentFilter,
+    string searchString,
+    int? page, int? pageSize)
         {
-            var applicationDbContext = _context.Song.Include(s => s.Author).Include(s => s.AuthorSong).Include(s => s.Category);
-            return View(await applicationDbContext.ToListAsync());
+            List<NumberItem> SoLuong = new List<NumberItem>
+            {
+                new NumberItem { Value = 10},
+                new NumberItem { Value = 20},
+                new NumberItem { Value = 50},
+                new NumberItem { Value = 100},
+            };
+            ViewData["SoLuong"] = SoLuong;
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["TitleParm"] = String.IsNullOrEmpty(sortOrder) ? "title" : "";
+            ViewData["CurrentSize"] = pageSize;
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+            var applicationDbContext = await _repository.GetAll(sortOrder, searchString, page, pageSize);
+            return View(applicationDbContext);
         }
 
         // GET: WebManager/SongManager/Details/5
@@ -49,10 +79,11 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
         }
 
         // GET: WebManager/SongManager/Create
+        [Route("quan-ly-web/bai-hat/tao-moi")]
         public IActionResult Create()
         {
             ViewData["AuthorID"] = new SelectList(_context.Users, "Id", "Id");
-            ViewData["AuthorSongID"] = new SelectList(_context.Set<AuthorSong>(), "ID", "ID");
+            ViewData["AuthorSongID"] = new SelectList(_context.Set<AuthorSong>(), "ID", "Name");
             ViewData["CategoryID"] = new SelectList(_context.Category, "ID", "Name");
             return View();
         }

@@ -4,7 +4,7 @@
 @inject UserManager<ApplicationUser> UserManager
 @inject ApplicationDbContext _Context
 @{ 
-    var _user = @_Context.Users.Where(p => p.UserName == UserManager.GetUserName(User)).FirstOrDefault();
+    var _user = _Context.Users.Where(p => p.UserName == UserManager.GetUserName(User)).FirstOrDefault();
 }
 <a asp-controller="Home" asp-action="Index" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -120,6 +120,7 @@
                 </ul>
             </li>*@
             <!-- User Account Menu -->
+            @if(_user != null) { 
             <li class="dropdown user user-menu">
                 <!-- Menu Toggle Button -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -169,6 +170,7 @@
             <li>
                 <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
             </li>
+            }
         </ul>
     </div>
 </nav>
