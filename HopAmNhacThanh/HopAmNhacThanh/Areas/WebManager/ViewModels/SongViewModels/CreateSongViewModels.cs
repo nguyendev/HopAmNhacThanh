@@ -12,24 +12,52 @@ namespace HopAmNhacThanh.Areas.WebManager.ViewModels.SongViewModels
         [Display(Name = "Tên bài hát")]
         [MaxLength(60)]
         [Required]
-        public string Name { get; set; }
+        public string NameSong { get; set; }
         [MaxLength(60)]
         [Display(Name = "Tên khác")]
-        public string OrtherName { get; set; }
-        [Display(Name = "Slug")]
-        [MaxLength(30)]
-        [Required]
-        public string Slug { get; set; }
+        public string OrtherNameSong { get; set; }
+        //[Display(Name = "Slug")]
+        //[MaxLength(30)]
+        //[Required]
+        //public string Slug { get; set; }
         [Display(Name = " Thể loại")]
         [Required]
         public int CategoryID { get; set; }
-        public Category Category { get; set; }
         [Display(Name = "Tác giả")]
-        public int? AuthorSongID { get; set; }
-        public AuthorSong AuthorSong { get; set; }
-        [Display(Name = "Lời việt")]
-        public int? VietnameseLyric { get; set; }
+        public int AuthorSongID { get; set; }
+        public int VietNameseLyric { get; set; }
         [Display(Name = "Năm xuất bản")]
         public string YearPublish { get; set; }
+        public List<TempChords> ArrChords { get; set; }
+        public List<TempLinkSong> ArrLinkSong { get; set; }
+        public List<TempVideo> ArrVideo {get;set;}
+        public List<TempSheetMusic> ArrSheetMusic { get; set; }
+
+
+
+    }
+    public class TempChords
+    {
+        public string Intro { get; set; }
+        public string Lyric { get; set; }
+    }
+
+    public class TempLinkSong
+    {
+        public int SongID { get; set; }
+        public string Tone { get; set; }
+        public string Link { get; set; }
+    }
+
+    public class TempVideo
+    {
+        public string Name { get; set; }
+        public string Link { get; set; }
+    }
+
+    public class TempSheetMusic
+    {
+        public string Name { get; set; }
+        public string Type { get; set; }
     }
 }

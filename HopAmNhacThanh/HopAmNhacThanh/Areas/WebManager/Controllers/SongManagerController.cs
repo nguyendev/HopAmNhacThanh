@@ -9,6 +9,8 @@ using HopAmNhacThanh.Data;
 using HopAmNhacThanh.Models;
 using HopAmNhacThanh.Areas.WebManager.ViewModels;
 using HopAmNhacThanh.Areas.WebManager.Data;
+using HopAmNhacThanh.Areas.WebManager.ViewModels.SongViewModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace HopAmNhacThanh.Areas.WebManager.Controllers
 {
@@ -17,11 +19,14 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ISongManagerRepository _repository;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public SongManagerController(ApplicationDbContext context,
-            ISongManagerRepository repository)
+            ISongManagerRepository repository,
+            UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
             _repository = repository;
         }
 
@@ -87,7 +92,17 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
             ViewData["CategoryID"] = new SelectList(_context.Category, "ID", "Name");
             return View();
         }
-
+        [HttpPost]
+        public async Task<IActionResult> SaveAll(CreateSongViewModels CreateSongViewModels)
+        {
+            //if (login fails)
+            //{
+            //return Json(new { result = "InvalidLogin" }, JsonRequestBehavior.AllowGet);
+            var user = await GetCurrentUser();
+            await _repository.Create(CreateSongViewModels, user);
+           // }
+            return Json(new { success = true, url = Url.Action("Index") });
+        }
         // POST: WebManager/SongManager/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -199,6 +214,10 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
         private bool SongExists(long id)
         {
             return _context.Song.Any(e => e.ID == id);
+        }
+        private async Task<ApplicationUser> GetCurrentUser()
+        {
+            return await _userManager.GetUserAsync(HttpContext.User);
         }
     }
 }

@@ -158,26 +158,24 @@ namespace HopAmNhacThanh
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true
             });
-            //if (env.IsDevelopment())
-            //{
-            //    //connect facebook localhost
-            //    app.UseFacebookAuthentication(new FacebookOptions()
-            //    {
-            //        AppId = "107378839934718",
-            //        AppSecret = "03a1fbbb98f50059c29c7d2bc209ec21"
-            //    });
-
-
-            //}
-            //else
-            //{
-            //    //connect facebook in vps
-            //    app.UseFacebookAuthentication(new FacebookOptions()
-            //    {
-            //        AppId = "283779168758487",
-            //        AppSecret = "16cbd9eafd6d2b5f6c1fb8b2fda3b1c6"
-            //    });
-            //}
+            if (env.IsDevelopment())
+            {
+                //connect facebook localhost
+                app.UseFacebookAuthentication(new FacebookOptions()
+                {
+                    AppId = "707542496098719",
+                    AppSecret = "d5af1e86890606ff1705caede5893048"
+                });
+            }
+            else
+            {
+                //connect facebook in vps
+                app.UseFacebookAuthentication(new FacebookOptions()
+                {
+                    AppId = "283779168758487",
+                    AppSecret = "16cbd9eafd6d2b5f6c1fb8b2fda3b1c6"
+                });
+            }
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 
             app.UseMvc(routes =>

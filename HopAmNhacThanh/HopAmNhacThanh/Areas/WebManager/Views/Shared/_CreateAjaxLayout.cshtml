@@ -1,7 +1,7 @@
 @{ 
     Layout = "_TableIndexLayout";
 }
-<form asp-action="Create">
+<form>
     <div class="box-body">
        @RenderBody()
     </div>
@@ -10,4 +10,4 @@
         <input id="create" type="submit" value="Tạo" class="btn btn-info pull-right">
     </div>
 </form>
-@RenderSection("ScriptCreate", false)
+@RenderSection("ScriptCreate",false)
