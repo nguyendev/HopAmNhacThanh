@@ -99,9 +99,11 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
             //{
             //return Json(new { result = "InvalidLogin" }, JsonRequestBehavior.AllowGet);
             var user = await GetCurrentUser();
-            await _repository.Create(CreateSongViewModels, user);
-           // }
-            return Json(new { success = true, url = Url.Action("Index") });
+            bool result = await _repository.Create(CreateSongViewModels, user);
+            if(result)
+                return Json(new { success = true, url = Url.Action("Index") });
+            ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+            return Json(new { success = false, url = Url.Action("Index") });
         }
         // POST: WebManager/SongManager/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

@@ -8,9 +8,10 @@ using HopAmNhacThanh.Data;
 namespace HopAmNhacThanh.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171014040319_EditNotNull")]
+    partial class EditNotNull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -264,7 +265,8 @@ namespace HopAmNhacThanh.Data.Migrations
                     b.Property<bool>("IsDeleted");
 
                     b.Property<string>("Link")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(100);
 
                     b.Property<string>("Note")
                         .HasMaxLength(200);
@@ -390,8 +392,6 @@ namespace HopAmNhacThanh.Data.Migrations
                     b.Property<string>("Note")
                         .HasMaxLength(200);
 
-                    b.Property<int?>("NumberSongInAlbum");
-
                     b.Property<string>("OrtherName")
                         .HasMaxLength(60);
 
@@ -401,7 +401,7 @@ namespace HopAmNhacThanh.Data.Migrations
 
                     b.Property<DateTime?>("UpdateDT");
 
-                    b.Property<int?>("VietnameseLyricID");
+                    b.Property<int?>("VietnameseLyric");
 
                     b.Property<int>("Views");
 
@@ -416,8 +416,6 @@ namespace HopAmNhacThanh.Data.Migrations
                     b.HasIndex("AuthorSongID");
 
                     b.HasIndex("CategoryID");
-
-                    b.HasIndex("VietnameseLyricID");
 
                     b.ToTable("Song");
                 });
@@ -456,20 +454,6 @@ namespace HopAmNhacThanh.Data.Migrations
                     b.HasIndex("SongID");
 
                     b.ToTable("Video");
-                });
-
-            modelBuilder.Entity("HopAmNhacThanh.Models.VietnameseLyric", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Content");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("VietnameseLyric");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
@@ -662,10 +646,6 @@ namespace HopAmNhacThanh.Data.Migrations
                         .WithMany()
                         .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("HopAmNhacThanh.Models.VietnameseLyric", "VietnameseLyric")
-                        .WithMany()
-                        .HasForeignKey("VietnameseLyricID");
                 });
 
             modelBuilder.Entity("HopAmNhacThanh.Models.Video", b =>

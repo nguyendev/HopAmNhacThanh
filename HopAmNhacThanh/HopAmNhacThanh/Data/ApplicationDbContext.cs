@@ -32,5 +32,6 @@ namespace HopAmNhacThanh.Data
         public DbSet<Album> Album { get; set; }
         public DbSet<AuthorSong> AuthorSong { get; set; }
         public DbSet<SheetMusic> SheetMusic { get; set; }
+        public DbSet<VietnameseLyric> VietnameseLyric { get; set; }
     }
 }

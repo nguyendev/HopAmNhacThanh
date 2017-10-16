@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using HopAmNhacThanh.Data.HomeRepository;
 
 namespace HopAmNhacThanh.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IHomeRepository _repostitory;
+        public HomeController(IHomeRepository repository)
         {
+            _repostitory = repository;
+        }
+        public async Task<IActionResult> Index()
+        {
+            ViewData["MainContent"] = await _repostitory.GetMainContent();
             return View();
         }
 

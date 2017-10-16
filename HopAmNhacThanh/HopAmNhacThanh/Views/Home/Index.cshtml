@@ -1,5 +1,6 @@
-﻿<br /><br /><br /><br />
-
+﻿@{ 
+    HopAmNhacThanh.Models.HomeViewModels.MainContentViewModel mainContent = ViewData["MainContent"] as HopAmNhacThanh.Models.HomeViewModels.MainContentViewModel;
+}
 <div class="row">
     <div class="col-md-8"style="padding-right: 0px;">
         @*<div class="panel panel-default">
@@ -11,554 +12,73 @@
         </div>*@
         <div class="panel panel-default">
             <div class="panel-body">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#new">Mới nhất</a></li>
-                    <li><a data-toggle="tab" href="#hot-week">Hot nhất trong tuần</a></li>
-                    <li><a data-toggle="tab" href="#hot">Hot nhất</a></li>
+                <ul class="nav nav-pills">
+                    <li class="active"><a data-toggle="pill" href="#new">Mới nhất</a></li>
+                    <li><a data-toggle="pill" href="#hot-week">Phổ biến nhất</a></li>
+                    <li><a data-toggle="pill" href="#hot">Đang được yêu cầu</a></li>
                 </ul>
-
-                <div class="tab-content">
+                <hr />
+                <div class="tab-content" style="margin-top:10px;">
                     <div id="new" class="tab-pane fade in active">
-                        <div class="col-md-6" style="border-right: 1px dotted #337ab7">
-                            <div class="col-md-12">
-                                <h4>
-                                    <i class="fa fa-music fa-fw"></i>
-                                    <a asp-controller="Home" asp-action="single">
-                                        Con cần Cha
-                                    </a>
-
-                                    <small>
-                                        <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
-                                        <a asp-controller="Home" asp-action="single"> Nguyễn Đình Thôn</a>
-                                    </small>
-                                    <small>
-                                        &nbsp;<i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: 5000
-
-                                    </small>
-                                </h4>
-                                <em>
-                                    1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.
-                                    Vực con vươn [C] l&ecirc;n khỏi chốn tối tăm tuyệt [G] vọng <br />
-                                    Vực con vươn [Am] l&ecirc;n khỏi [D] nghi sợ v&agrave; sầu [G] n&atilde;o [C] <br />
-                                    Th&igrave; con sẽ [F] h&aacute;t ch&uacute;c t&aacute;n ngợi khen danh [G] Ch&uacute;a [A7] <br />
-                                    Xin thần linh [Dm] đến chạm [G7] v&agrave;o con ngay Ch&uacute;a [C] ơi. <br />
-                                    <br />
-                                    2. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y<br />
-                                    Chạm l&ograve;ng [F] con để [E7] con lu&ocirc;n tin [Am] Ng&agrave;i<br />
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y<br />
-                                    Chạm l&ograve;ng [F] con để [G7] con lu&ocirc;n y&ecirc;u [C] Ng&agrave;i. [G]<br />
-                                    <br />
-                                    Vực con vươn [C] l&ecirc;n khỏi chốn tối tăm tuyệt [G] vọng<br />
-                                    Vực con vươn [Am] l&ecirc;n khỏi [D] nghi sợ v&agrave; sầu [G] n&atilde;o [C]<br />
-                                    Th&igrave; con sẽ [F] h&aacute;t ch&uacute;c t&aacute;n ngợi khen danh [G] Ch&uacute;a [A7]<br />
-                                    Xin thần linh [Dm] đến chạm [G7] v&agrave;o con ngay Ch&uacute;a [C] ơi. <br /><br />
-                                </em>
-                                <hr>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>
-                                    <i class="fa fa-music fa-fw"></i>
-                                    <a asp-controller="Home" asp-action="single">
-                                        Con cần Cha
-                                    </a>
-
-                                    <small>
-                                        <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
-                                        <a asp-controller="Home" asp-action="single"> Nguyễn Đình Thôn</a>
-                                    </small>
-                                    <small>
-                                        &nbsp;<i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: 5000
-
-                                    </small>
-                                </h4>
-                                <em>
-                                    1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.
-                                    Vực con vươn [C] l&ecirc;n khỏi chốn tối tăm tuyệt [G] vọng <br />
-                                    Vực con vươn [Am] l&ecirc;n khỏi [D] nghi sợ v&agrave; sầu [G] n&atilde;o [C] <br />
-                                    Th&igrave; con sẽ [F] h&aacute;t ch&uacute;c t&aacute;n ngợi khen danh [G] Ch&uacute;a [A7] <br />
-                                    Xin thần linh [Dm] đến chạm [G7] v&agrave;o con ngay Ch&uacute;a [C] ơi. <br />
-                                    <br />
-                                    2. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y<br />
-                                    Chạm l&ograve;ng [F] con để [E7] con lu&ocirc;n tin [Am] Ng&agrave;i<br />
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y<br />
-                                    Chạm l&ograve;ng [F] con để [G7] con lu&ocirc;n y&ecirc;u [C] Ng&agrave;i. [G]<br />
-                                    <br />
-                                    Vực con vươn [C] l&ecirc;n khỏi chốn tối tăm tuyệt [G] vọng<br />
-                                    Vực con vươn [Am] l&ecirc;n khỏi [D] nghi sợ v&agrave; sầu [G] n&atilde;o [C]<br />
-                                    Th&igrave; con sẽ [F] h&aacute;t ch&uacute;c t&aacute;n ngợi khen danh [G] Ch&uacute;a [A7]<br />
-                                    Xin thần linh [Dm] đến chạm [G7] v&agrave;o con ngay Ch&uacute;a [C] ơi. <br /><br />
-                                </em>
-                                <hr>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>
-                                    <i class="fa fa-music fa-fw"></i>
-                                    <a asp-controller="Home" asp-action="single">
-                                        Con cần Cha
-                                    </a>
-
-                                    <small>
-                                        <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
-                                        <a asp-controller="Home" asp-action="single"> Nguyễn Đình Thôn</a>
-                                    </small>
-                                    <small>
-                                        &nbsp;<i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: 5000
-
-                                    </small>
-                                </h4>
-                                <em>
-                                    1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.
-                                    Vực con vươn [C] l&ecirc;n khỏi chốn tối tăm tuyệt [G] vọng <br />
-                                    Vực con vươn [Am] l&ecirc;n khỏi [D] nghi sợ v&agrave; sầu [G] n&atilde;o [C] <br />
-                                    Th&igrave; con sẽ [F] h&aacute;t ch&uacute;c t&aacute;n ngợi khen danh [G] Ch&uacute;a [A7] <br />
-                                    Xin thần linh [Dm] đến chạm [G7] v&agrave;o con ngay Ch&uacute;a [C] ơi. <br />
-                                    <br />
-                                    2. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y<br />
-                                    Chạm l&ograve;ng [F] con để [E7] con lu&ocirc;n tin [Am] Ng&agrave;i<br />
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y<br />
-                                    Chạm l&ograve;ng [F] con để [G7] con lu&ocirc;n y&ecirc;u [C] Ng&agrave;i. [G]<br />
-                                    <br />
-                                    Vực con vươn [C] l&ecirc;n khỏi chốn tối tăm tuyệt [G] vọng<br />
-                                    Vực con vươn [Am] l&ecirc;n khỏi [D] nghi sợ v&agrave; sầu [G] n&atilde;o [C]<br />
-                                    Th&igrave; con sẽ [F] h&aacute;t ch&uacute;c t&aacute;n ngợi khen danh [G] Ch&uacute;a [A7]<br />
-                                    Xin thần linh [Dm] đến chạm [G7] v&agrave;o con ngay Ch&uacute;a [C] ơi. <br /><br />
-                                </em>
-                                <hr>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>
-                                    <i class="fa fa-music fa-fw"></i>
-                                    <a asp-controller="Home" asp-action="single">
-                                        Con cần Cha
-                                    </a>
-
-                                    <small>
-                                        <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
-                                        <a asp-controller="Home" asp-action="single"> Nguyễn Đình Thôn</a>
-                                    </small>
-                                    <small>
-                                        &nbsp;<i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: 5000
-
-                                    </small>
-                                </h4>
-                                <em>
-                                    1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.
-                                    Vực con vươn [C] l&ecirc;n khỏi chốn tối tăm tuyệt [G] vọng <br />
-                                    Vực con vươn [Am] l&ecirc;n khỏi [D] nghi sợ v&agrave; sầu [G] n&atilde;o [C] <br />
-                                    Th&igrave; con sẽ [F] h&aacute;t ch&uacute;c t&aacute;n ngợi khen danh [G] Ch&uacute;a [A7] <br />
-                                    Xin thần linh [Dm] đến chạm [G7] v&agrave;o con ngay Ch&uacute;a [C] ơi. <br />
-                                    <br />
-                                    2. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y<br />
-                                    Chạm l&ograve;ng [F] con để [E7] con lu&ocirc;n tin [Am] Ng&agrave;i<br />
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y<br />
-                                    Chạm l&ograve;ng [F] con để [G7] con lu&ocirc;n y&ecirc;u [C] Ng&agrave;i. [G]<br />
-                                    <br />
-                                    Vực con vươn [C] l&ecirc;n khỏi chốn tối tăm tuyệt [G] vọng<br />
-                                    Vực con vươn [Am] l&ecirc;n khỏi [D] nghi sợ v&agrave; sầu [G] n&atilde;o [C]<br />
-                                    Th&igrave; con sẽ [F] h&aacute;t ch&uacute;c t&aacute;n ngợi khen danh [G] Ch&uacute;a [A7]<br />
-                                    Xin thần linh [Dm] đến chạm [G7] v&agrave;o con ngay Ch&uacute;a [C] ơi. <br /><br />
-                                </em>
-                                <hr>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>
-                                    <i class="fa fa-music fa-fw"></i>
-                                    <a asp-controller="Home" asp-action="single">
-                                        Con cần Cha
-                                    </a>
-
-                                    <small>
-                                        <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
-                                        <a asp-controller="Home" asp-action="single"> Nguyễn Đình Thôn</a>
-                                    </small>
-                                    <small>
-                                        &nbsp;<i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: 5000
-
-                                    </small>
-                                </h4>
-                                <em>
-                                    1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.
-                                </em>
-                                <hr>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>
-                                    <i class="fa fa-music fa-fw"></i>
-                                    <a asp-controller="Home" asp-action="single">
-                                        Con cần Cha
-                                    </a>
-
-                                    <small>
-                                        <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
-                                        <a asp-controller="Home" asp-action="single"> Nguyễn Đình Thôn</a>
-                                    </small>
-                                    <small>
-                                        &nbsp;<i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: 5000
-
-                                    </small>
-                                </h4>
-                                <em>
-                                    1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.
-                                </em>
-                                <hr>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>
-                                    <i class="fa fa-music fa-fw"></i>
-                                    <a asp-controller="Home" asp-action="single">
-                                        Con cần Cha
-                                    </a>
-
-                                    <small>
-                                        <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
-                                        <a asp-controller="Home" asp-action="single"> Nguyễn Đình Thôn</a>
-                                    </small>
-                                    <small>
-                                        &nbsp;<i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: 5000
-
-                                    </small>
-                                </h4>
-                                <em>
-                                    1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.
-                                </em>
-                                <hr>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>
-                                    <i class="fa fa-music fa-fw"></i>
-                                    <a asp-controller="Home" asp-action="single">
-                                        Con cần Cha
-                                    </a>
-
-                                    <small>
-                                        <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
-                                        <a asp-controller="Home" asp-action="single"> Nguyễn Đình Thôn</a>
-                                    </small>
-                                    <small>
-                                        &nbsp;<i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: 5000
-
-                                    </small>
-                                </h4>
-                                <em>
-                                    1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.
-                                </em>
-                                <hr>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>
-                                    <i class="fa fa-music fa-fw"></i>
-                                    <a asp-controller="Home" asp-action="single">
-                                        Con cần Cha
-                                    </a>
-
-                                    <small>
-                                        <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
-                                        <a asp-controller="Home" asp-action="single"> Nguyễn Đình Thôn</a>
-                                    </small>
-                                    <small>
-                                        &nbsp;<i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: 5000
-
-                                    </small>
-                                </h4>
-                                <em>
-                                    1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.
-                                </em>
-                                <hr>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>
-                                    <i class="fa fa-music fa-fw"></i>
-                                    <a asp-controller="Home" asp-action="single">
-                                        Con cần Cha
-                                    </a>
-
-                                    <small>
-                                        <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
-                                        <a asp-controller="Home" asp-action="single"> Nguyễn Đình Thôn</a>
-                                    </small>
-                                    <small>
-                                        &nbsp;<i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: 5000
-
-                                    </small>
-                                </h4>
-                                <em>
-                                    1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.
-                                </em>
-                                <hr>
-                            </div>
+                        <div class="sort-new-song text-center">
+                            <a href="https://hopamviet.vn/chord/alphabet/a.html"><span class="label label-primary">A</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/b.html"><span class="label label-primary">B</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/c.html"><span class="label label-primary">C</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/d.html"><span class="label label-primary">D</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/e.html"><span class="label label-primary">E</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/f.html"><span class="label label-primary">F</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/g.html"><span class="label label-primary">G</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/h.html"><span class="label label-primary">H</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/i.html"><span class="label label-primary">I</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/j.html"><span class="label label-primary">J</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/k.html"><span class="label label-primary">K</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/l.html"><span class="label label-primary">L</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/m.html"><span class="label label-primary">M</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/n.html"><span class="label label-primary">N</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/o.html"><span class="label label-primary">O</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/p.html"><span class="label label-primary">P</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/q.html"><span class="label label-primary">Q</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/r.html"><span class="label label-primary">R</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/s.html"><span class="label label-primary">S</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/t.html"><span class="label label-primary">T</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/u.html"><span class="label label-primary">U</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/v.html"><span class="label label-primary">V</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/w.html"><span class="label label-primary">W</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/x.html"><span class="label label-primary">X</span></a>
+                            <a href="https://hopamviet.vn/chord/alphabet/y.html"><span class="label label-primary">Y</span></a>
                         </div>
-                        <div class="col-md-6">
-                            <div class="col-md-12">
-                                <h4>
-                                    <i class="fa fa-music fa-fw"></i>
-                                    <a asp-controller="Home" asp-action="single">
-                                        Con cần Cha
-                                    </a>
+                        <br />
+                        <div class="new-song-list">
+                            @foreach(var item in mainContent.ListNewSong)
+                            { 
+                                <div class="new-song-item col-md-12">
+                                    <h4>
+                                        <i class="fa fa-music fa-fw"></i>
+                                        <a asp-controller="Home" asp-action="single">
+                                            @item.Name
+                                        </a>
 
-                                    <small>
-                                        <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
-                                        <a asp-controller="Home" asp-action="single"> Nguyễn Đình Thôn</a>
-                                    </small>
-                                    <small>
-                                        &nbsp;<i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: 5000
+                                        <small>
+                                            <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
+                                            <a asp-controller="Home" asp-action="single"> @item.AuthorSong</a>
+                                        </small>
+                                        <small>
+                                            &nbsp;<i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: @item.View
 
-                                    </small>
-                                </h4>
-                                <em>
-                                    1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.
-                                </em>
-                                <hr>
+                                        </small>
+                                    </h4>
+                                    <em class="lyric" style="text-align: justify">
+                                        @Html.Raw(item.Lyric)
+                                        @*1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
+                                        Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
+                                        Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
+                                        Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.*@
+                                    </em>
+                                    <hr>
+                                </div>
+                            }
                             </div>
-                            <div class="col-md-12">
-                                <h4>
-                                    <i class="fa fa-music fa-fw"></i>
-                                    <a asp-controller="Home" asp-action="single">
-                                        Con cần Cha
-                                    </a>
-
-                                    <small>
-                                        <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
-                                        <a asp-controller="Home" asp-action="single"> Nguyễn Đình Thôn</a>
-                                    </small>
-                                    <small>
-                                        &nbsp;<i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: 5000
-
-                                    </small>
-                                </h4>
-                                <em>
-                                    1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.
-                                </em>
-                                <hr>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>
-                                    <i class="fa fa-music fa-fw"></i>
-                                    <a asp-controller="Home" asp-action="single">
-                                        Con cần Cha
-                                    </a>
-
-                                    <small>
-                                        <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
-                                        <a asp-controller="Home" asp-action="single"> Nguyễn Đình Thôn</a>
-                                    </small>
-                                    <small>
-                                        &nbsp;<i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: 5000
-
-                                    </small>
-                                </h4>
-                                <em>
-                                    1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.
-                                </em>
-                                <hr>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>
-                                    <i class="fa fa-music fa-fw"></i>
-                                    <a asp-controller="Home" asp-action="single">
-                                        Con cần Cha
-                                    </a>
-
-                                    <small>
-                                        <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
-                                        <a asp-controller="Home" asp-action="single"> Nguyễn Đình Thôn</a>
-                                    </small>
-                                    <small>
-                                        &nbsp;<i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: 5000
-
-                                    </small>
-                                </h4>
-                                <em>
-                                    1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.
-                                </em>
-                                <hr>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>
-                                    <i class="fa fa-music fa-fw"></i>
-                                    <a asp-controller="Home" asp-action="single">
-                                        Con cần Cha
-                                    </a>
-
-                                    <small>
-                                        <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
-                                        <a asp-controller="Home" asp-action="single"> Nguyễn Đình Thôn</a>
-                                    </small>
-                                    <small>
-                                        &nbsp;<i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: 5000
-
-                                    </small>
-                                </h4>
-                                <em>
-                                    1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.
-                                </em>
-                                <hr>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>
-                                    <i class="fa fa-music fa-fw"></i>
-                                    <a asp-controller="Home" asp-action="single">
-                                        Con cần Cha
-                                    </a>
-
-                                    <small>
-                                        <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
-                                        <a asp-controller="Home" asp-action="single"> Nguyễn Đình Thôn</a>
-                                    </small>
-                                    <small>
-                                        &nbsp;<i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: 5000
-
-                                    </small>
-                                </h4>
-                                <em>
-                                    1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.
-                                </em>
-                                <hr>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>
-                                    <i class="fa fa-music fa-fw"></i>
-                                    <a asp-controller="Home" asp-action="single">
-                                        Con cần Cha
-                                    </a>
-
-                                    <small>
-                                        <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
-                                        <a asp-controller="Home" asp-action="single"> Nguyễn Đình Thôn</a>
-                                    </small>
-                                    <small>
-                                        &nbsp;<i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: 5000
-
-                                    </small>
-                                </h4>
-                                <em>
-                                    1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.
-                                </em>
-                                <hr>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>
-                                    <i class="fa fa-music fa-fw"></i>
-                                    <a asp-controller="Home" asp-action="single">
-                                        Con cần Cha
-                                    </a>
-
-                                    <small>
-                                        <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
-                                        <a asp-controller="Home" asp-action="single"> Nguyễn Đình Thôn</a>
-                                    </small>
-                                    <small>
-                                        &nbsp;<i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: 5000
-
-                                    </small>
-                                </h4>
-                                <em>
-                                    1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.
-                                </em>
-                                <hr>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>
-                                    <i class="fa fa-music fa-fw"></i>
-                                    <a asp-controller="Home" asp-action="single">
-                                        Con cần Cha
-                                    </a>
-
-                                    <small>
-                                        <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
-                                        <a asp-controller="Home" asp-action="single"> Nguyễn Đình Thôn</a>
-                                    </small>
-                                    <small>
-                                        &nbsp;<i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: 5000
-
-                                    </small>
-                                </h4>
-                                <em>
-                                    1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.
-                                </em>
-                                <hr>
-                            </div>
-                            <div class="col-md-12">
-                                <h4>
-                                    <i class="fa fa-music fa-fw"></i>
-                                    <a asp-controller="Home" asp-action="single">
-                                        Con cần Cha
-                                    </a>
-
-                                    <small>
-                                        <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
-                                        <a asp-controller="Home" asp-action="single"> Nguyễn Đình Thôn</a>
-                                    </small>
-                                    <small>
-                                        &nbsp;<i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: 5000
-
-                                    </small>
-                                </h4>
-                                <em>
-                                    1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
-                                    Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
-                                    Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.
-                                </em>
-                                <hr>
-                            </div>
-                        </div>
+                            
                         @*<div class="col-md-12">
                             <a class="pull-right" asp-controller="" asp-action=""><em>Xem thêm <i class="fa fa-arrow-right"></i></em></a>
                         </div>*@
@@ -924,12 +444,15 @@
 @section Scripts {
 <script defer>
         function bodyLoad() {
+            
+
             chord = "(([A-G][b#]?)((7sus4|7sus2|sus4|sus2|dim|aug|add9|m7M|maj7|m9|m7|m6|m|7M|9|7|6|4|11|m11)?(\\s*[-/]?\\s*)))";
             openBracket = "[\\[\\(]";
             closeBracket = "[\\]\\)]";
             reOneChord = new RegExp(chord, "g");
             reChords = new RegExp(openBracket + "(" + chord + "+)" + closeBracket, "g");
             document.body.innerHTML = document.body.innerHTML.replace(reChords, "<span class=chord>$&</span>");
+            $('.lyric br').replaceWith(' ');
         }
         $(function () {
             bodyLoad();

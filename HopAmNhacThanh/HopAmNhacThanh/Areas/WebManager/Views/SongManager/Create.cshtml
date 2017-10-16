@@ -15,13 +15,13 @@
     <div class="col-md-6">
         <div class="form-group">
             <label asp-for="NameSong" class="control-label"></label>
-            <input id="name-song" required class="form-control" />
+            <input id="name-song" placeholder="Ví dụ: Vững An" required class="form-control" />
         </div>
     </div>
     <div class="col-md-6">
         <div class="form-group">
             <label asp-for="OrtherNameSong" class="control-label"></label>
-            <input id="orther-name" class="form-control" />
+            <input id="orther-name" placeholder="Ví dụ: Still" class="form-control" />
         </div>
     </div>
 </div>
@@ -35,46 +35,50 @@
     <div class="col-md-3">
         <div class="form-group">
             <label asp-for="AuthorSongID" class="control-label"></label>
-            <select id="author-song-id" class="form-control" asp-items="ViewBag.AuthorSongID"></select>
+            <select id="author-song-id" class="form-control" asp-items="ViewBag.AuthorSongID">
+                <option disabled selected>--- Chưa rõ ---</option>
+            </select>
+
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
             <label asp-for="VietNameseLyric" class="control-label"></label>
-            <select id="vietnamese-lyric" class="form-control" asp-items="ViewBag.AuthorSongID"></select>
+            <select id="vietnamese-lyric" class="form-control" asp-items="ViewBag.AuthorSongID">
+                <option disabled selected>--- Chưa rõ ---</option>
+            </select>
             @*<input id="vietnamese-lyric" class="form-control" />*@
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
             <label asp-for="YearPublish" class="control-label"></label>
-            <input id="year-publish" class="form-control" />
+            <input id="year-publish" type="number" maxlength="4" class="form-control" />
         </div>
     </div>
 </div>
 <div class="row">
     <div id="version-lyric-list" class="version-lyric-list col-md-12">
-        <ul id="version-lyric-nav" class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#version-lyric-0">Phiên bản 1</a></li>
+        <ul id="version-lyric-nav" class="nav nav-pills">
+            <li class="active"><a data-toggle="pill" href="#version-lyric-0">Phiên bản 1</a></li>
         </ul>
         <div id="version-lyric-tab-content" class="tab-content">
             <div id="version-lyric-0" class="tab-pane fade in active version-lyric-check">
                 <div class="version-lyric-item">
                     <div class="form-group">
                         <label style="margin-top: 10px !important" class="control-label">Vòng hợp âm và giới thiệu</label>
-                        <textarea id="intro-0" rows="3" cols="3" class="form-control"></textarea>
+                        <textarea id="intro-0" rows="3" cols="3" class="form-control" placeholder="Ví dụ: Intro: [C] [Dm] [F] [G] [C]"></textarea>
                         <span class="help-block"><em>Hợp âm phải bỏ trong dấu ngoặc vuông []</em></span>
                     </div>
                     <br />
                     <div class="form-group">
                         <label class="control-label">Lời và hợp âm</label>
-                        <textarea id="lyric-0" rows="8" cols="3" class="form-control"></textarea>
+                        <textarea required id="lyric-0" rows="8" cols="3" class="form-control"></textarea>
                         <span class="help-block"><em>Hợp âm phải bỏ trong dấu ngoặc vuông []</em></span>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 <div style="margin-bottom: 20px;">
@@ -85,9 +89,9 @@
 <script type="text/javascript">
     var numberVersionLyric = 1;
     function AddVersionLyricItem() {
-        $("#version-lyric-nav").append('<li><a data-toggle="tab" href="#version-lyric-' + numberVersionLyric + '">Phiên bản '+(numberVersionLyric+1)+'</a></li>');
+        $("#version-lyric-nav").append('<li><a data-toggle="pill" href="#version-lyric-' + numberVersionLyric + '">Phiên bản '+(numberVersionLyric+1)+'</a></li>');
         $("#version-lyric-tab-content").append(
-            '<div id="#version-lyric-' + numberVersionLyric + '" class="tab-pane fade">' +
+            '<div id="version-lyric-' + numberVersionLyric + '" class="tab-pane fade version-lyric-check">' +
             '<div class="version-lyric-item">' +
             '<div class="form-group">' +
             '<label class="control-label">Vòng hợp âm và giới thiệu</label>' +
@@ -105,7 +109,6 @@
         numberVersionLyric++;
     };
 </script>
-
 <div class="row">
     <div id="link-song-list" class="version-lyric col-md-12">
     </div>
@@ -122,20 +125,22 @@
             '<div class="col-md-3">' +
             '<div class="form-group">'+
                 '<label class="control-label">Tên ca sỹ</label>'+
-                '<select id="single-name-' + numberLinkSong+'" class="form-control" asp-items="ViewBag.AuthorSongID"></select>'+
+            '<select id="single-name-' + numberLinkSong + '" class="form-control" asp-items="ViewBag.AuthorSongID">' +
+            '<option disabled selected>--- Chưa rõ ---</option>' +
+            '</select>' +
             '</div>'+
             '</div>'+
             '<div class="col-md-3">'+
                 '<div class="form-group">'+
                     '<label class="control-label">Tông chủ</label>'+
-                    '<input id="tone-' + numberLinkSong+'" type="text" class="form-control" />'+
+                    '<input id="tone-' + numberLinkSong +'" type="text" placeholder="Ví dụ: Am" class="form-control" />'+
                     @*<span asp-validation-for="VietnameseLyric" class="text-danger"></span>*@
                 '</div>'+
             '</div>'+
             '<div class="col-md-6">'+
                 '<div class="form-group">'+
                     '<label class="control-label">Link nhạc</label>'+
-                    '<input id="link-' + numberLinkSong+'" class="form-control" />'+
+                    '<input id="link-' + numberLinkSong+'" class="form-control"  placeholder="Ví dụ: https://mp3.zing.vn/embed/song/IW9F9WAU/>"'+
                     @*<span asp-validation-for="YearPublish" class="text-danger"></span>*@
                 '</div>'+
             '</div>'+
@@ -161,14 +166,14 @@
             '<div id="video-item-' + numberVideo+'" class="video-item">'+
                 '<div class="col-md-3">'+
                     '<div class="form-group">'+
-                        '<label class="control-label">Tên</label>'+
+                        '<label class="control-label" placeholder="Ví du: Hướng dẫn chơi ghitar Chúa luôn mở lối">Tên</label>'+
                         '<input id="video-name-' + numberVideo+'" type="text" class="form-control" />'+
                 '</div>'+
             '</div>'+
             '<div class="col-md-9">'+
                 '<div class="form-group">'+
                     '<label class="control-label">Link video</label>'+
-                    '<input id="video-link-' + numberVideo+'" class="form-control" />'+
+                    '<input id="video-link-' + numberVideo +'" class="form-control" placeholder="Ví du: https://www.youtube.com/embed/uI8hGm5Jjlk"/>'+
                     @*<span asp-validation-for="VietnameseLyric" class="text-danger"></span>*@
                 '</div>'+
             '</div>'+
@@ -190,17 +195,17 @@
     function AddSheetSong() {
         $("#sheet-music-list").append(
             '<div id="sheet-music-item-' + numberSheetSong+'" class="sheet-music-item">' +
-            '<div class="col-md-3">' +
+            '<div class="col-md-9">' +
             '<div class="form-group">' +
                 '<label class="control-label">Đường dẫn</label>'+
-                '<input id="sheet-url-' + numberSheetSong+'" type="url" class="form-control" />'+
+                '<input id="sheet-url-' + numberSheetSong +'" type="url" class="form-control" placeholder="Ví du: "/>'+
                 @*<select class="form-control" asp-items="ViewBag.AuthorSongID"></select>*@
                     '</div>'+
             '</div>'+
-            '<div class="col-md-9">' +
+            '<div class="col-md-3">' +
             '<div class="form-group">' +
                 '<label class="control-label">Kiểu file</label>'+
-                '<input id="sheet-type-' + numberSheetSong+'" class="form-control"/>'+
+                '<input id="sheet-type-' + numberSheetSong +'" class="form-control" placeholder="Ví du: PDF/>'+
                     @*<span asp-validation-for="VietnameseLyric" class="text-danger"></span>*@
                 '</div>'+
             '</div>'+

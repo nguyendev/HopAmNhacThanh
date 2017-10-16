@@ -35,30 +35,30 @@
     <!-- /.search form -->
     <!-- Sidebar Menu -->
     <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">Danh mục câu hỏi</li>
+        <li class="header">Danh mục bài hát</li>
         <!-- Optionally, you can add icons to the links -->
         <li>
-            <a asp-action="Index" asp-controller="Media" asp-area="WebManager">
+            <a asp-action="Index" asp-controller="SongManager" asp-area="WebManager">
                 <i class="fa fa-picture-o"></i>
-                <span class="">Thư viện hình ảnh</span>
+                <span class="">Bài hát</span>
                 @*<span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
                 </span>*@
             </a>
         </li>
         <li>
-            <a asp-action="Index" asp-controller="MultiPuzzle" asp-area="WebManager">
+            <a asp-action="Index" asp-controller="ChordsManager" asp-area="WebManager">
                 <i class="fa fa-puzzle-piece"></i>
-                <span class="">Câu đố đặc biệt</span>
+                <span class="">Hợp âm</span>
                 @*<span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
                 </span>*@
             </a>
         </li>
         <li>
-            <a asp-action="Index" asp-controller="SinglePuzzles" asp-area="WebManager">
+            <a asp-action="Index" asp-controller="LinkSongsManager" asp-area="WebManager">
                 <i class="fa fa-puzzle-piece"></i>
-                <span class="">Câu đố theo ngày</span>
+                <span class="">Link ca sỹ</span>
                 @*<span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
                 </span>*@

@@ -14,7 +14,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
         bool Exists(int id);
         Task<PaginatedList<Song>> GetAll(string sortOrder, string searchString,
     int? page, int? pageSize);
-        Task Create(CreateSongViewModels model, ApplicationUser user);
+        Task<bool> Create(CreateSongViewModels model, ApplicationUser user);
         Task<EditSongViewModels> GetEdit(int? ID);
         Task Update(EditSongViewModels model);
         Task Delete(long id);

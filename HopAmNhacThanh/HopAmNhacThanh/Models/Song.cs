@@ -30,15 +30,16 @@ namespace HopAmNhacThanh.Models
         public int CategoryID { get; set; }
         public Category Category {get;set;}
         [Display(Name = "Album")]
-        [Required]
         public int? AlbumID { get; set; }
         public Album Album { get; set; }
+        [Display(Name = "Số thứ tự bài hát trong Album")]
+        public int? NumberSongInAlbum { get; set; }
         [Display(Name = "Tác giả")]
-        [Required]
         public int? AuthorSongID { get; set; }
         public AuthorSong AuthorSong { get; set; }
         [Display(Name = "Lời việt")]
-        public int? VietnameseLyric { get; set; }
+        public int? VietnameseLyricID { get; set; }
+        public VietnameseLyric VietnameseLyric { get; set; }
         [Display(Name = "Năm xuất bản")]
         public string YearPublish { get; set; }
         public List<LinkSong> ListLinkSong { get; set; }

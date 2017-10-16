@@ -16,7 +16,6 @@ namespace HopAmNhacThanh.Models
         [MaxLength(5)]
         [Display(Name = "Tông chủ")]
         public string Tone { get; set; }
-        [StringLength(100, MinimumLength = 3)]
         [Required]
         [Display(Name = "Link")]
         public string Link { get; set; }

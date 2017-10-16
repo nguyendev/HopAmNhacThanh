@@ -8,9 +8,10 @@ using HopAmNhacThanh.Data;
 namespace HopAmNhacThanh.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171016074429_VietnamesLyric")]
+    partial class VietnamesLyric
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -264,7 +265,8 @@ namespace HopAmNhacThanh.Data.Migrations
                     b.Property<bool>("IsDeleted");
 
                     b.Property<string>("Link")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(100);
 
                     b.Property<string>("Note")
                         .HasMaxLength(200);

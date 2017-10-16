@@ -19,109 +19,123 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
         {
             _context = context;
         }
-        public async Task Create(CreateSongViewModels model, ApplicationUser user)
+        public async Task<bool> Create(CreateSongViewModels model, ApplicationUser user)
         {
-            Song song = new Song
+            try
             {
-                Name = model.NameSong,
-                OrtherName = model.OrtherNameSong,
-                Active = "A",
-                AuthorID = user.Id,
-                Approved = "U",
-                CategoryID = model.CategoryID,
-                IsDeleted = false,
-                Note = "",
-                YearPublish = model.YearPublish,
-                Views = 0,
-                VietnameseLyric = model.VietNameseLyric,
-                UpdateDT = null,
-                CreateDT = DateTime.Now,
-                AlbumID = null,
-                AuthorSongID = model.AuthorSongID,
-                Slug = StringExtensions.ConvertToUnSign3(model.NameSong),
-            };
-            await _context.Song.AddAsync(song);
-            await _context.SaveChangesAsync();
-
-            List<LinkSong> listLinkSong = new List<LinkSong>();
-            foreach (var item in model.ArrLinkSong)
-            {
-                LinkSong linkSong = new LinkSong
+                Song song = new Song
                 {
-                    CreateDT = DateTime.Now,
+                    Name = model.NameSong,
+                    OrtherName = model.OrtherNameSong,
                     Active = "A",
-                    Approved = "A",
                     AuthorID = user.Id,
+                    Approved = "U",
+                    CategoryID = model.CategoryID,
                     IsDeleted = false,
-                    Link = item.Link,
                     Note = "",
-                    SingleSongID = item.SongID,
-                    SongID = song.ID,
+                    YearPublish = model.YearPublish,
+                    Views = 0,
                     UpdateDT = null,
-                    Tone = item.Tone
-                };
-                _context.LinkSong.Add(linkSong);
-            }
-
-            List<Chords> listChords = new List<Chords>();
-            foreach (var item in model.ArrChords)
-            {
-                Chords chords = new Chords
-                {
                     CreateDT = DateTime.Now,
-                    Active = "A",
-                    Approved = "A",
-                    AuthorID = user.Id,
-                    IsDeleted = false,
-                    Note = "",
-                    Info = "",
-                    Intro = item.Intro,
-                    Lyric = item.Lyric,
-                    InfoShort = "",
-                    Tone = "",
-                    Slug = user.Slug + "-" + StringExtensions.RandomNumber(2),
-                    SongID = song.ID,
-                    StyleID = null,
-                    UpdateDT = null,
-                    Version = "",
+                    Slug = StringExtensions.ConvertToUnSign3(model.NameSong),
                 };
-                _context.Chords.Add(chords);
-            }
+                song.AuthorSongID = model.AuthorSongID != 0 ? model.AuthorSongID : song.AuthorSongID = null;
+                song.VietnameseLyricID = model.VietNameseLyric != 0 ? model.VietNameseLyric : song.VietnameseLyricID = null;
+                //AlbumID = null,
+                _context.Song.Add(song);
+                _context.SaveChanges();
 
-            List<Video> listVideo = new List<Video>();
-            foreach (var item in model.ArrVideo)
-            {
-                Video video = new Video
+                List<LinkSong> listLinkSong = new List<LinkSong>();
+                if (null != model.ArrLinkSong)
                 {
-                    IsYoutube = false,
-                    Link = item.Link,
-                    SongID = song.ID,
-                    Name = item.Name
+                    foreach (var item in model.ArrLinkSong)
+                    {
+                        LinkSong linkSong = new LinkSong
+                        {
+                            CreateDT = DateTime.Now,
+                            Active = "A",
+                            Approved = "A",
+                            AuthorID = user.Id,
+                            IsDeleted = false,
+                            Link = item.Link,
+                            Note = "",
+                            SongID = song.ID,
+                            UpdateDT = null,
+                            Tone = item.Tone
+                        };
+                        linkSong.SingleSongID = item.SongID != 0 ? item.SongID : linkSong.SingleSongID = null;
 
-                };
-                _context.Video.Add(video);
-            }
-
-            List<SheetMusic> listSheetMusic = new List<SheetMusic>();
-            foreach (var item in model.ArrSheetMusic)
-            {
-                SheetMusic sheetMusic = new SheetMusic
+                        _context.LinkSong.Add(linkSong);
+                    }
+                }
+                List<Chords> listChords = new List<Chords>();
+                foreach (var item in model.ArrChords)
                 {
-                    CreateDT = DateTime.Now,
-                    Active = "A",
-                    Approved = "A",
-                    AuthorID = user.Id,
-                    IsDeleted = false,
-                    Note = "",
-                    Name = item.Name,
-                    SongID = song.ID,
-                    Type = item.Type,
-                    UpdateDT = null
-                };
-                _context.SheetMusic.Add(sheetMusic);
-            }
+                    Chords chords = new Chords
+                    {
+                        CreateDT = DateTime.Now,
+                        Active = "A",
+                        Approved = "A",
+                        AuthorID = user.Id,
+                        IsDeleted = false,
+                        Note = "",
+                        Info = "",
+                        Intro = item.Intro,
+                        Lyric = item.Lyric,
+                        InfoShort = "",
+                        Tone = "",
+                        Slug = user.Slug + "-" + StringExtensions.RandomNumber(2),
+                        SongID = song.ID,
+                        StyleID = null,
+                        UpdateDT = null,
+                        Version = "",
+                    };
+                    _context.Chords.Add(chords);
+                }
+                if (model.ArrVideo != null)
+                {
+                    List<Video> listVideo = new List<Video>();
+                    foreach (var item in model.ArrVideo)
+                    {
+                        Video video = new Video
+                        {
+                            IsYoutube = false,
+                            Link = item.Link,
+                            SongID = song.ID,
+                            Name = item.Name
 
-            await _context.SaveChangesAsync();
+                        };
+                        _context.Video.Add(video);
+                    }
+                }
+                List<SheetMusic> listSheetMusic = new List<SheetMusic>();
+                if (model.ArrSheetMusic != null)
+                {
+                    foreach (var item in model.ArrSheetMusic)
+                    {
+                        SheetMusic sheetMusic = new SheetMusic
+                        {
+                            CreateDT = DateTime.Now,
+                            Active = "A",
+                            Approved = "A",
+                            AuthorID = user.Id,
+                            IsDeleted = false,
+                            Note = "",
+                            Name = item.Name,
+                            SongID = song.ID,
+                            Type = item.Type,
+                            UpdateDT = null
+                        };
+                        _context.SheetMusic.Add(sheetMusic);
+                    }
+                }
+            
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e) {
+                return false;
+            }
         }
 
 

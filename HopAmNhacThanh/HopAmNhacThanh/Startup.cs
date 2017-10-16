@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json.Serialization;
 using Microsoft.Net.Http.Headers;
 using HopAmNhacThanh.Areas.WebManager.Data;
+using HopAmNhacThanh.Data.HomeRepository;
 
 namespace HopAmNhacThanh
 {
@@ -101,6 +102,7 @@ namespace HopAmNhacThanh
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddScoped<ISongManagerRepository, SongManagerRepository>();
+            services.AddScoped<IHomeRepository, HomeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

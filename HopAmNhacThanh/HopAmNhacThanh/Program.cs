@@ -28,8 +28,12 @@ namespace HopAmNhacThanh
                 try
                 {
                     // Requires using RazorPagesMovie.Models;
-                    SeedData.SamepleCategory(services);
-                    SeedData.SamepleAuthorSong(services);
+                    SeedData.SampleCategory(services);
+                    SeedData.SampleStyle(services);
+                    SeedData.SampleAuthorSong(services);
+                    SeedData.SampleSingleSong(services);
+                    SeedData.SampleAlbum(services);
+                    SeedData.SampleSong(services);
                 }
                 catch (Exception ex)
                 {
