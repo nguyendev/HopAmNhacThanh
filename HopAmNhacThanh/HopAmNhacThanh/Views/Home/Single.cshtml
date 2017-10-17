@@ -1,4 +1,7 @@
-﻿<br /><br /><br /><br />
+﻿@{
+    HopAmNhacThanh.Models.HomeViewModels.MainSingleViewModel MainSingle = ViewData["MainSingle"] as HopAmNhacThanh.Models.HomeViewModels.MainSingleViewModel;
+}
+
 <div class="row">
     <div class="col-md-8">
         <div class="panel panel-default">
@@ -22,29 +25,27 @@
                 <div>
                     <div class="row">
                         <h3 class="col-md-10">
-                            Chạm lòng con Chúa ơi
+                            @MainSingle.Name
                             <small>
+                                @MainSingle.OrtherName
                             </small>
                         </h3>
                         <div class="col-md-2">
                             <h3 class="dropdown pull-right">
-                                <button class="btn btn-success btn-sm"  type="button" data-toggle="modal" data-target="#versionModel">Phiên bản</button>
+                                <button class="btn btn-success btn-sm" type="button" data-toggle="modal" data-target="#versionModel">Phiên bản</button>
                             </h3>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-9" style="vertical-align: middle; padding-top: 5px; line-height: 1.5;
+                        <div style="vertical-align: middle; padding-top: 5px; line-height: 1.5;
     border-radius: 3px">
-                            <i title="Sáng tác" class="fa fa-leaf"></i> Sáng tác: <a href="https://hopamviet.vn/chord/composer/1984/kien-tran.html">Chưa rõ</a> |
-                            <i class="fa fa-book"></i> <a href="https://hopamviet.vn/chord/category/3/nhac-tre.html">Nhạc Thánh</a> |
+                            <i title="Sáng tác" class="fa fa-leaf"></i> Sáng tác: <a href="https://hopamviet.vn/chord/composer/1984/kien-tran.html">@MainSingle.AuthorSongName</a> |
+                            <i class="fa fa-book"></i> <a href="https://hopamviet.vn/chord/category/3/nhac-tre.html">@MainSingle.AlbumName</a> |
                             Điệu:
-                            Chưa chọn |
+                            Chưa rõ |
                             <i title="Người đăng" class="fa fa-user"></i> <a href="https://hopamviet.vn/user/1/intrepid">Billy</a> |
                             <i title="Lượt xem" class="fa fa-eye"></i> 25
-                        </div>
-                        <div class="col-md-3">
-                            
                         </div>
                     </div>
                 </div>
@@ -54,9 +55,11 @@
                         background-color: #fff;
                         border-color: #ccc;
                     }
+
                     #lyric, #form-lyric, #intro {
                         margin-top: 20px;
                     }
+
                     #intro {
                         border: 1px dashed #969696;
                         background-color: #fffce0;
@@ -76,33 +79,12 @@
                     </div>
                     <br />
                     <div id="intro">
-                        Tone Xesi Cm; Capo 3 chơi <span class="chord">[Am]</span> <br />
-                        hợp âm chia ở tone <span class="chord">[Am]</span> <br />
-                        Intro: <span class="chord">[C]</span> <span class="chord">[F]</span> <span class="chord">[G]</span> <span class="chord">[C]</span>
+                        @Html.Raw(MainSingle.Intro)
                     </div>
                     <div id="lyric">
-                        1. Chạm lòng <span class="chord">[C]</span> con Chúa ơi, ngay giờ <span class="chord">[Dm]</span> này<br>
-                        Chạm lòng <span class="chord">[F]</span> con để <span class="chord">[E7]</span> con không xa <span class="chord">[Am]</span> Ngài<br>
-                        Chạm lòng <span class="chord">[G]</span> con Chúa <span class="chord">[A7]</span> ơi, ngay giờ <span class="chord">[Dm]</span> này<br>
-                        Chạm lòng <span class="chord">[F]</span> con để <span class="chord">[G7]</span> con say mê <span class="chord">[C]</span> Ngài. <br>
-                        <br>
-                        Vực con vươn <span class="chord">[C]</span> lên khỏi chốn tối tăm tuyệt <span class="chord">[G]</span> vọng <br>
-                        Vực con vươn <span class="chord">[Am]</span> lên khỏi <span class="chord">[D]</span> nghi sợ và sầu <span class="chord">[G]</span> não <span class="chord">[C]</span> <br>
-                        Thì con sẽ <span class="chord">[F]</span> hát chúc tán ngợi khen danh <span class="chord">[G]</span> Chúa <span class="chord">[A7]</span> <br>
-                        Xin thần linh <span class="chord">[Dm]</span> đến chạm <span class="chord">[G7]</span> vào con ngay Chúa <span class="chord">[C]</span> ơi. <br>
-                        <br>
-                        2. Chạm lòng <span class="chord">[C]</span> con Chúa ơi, ngay giờ <span class="chord">[Dm]</span> này<br>
-                        Chạm lòng <span class="chord">[F]</span> con để <span class="chord">[E7]</span> con luôn tin <span class="chord">[Am]</span> Ngài<br>
-                        Chạm lòng <span class="chord">[G]</span> con Chúa <span class="chord">[A7]</span> ơi, ngay giờ <span class="chord">[Dm]</span> này<br>
-                        Chạm lòng <span class="chord">[F]</span> con để <span class="chord">[G7]</span> con luôn yêu <span class="chord">[C]</span> Ngài. <span class="chord">[G]</span><br>
-                        <br>
-                        Vực con vươn <span class="chord">[C]</span> lên khỏi chốn tối tăm tuyệt <span class="chord">[G]</span> vọng<br>
-                        Vực con vươn <span class="chord">[Am]</span> lên khỏi <span class="chord">[D]</span> nghi sợ và sầu <span class="chord">[G]</span> não <span class="chord">[C]</span><br>
-                        Thì con sẽ <span class="chord">[F]</span> hát chúc tán ngợi khen danh <span class="chord">[G]</span> Chúa <span class="chord">[A7]</span><br>
-                        Xin thần linh <span class="chord">[Dm]</span> đến chạm <span class="chord">[G7]</span> vào con ngay Chúa <span class="chord">[C]</span> ơi. <br><br>
+                        @Html.Raw(MainSingle.Lyric)
                     </div>
                     <div id="draw-chords"></div>
-                    
                     <style>
                         #draw-chords {
                             background: #ffffff;
@@ -116,7 +98,6 @@
                             outline-style: none;
                         }
                     </style>
-                    
                 </div>
                 <br />
                 <div class="panel panel-default">
@@ -132,7 +113,7 @@
                             <div class="tab-content">
                                 <div id="guitar" class="tab-pane fade in active">
                                     <div id="mytab"></div>
-                                   
+
                                 </div>
                                 <div id="ukulele" class="tab-pane fade">
                                     <p>Sẽ cập nhật sau </p>
@@ -155,124 +136,136 @@
     </div>
 </div>
 @Html.Partial("ModelSingle")
-
 <div id="fb-root"></div>
 
 @section Style {
-<link href="~/lib/ChordPro/css/chopro.css" rel="stylesheet" />
+    <link href="~/lib/ChordPro/css/chopro.css" rel="stylesheet" />
 }
 @section ScriptsHead {
-<script src="~/lib/ChordPro/js/elb.js"></script>
-@*<script src="~/lib/ChordPro/js/jquery-1.6.2.min.js"></script>*@
-<script src="~/lib/ChordPro/js/Transposer.js"></script>
-<script>
+    <script>
+        function bodyLoad() {
+            chord = "(([A-G][b#]?)((7sus4|7sus2|sus4|sus2|dim|aug|add9|m7M|maj7|m9|m7|m6|m|7M|9|7|6|4|11|m11)?(\\s*[-/]?\\s*)))";
+            openBracket = "[\\[\\(]";
+            closeBracket = "[\\]\\)]";
+            reOneChord = new RegExp(chord, "g");
+            reChords = new RegExp(openBracket + "(" + chord + "+)" + closeBracket, "g");
+            document.body.innerHTML = document.body.innerHTML.replace(reChords, "<span class=chord>$&</span>");
+        }
+        function findTone() {
+            var tone = $('#lyric > span.chord').first().text();
+            tone = tone.replace("[", "");
+            tone = tone.replace("]", "");
+            $(".key").text(tone);
+        }
+        $(function () {
+            bodyLoad();
+            findTone();
+            changeChords();
+        });
+    </script>
+    <script defer src="~/lib/ChordPro/js/elb.js"></script>
+    @*<script src="~/lib/ChordPro/js/jquery-1.6.2.min.js"></script>/////*@
+    <script defer src="~/lib/ChordPro/js/Transposer.js"></script>
+    <script defer>
         jQuery(document).ready(function () {
             var ourKeyElement, ourTransposer;
             ourKeyElement = jQuery("#musicalKey");
             ourTransposer = ELB.Music.aTransposer(ourKeyElement);
 
         });
-</script>
+    </script>
 }
 
 @section Scripts {
-<script defer>
-        $('.chord').mouseover(function () {
-            //("#userblock").show();
-            var txtChords = $(this).text();
-            txtChords = txtChords.replace('[', '');
-            txtChords = txtChords.replace(']', '');
-            txtChords = txtChords.replace('♭', 'b');
-            txtChords = txtChords.replace('♯', '#');
-            $("#draw-chords").empty();
-            $("#draw-chords").append('<span class="col-md-3 col-xs-6 jtab chordonly left">' + txtChords + '</span>');
-            var showChords = $("#draw-chords");
-            var currentChords = $(this);
-            setTimeout(function () {
-                var positionChords = currentChords.offset();
-                showChords.css({
-                    position: "absolute",
-                    top: positionChords.top - 200 + "px",
-                    left: positionChords.left - 70 + "px",
 
-                }).show();
+    <script defer>
+        $(document).ready(function () {
+            $('span.chord').mouseover(function () {
+                //("#userblock").show();
+                var txtChords = $(this).text();
+                txtChords = txtChords.replace('[', '');
+                txtChords = txtChords.replace(']', '');
+                txtChords = txtChords.replace('♭', 'b');
+                txtChords = txtChords.replace('♯', '#');
+                $("#draw-chords").empty();
+                $("#draw-chords").append('<span class="col-md-3 col-xs-6 jtab chordonly left">' + txtChords + '</span>');
+                var showChords = $("#draw-chords");
+                var currentChords = $(this);
+                setTimeout(function () {
+                    var positionChords = currentChords.offset();
+                    showChords.css({
+                        position: "absolute",
+                        top: positionChords.top - 200 + "px",
+                        left: positionChords.left - 70 + "px",
 
-                jtab.renderimplicit();
-            }, 300);
+                    }).show();
 
-        }).mouseleave(function () {
-            setTimeout(function () {
-                $("#draw-chords").hide();
-            }, 300);
+                    jtab.renderimplicit();
+                }, 300);
+
+            }).mouseleave(function () {
+                setTimeout(function () {
+                    $("#draw-chords").hide();
+                }, 300);
+            });
         });
-</script>
-<script defer>
-         //Change Chords
-         function changeChords() {
-             var chords = [];
-             $('span.chord').each(function () {
-                 var txtChords = $(this).text()
-                 txtChords = txtChords.replace('[', '');
-                 txtChords = txtChords.replace(']', '');
-                 txtChords = txtChords.replace('♭', 'b');
-                 txtChords = txtChords.replace('♯', '#');
-                 chords.push(txtChords);
-             });
+        //Change Chords
+        function changeChords() {
+            var chords = [];
+            $('span.chord').each(function () {
+                var txtChords = $(this).text()
+                txtChords = txtChords.replace('[', '');
+                txtChords = txtChords.replace(']', '');
+                txtChords = txtChords.replace('♭', 'b');
+                txtChords = txtChords.replace('♯', '#');
+                chords.push(txtChords);
+            });
 
-             //unique string
-             var unique = chords.filter(function (itm, i, chords) {
-                 return i == chords.indexOf(itm);
-             });
-             var formatText = unique.toString();
+            //unique string
+            var unique = chords.filter(function (itm, i, chords) {
+                return i == chords.indexOf(itm);
+            });
+            var formatText = unique.toString();
 
 
-             //var repaceText = formatText.split(",").join(" ");
-             //var length = repaceText.length;
-             //var rowChords = Math.floor(length / 4);
-             //alert(rowChords);
+            //var repaceText = formatText.split(",").join(" ");
+            //var length = repaceText.length;
+            //var rowChords = Math.floor(length / 4);
+            //alert(rowChords);
 
-             //function myFunction(item, index) {
-             //    //demoP.innerHTML = demoP.innerHTML + "index[" + index + "]: " + item + "<br>";
-             //    $("#mytab").append('<div class="col-md-3">dfaadfads</div>');
+            //function myFunction(item, index) {
+            //    //demoP.innerHTML = demoP.innerHTML + "index[" + index + "]: " + item + "<br>";
+            //    $("#mytab").append('<div class="col-md-3">dfaadfads</div>');
 
-             //    jtab.render($('#mytab'), item);
-             //    alert(item);
+            //    jtab.render($('#mytab'), item);
+            //    alert(item);
 
-             //}
-             //alert(unique);
-             //unique.forEach(myFunction);
-             $("#mytab").empty();
-             for (var i = 0; i < unique.length; i++) {
-                 $("#mytab").append('<span class="col-md-3 col-xs-6 jtab chordonly left">' + unique[i] + '</span>');
-             }
-             $("#mytab").append('<div class="clear"><div class="row"><span></span></div></div>');
-             jtab.renderimplicit();
+            //}
+            //alert(unique);
+            //unique.forEach(myFunction);
+            $("#mytab").empty();
+            for (var i = 0; i < unique.length; i++) {
+                $("#mytab").append('<span class="col-md-3 col-xs-6 jtab chordonly left">' + unique[i] + '</span>');
+            }
+            $("#mytab").append('<div class="clear"><div class="row"><span></span></div></div>');
+            jtab.renderimplicit();
 
-             //jtab.render($('#mytab'), repaceText);
-         }
+            //jtab.render($('#mytab'), repaceText);
+        }
 
-         $(document).ready(function () {
-             changeChords();
-             $(".tbutton").click(function () {
-                 //var $this = $(this);
-                 //if ($this.data('clicked')) {
-                 //}
-                 //else {
-                 //    $this.data('clicked', true);
-                 changeChords();
-                 //}
-             });
-         });
-</script>
-<script>
-         $(document).ready(function () {
-             $('#lyric').bind("cut copy paste", function (e) {
-                 /* alert('Copy Paste is disabled');*/
-                 e.preventDefault();
-             });
-         });
-</script>
-<script>
+        $(document).ready(function () {
+            $(".tbutton").click(function () {
+                changeChords();
+            });
+        });
+        $(document).ready(function () {
+            $('#lyric').bind("cut copy paste", function (e) {
+                /* alert('Copy Paste is disabled');*/
+                e.preventDefault();
+            });
+        });
+    </script>
+    <script>
     ////tu dong truot
     //var scrollValue = 1;
     //var scrolldelay;
@@ -306,7 +299,7 @@
     //show_fullsong();
 
 
-</script>
+    </script>
 
 
 }

@@ -8,6 +8,8 @@ namespace HopAmNhacThanh.Data.HomeRepository
 {
     public interface IHomeRepository
     {
-        Task<MainContentViewModel> GetMainContent();
+        Task<MainContentViewModel> GetMainHome();
+
+        Task<MainSingleViewModel> GetMainSingle(string slugSong, string slugVersion);
     }
 }

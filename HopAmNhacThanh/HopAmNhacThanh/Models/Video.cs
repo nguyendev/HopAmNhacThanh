@@ -15,6 +15,6 @@ namespace HopAmNhacThanh.Models
         public long SongID { get; set; }
         public string Name { get; set; }
         public string Link { get; set; }
-        public bool IsYoutube { get; set; }
+        public int? Type { get; set; }
     }
 }

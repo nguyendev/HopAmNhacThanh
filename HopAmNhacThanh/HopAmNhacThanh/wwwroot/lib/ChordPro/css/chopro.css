@@ -4,14 +4,14 @@
   color: red;
 }
 .offKey {
-  color: orange;
+    color: blue;
 }
 
 /*a {color: cyan}*/
 a:visited {color: mediumpurple}
 
 html{
-  background-color: black;
+  /*background-color: black;*/
 }
 
 body {

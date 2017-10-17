@@ -19,5 +19,7 @@ namespace HopAmNhacThanh.Models.HomeViewModels
         public string AlbumName { get; set; }
         public int View { get; set; }
         public string Lyric { get; set; }
+        public string Slug { get; set; }
+        public string VersionSlug { get; set; }
     }
 }

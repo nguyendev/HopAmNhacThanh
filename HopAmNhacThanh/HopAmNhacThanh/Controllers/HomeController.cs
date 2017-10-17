@@ -16,7 +16,7 @@ namespace HopAmNhacThanh.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            ViewData["MainContent"] = await _repostitory.GetMainContent();
+            ViewData["MainContent"] = await _repostitory.GetMainHome();
             return View();
         }
 
@@ -35,8 +35,10 @@ namespace HopAmNhacThanh.Controllers
 
             return View();
         }
-        public IActionResult Single()
+        [Route("bai-hat/{slug}/{slugVersion}")]
+        public async Task<IActionResult> Single(string slug, string slugVersion)
         {
+            ViewData["MainSingle"] = await _repostitory.GetMainSingle(slug,slugVersion);
             ViewData["Message"] = "Your contact page.";
 
             return View();

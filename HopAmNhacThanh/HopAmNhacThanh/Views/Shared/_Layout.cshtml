@@ -71,7 +71,7 @@
 
     @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
-<body style="background-color: #f1f4f9">
+<body style="background-color: #f1f4f9 !important">
     @*<environment names="Development">
             <script src="~/lib/jquery/dist/jquery.js"></script>
             <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
@@ -529,7 +529,7 @@
                 </nav>
             </div>*@
     </nav>
-    <div class="container">
+    <div class="container" style="margin-top: 80px !important">
         @RenderBody()
         <hr />
         <div class="footer">

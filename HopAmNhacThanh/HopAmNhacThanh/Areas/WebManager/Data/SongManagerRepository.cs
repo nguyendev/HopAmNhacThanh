@@ -99,7 +99,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
                     {
                         Video video = new Video
                         {
-                            IsYoutube = false,
+                            Type = 1,
                             Link = item.Link,
                             SongID = song.ID,
                             Name = item.Name

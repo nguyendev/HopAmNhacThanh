@@ -300,7 +300,7 @@ namespace HopAmNhacThanh.Models
 
                 Video video = new Video
                 {
-                    IsYoutube = true,
+                    Type = 1,
                     Link = "https://www.youtube.com/embed/poZ_PiHU3-M",
                     SongID = song.ID,
                     Name = "Ân Chúa Dẫy Đầy"
