@@ -6,31 +6,15 @@
     <div class="col-md-8">
         <div class="panel panel-default">
             <div class="panel-body">
-                <form role="form" name="search" method="get" action="https://hopamviet.vn/chord/search.html">
-                    <div class="input-group">
-                        <input type="text" class="form-control" value="" name="song" placeholder="Nhập tên bài hát, tên ca sĩ / tên nhạc sĩ / lời" />
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="submit"><i class="fa fa-search fa-fw"></i> Tìm</button>
-                        </span>
-                    </div>
-                </form>
-                <br />
-                <div>
-                    <a href="https://hopamviet.vn/chord/alphabet/a.html"><span class="label label-default">A</span></a> <a href="https://hopamviet.vn/chord/alphabet/b.html"><span class="label label-default">B</span></a> <a href="https://hopamviet.vn/chord/alphabet/c.html"><span class="label label-default">C</span></a> <a href="https://hopamviet.vn/chord/alphabet/d.html"><span class="label label-default">D</span></a> <a href="https://hopamviet.vn/chord/alphabet/e.html"><span class="label label-default">E</span></a> <a href="https://hopamviet.vn/chord/alphabet/f.html"><span class="label label-default">F</span></a> <a href="https://hopamviet.vn/chord/alphabet/g.html"><span class="label label-default">G</span></a> <a href="https://hopamviet.vn/chord/alphabet/h.html"><span class="label label-default">H</span></a> <a href="https://hopamviet.vn/chord/alphabet/i.html"><span class="label label-default">I</span></a> <a href="https://hopamviet.vn/chord/alphabet/j.html"><span class="label label-default">J</span></a> <a href="https://hopamviet.vn/chord/alphabet/k.html"><span class="label label-default">K</span></a> <a href="https://hopamviet.vn/chord/alphabet/l.html"><span class="label label-default">L</span></a> <a href="https://hopamviet.vn/chord/alphabet/m.html"><span class="label label-default">M</span></a> <a href="https://hopamviet.vn/chord/alphabet/n.html"><span class="label label-default">N</span></a> <a href="https://hopamviet.vn/chord/alphabet/o.html"><span class="label label-default">O</span></a> <a href="https://hopamviet.vn/chord/alphabet/p.html"><span class="label label-default">P</span></a> <a href="https://hopamviet.vn/chord/alphabet/q.html"><span class="label label-default">Q</span></a> <a href="https://hopamviet.vn/chord/alphabet/r.html"><span class="label label-default">R</span></a> <a href="https://hopamviet.vn/chord/alphabet/s.html"><span class="label label-default">S</span></a> <a href="https://hopamviet.vn/chord/alphabet/t.html"><span class="label label-default">T</span></a> <a href="https://hopamviet.vn/chord/alphabet/u.html"><span class="label label-default">U</span></a> <a href="https://hopamviet.vn/chord/alphabet/v.html"><span class="label label-default">V</span></a> <a href="https://hopamviet.vn/chord/alphabet/w.html"><span class="label label-default">W</span></a> <a href="https://hopamviet.vn/chord/alphabet/x.html"><span class="label label-default">X</span></a> <a href="https://hopamviet.vn/chord/alphabet/y.html"><span class="label label-default">Y</span></a>
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-body">
                 <div>
                     <div class="row">
-                        <h3 class="col-md-10">
+                        <h3 class="col-md-10 col-sm-6 col-xs-8">
                             @MainSingle.Name
                             <small>
                                 @MainSingle.OrtherName
                             </small>
                         </h3>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-sm-6 col-xs-4">
                             <h3 class="dropdown pull-right">
                                 <button class="btn btn-success btn-sm" type="button" data-toggle="modal" data-target="#versionModel">Phiên bản</button>
                             </h3>
@@ -38,13 +22,13 @@
                     </div>
 
                     <div class="row">
-                        <div style="vertical-align: middle; padding-top: 5px; line-height: 1.5;
+                        <div class="col-md-12" style="vertical-align: middle; padding-top: 5px; line-height: 1.5;
     border-radius: 3px">
                             <i title="Sáng tác" class="fa fa-leaf"></i> Sáng tác: <a href="https://hopamviet.vn/chord/composer/1984/kien-tran.html">@MainSingle.AuthorSongName</a> |
                             <i class="fa fa-book"></i> <a href="https://hopamviet.vn/chord/category/3/nhac-tre.html">@MainSingle.AlbumName</a> |
-                            Điệu:
-                            Chưa rõ |
-                            <i title="Người đăng" class="fa fa-user"></i> <a href="https://hopamviet.vn/user/1/intrepid">Billy</a> |
+                            <i class="fa fa-book"></i> <a href="https://hopamviet.vn/chord/category/3/nhac-tre.html">@MainSingle.CategoryName</a> |
+                            <i class="fa fa-music"></i> <a href="https://hopamviet.vn/chord/category/3/nhac-tre.html">Điệu: @MainSingle.StyleName</a> |
+                            @*<i title="Người đăng" class="fa fa-user"></i> <a href="https://hopamviet.vn/user/1/intrepid">Billy</a> |*@
                             <i title="Lượt xem" class="fa fa-eye"></i> 25
                         </div>
                     </div>
@@ -70,18 +54,20 @@
                 <div id="form-lyric">
                     <div class="btn-group">
                         <div id="musicalKey" style="margin-right: 5px;" class="annotation btn-group"><span class="key btn btn-default btn-sm">G</span></div>
-                        <div class="btn-group">
+                        <div class="btn-group" style="margin-right: 5px;">
                             <span id="fontsize" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="fa fa-font fa-1x"></i></span>
                             <a href="https://hopamviet.vn/chord/printsong/chia-tay/W8IUUAC8.html" target="_blank" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="fa fa-print"></i></a>
                             <span id="clone" class="btn btn-default btn-sm">x2</span>
-
+                        </div>
+                        <div class="btn-group">
+                            <span id="gopdong" class="btn btn-default btn-sm">Gộp dòng <i class="fa fa-fw fa-check-square-o"></i></span>
                         </div>
                     </div>
                     <br />
                     <div id="intro">
                         @Html.Raw(MainSingle.Intro)
                     </div>
-                    <div id="lyric">
+                    <div id="lyric" style="position: relative">
                         @Html.Raw(MainSingle.Lyric)
                     </div>
                     <div id="draw-chords"></div>
@@ -132,17 +118,17 @@
         </div>
     </div>
     <div class="col-md-4">
-        @Html.Partial("SidebarSingle")
+        @await Html.PartialAsync("SidebarSingle", MainSingle)
     </div>
 </div>
-@Html.Partial("ModelSingle")
+@await Html.PartialAsync("ModelSingle", MainSingle)
 <div id="fb-root"></div>
 
 @section Style {
     <link href="~/lib/ChordPro/css/chopro.css" rel="stylesheet" />
 }
 @section ScriptsHead {
-    <script>
+    <script defer>
         function bodyLoad() {
             chord = "(([A-G][b#]?)((7sus4|7sus2|sus4|sus2|dim|aug|add9|m7M|maj7|m9|m7|m6|m|7M|9|7|6|4|11|m11)?(\\s*[-/]?\\s*)))";
             openBracket = "[\\[\\(]";
@@ -171,15 +157,52 @@
             var ourKeyElement, ourTransposer;
             ourKeyElement = jQuery("#musicalKey");
             ourTransposer = ELB.Music.aTransposer(ourKeyElement);
-
         });
     </script>
 }
-
 @section Scripts {
-
     <script defer>
         $(document).ready(function () {
+            var KhongGopDong = true;
+            $("#gopdong").click(function () {
+                if (KhongGopDong) {
+                    $("span.chord").css('position', 'relative');
+                    $("span.chord").css('display', 'inline-block');
+                    $("span.chord").css('top', 'inline');
+                    $("span.chord").css('width', '-1em');
+                    KhongGopDong = false;
+                    $(this).empty();
+                    $(this).append('Gộp dòng <i class="fa fa-fw fa-square-o" ></i>')
+                }
+                else
+                {
+                    $("span.chord").css('position', '');
+                    $("span.chord").css('display', '');
+                    $("span.chord").css('top', '');
+                    $("span.chord").css('width', '');
+                    KhongGopDong = true;
+                    $(this).empty();
+                    $(this).append('Gộp dòng <i class="fa fa-fw fa-check-square-o" ></i>')
+                }
+            });
+
+            $("#fontsize").click(function () {
+                var ourText = $("#lyric");
+                var currFontSize = ourText.css("fontSize");
+                var finalNum = parseFloat(currFontSize, 10);
+                var stringEnding = currFontSize.slice(-2);
+                var minSize = 14;
+                var maxSize = 18;
+                if (maxSize > finalNum) {
+                    finalNum++;
+                } else {
+                    finalNum = minSize;
+                }
+                ourText.css("fontSize", finalNum + stringEnding);
+            });
+            $("#clone").click(function () {
+                $("#lyric").append($("#lyric").clone());
+            });
             $('span.chord').mouseover(function () {
                 //("#userblock").show();
                 var txtChords = $(this).text();
@@ -282,24 +305,35 @@
     //        scrolldelay = setTimeout('startScroll()', 200 / scrollValue);
     //    }
     //}
+        
+    //xo ca si the hien
+    var song_expand = '<p>Xem thêm các ca sĩ khác <i class="fa fa-chevron-down"></i></p>';
+    var song_collapse = '<p>Thu gọn <i class="fa fa-chevron-up"></i></p>';
+    function show_fullsong() {
+        if (document.getElementById('moresong').innerHTML == song_expand) {
+            document.getElementById('fullsong').setAttribute('style', "overflow: auto;");
+            document.getElementById('moresong').innerHTML = song_collapse;
+        }
+        else if (document.getElementById('fullsong').offsetHeight > 350) {
+            document.getElementById('fullsong').setAttribute('style', "max-height: 150px; overflow: hidden;");
+            document.getElementById('moresong').innerHTML = song_expand;
+        }
+    }
+        show_fullsong();
 
-    ////xo ca si the hien
-    //var song_expand = '<p>Xem thêm các ca sĩ khác <i class="fa fa-chevron-down"></i></p>';
-    //var song_collapse = '<p>Thu gọn <i class="fa fa-chevron-up"></i></p>';
-    //function show_fullsong() {
-    //    if (document.getElementById('moresong').innerHTML == song_expand) {
-    //        document.getElementById('fullsong').setAttribute('style', "overflow: auto;");
-    //        document.getElementById('moresong').innerHTML = song_collapse;
-    //    }
-    //    else if (document.getElementById('fullsong').offsetHeight > 350) {
-    //        document.getElementById('fullsong').setAttribute('style', "max-height: 290px; overflow: hidden;");
-    //        document.getElementById('moresong').innerHTML = song_expand;
-    //    }
-    //}
-    //show_fullsong();
-
-
+        ////xo ca si the hien
+        var video_expand = '<p>Xem thêm các video khác <i class="fa fa-chevron-down"></i></p>';
+        var video_collapse = '<p>Thu gọn <i class="fa fa-chevron-up"></i></p>';
+        function show_fullvideo() {
+            if (document.getElementById('morevideo').innerHTML == video_expand) {
+                document.getElementById('fullvideo').setAttribute('style', "overflow: auto;");
+                document.getElementById('morevideo').innerHTML = video_collapse;
+            }
+            else if (document.getElementById('fullvideo').offsetHeight > 350) {
+                document.getElementById('fullvideo').setAttribute('style', "max-height: 230px; overflow: hidden;");
+                document.getElementById('morevideo').innerHTML = video_expand;
+            }
+        }
+        show_fullvideo();
     </script>
-
-
 }

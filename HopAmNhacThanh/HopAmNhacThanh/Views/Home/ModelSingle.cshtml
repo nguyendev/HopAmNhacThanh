@@ -1,4 +1,4 @@
-﻿
+﻿@model HopAmNhacThanh.Models.HomeViewModels.MainSingleViewModel
 <div id="musicModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form action="https://hopamviet.vn/chord/insert_song" method="post">
         <div class="modal-dialog">
@@ -49,10 +49,10 @@
                 <div class="table-responsive">
                     <style>
                         .table {
-                            color: black !important
+                            color: black ;
                         }
-                        tr.active {
-                            background-color: deepskyblue;
+                        tr.active td{
+                            background-color: powderblue !important;
                         }
                         tr:hover {
                             background-color: yellow;
@@ -68,42 +68,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><a asp-controller="Home" asp-action="Single">Hợp âm nâng cao</a></td>
+                            @foreach (var item in Model.ListChords) {
+                                {
+                                    if (item.Selected)
+                                    {
+                                        ViewData["active"] = "active";
+                                    }
+                                    else
+                                    {
+                                        ViewData["active"] = "";
+                                    }
+                                }
+                            <tr class="@ViewData["active"]">
+                                <td class="@ViewData["active"]"><a asp-controller="Home" asp-action="Single" asp-route-slug="@Model.Slug" asp-route-slugVersion="@item.Slug">@item.Name assdfds</a></td>
                                 <td><div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div></td>
-                                <td>Hợp âm nâng cao</td>
+                                <td>@item.Description</td>
                                 <td>
                                     <img src="https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.0-1/p40x40/15726586_1049327511879462_6901300413484871919_n.jpg?oh=0ae04013d348113dc3851e3b33cb43cb&oe=5A4137CB" width="20px" height="20px" />
-                                    <label>Nguyễn Văn Tèo</label>
+                                    <label>@item.AuthorName</label>
                                 </td>
                             </tr>
-                            <tr>
-                                <td><a asp-controller="Home" asp-action="Single">Hợp âm nâng cao</a></td>
-                                <td><div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div></td>
-                                <td>Hợp âm nâng cao</td>
-                                <td>
-                                    <img src="https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.0-1/p40x40/15726586_1049327511879462_6901300413484871919_n.jpg?oh=0ae04013d348113dc3851e3b33cb43cb&oe=5A4137CB" width="20px" height="20px" />
-                                    <label>Nguyễn Văn Tèo</label>
-                                </td>
-                            </tr>
-                            <tr class="active">
-                                <td><a asp-controller="Home" asp-action="Single">Hợp âm nâng cao</a></td>
-                                <td><div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div></td>
-                                <td>Hợp âm nâng cao</td>
-                                <td>
-                                    <img src="https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.0-1/p40x40/15726586_1049327511879462_6901300413484871919_n.jpg?oh=0ae04013d348113dc3851e3b33cb43cb&oe=5A4137CB" width="20px" height="20px" />
-                                    <label>Nguyễn Văn Tèo</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a asp-controller="Home" asp-action="Single">Hợp âm nâng cao</a></td>
-                                <td><div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div></td>
-                                <td>Hợp âm nâng cao</td>
-                                <td>
-                                    <img src="https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.0-1/p40x40/15726586_1049327511879462_6901300413484871919_n.jpg?oh=0ae04013d348113dc3851e3b33cb43cb&oe=5A4137CB" width="20px" height="20px" />
-                                    <label>Nguyễn Văn Tèo</label>
-                                </td>
-                            </tr>
+                            }
                         </tbody>
                     </table>
                 </div>

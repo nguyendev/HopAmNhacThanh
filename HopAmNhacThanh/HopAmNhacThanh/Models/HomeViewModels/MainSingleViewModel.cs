@@ -21,10 +21,13 @@ namespace HopAmNhacThanh.Models.HomeViewModels
         public string VietnameseLyricName { get; set; }
         public string Intro { get; set; }
         public string Lyric { get; set; }
+        public string StyleName { get; set; }
         [Display(Name = "Năm xuất bản")]
         public List<SimpleLinkSongViewModel> ListLinkSong { get; set; }
         public List<SimpleChordsViewModel> ListChords { get; set; }
         public List<SimpleVideoViewModel> ListVideos { get; set; }
+        public List<SimpleSongInAblumViewModel> ListSongInAblum { get; set; }
+        public List<SimpleSongInAblumViewModel> ListSongInCategory { get; set; }
         public bool IsSheetExisted { get; set; }
         [Display(Name = "Lượt xem")]
         public int Views { get; set; }
@@ -37,6 +40,7 @@ namespace HopAmNhacThanh.Models.HomeViewModels
         public string Name { get; set; }
         public string Description { get; set; }
         public string AuthorName { get; set; }
+        public string StyleName { get; set; }
         public bool Selected { get; set; }
     }
 
@@ -54,5 +58,12 @@ namespace HopAmNhacThanh.Models.HomeViewModels
         public string Name { get; set; }
         public string Link { get; set; }
         public int Type { get; set; }
+    }
+
+    public class SimpleSongInAblumViewModel
+    {
+        public string Name { get; set; }
+        public string Slug { get; set; }
+        public int Number { get; set; }
     }
 }

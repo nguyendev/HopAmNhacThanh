@@ -7,13 +7,6 @@
     color: blue;
 }
 
-/*a {color: cyan}*/
-a:visited {color: mediumpurple}
-
-html{
-  /*background-color: black;*/
-}
-
 body {
   color: black;
 }
@@ -66,11 +59,11 @@ p.lyric {
     padding-top: 1em;
 }
 span.chord {
-    /*position: relative;*/
-    /*top: -1em;
+    /*position: relative;
+    top: -1em;
     width: 0;
-    display: inline-block;
+    display: inline-block;*/
     
-    font-family: Arial;*/
+    font-family: Arial;
     color: blue;
 }

@@ -85,10 +85,11 @@ namespace HopAmNhacThanh.Data.HomeRepository
 
         public async Task<MainSingleViewModel> GetMainSingle(string slugSong, string slugVersion)
         {
-            try
-            {
+            //try
+            //{
                 string Intro = "";
                 string Lyric = "";
+                string Style = "";
                 var songContext = await _context.Song
                     .Include(p => p.Album)
                     .Include(p => p.AuthorSong)
@@ -98,6 +99,7 @@ namespace HopAmNhacThanh.Data.HomeRepository
 
                 var chordsContext = await _context.Chords
                     .Include(p => p.Author)
+                    .Include(p => p.Style)
                     .Where(p => p.SongID == songContext.ID)
                     .ToListAsync();
                 List<SimpleChordsViewModel> simpleChords = new List<SimpleChordsViewModel>();
@@ -110,13 +112,16 @@ namespace HopAmNhacThanh.Data.HomeRepository
                         AuthorName = item.Author.FullName,
                         Description = item.InfoShort,
                         Slug = item.Slug,
-                        Selected = selected
+                        Selected = selected,
                     };
                     if (selected)
                     {
                         Intro = item.Intro;
                         Lyric = item.Lyric;
+                        Style = item.StyleID.HasValue ? item.Style.Name : "";
                     }
+
+                    simpleChord.StyleName = item.StyleID.HasValue ? item.Style.Name : "";
                     simpleChords.Add(simpleChord);
                 };
 
@@ -154,6 +159,19 @@ namespace HopAmNhacThanh.Data.HomeRepository
                     listVideo.Add(simpleVideo);
                 };
 
+                var songInCategoryContext = await _context.Song.Where(p => p.CategoryID == songContext.CategoryID).Take(10).ToListAsync();
+                List<SimpleSongInAblumViewModel> ListSongInCategory = new List<SimpleSongInAblumViewModel>();
+                foreach (var item in songInCategoryContext)
+                {
+                    SimpleSongInAblumViewModel songInAblum = new SimpleSongInAblumViewModel
+                    {
+                        Name = item.Name,
+                        Slug = item.Slug,
+                        Number = item.NumberSongInAlbum.Value,
+                    };
+                    ListSongInCategory.Add(songInAblum);
+                }
+
                 MainSingleViewModel model = new MainSingleViewModel();
                 model.AlbumName = songContext.Album != null ? songContext.Album.Name : "";
                 model.Name = songContext.Name;
@@ -169,13 +187,33 @@ namespace HopAmNhacThanh.Data.HomeRepository
                 model.ListVideos = listVideo;
                 model.Lyric = Lyric;
                 model.Intro = Intro;
+                model.ListSongInCategory = ListSongInCategory;
+                model.StyleName = Style;
+                if (songContext.AlbumID.HasValue)
+                {
+                    var songInAlbumContext = await _context.Song.Where(p => p.AlbumID == songContext.AlbumID).Take(10).ToListAsync();
+                    List<SimpleSongInAblumViewModel> ListSongInAlbum = new List<SimpleSongInAblumViewModel>();
+                    foreach (var item in songInAlbumContext)
+                    {
+                        SimpleSongInAblumViewModel songInAblum = new SimpleSongInAblumViewModel
+                        {
+                            Name = item.Name,
+                            Slug = item.Slug,
+                            Number = item.NumberSongInAlbum.Value,
+                        };
+                        ListSongInAlbum.Add(songInAblum);
+                    }
+                    model.ListSongInAblum = ListSongInAlbum;
+                }
+                else
+                    model.ListSongInAblum = null;
 
                 return model;
-            }
-            catch
-            {
-                return null;
-            }
+            //}
+            //catch
+            //{
+            //    return null;
+            //}
         }
     }
 }
