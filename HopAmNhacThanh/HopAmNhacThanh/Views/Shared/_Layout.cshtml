@@ -117,276 +117,42 @@
             </div>
         </nav>*@
     <style>
-        .bootsnipp-search {
+        
+
+        .navbar-default .navbar-nav > li > a {
+            color: white;
         }
-
-        .navbar-bootsnipp .navbar-nav > li > a:hover {
-            background-color: #0099cd !important;
+        .navbar-default {
+            background-color: #0099cd;
+            border-color: #0786c5;
         }
-
-        .navbar-bootsnipp {
-            background-color: #0099cd !important;
-            border-color: #0786c5 !important;
-        }
-
-            .navbar-bootsnipp .navbar-brand {
-                color: #ffffff !important;
-                font-family: 'Times New Roman';
+            .navbar-default .navbar-toggle {
+                border-color: #0786c5;
+                color: white;
             }
-            .navbar-bootsnipp .navbar-nav > li > a {
-                color: #ffffff !important;
-                font-family: 'Times New Roman';
+            .navbar-default .navbar-brand {
+                color: #ffffff;
             }
-
-        .animate {
-            -webkit-transition: all 0.3s ease-in-out;
-            -moz-transition: all 0.3s ease-in-out;
-            -o-transition: all 0.3s ease-in-out;
-            -ms-transition: all 0.3s ease-in-out;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .navbar-bootsnipp {
-            background-color: rgb(255, 255, 255);
-            border-color: rgb(95, 176, 228);
-            border-radius: 0px;
-            margin-bottom: 0px;
-            z-index: 100;
-        }
-
-            .navbar-bootsnipp:nth-of-type(2) {
-                border-top-width: 1px;
-                z-index: 50
+            .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+                border-color: #ffffff;
             }
-
-            .navbar-bootsnipp.affix-top {
-                position: absolute;
-                top: 0px;
-                width: 100%;
-            }
-
-            .navbar-bootsnipp.affix {
-                top: 0px;
-                width: 100%;
-            }
-
-            .navbar-bootsnipp .navbar-toggle .icon-bar {
-                background-color: rgb(95, 176, 228);
-            }
-
-            .navbar-bootsnipp .navbar-brand {
-                color: rgb(95, 176, 228);
-                font-weight: 900;
-                letter-spacing: 2px;
-            }
-
-            .navbar-bootsnipp .navbar-nav > li > a {
-                border: 0px solid rgb(95, 176, 228);
-                color: rgb(120, 120, 120);
-                padding: 15px 14px;
-            }
-
-            .navbar-bootsnipp .navbar-nav > li > form > .input-group > input,
-            .navbar-bootsnipp .navbar-nav > li > form > .input-group > .input-group-btn > .btn {
-                border-radius: 0px;
-            }
-
-            .navbar-bootsnipp .navbar-nav > li:not(.disabled).open > a,
-            .navbar-bootsnipp .navbar-nav > li:not(.disabled).active > a,
-            .navbar-bootsnipp .navbar-nav > li:not(.disabled) > a:hover,
-            .navbar-bootsnipp .navbar-nav > li:not(.disabled) > a:focus {
-                border-left-width: 5px;
-                color: rgb(95, 176, 228);
-                padding-left: 10px;
-            }
-
-            .navbar-bootsnipp .navbar-nav > li.disabled > a {
-                color: rgb(200, 200, 200);
-            }
-
-            .navbar-bootsnipp .navbar-nav > li > .dropdown-menu {
-                border-radius: 0;
-                margin-right: -1px;
-                min-width: 220px;
-                padding: 0px;
-            }
-
-            .navbar-bootsnipp .navbar-nav > li:not(.dropdown-right) > .dropdown-menu {
-                left: 0px;
-                margin-left: -1px;
-                right: auto;
-            }
-
-            .navbar-bootsnipp .navbar-nav > li > .dropdown-menu > li > a {
-                border-left: 0px solid rgb(95, 176, 228);
-                color: rgb(120, 120, 120);
-                /*font-size: 16px;*/
-                font-weight: 400;
-                padding: 10px 20px;
-                white-space: nowrap;
-            }
-
-                .navbar-bootsnipp .navbar-nav > li > .dropdown-menu > li.active > a,
-                .navbar-bootsnipp .navbar-nav > li > .dropdown-menu > li > a:hover,
-                .navbar-bootsnipp .navbar-nav > li > .dropdown-menu > li > a:focus {
-                    background-color: rgb(245, 245, 245);
-                    border-left-width: 5px;
-                    padding-left: 15px;
-                }
-
-        .navbar .bootsnipp-profile > a {
-            padding-bottom: 9px;
-            padding-top: 9px;
-        }
-
-            .navbar .bootsnipp-profile > a > img {
-                border-radius: 50%;
-                width: 32px;
-            }
-
-        .navbar .bootsnipp-profile > .dropdown-menu {
-            width: 320px;
-        }
-
-            .navbar .bootsnipp-profile > .dropdown-menu > li > .row {
-                padding: 5px 15px;
-            }
-
-                .navbar .bootsnipp-profile > .dropdown-menu > li > .row img {
-                    width: 100%;
-                }
-
-        .navbar-bootsnipp .bootsnipp-search {
-            display: none;
-        }
-
-            .navbar-bootsnipp .bootsnipp-search .form-control {
-                background-color: rgb(235, 235, 235);
-                border-radius: 0px;
-                border-width: 0px;
-                /*font-size: 24px;*/
-                padding: 30px 0px;
-            }
-        .form-control {
-            font-size: 24px
-        }
-            
-
-                .navbar-bootsnipp .bootsnipp-search .form-control:focus {
-                    border-color: transparent;
-                    outline: 0;
-                    -webkit-box-shadow: none;
-                    box-shadow: none;
-                }
-
-            .navbar-bootsnipp .bootsnipp-search .input-group-btn > .btn {
-                padding: 14px 16px;
-                border-radius: 0px;
-            }
-
-                .navbar-bootsnipp .bootsnipp-search .input-group-btn > .btn.active,
-                .navbar-bootsnipp .bootsnipp-search .input-group-btn > .btn:hover,
-                .navbar-bootsnipp .bootsnipp-search .input-group-btn > .btn:focus {
-                    padding: 14px 16px 14px 15px;
-                }
-
-            .navbar-bootsnipp .bootsnipp-search .input-group-btn > .btn-default {
-                background-color: rgb(245, 245, 245);
-            }
-
-        .nav-padding {
-            padding-top: 61px;
-        }
-
-        @@media screen and (min-width: 768px) {
-            .navbar-bootsnipp .navbar-brand {
-                /*font-size: 20px;*/
-                height: auto;
-                padding: 15px 5px;
-            }
-
-            .navbar-bootsnipp .navbar-nav > li > a {
-                /*font-size: 16px;*/
-                letter-spacing: 1px;
-            }
-
-            .navbar-bootsnipp .navbar-nav > li:not(.disabled).open > a,
-            .navbar-bootsnipp .navbar-nav > li:not(.disabled).active > a,
-            .navbar-bootsnipp .navbar-nav > li:not(.disabled) > a:hover,
-            .navbar-bootsnipp .navbar-nav > li:not(.disabled) > a:focus {
-                border-bottom-width: 5px;
-                border-left-width: 0px;
-                padding-bottom: 10px;
-                padding-left: 14px;
-            }
-
-            .navbar-bootsnipp .navbar-nav > li.disabled > a {
-                padding-left: 10px;
-                padding-right: 10px;
-            }
-
-
-            .navbar-bootsnipp .bootsnipp-search {
-                background-color: rgb(235, 235, 235);
-                display: block;
-                position: absolute;
-                top: 100%;
-                width: 100%;
-                -webkit-transform: rotateX(-90deg);
-                -moz-transform: rotateX(-90deg);
-                -o-transform: rotateX(-90deg);
-                -ms-transform: rotateX(-90deg);
-                transform: rotateX(-90deg);
-                -webkit-transform-origin: 0 0 0;
-                -moz-transform-origin: 0 0 0;
-                -o-transform-origin: 0 0 0;
-                -ms-transform-origin: 0 0 0;
-                transform-origin: 0 0 0;
-                visibility: hidden;
-            }
-
-                .navbar-bootsnipp .bootsnipp-search.open {
-                    -webkit-transform: rotateX(0deg);
-                    -moz-transform: rotateX(0deg);
-                    -o-transform: rotateX(0deg);
-                    -ms-transform: rotateX(0deg);
-                    transform: rotateX(0deg);
-                    visibility: visible;
-                }
-
-                .navbar-bootsnipp .bootsnipp-search > .container {
-                    padding: 0px;
-                }
-        }
     </style>
-    <nav class="navbar navbar-fixed-top navbar-bootsnipp animate" role="navigation">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
+
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapsible">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <div class="animbrand">
-                    <a class="navbar-brand animate" href="#">Hợp âm nhạc thánh</a>
-                </div>
+                <a class="navbar-brand" href="#">Brand</a>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <div class="navbar-collapse collapse" id="navbar-collapsible">
+
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="visible-xs">
-                        <form action="http://bootsnipp.com/search" method="GET" role="search">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="q" placeholder="Nhập tên bài hát, tên ca sỹ">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-                                    <button class="btn btn-danger" type="reset"><span class="glyphicon glyphicon-remove"></span></button>
-                                </span>
-                            </div>
-                        </form>
-                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book fa-fw fa-lg"></i> Thể loại <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -398,7 +164,7 @@
                             <li><a class="animate" href="https://hopamviet.vn/chord/category/6/nhac-do.html"><i class="fa fa-book"></i>&nbsp; Nhạc Đỏ</a></li>
                             <li><a class="animate" href="https://hopamviet.vn/chord/category/7/nhac-dan-ca.html"><i class="fa fa-book"></i>&nbsp; Nhạc Dân ca</a></li>
                             <li><a class="animate" href="https://hopamviet.vn/chord/category/8/nhac-quoc-te.html"><i class="fa fa-book"></i>&nbsp; Nhạc Quốc tế</a></li>
-                            <li><a class="animate"href="https://hopamviet.vn/chord/category/9/nhac-hoc-tro.html"><i class="fa fa-book"></i>&nbsp; Nhạc Học trò</a></li>
+                            <li><a class="animate" href="https://hopamviet.vn/chord/category/9/nhac-hoc-tro.html"><i class="fa fa-book"></i>&nbsp; Nhạc Học trò</a></li>
                             <li><a class="animate" href="https://hopamviet.vn/chord/category/10/nhac-thieu-nhi.html"><i class="fa fa-book"></i>&nbsp; Nhạc Thiếu nhi</a></li>
                             <li><a class="animate" href="https://hopamviet.vn/chord/category/11/nhac-thanh-ca.html"><i class="fa fa-book"></i>&nbsp; Nhạc Thánh ca</a></li>
                             <li><a class="animate" href="https://hopamviet.vn/chord/category/12/nhac-phat-giao.html"><i class="fa fa-book"></i>&nbsp; Nhạc Phật giáo</a></li>
@@ -427,7 +193,7 @@
                             <li><a class="animate" href="https://hopamviet.vn/chord/rhythm/17/habanera.html"><i class="fa fa-music"></i>&nbsp; Habanera</a></li>
                             <li><a class="animate" href="https://hopamviet.vn/chord/rhythm/18/twist.html"><i class="fa fa-music"></i>&nbsp; Twist</a></li>
                             <li><a class="animate" href="https://hopamviet.vn/chord/rhythm/19/march.html"><i class="fa fa-music"></i>&nbsp; March</a></li>
-                            <li><a class="animate"  href="https://hopamviet.vn/chord/rhythm/20/pasodope.html"><i class="fa fa-music"></i>&nbsp; Pasodope</a></li>
+                            <li><a class="animate" href="https://hopamviet.vn/chord/rhythm/20/pasodope.html"><i class="fa fa-music"></i>&nbsp; Pasodope</a></li>
                             <li><a class="animate" href="https://hopamviet.vn/chord/rhythm/21/slow-ballad.html"><i class="fa fa-music"></i>&nbsp; Slow Ballad</a></li>
                             <li><a class="animate" href="https://hopamviet.vn/chord/rhythm/22/rap.html"><i class="fa fa-music"></i>&nbsp; Rap</a></li>
                         </ul>
@@ -435,99 +201,20 @@
                     <li>@*<a href="https://hopamviet.vn/user/likes.html"><i class="fa fa-star-o fa-fw fa-lg"></i> Yêu thích</a>*@</li>
                     <li><a class="animate" href="https://hopamviet.vn/auth/register.html"><i class="fa fa-key fa-fw"></i> Đăng ký</a></li>
                     <li><a class="animate" href="https://hopamviet.vn/auth/login.html"><i class="fa fa-lock fa-fw"></i> Đăng nhập</a></li>
-                    <li class="[ hidden-xs ]"><a href="#toggle-search" class="[ animate ]"><span class="[ glyphicon glyphicon-search ]"></span></a></li>
-                    
                 </ul>
-            </div>
-        </div>
-        <div class="[ bootsnipp-search animate ]">
-            <div class="[ container ]">
-                <form action="http://bootsnipp.com/search" method="GET" role="search">
-                    <div class="[ input-group ]">
-                        <input type="text" class="[ form-control ]" name="q" placeholder="Nhập tên bài hát, ca sỹ và enter">
-                        <span class="[ input-group-btn ]">
-                            <button class="[ btn btn-danger ]" type="reset"><span class="[ glyphicon glyphicon-remove ]"></span></button>
-                        </span>
+                <form class="navbar-form collapsed">
+                    <div class="form-group" style="display:inline;">
+                        <div class="input-group" style="display:table;">
+                            <span class="input-group-addon" style="width:1%;"><span class="glyphicon glyphicon-search"></span></span>
+                            <input class="form-control" name="search" placeholder="Search Here" autocomplete="off" autofocus="autofocus" type="text">
+                        </div>
                     </div>
                 </form>
-            </div>
-        </div>
-        @*<div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".bs-navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" asp-controller="Home" asp-action="Index">Hợp Âm Nhạc Thánh</a>
-                </div>
-                <nav class="collapse navbar-collapse bs-navbar-collapse">
-                    <div class="col-sm-3 col-md-3">
-                    <form class="navbar-form" role="search">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search" name="q">
-                            <div class="input-group-btn">
-                                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                            </div>
-                        </div>
-                    </form>
-                    </div>
-                    @*<ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book fa-fw fa-lg"></i> Thể loại <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="https://hopamviet.vn/chord/category/1/nhac-vang.html"><i class="fa fa-book"></i>&nbsp; Nhạc Vàng</a></li>
-                                <li><a href="https://hopamviet.vn/chord/category/2/nhac-tru-tinh.html"><i class="fa fa-book"></i>&nbsp; Nhạc Trữ tình</a></li>
-                                <li><a href="https://hopamviet.vn/chord/category/3/nhac-tre.html"><i class="fa fa-book"></i>&nbsp; Nhạc Trẻ</a></li>
-                                <li><a href="https://hopamviet.vn/chord/category/4/nhac-que-huong.html"><i class="fa fa-book"></i>&nbsp; Nhạc Quê hương</a></li>
-                                <li><a href="https://hopamviet.vn/chord/category/5/nhac-ngoai-loi-viet.html"><i class="fa fa-book"></i>&nbsp; Nhạc Ngoại lời Việt</a></li>
-                                <li><a href="https://hopamviet.vn/chord/category/6/nhac-do.html"><i class="fa fa-book"></i>&nbsp; Nhạc Đỏ</a></li>
-                                <li><a href="https://hopamviet.vn/chord/category/7/nhac-dan-ca.html"><i class="fa fa-book"></i>&nbsp; Nhạc Dân ca</a></li>
-                                <li><a href="https://hopamviet.vn/chord/category/8/nhac-quoc-te.html"><i class="fa fa-book"></i>&nbsp; Nhạc Quốc tế</a></li>
-                                <li><a href="https://hopamviet.vn/chord/category/9/nhac-hoc-tro.html"><i class="fa fa-book"></i>&nbsp; Nhạc Học trò</a></li>
-                                <li><a href="https://hopamviet.vn/chord/category/10/nhac-thieu-nhi.html"><i class="fa fa-book"></i>&nbsp; Nhạc Thiếu nhi</a></li>
-                                <li><a href="https://hopamviet.vn/chord/category/11/nhac-thanh-ca.html"><i class="fa fa-book"></i>&nbsp; Nhạc Thánh ca</a></li>
-                                <li><a href="https://hopamviet.vn/chord/category/12/nhac-phat-giao.html"><i class="fa fa-book"></i>&nbsp; Nhạc Phật giáo</a></li>
-                                <li><a href="https://hopamviet.vn/chord/category/13/nhac-che-vui.html"><i class="fa fa-book"></i>&nbsp; Nhạc Chế - Vui</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-music fa-fw fa-lg"></i> Điệu <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="https://hopamviet.vn/chord/rhythm/1/bolero.html"><i class="fa fa-music"></i>&nbsp; Boléro</a></li>
-                                <li><a href="https://hopamviet.vn/chord/rhythm/2/slow.html"><i class="fa fa-music"></i>&nbsp; Slow</a></li>
-                                <li><a href="https://hopamviet.vn/chord/rhythm/3/slow-rock.html"><i class="fa fa-music"></i>&nbsp; Slow Rock</a></li>
-                                <li><a href="https://hopamviet.vn/chord/rhythm/4/slow-surf.html"><i class="fa fa-music"></i>&nbsp; Slow Surf</a></li>
-                                <li><a href="https://hopamviet.vn/chord/rhythm/5/blues.html"><i class="fa fa-music"></i>&nbsp; Blues</a></li>
-                                <li><a href="https://hopamviet.vn/chord/rhythm/6/ballade.html"><i class="fa fa-music"></i>&nbsp; Ballade</a></li>
-                                <li><a href="https://hopamviet.vn/chord/rhythm/7/chachacha.html"><i class="fa fa-music"></i>&nbsp; Chachacha</a></li>
-                                <li><a href="https://hopamviet.vn/chord/rhythm/8/disco.html"><i class="fa fa-music"></i>&nbsp; Disco</a></li>
-                                <li><a href="https://hopamviet.vn/chord/rhythm/9/rhumba.html"><i class="fa fa-music"></i>&nbsp; Rhumba</a></li>
-                                <li><a href="https://hopamviet.vn/chord/rhythm/10/tango.html"><i class="fa fa-music"></i>&nbsp; Tango</a></li>
-                                <li><a href="https://hopamviet.vn/chord/rhythm/11/boston.html"><i class="fa fa-music"></i>&nbsp; Boston</a></li>
-                                <li><a href="https://hopamviet.vn/chord/rhythm/12/fox.html"><i class="fa fa-music"></i>&nbsp; Fox</a></li>
-                                <li><a href="https://hopamviet.vn/chord/rhythm/13/rock.html"><i class="fa fa-music"></i>&nbsp; Rock</a></li>
-                                <li><a href="https://hopamviet.vn/chord/rhythm/14/valse.html"><i class="fa fa-music"></i>&nbsp; Valse</a></li>
-                                <li><a href="https://hopamviet.vn/chord/rhythm/15/bossa-nova.html"><i class="fa fa-music"></i>&nbsp; Bossa Nova</a></li>
-                                <li><a href="https://hopamviet.vn/chord/rhythm/16/pop.html"><i class="fa fa-music"></i>&nbsp; Pop</a></li>
-                                <li><a href="https://hopamviet.vn/chord/rhythm/17/habanera.html"><i class="fa fa-music"></i>&nbsp; Habanera</a></li>
-                                <li><a href="https://hopamviet.vn/chord/rhythm/18/twist.html"><i class="fa fa-music"></i>&nbsp; Twist</a></li>
-                                <li><a href="https://hopamviet.vn/chord/rhythm/19/march.html"><i class="fa fa-music"></i>&nbsp; March</a></li>
-                                <li><a href="https://hopamviet.vn/chord/rhythm/20/pasodope.html"><i class="fa fa-music"></i>&nbsp; Pasodope</a></li>
-                                <li><a href="https://hopamviet.vn/chord/rhythm/21/slow-ballad.html"><i class="fa fa-music"></i>&nbsp; Slow Ballad</a></li>
-                                <li><a href="https://hopamviet.vn/chord/rhythm/22/rap.html"><i class="fa fa-music"></i>&nbsp; Rap</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="https://hopamviet.vn/user/likes.html"><i class="fa fa-star-o fa-fw fa-lg"></i> Yêu thích</a></li>
+                
 
-                    </ul>
-                    <ul class="nav navbar-nav navbar-top-links navbar-right">
-                        <li><a href="https://hopamviet.vn/auth/register.html"><i class="fa fa-key fa-fw"></i> Đăng ký</a></li>
-                        <li><a href="https://hopamviet.vn/auth/login.html"><i class="fa fa-lock fa-fw"></i> Đăng nhập</a></li>
-                    </ul>
-                </nav>
-            </div>*@
+            </div>
+
+        </div>
     </nav>
     <div class="container" style="margin-top: 80px !important">
         @RenderBody()
@@ -549,31 +236,7 @@
 
 
     @RenderSection("Scripts", required: false)
-    <script defer asp-append-version="true">
-        $(function () {
 
-            $('a[href="#toggle-search"], .navbar-bootsnipp .bootsnipp-search .input-group-btn > .btn[type="reset"]').on('click', function (event) {
-                event.preventDefault();
-                $('.navbar-bootsnipp .bootsnipp-search .input-group > input').val('');
-                $('.navbar-bootsnipp .bootsnipp-search').toggleClass('open');
-                $('a[href="#toggle-search"]').closest('li').toggleClass('active');
-
-                if ($('.navbar-bootsnipp .bootsnipp-search').hasClass('open')) {
-                    /* I think .focus dosen't like css animations, set timeout to make sure input gets focus */
-                    setTimeout(function () {
-                        $('.navbar-bootsnipp .bootsnipp-search .form-control').focus();
-                    }, 100);
-                }
-            });
-
-            $(document).on('keyup', function (event) {
-                if (event.which == 27 && $('.navbar-bootsnipp .bootsnipp-search').hasClass('open')) {
-                    $('a[href="#toggle-search"]').trigger('click');
-                }
-            });
-
-        });
-    </script>
     <script defer asp-append-version="true">
         (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];

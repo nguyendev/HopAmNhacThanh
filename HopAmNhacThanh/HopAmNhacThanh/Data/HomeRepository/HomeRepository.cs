@@ -1,4 +1,5 @@
 ﻿using DoVuiHaiNao.Services;
+using HopAmNhacThanh.Models;
 using HopAmNhacThanh.Models.HomeViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -90,6 +91,7 @@ namespace HopAmNhacThanh.Data.HomeRepository
                 string Intro = "";
                 string Lyric = "";
                 string Style = "";
+                ApplicationUser AuthorChords = null;
                 var songContext = await _context.Song
                     .Include(p => p.Album)
                     .Include(p => p.AuthorSong)
@@ -109,7 +111,7 @@ namespace HopAmNhacThanh.Data.HomeRepository
                     SimpleChordsViewModel simpleChord = new SimpleChordsViewModel
                     {
                         Name = item.Info,
-                        AuthorName = item.Author.FullName,
+                        Author = item.Author,
                         Description = item.InfoShort,
                         Slug = item.Slug,
                         Selected = selected,
@@ -118,6 +120,7 @@ namespace HopAmNhacThanh.Data.HomeRepository
                     {
                         Intro = item.Intro;
                         Lyric = item.Lyric;
+                        AuthorChords = item.Author;
                         Style = item.StyleID.HasValue ? item.Style.Name : "";
                     }
 
@@ -189,6 +192,7 @@ namespace HopAmNhacThanh.Data.HomeRepository
                 model.Intro = Intro;
                 model.ListSongInCategory = ListSongInCategory;
                 model.StyleName = Style;
+                model.AuthorChords = AuthorChords;
                 if (songContext.AlbumID.HasValue)
                 {
                     var songInAlbumContext = await _context.Song.Where(p => p.AlbumID == songContext.AlbumID).Take(10).ToListAsync();

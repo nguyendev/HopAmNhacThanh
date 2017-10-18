@@ -17,6 +17,7 @@ namespace HopAmNhacThanh.Models.HomeViewModels
         public string AlbumName { get; set; }
         [Display(Name = "Tác giả")]
         public string AuthorSongName { get; set; }
+        public ApplicationUser AuthorChords { get; set; }
         [Display(Name = "Lời việt")]
         public string VietnameseLyricName { get; set; }
         public string Intro { get; set; }
@@ -39,7 +40,7 @@ namespace HopAmNhacThanh.Models.HomeViewModels
         public string Slug { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string AuthorName { get; set; }
+        public ApplicationUser Author { get; set; }
         public string StyleName { get; set; }
         public bool Selected { get; set; }
     }

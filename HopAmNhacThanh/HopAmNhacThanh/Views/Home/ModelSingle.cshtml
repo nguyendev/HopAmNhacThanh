@@ -54,13 +54,13 @@
                         tr.active td{
                             background-color: powderblue !important;
                         }
-                        tr:hover {
+                        tr.table-content:hover {
                             background-color: yellow;
                         }
                     </style>
                     <table class="table">
                         <thead>
-                            <tr>
+                            <tr class="table-title">
                                 <th>Phiên bản</th>
                                 <th>Xếp loại</th>
                                 <th>Thông tin</th>
@@ -68,8 +68,12 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @{ 
+                                int version = 1;
+                            }
                             @foreach (var item in Model.ListChords) {
                                 {
+                                    
                                     if (item.Selected)
                                     {
                                         ViewData["active"] = "active";
@@ -79,13 +83,31 @@
                                         ViewData["active"] = "";
                                     }
                                 }
-                            <tr class="@ViewData["active"]">
-                                <td class="@ViewData["active"]"><a asp-controller="Home" asp-action="Single" asp-route-slug="@Model.Slug" asp-route-slugVersion="@item.Slug">@item.Name assdfds</a></td>
+                            <tr class="@ViewData["active"] table-content">
+                                <td class="@ViewData["active"]">
+                                    @if(item.Name == "")
+                                    { 
+                                        <a asp-controller="Home" asp-action="Single" asp-route-slug="@Model.Slug" asp-route-slugVersion="@item.Slug">Phiên bản @version</a>
+                                        version++;
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Home" asp-action="Single" asp-route-slug="@Model.Slug" asp-route-slugVersion="@item.Slug">@item.Name</a>
+
+                                    }
+                                </td>
                                 <td><div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div></td>
-                                <td>@item.Description</td>
+                                @if (item.Description == "")
+                                {
+                                    <td>Chưa có mô tả</td>
+                                }
+                                else
+                                {
+                                    <td>@item.Description</td>
+                                }
                                 <td>
-                                    <img src="https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.0-1/p40x40/15726586_1049327511879462_6901300413484871919_n.jpg?oh=0ae04013d348113dc3851e3b33cb43cb&oe=5A4137CB" width="20px" height="20px" />
-                                    <label>@item.AuthorName</label>
+                                    <img src="@item.Author.PictureSmall" width="20px" height="20px" />
+                                    <label>@item.Author.FullName</label>
                                 </td>
                             </tr>
                             }

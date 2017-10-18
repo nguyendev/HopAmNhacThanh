@@ -30,6 +30,7 @@
                             <i class="fa fa-music"></i> <a href="https://hopamviet.vn/chord/category/3/nhac-tre.html">Điệu: @MainSingle.StyleName</a> |
                             @*<i title="Người đăng" class="fa fa-user"></i> <a href="https://hopamviet.vn/user/1/intrepid">Billy</a> |*@
                             <i title="Lượt xem" class="fa fa-eye"></i> 25
+
                         </div>
                     </div>
                 </div>
@@ -85,26 +86,66 @@
                         }
                     </style>
                 </div>
-                <br />
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Hướng dẫn sử dụng hợp âm</h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="panel-body">
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#guitar"><i class="fa fa-book"> Guitar </i></a></li>
-                                <li><a data-toggle="tab" href="#ukulele"> Ukulele</a></li>
-                            </ul>
-                            <div class="tab-content">
-                                <div id="guitar" class="tab-pane fade in active">
-                                    <div id="mytab"></div>
+                <style>
+                    .clearfix {
+                        zoom: 1 !important;
+                        margin-top: 20px !important;
+                        margin-bottom: 20px !important;
+                        border: 0 !important;
+                        border-top: 1px solid #eee !important;
+                    }
 
-                                </div>
-                                <div id="ukulele" class="tab-pane fade">
-                                    <p>Sẽ cập nhật sau </p>
-                                </div>
-                            </div>
+                    .height_10 {
+                        height: 10px !important;
+                    }
+
+                    .center-pills {
+                        display: inline-block;
+                    }
+
+                    span.song-item {
+                        margin-right: 15px;
+                    }
+                </style>
+                <div style="margin-top: 50px;">
+                    <span class="song-item"><i title="Sáng tác" class="fa fa-user"></i> Người đăng: <a href="https://hopamviet.vn/chord/composer/1984/kien-tran.html">@MainSingle.AuthorChords.FullName</a></span>
+                    @*<span class="song-item">
+                        <i class="fa fa-book"></i> <a href="https://hopamviet.vn/chord/category/3/nhac-tre.html">@MainSingle.AlbumName</a> 
+                    </span>
+                    <span class="song-item">
+                        <i class="fa fa-book"></i> <a href="https://hopamviet.vn/chord/category/3/nhac-tre.html">@MainSingle.CategoryName</a> 
+                    </span>    <span class="song-item">
+                        <i class="fa fa-music"></i> <a href="https://hopamviet.vn/chord/category/3/nhac-tre.html">Điệu: @MainSingle.StyleName</a> 
+                    </span>        
+                    <span class="song-item"> <i title="Lượt xem" class="fa fa-eye"></i> 25</span>*@
+                    <div class="btn-group text-center" style="float:right">
+                        <button style="float:right" type="button"
+                                id="testBtn"
+                                class="btn btn-xs btn-warning glyphicon glyphicon-thumbs-down"
+                                data-loading-text=" ... ">
+                            4
+                        </button>
+                        <button style="float: right" type="button" id="testBtnDown" class="btn btn-xs btn-primary glyphicon glyphicon-thumbs-up" data-loading-text=" ... ">
+                            4
+                        </button>
+                    </div>
+                </div>
+                <div class="clearfix height_10"></div>
+                <div class="text-center">
+                    <ul class="nav nav-tabs center-pills">
+                        <li class="active"><a data-toggle="tab" href="#guitar"><i class="fa fa-book"> Guitar </i></a></li>
+                        <li><a data-toggle="tab" href="#ukulele"> Ukulele</a></li>
+                        <li><a data-toggle="tab" href="#piano"> Piano</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="guitar" class="tab-pane fade in active">
+                            <div id="mytab"></div>
+                        </div>
+                        <div id="ukulele" class="tab-pane fade">
+                            <p>Sẽ cập nhật sau </p>
+                        </div>
+                        <div id="piano" class="tab-pane fade">
+                            <p>Sẽ cập nhật sau </p>
                         </div>
                     </div>
                     <hr />
@@ -174,8 +215,7 @@
                     $(this).empty();
                     $(this).append('Gộp dòng <i class="fa fa-fw fa-square-o" ></i>')
                 }
-                else
-                {
+                else {
                     $("span.chord").css('position', '');
                     $("span.chord").css('display', '');
                     $("span.chord").css('top', '');
@@ -289,36 +329,36 @@
         });
     </script>
     <script>
-    ////tu dong truot
-    //var scrollValue = 1;
-    //var scrolldelay;
+        ////tu dong truot
+        //var scrollValue = 1;
+        //var scrolldelay;
 
-    //function stopScroll() {
-    //    clearTimeout(scrolldelay);
-    //}
+        //function stopScroll() {
+        //    clearTimeout(scrolldelay);
+        //}
 
-    //function startScroll() {
-    //    window.scrollBy(0, 1);
-    //    if ($(window).scrollTop() > ($('#lyric').offset().top + $('#lyric').height() - $(window).height() / 4)) {
-    //        stopScroll();
-    //    } else {
-    //        scrolldelay = setTimeout('startScroll()', 200 / scrollValue);
-    //    }
-    //}
-        
-    //xo ca si the hien
-    var song_expand = '<p>Xem thêm các ca sĩ khác <i class="fa fa-chevron-down"></i></p>';
-    var song_collapse = '<p>Thu gọn <i class="fa fa-chevron-up"></i></p>';
-    function show_fullsong() {
-        if (document.getElementById('moresong').innerHTML == song_expand) {
-            document.getElementById('fullsong').setAttribute('style', "overflow: auto;");
-            document.getElementById('moresong').innerHTML = song_collapse;
+        //function startScroll() {
+        //    window.scrollBy(0, 1);
+        //    if ($(window).scrollTop() > ($('#lyric').offset().top + $('#lyric').height() - $(window).height() / 4)) {
+        //        stopScroll();
+        //    } else {
+        //        scrolldelay = setTimeout('startScroll()', 200 / scrollValue);
+        //    }
+        //}
+
+        //xo ca si the hien
+        var song_expand = '<p>Xem thêm các ca sĩ khác <i class="fa fa-chevron-down"></i></p>';
+        var song_collapse = '<p>Thu gọn <i class="fa fa-chevron-up"></i></p>';
+        function show_fullsong() {
+            if (document.getElementById('moresong').innerHTML == song_expand) {
+                document.getElementById('fullsong').setAttribute('style', "overflow: auto;");
+                document.getElementById('moresong').innerHTML = song_collapse;
+            }
+            else if (document.getElementById('fullsong').offsetHeight > 350) {
+                document.getElementById('fullsong').setAttribute('style', "max-height: 150px; overflow: hidden;");
+                document.getElementById('moresong').innerHTML = song_expand;
+            }
         }
-        else if (document.getElementById('fullsong').offsetHeight > 350) {
-            document.getElementById('fullsong').setAttribute('style', "max-height: 150px; overflow: hidden;");
-            document.getElementById('moresong').innerHTML = song_expand;
-        }
-    }
         show_fullsong();
 
         ////xo ca si the hien
