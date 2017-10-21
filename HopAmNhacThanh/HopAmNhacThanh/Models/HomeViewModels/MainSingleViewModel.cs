@@ -12,17 +12,17 @@ namespace HopAmNhacThanh.Models.HomeViewModels
         public string OrtherName { get; set; }
         public string Slug { get; set; }
         [Display(Name = " Thể loại")]
-        public string CategoryName { get; set; }
+        public Category Category { get; set; }
         [Display(Name = "Album")]
-        public string AlbumName { get; set; }
+        public Album Album { get; set; }
         [Display(Name = "Tác giả")]
-        public string AuthorSongName { get; set; }
+        public AuthorSong AuthorSong { get; set; }
         public ApplicationUser AuthorChords { get; set; }
         [Display(Name = "Lời việt")]
-        public string VietnameseLyricName { get; set; }
+        public VietnameseLyric VietnameseLyric { get; set; }
         public string Intro { get; set; }
         public string Lyric { get; set; }
-        public string StyleName { get; set; }
+        public Style Style { get; set; }
         [Display(Name = "Năm xuất bản")]
         public List<SimpleLinkSongViewModel> ListLinkSong { get; set; }
         public List<SimpleChordsViewModel> ListChords { get; set; }

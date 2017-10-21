@@ -1,7 +1,20 @@
 ﻿@{
     HopAmNhacThanh.Models.HomeViewModels.MainSingleViewModel MainSingle = ViewData["MainSingle"] as HopAmNhacThanh.Models.HomeViewModels.MainSingleViewModel;
+    if (MainSingle.Name.Length > 140)
+    {
+        ViewData["Title"] = MainSingle.Name;
+    }
+    else
+    {
+        ViewData["Title"] = MainSingle.Name + " | Hợp Âm Nhạc Thánh";
+    }
+    ViewData["Desciption"] = MainSingle.Lyric;
+    string scheme = Context.Request.Scheme;
+    string host = Context.Request.Host.Host;
+    string port = Context.Request.Host.Port.ToString();
+    string path = Context.Request.Path;
+    string url = string.Format("{0}://{1}:{2}{3}", scheme, host, port, path);
 }
-
 <div class="row">
     <div class="col-md-8">
         <div class="panel panel-default">
@@ -20,15 +33,42 @@
                             </h3>
                         </div>
                     </div>
-
+                    <style>
+                        .sub-info > a {
+                            margin-right: 5px;
+                        }
+                    </style>
                     <div class="row">
-                        <div class="col-md-12" style="vertical-align: middle; padding-top: 5px; line-height: 1.5;
+                        <div class="col-md-12 sub-info" style="vertical-align: middle; padding-top: 5px; line-height: 1.5;
     border-radius: 3px">
-                            <i title="Sáng tác" class="fa fa-leaf"></i> Sáng tác: <a href="https://hopamviet.vn/chord/composer/1984/kien-tran.html">@MainSingle.AuthorSongName</a> |
-                            <i class="fa fa-book"></i> <a href="https://hopamviet.vn/chord/category/3/nhac-tre.html">@MainSingle.AlbumName</a> |
-                            <i class="fa fa-book"></i> <a href="https://hopamviet.vn/chord/category/3/nhac-tre.html">@MainSingle.CategoryName</a> |
-                            <i class="fa fa-music"></i> <a href="https://hopamviet.vn/chord/category/3/nhac-tre.html">Điệu: @MainSingle.StyleName</a> |
-                            @*<i title="Người đăng" class="fa fa-user"></i> <a href="https://hopamviet.vn/user/1/intrepid">Billy</a> |*@
+                            @if (MainSingle.AuthorSong != null)
+                            {
+                                <i title="Sáng tác" class="fa fa-leaf"></i> @Html.Raw("Sáng tác:") <a asp-controller="AuthorSong" asp-action="Single" asp-route-slug="@MainSingle.AuthorSong.Slug">@MainSingle.AuthorSong.Name</a>
+                            }
+                            else
+                            {
+                                <i title="Sáng tác" class="fa fa-leaf"></i> @Html.Raw("Sáng tác:") <a href="#"> @Html.Raw("Chưa rõ") </a>
+                            }
+                            @if (MainSingle.Album != null)
+                            {
+                                <i title="Album" class="fa fa-book"></i> @Html.Raw("Album:") <a asp-controller="Album" asp-action="Single" asp-route-slug="@MainSingle.Album.Slug"> @MainSingle.Album.Name </a>
+                            }
+                            @if (MainSingle.Category != null)
+                            {
+                                <i class="fa fa-book"></i> @Html.Raw("Danh mục:") <a asp-controller="Category" asp - action="single"> @MainSingle.Category.Name </a>
+                            }
+                            else
+                            {
+                                <i class="fa fa-book"></i> @Html.Raw("Danh mục:") <a href="#"> @Html.Raw("Chưa phân loại") </a>
+                            }
+                            @if (MainSingle.Style != null)
+                            {
+                                <i class="fa fa-music"></i> @Html.Raw("Điệu") <a asp-controller="Style" asp-action="Single" asp-route-slug="@MainSingle.Slug"> @MainSingle.Style.Name</a>
+                            }
+                            else
+                            {
+                                <i class="fa fa-music"></i> @Html.Raw("Điệu")<a asp-controller="Style" asp-action="Single" asp-route-slug="@MainSingle.Slug"> @Html.Raw("Chưa phân loại")</a>
+                            }
                             <i title="Lượt xem" class="fa fa-eye"></i> 25
 
                         </div>
@@ -57,11 +97,10 @@
                         <div id="musicalKey" style="margin-right: 5px;" class="annotation btn-group"><span class="key btn btn-default btn-sm">G</span></div>
                         <div class="btn-group" style="margin-right: 5px;">
                             <span id="fontsize" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="fa fa-font fa-1x"></i></span>
-                            <a href="https://hopamviet.vn/chord/printsong/chia-tay/W8IUUAC8.html" target="_blank" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="fa fa-print"></i></a>
+                            <a id="print" href="#" target="_blank" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="fa fa-print"></i></a>
                             <span id="clone" class="btn btn-default btn-sm">x2</span>
-                        </div>
-                        <div class="btn-group">
                             <span id="gopdong" class="btn btn-default btn-sm">Gộp dòng <i class="fa fa-fw fa-check-square-o"></i></span>
+                            <span id="fullscreen" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="glyphicon glyphicon-fullscreen"></i></span>
                         </div>
                     </div>
                     <br />
@@ -108,16 +147,16 @@
                     }
                 </style>
                 <div style="margin-top: 50px;">
-                    <span class="song-item"><i title="Sáng tác" class="fa fa-user"></i> Người đăng: <a href="https://hopamviet.vn/chord/composer/1984/kien-tran.html">@MainSingle.AuthorChords.FullName</a></span>
+                    <span class="song-item"><i title="Sáng tác" class="fa fa-user"></i> Người đăng: <a asp-controller="AuthorChords" asp-action="Single" asp-route-slug="@MainSingle.AuthorChords.Slug">@MainSingle.AuthorChords.FullName</a></span>
                     @*<span class="song-item">
-                        <i class="fa fa-book"></i> <a href="https://hopamviet.vn/chord/category/3/nhac-tre.html">@MainSingle.AlbumName</a> 
-                    </span>
-                    <span class="song-item">
-                        <i class="fa fa-book"></i> <a href="https://hopamviet.vn/chord/category/3/nhac-tre.html">@MainSingle.CategoryName</a> 
-                    </span>    <span class="song-item">
-                        <i class="fa fa-music"></i> <a href="https://hopamviet.vn/chord/category/3/nhac-tre.html">Điệu: @MainSingle.StyleName</a> 
-                    </span>        
-                    <span class="song-item"> <i title="Lượt xem" class="fa fa-eye"></i> 25</span>*@
+                            <i class="fa fa-book"></i> <a href="https://hopamviet.vn/chord/category/3/nhac-tre.html">@MainSingle.AlbumName</a>
+                        </span>
+                        <span class="song-item">
+                            <i class="fa fa-book"></i> <a href="https://hopamviet.vn/chord/category/3/nhac-tre.html">@MainSingle.CategoryName</a>
+                        </span>    <span class="song-item">
+                            <i class="fa fa-music"></i> <a href="https://hopamviet.vn/chord/category/3/nhac-tre.html">Điệu: @MainSingle.StyleName</a>
+                        </span>
+                        <span class="song-item"> <i title="Lượt xem" class="fa fa-eye"></i> 25</span>*@
                     <div class="btn-group text-center" style="float:right">
                         <button style="float:right" type="button"
                                 id="testBtn"
@@ -154,7 +193,7 @@
         </div>
         <div class="panel panel-default">
             <div class="panel-body">
-                <div class="fb-comments" data-width="100%" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5"></div>
+                <div class="fb-comments" data-width="100%" data-href="@string.Format("{0}",url)" data-numposts="10"></div>
             </div>
         </div>
     </div>
@@ -204,6 +243,48 @@
 @section Scripts {
     <script defer>
         $(document).ready(function () {
+            $("#new-version-submit").click(function () {
+                if ($.trim($("#lyric-new-version").val())) {
+                    $("#form-new-version-body").hide();
+                    $("#form-new-version-footer").hide();
+                    $("#thanks-new-version").show();
+                    
+                    $("#new-version-submit").prop("type", "submit");
+                    $("#new-version-submit").submit();
+                }
+                else { 
+                    $("#error-add-version").show();
+                }
+                });
+
+            $("#reportSong").click(function () {
+                if ($.trim($("#error").val())) {
+                    $("#form-report").hide();
+                    $("#reportSong").hide();
+                    $("#footer-report").hide();
+                   
+                    $("#thank-report").show();
+                    $("#reportSong").prop("type", "submit");
+                    $("#reportSong").submit();
+                }
+                else {
+                    $("#validate-error").show();
+                }
+            });
+            $(".tbutton").click(function () {
+                changeChords();
+            });
+            $('#lyric').bind("cut copy paste", function (e) {
+                /* alert('Copy Paste is disabled');*/
+                e.preventDefault();
+            });
+            $("#fullscreen").click(function () {
+                alert("Xin lỗi bạn, tính năng này đang xây dựng. Hãy quay lại khi khác");
+            });
+
+            $("#print").click(function () {
+                alert("Xin lỗi bạn, tính năng này đang xây dựng. Hãy quay lại khi khác");
+            });
             var KhongGopDong = true;
             $("#gopdong").click(function () {
                 if (KhongGopDong) {
@@ -316,19 +397,6 @@
             //jtab.render($('#mytab'), repaceText);
         }
 
-        $(document).ready(function () {
-            $(".tbutton").click(function () {
-                changeChords();
-            });
-        });
-        $(document).ready(function () {
-            $('#lyric').bind("cut copy paste", function (e) {
-                /* alert('Copy Paste is disabled');*/
-                e.preventDefault();
-            });
-        });
-    </script>
-    <script>
         ////tu dong truot
         //var scrollValue = 1;
         //var scrolldelay;

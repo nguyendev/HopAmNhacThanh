@@ -1,6 +1,7 @@
 ﻿using DoVuiHaiNao.Services;
 using HopAmNhacThanh.Models;
 using HopAmNhacThanh.Models.HomeViewModels;
+using HopAmNhacThanh.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,23 +20,28 @@ namespace HopAmNhacThanh.Data.HomeRepository
         }
         public async Task<MainContentViewModel> GetMainHome()
         {
-            try
-            {
+
                 List<SimpleSongViewModel> ListNewSong = new List<SimpleSongViewModel>();
                 var application = await _context.Song
                     .Include(p => p.Album)
                     .Include(p => p.AuthorSong)
+                    .Where(p => p.Approved == Global.APPROVED)
+                    .Where(p => p.CreateDT <= DateTime.Now)
+                    .Where(p => !p.IsDeleted)
                     .OrderByDescending(p => p.CreateDT).Take(10).ToListAsync();
                 foreach (var item in application)
                 {
                     var chords = _context.Chords
                         .Where(p => p.SongID == item.ID)
+                        .Where(p => p.Approved == Global.APPROVED)
+                        .Where(p => p.CreateDT <= DateTime.Now)
+                        .Where(p => !p.IsDeleted)
                         .First();
                     SimpleSongViewModel song = new SimpleSongViewModel
                     {
                         Name = item.Name,
-                        AlbumName = item.Album.Name,
-                        AuthorSong = item.AuthorSong.Name,
+                        Album = item.Album,
+                        AuthorSong = item.AuthorSong,
                         OrtherName = item.OrtherName,
                         View = item.Views,
                         Lyric = SEOExtension.GetStringToLength(chords.Lyric, LENGTH_LYRIC),
@@ -49,7 +55,11 @@ namespace HopAmNhacThanh.Data.HomeRepository
                 application = await _context.Song
                     .Include(p => p.Album)
                     .Include(p => p.AuthorSong)
-                    .OrderByDescending(p => p.CreateDT).Take(10).ToListAsync();
+                    .Where(p => p.Approved == Global.APPROVED)
+                    .Where(p => p.CreateDT <= DateTime.Now)
+                    .Where(p => !p.IsDeleted)
+                    .OrderByDescending(p => p.Views)
+                    .Take(10).ToListAsync();
                 foreach (var item in application)
                 {
                     var chords = _context.Chords
@@ -58,8 +68,8 @@ namespace HopAmNhacThanh.Data.HomeRepository
                     SimpleSongViewModel song = new SimpleSongViewModel
                     {
                         Name = item.Name,
-                        AlbumName = item.Album.Name,
-                        AuthorSong = item.AuthorSong.Name,
+                        Album = item.Album,
+                        AuthorSong = item.AuthorSong,
                         OrtherName = item.OrtherName,
                         View = item.Views,
                         Lyric = SEOExtension.GetStringToLength(chords.Lyric, LENGTH_LYRIC),
@@ -68,20 +78,55 @@ namespace HopAmNhacThanh.Data.HomeRepository
                     };
                     ListNewSong.Add(song);
                 }
+
+                //Top week
+                var topWeekContext = await _context.Song
+                .Where(p => p.Approved == Global.APPROVED)
+                .Where(p => p.CreateDT <= DateTime.Now)
+                    .Where(p => !p.IsDeleted)
+                    .OrderByDescending(p => p.Views)
+               .Take(10).ToListAsync();
+                List<BestSimpleSongViewModel> ListTopSong = new List<BestSimpleSongViewModel>();
+                foreach (var item in topWeekContext)
+                {
+                    var chords = _context.Chords
+                        .Where(p => p.SongID == item.ID)
+                        .Where(p => p.Approved == Global.APPROVED)
+                        .Where(p => p.CreateDT <= DateTime.Now)
+                        .Where(p => !p.IsDeleted)
+                        .First();
+                    BestSimpleSongViewModel song = new BestSimpleSongViewModel
+                    {
+                        Name = item.Name,
+                        Slug = item.Slug,
+                        Version = item.Slug,
+                    };
+                    ListTopSong.Add(song);
+                }
+
+                var styleDbContext = await _context.Style.ToListAsync();
+
+                List<SimpleStyleViewModel> ListStyle = new List<SimpleStyleViewModel>();
+                foreach (var item in styleDbContext)
+                {
+                    SimpleStyleViewModel style = new SimpleStyleViewModel
+                    {
+                        Name = item.Name,
+                        Slug = item.Slug,
+                    };
+                    ListStyle.Add(style);
+                }
+
                 MainContentViewModel model = new MainContentViewModel
                 {
                     ListNewSong = ListNewSong,
                     ListPupularSong = ListPupularSong,
-
+                    ListTopSong = ListTopSong,
+                    ListStyle = ListStyle
                 };
                 return model;
-            }
-            catch (Exception e)
-            {
-                //var logger = services.GetRequiredService<ILogger<Program>>();
-                //logger.LogError(ex.Message, "An error occurred seeding the DB.");
-                return null;
-            }
+    
+
         }
 
         public async Task<MainSingleViewModel> GetMainSingle(string slugSong, string slugVersion)
@@ -90,7 +135,7 @@ namespace HopAmNhacThanh.Data.HomeRepository
             //{
                 string Intro = "";
                 string Lyric = "";
-                string Style = "";
+                Style Style = null;
                 ApplicationUser AuthorChords = null;
                 var songContext = await _context.Song
                     .Include(p => p.Album)
@@ -121,7 +166,7 @@ namespace HopAmNhacThanh.Data.HomeRepository
                         Intro = item.Intro;
                         Lyric = item.Lyric;
                         AuthorChords = item.Author;
-                        Style = item.StyleID.HasValue ? item.Style.Name : "";
+                        Style = item.Style;
                     }
 
                     simpleChord.StyleName = item.StyleID.HasValue ? item.Style.Name : "";
@@ -175,15 +220,17 @@ namespace HopAmNhacThanh.Data.HomeRepository
                     ListSongInCategory.Add(songInAblum);
                 }
 
-                MainSingleViewModel model = new MainSingleViewModel();
-                model.AlbumName = songContext.Album != null ? songContext.Album.Name : "";
+                
+
+            MainSingleViewModel model = new MainSingleViewModel();
+                model.Album = songContext.Album;
                 model.Name = songContext.Name;
-                model.AuthorSongName = songContext.AuthorSong != null ? songContext.AuthorSong.Name: "";
-                model.CategoryName = songContext.Category != null ? songContext.Category.Name : "";
+                model.AuthorSong = songContext.AuthorSong;
+                model.Category = songContext.Category;
                 model.OrtherName = songContext.OrtherName;
                 model.Slug = songContext.Slug;
                 model.Views = songContext.Views;
-                model.VietnameseLyricName = songContext.VietnameseLyric != null ? songContext.VietnameseLyric.Name : "";
+                model.VietnameseLyric = songContext.VietnameseLyric;
                 model.ListChords = simpleChords;
                 model.ListLinkSong = listLinkSongs;
                 model.IsSheetExisted = isSheetExisted;
@@ -191,7 +238,7 @@ namespace HopAmNhacThanh.Data.HomeRepository
                 model.Lyric = Lyric;
                 model.Intro = Intro;
                 model.ListSongInCategory = ListSongInCategory;
-                model.StyleName = Style;
+                model.Style = Style;
                 model.AuthorChords = AuthorChords;
                 if (songContext.AlbumID.HasValue)
                 {
@@ -218,6 +265,151 @@ namespace HopAmNhacThanh.Data.HomeRepository
             //{
             //    return null;
             //}
+        }
+
+        public async Task<MainSearchViewModel> GetSearch(string searchString, int page, int pageSize)
+        {
+            var songDbContext = from s in _context.Song
+                                .Include(p => p.Album)
+                    .Include(p => p.AuthorSong)
+                    .Include(p => p.Category)
+                    .Include(p => p.VietnameseLyric)
+                    .Where(p => p.Approved == Global.APPROVED)
+                    .Where(p => p.CreateDT <= DateTime.Now)
+                    .Where(p => !p.IsDeleted)
+                                select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                songDbContext = songDbContext.Where(s => s.Name.Contains(searchString))
+                    .OrderByDescending(p => p.CreateDT);
+                if (songDbContext.Count() == 0)
+                {
+                    songDbContext = songDbContext.Where(s => s.OrtherName.Contains(searchString))
+                        .OrderByDescending(p => p.CreateDT);
+                }
+                
+            }
+            var songPaginatedList = await PaginatedList<Song>.CreateAsync(songDbContext.AsNoTracking(), page, pageSize);
+
+
+            List<SimpleSongViewModel> listSong = new List<SimpleSongViewModel>();
+            foreach (var item in songPaginatedList)
+            {
+                var chords = _context.Chords
+                        .Where(p => p.SongID == item.ID)
+                        .Where(p => p.Approved == Global.APPROVED)
+                        .Where(p => p.CreateDT <= DateTime.Now)
+                        .Where(p => !p.IsDeleted)
+                        .First();
+                SimpleSongViewModel song = new SimpleSongViewModel
+                {
+                    Name = item.Name,
+                    Album = item.Album,
+                    AuthorSong = item.AuthorSong,
+                    OrtherName = item.OrtherName,
+                    View = item.Views,
+                    Lyric = SEOExtension.GetStringToLength(chords.Lyric, LENGTH_LYRIC),
+                    Slug = item.Slug,
+                    VersionSlug = chords.Slug
+                };
+                listSong.Add(song);
+            }
+
+            MainSearchViewModel search = new MainSearchViewModel
+            {
+                Count = songPaginatedList.Count,
+                PageIndex = songPaginatedList.PageIndex,
+                PageSize = songPaginatedList.PageSize,
+                TotalPages = songPaginatedList.TotalPages,
+                ListSong = listSong,
+                Action = "search",
+                Controller = "home",
+                Search = searchString
+            };
+            return search;
+        }
+
+        public async Task<MainContentViewModel> GetMainHome(char slug, int page, int pageSize)
+        {
+            try
+            {
+                List<SimpleSongViewModel> ListNewSong = new List<SimpleSongViewModel>();
+                var application = _context.Song
+                    .Include(p => p.Album)
+                    .Include(p => p.AuthorSong)
+                    .Where(p => p.Approved == Global.APPROVED)
+                    .Where(p => p.CreateDT <= DateTime.Now)
+                    .Where(p => !p.IsDeleted)
+                    .Where(p => p.Name.ToString().ToLower().First() == slug);
+
+                application = application.OrderByDescending(p => p.CreateDT);
+
+                var songPaginatedList = await PaginatedList<Song>.CreateAsync(application.AsNoTracking(), page, pageSize);
+
+
+                foreach (var item in songPaginatedList)
+                {
+                    var chords = _context.Chords
+                        .Where(p => p.SongID == item.ID)
+                        .First();
+                    SimpleSongViewModel song = new SimpleSongViewModel
+                    {
+                        Name = item.Name,
+                        Album = item.Album,
+                        AuthorSong = item.AuthorSong,
+                        OrtherName = item.OrtherName,
+                        View = item.Views,
+                        Lyric = SEOExtension.GetStringToLength(chords.Lyric, LENGTH_LYRIC),
+                        Slug = item.Slug,
+                        VersionSlug = chords.Slug
+                    };
+                    ListNewSong.Add(song);
+                }
+
+                List<SimpleSongViewModel> ListPupularSong = new List<SimpleSongViewModel>();
+                application = _context.Song
+                    .Include(p => p.Album)
+                    .Include(p => p.AuthorSong)
+                    .Where(p => p.Name.ToString().ToLower().First() == slug);
+
+                application = application.OrderByDescending(p => p.Views);
+                foreach (var item in songPaginatedList)
+                {
+                    var chords = _context.Chords
+                        .Where(p => p.SongID == item.ID)
+                        .First();
+                    SimpleSongViewModel song = new SimpleSongViewModel
+                    {
+                        Name = item.Name,
+                        Album = item.Album,
+                        AuthorSong = item.AuthorSong,
+                        OrtherName = item.OrtherName,
+                        View = item.Views,
+                        Lyric = SEOExtension.GetStringToLength(chords.Lyric, LENGTH_LYRIC),
+                        Slug = item.Slug,
+                        VersionSlug = chords.Slug
+                    };
+                    ListNewSong.Add(song);
+                }
+                MainContentViewModel model = new MainContentViewModel
+                {
+                    ListNewSong = ListNewSong,
+                    ListPupularSong = ListPupularSong,
+                    Action = "Home",
+                    Controller = "Index",
+                    Count = songPaginatedList.Count,
+                    PageIndex = songPaginatedList.PageIndex,
+                    PageSize = songPaginatedList.PageSize,
+                    TotalPages = songPaginatedList.TotalPages
+                };
+                return model;
+            }
+            catch (Exception e)
+            {
+                //var logger = services.GetRequiredService<ILogger<Program>>();
+                //logger.LogError(ex.Message, "An error occurred seeding the DB.");
+                return null;
+            }
         }
     }
 }

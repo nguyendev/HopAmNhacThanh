@@ -38,6 +38,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\AuthorSong\" />
+    <Folder Include="Views\Album\" />
+    <Folder Include="Views\AuthorChords\" />
+    <Folder Include="Views\Sheet\" />
     <Folder Include="wwwroot\plugins\" />
   </ItemGroup>
 

@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HopAmNhacThanh.Data;
 using HopAmNhacThanh.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HopAmNhacThanh.Areas.WebManager.Controllers
 {
     [Area("WebManager")]
+    [Authorize(Roles = "Admin, Manager")]
     public class LinkSongsManagerController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,14 +22,14 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
             _context = context;    
         }
 
-        // GET: WebManager/LinkSongsManager
+        // GET: WebManager/LinkSongs
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.LinkSong.Include(l => l.Author).Include(l => l.SingleSong);
+            var applicationDbContext = _context.LinkSong.Include(l => l.Author).Include(l => l.SingleSong).Include(l => l.Song);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: WebManager/LinkSongsManager/Details/5
+        // GET: WebManager/LinkSongs/Details/5
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
             var linkSong = await _context.LinkSong
                 .Include(l => l.Author)
                 .Include(l => l.SingleSong)
+                .Include(l => l.Song)
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (linkSong == null)
             {
@@ -47,15 +50,16 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
             return View(linkSong);
         }
 
-        // GET: WebManager/LinkSongsManager/Create
+        // GET: WebManager/LinkSongs/Create
         public IActionResult Create()
         {
-            ViewData["AuthorID"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["AuthorID"] = new SelectList(_context.ApplicationUser, "Id", "Id");
             ViewData["SingleSongID"] = new SelectList(_context.SingleSong, "ID", "Name");
+            ViewData["SongID"] = new SelectList(_context.Song, "ID", "Name");
             return View();
         }
 
-        // POST: WebManager/LinkSongsManager/Create
+        // POST: WebManager/LinkSongs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -68,12 +72,13 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewData["AuthorID"] = new SelectList(_context.Users, "Id", "Id", linkSong.AuthorID);
+            ViewData["AuthorID"] = new SelectList(_context.ApplicationUser, "Id", "Id", linkSong.AuthorID);
             ViewData["SingleSongID"] = new SelectList(_context.SingleSong, "ID", "Name", linkSong.SingleSongID);
+            ViewData["SongID"] = new SelectList(_context.Song, "ID", "Name", linkSong.SongID);
             return View(linkSong);
         }
 
-        // GET: WebManager/LinkSongsManager/Edit/5
+        // GET: WebManager/LinkSongs/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -86,12 +91,13 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
             {
                 return NotFound();
             }
-            ViewData["AuthorID"] = new SelectList(_context.Users, "Id", "Id", linkSong.AuthorID);
+            ViewData["AuthorID"] = new SelectList(_context.ApplicationUser, "Id", "Id", linkSong.AuthorID);
             ViewData["SingleSongID"] = new SelectList(_context.SingleSong, "ID", "Name", linkSong.SingleSongID);
+            ViewData["SongID"] = new SelectList(_context.Song, "ID", "Name", linkSong.SongID);
             return View(linkSong);
         }
 
-        // POST: WebManager/LinkSongsManager/Edit/5
+        // POST: WebManager/LinkSongs/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -123,12 +129,13 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["AuthorID"] = new SelectList(_context.Users, "Id", "Id", linkSong.AuthorID);
+            ViewData["AuthorID"] = new SelectList(_context.ApplicationUser, "Id", "Id", linkSong.AuthorID);
             ViewData["SingleSongID"] = new SelectList(_context.SingleSong, "ID", "Name", linkSong.SingleSongID);
+            ViewData["SongID"] = new SelectList(_context.Song, "ID", "Name", linkSong.SongID);
             return View(linkSong);
         }
 
-        // GET: WebManager/LinkSongsManager/Delete/5
+        // GET: WebManager/LinkSongs/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -139,6 +146,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
             var linkSong = await _context.LinkSong
                 .Include(l => l.Author)
                 .Include(l => l.SingleSong)
+                .Include(l => l.Song)
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (linkSong == null)
             {
@@ -148,7 +156,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
             return View(linkSong);
         }
 
-        // POST: WebManager/LinkSongsManager/Delete/5
+        // POST: WebManager/LinkSongs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)

@@ -15,6 +15,17 @@
     </form>
 </div>
 
+@{
+    string scheme = Context.Request.Scheme;
+    string host = Context.Request.Host.Host;
+    string port = Context.Request.Host.Port.ToString();
+    string path = Context.Request.Path;
+
+    string url = string.Format("{0}", path);
+    string urlActive = string.Format("{0}://{1}:{2}{3}", scheme, host, port, path);
+    
+}
+
 
 <div id="sheetModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <form action="https://hopamviet.vn/chord/insert_sheet" enctype="multipart/form-data" method="post">
@@ -73,7 +84,7 @@
                             }
                             @foreach (var item in Model.ListChords) {
                                 {
-                                    
+
                                     if (item.Selected)
                                     {
                                         ViewData["active"] = "active";
@@ -85,8 +96,8 @@
                                 }
                             <tr class="@ViewData["active"] table-content">
                                 <td class="@ViewData["active"]">
-                                    @if(item.Name == "")
-                                    { 
+                                    @if (item.Name == "")
+                                    {
                                         <a asp-controller="Home" asp-action="Single" asp-route-slug="@Model.Slug" asp-route-slugVersion="@item.Slug">Phiên bản @version</a>
                                         version++;
                                     }
@@ -96,7 +107,16 @@
 
                                     }
                                 </td>
-                                <td><div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div></td>
+                               
+                                @if (ViewData["active"] as string == "active")
+                                {
+                                <td><div class="fb-like" data-href="@urlActive" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div></td>
+                                }
+                                else
+                                {
+                                    string urlUnActive = string.Format("{0}://{1}:{2}{3}", scheme, host, port, "/bai-hat/" + Model.Slug + "/" + item.Slug);
+                                    <td><div class="fb-like" data-href="@urlUnActive" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div></td>
+                                }
                                 @if (item.Description == "")
                                 {
                                     <td>Chưa có mô tả</td>
@@ -110,7 +130,7 @@
                                     <label>@item.Author.FullName</label>
                                 </td>
                             </tr>
-                            }
+                                    }
                         </tbody>
                     </table>
                 </div>
@@ -148,5 +168,9 @@
     </div>
 </div>
 
+/*Add new song version*/
 
 
+
+@Html.Partial("AddNewVersionSongPartial", new HopAmNhacThanh.Models.HomeViewModels.AddNewVersionSong {  Name = Model.Name,Slug=Model.Slug, Url = url})
+@Html.Partial("ReportSongPartial", new HopAmNhacThanh.Models.HomeViewModels.ReportSongViewModel { Name = Model.Name, Slug = Model.Slug, Url = url })

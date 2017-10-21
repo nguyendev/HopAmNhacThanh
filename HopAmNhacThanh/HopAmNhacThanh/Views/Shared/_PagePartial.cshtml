@@ -1,0 +1,59 @@
+﻿@model HopAmNhacThanh.Models.PageListItemTemplate
+<div class="text-center">
+    @{
+            int Min = (Model.PageIndex - 1) * Model.PageSize;
+            int Max = (Model.PageIndex) * Model.PageSize;
+    }
+    <ul class="pagination">
+
+        @if (Model.PageIndex - 1 > 0)
+        {
+            <li class=""><a asp-route-search="@ViewData["search"]" asp-controller="@Model.Controller" asp-action="@Model.Action" asp-route-page="@(Model.PageIndex - 1)" aria-label="Previous"><span aria-hidden="true"><i class="fa fa-angle-left"></i></span></a></li>
+        }
+        @if (Model.PageIndex - 2 > 0)
+        {
+            <li>
+                <a asp-controller="@Model.Controller" asp-route-search="@ViewData["search"]" asp-action="@Model.Action"
+                   asp-route-page="@(Model.PageIndex - 2)">@(Model.PageIndex - 2)</a>
+            </li>
+        }
+        @if (Model.PageIndex - 1 > 0)
+        {
+            <li>
+                <a asp-route-search="@ViewData["search"]" asp-controller="@Model.Controller" asp-action="@Model.Action"
+                   asp-route-page="@(Model.PageIndex - 1)">@(Model.PageIndex - 1)</a>
+            </li>
+        }
+        @if (Model.PageIndex < Model.TotalPages)
+        {    <li class="active">
+                <a asp-route-search="@ViewData["search"]" asp-controller="@Model.Controller" asp-action="@Model.Action"
+                   asp-route-page="@(Model.PageIndex)"
+                   >@Model.PageIndex</a>
+            </li>
+        }
+        @if (Model.PageIndex + 1 <= Model.TotalPages)
+        {
+            <li>
+                <a asp-route-search="@ViewData["search"]" asp-controller="@Model.Controller" asp-action="@Model.Action"
+                   asp-route-page="@(Model.PageIndex + 1)">
+                    @(Model.PageIndex + 1)
+                </a>
+            </li>
+        }
+        @if (Model.PageIndex + 2 <= Model.TotalPages)
+        {
+            <li>
+                <a asp-route-search="@ViewData["search"]" asp-controller="@Model.Controller" asp-action="@Model.Action"
+                   asp-route-page="@(Model.PageIndex + 2)">@(Model.PageIndex + 2)</a>
+            </li>
+        }
+        @*<span>...</span>
+            <a href="#">11</a>
+            <a href="#">12</a>
+            <a href="#">13</a>*@
+        @if (Model.PageIndex + 1 <= Model.TotalPages)
+        {
+            <li class=""><a asp-route-search="@ViewData["search"]" asp-controller="@Model.Controller" asp-action="@Model.Action" asp-route-page="@(Model.PageIndex + 1)" aria-label="Next"><span aria-hidden="true"><i class="fa fa-angle-right"></i></span></a></li>
+        }
+    </ul>
+</div>

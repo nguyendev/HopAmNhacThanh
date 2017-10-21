@@ -1,9 +1,11 @@
-﻿<style>
+﻿@model HopAmNhacThanh.Models.HomeViewModels.MainContentViewModel
+
+<style>
     .sidebar-search {
         margin-bottom: 20px;
     }
 </style>
-<div class="sidebar-search">
+@*<div class="sidebar-search">
     <div id="search-google" class="panel panel-default">
         <div class="panel-body">
             <h2 class="text-primary" style="font-size:larger; font-weight:bold">Tìm kiếm</h2><hr />
@@ -42,7 +44,7 @@
             <gcse:search></gcse:search>
         </div>
     </div>
-</div>
+</div>*@
 
 <div id="rhythm" class="panel panel-default">
     <style>
@@ -71,20 +73,18 @@
     </style>
     <div class="panel-body text-center">
         <h2 class="text-primary" style="font-size:larger; font-weight:bold">Điệu bài hát</h2><hr />
-        
+       
         <div class="rhythm-list">
-            <a style="background-color: greenyellow" class="rhythm-item" data-rhythm="ballad" href="">
-                Điệu Ballad (3000 bài)
-            </a>
-            <a style="background-color: cornflowerblue" class="rhythm-item" data-rhythm="ballad" href="">
-                Điệu Ballad (3000 bài)
-            </a>
-            <a style="background-color: coral" class="rhythm-item" data-rhythm="ballad" href="">
-                Điệu Ballad (3000 bài)
-            </a>
-            <a class="rhythm-item" data-rhythm="ballad" href="">
-                Điệu Ballad (3000 bài)
-            </a>
+            @{ 
+                var random = new Random();
+            }
+            @foreach (var item in Model.ListStyle)
+            {
+                var color = String.Format("#{0:X6}", random.Next(0x1000000));
+                <a style="background-color: @color" class="rhythm-item" data-rhythm="ballad" href="">
+                    Điệu @item.Name 
+                </a>
+            }
         </div>
     </div>
 </div>
@@ -150,222 +150,26 @@
         <div class="hot-today-item">
             <span class="hot-today-views">
                 <i class="fa fa-star"></i>
-                <span class="hot-today-view-count">3257</span>
+                @*<span class="hot-today-view-count">3257</span>*@
             </span>
-            <a class="hot-today-item-song" asp-controller="home" asp-action="single">
-                1.
-                Con cần cha
+            @{ 
+                var number = 1;
+            }
+            @foreach (var item in Model.ListTopSong)
+            { 
+            <a class="hot-today-item-song" asp-controller="home" asp-action="single" asp-route-slug="@item.Slug" asp-route-slugVersion="@item.Version">
+                @number.
+                @item.Name
             </a>
-            <span class="hot-today-item-singers">
+            @*<span class="hot-today-item-singers">
                 <a href="/artist/23465/jayk">
                     JayK
                 </a>
-            </span>
+            </span>*@
+                number++;
+            }
         </div>
 
-        <div class="hot-today-item">
-            <span class="hot-today-views">
-                <i class="fa fa-star"></i>
-                <span class="hot-today-view-count">1728</span>
-            </span>
-            <a class="hot-today-item-song" href="/song/8801/anh-nang-cua-anh">
-                2.
-                Con cần cha
-            </a>
-            <span class="hot-today-item-singers">
-                <a href="/artist/21806/duc-phuc">
-                    Đức Phúc
-                </a>
-            </span>
-        </div>
-
-        <div class="hot-today-item">
-            <span class="hot-today-views">
-                <i class="fa fa-star"></i>
-                <span class="hot-today-view-count">1388</span>
-            </span>
-            <a class="hot-today-item-song" href="/song/510/nguoi-ta-noi">
-                3.
-                Con cần cha
-            </a>
-            <span class="hot-today-item-singers">
-                <a href="/artist/63/ung-hoang-phuc">
-                    Ưng Hoàng Phúc
-                </a>
-                ,
-                <a href="/artist/20730/minh-mon">
-                    Minh Mon
-                </a>
-                ,
-                <a href="/artist/20308/truc-nhan">
-                    Trúc Nhân
-                </a>
-            </span>
-        </div>
-
-        <div class="hot-today-item">
-            <span class="hot-today-views">
-                <i class="fa fa-star"></i>
-                <span class="hot-today-view-count">1367</span>
-            </span>
-            <a class="hot-today-item-song" href="/song/12118/tuy-am">
-                4.
-                Con cần cha
-            </a>
-            <span class="hot-today-item-singers">
-                <a href="/artist/23752/xesi">
-                    Xesi
-                </a>
-            </span>
-        </div>
-
-        <div class="hot-today-item">
-            <span class="hot-today-views">
-                <i class="fa fa-star"></i>
-                <span class="hot-today-view-count">1141</span>
-            </span>
-            <a class="hot-today-item-song" href="/song/1528/ngay-mai-em-di">
-                5.
-                Con cần cha
-            </a>
-            <span class="hot-today-item-singers">
-                <a href="/artist/24/le-hieu">
-                    Lê Hiếu
-                </a>
-                ,
-                <a href="/artist/15235/touliver">
-                    Touliver
-                </a>
-                ,
-                <a href="/artist/21504/soobin-hoang-son">
-                    Soobin Hoàng Sơn
-                </a>
-                ,
-                <a href="/artist/24/le-hieu">
-                    Lê Hiếu
-                </a>
-            </span>
-        </div>
-
-        <div class="hot-today-item">
-            <span class="hot-today-views">
-                <i class="fa fa-star"></i>
-                <span class="hot-today-view-count">961</span>
-            </span>
-            <a class="hot-today-item-song" href="/song/1197/nguoi-tinh-mua-dong">
-                6.
-                Con cần cha
-            </a>
-            <span class="hot-today-item-singers">
-                <a href="/artist/3273/nhu-quynh">
-                    Như Quỳnh
-                </a>
-            </span>
-        </div>
-
-        <div class="hot-today-item">
-            <span class="hot-today-views">
-                <i class="fa fa-star"></i>
-                <span class="hot-today-view-count">806</span>
-            </span>
-            <a class="hot-today-item-song" href="/song/8503/phia-sau-mot-co-gai">
-                7.
-                Con cần cha
-            </a>
-            <span class="hot-today-item-singers">
-                <a href="/artist/21504/soobin-hoang-son">
-                    Soobin Hoàng Sơn
-                </a>
-            </span>
-        </div>
-
-        <div class="hot-today-item">
-            <span class="hot-today-views">
-                <i class="fa fa-star"></i>
-                <span class="hot-today-view-count">725</span>
-            </span>
-            <a class="hot-today-item-song" href="/song/11490/xin-dung-lang-im-">
-                8.
-                Con cần cha
-            </a>
-            <span class="hot-today-item-singers">
-                <a href="/artist/21504/soobin-hoang-son">
-                    Soobin Hoàng Sơn
-                </a>
-            </span>
-        </div>
-
-        <div class="hot-today-item">
-            <span class="hot-today-views">
-                <i class="fa fa-star"></i>
-                <span class="hot-today-view-count">700</span>
-            </span>
-            <a class="hot-today-item-song" href="/song/11423/dau-chi-rieng-em">
-                9.
-                Con cần cha
-            </a>
-            <span class="hot-today-item-singers">
-                <a href="/artist/54/my-tam">
-                    Mỹ Tâm
-                </a>
-            </span>
-        </div>
-
-        <div class="hot-today-item">
-            <span class="hot-today-views">
-                <i class="fa fa-star"></i>
-                <span class="hot-today-view-count">615</span>
-            </span>
-            <a class="hot-today-item-song" href="/song/5600/mot-nha-">
-                10.
-                Con cần cha
-            </a>
-            <span class="hot-today-item-singers">
-                <a href="/artist/21395/da-lab">
-                    Da Lab
-                </a>
-            </span>
-        </div>
-
-        <div class="hot-today-item">
-            <span class="hot-today-views">
-                <i class="fa fa-star"></i>
-                <span class="hot-today-view-count">559</span>
-            </span>
-            <a class="hot-today-item-song" href="/song/9221/noi-nay-co-anh">
-                11.
-                Nơi Này Có Anh
-            </a>
-            <span class="hot-today-item-singers">
-                <a href="/artist/21205/son-tung-m-tp">
-                    Sơn Tùng M-TP
-                </a>
-            </span>
-        </div>
-
-        <div class="hot-today-item">
-            <span class="hot-today-views">
-                <i class="fa fa-star"></i>
-                <span class="hot-today-view-count">507</span>
-            </span>
-            <a class="hot-today-item-song" href="/song/11844/em-gai-mua-">
-                12.
-                Em gái mưa
-            </a>
-            <span class="hot-today-item-singers">
-                <a href="/artist/2380/anh-khang">
-                    Anh Khang
-                </a>
-                ,
-                <a href="/artist/20556/mr.-siro">
-                    Mr. Siro
-                </a>
-                ,
-                <a href="/artist/20153/huong-tram">
-                    Hương Tràm
-                </a>
-            </span>
-        </div>
     </div>
 </div>
 

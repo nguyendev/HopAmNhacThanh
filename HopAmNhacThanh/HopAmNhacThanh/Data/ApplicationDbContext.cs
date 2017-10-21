@@ -33,5 +33,10 @@ namespace HopAmNhacThanh.Data
         public DbSet<AuthorSong> AuthorSong { get; set; }
         public DbSet<SheetMusic> SheetMusic { get; set; }
         public DbSet<VietnameseLyric> VietnameseLyric { get; set; }
+        public DbSet<ReportSong> ReportSong { get; set; }
+        public DbSet<FavoriteSongChord> FavoriteSongChord { get; set; }
+        public DbSet<LikeSongChords> LikeSongChords { get; set; }
+        public DbSet<HopAmNhacThanh.Models.ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<HopAmNhacThanh.Models.RequestSong> RequestSong { get; set; }
     }
 }

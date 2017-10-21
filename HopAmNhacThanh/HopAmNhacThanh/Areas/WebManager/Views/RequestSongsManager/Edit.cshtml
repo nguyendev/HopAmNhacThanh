@@ -1,0 +1,100 @@
+@model HopAmNhacThanh.Models.RequestSong
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>RequestSong</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="ID" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="IsFinished" />
+                    <label asp-for="IsFinished"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Slug" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Slug" class="form-control" />
+                <span asp-validation-for="Slug" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CreateDT" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="CreateDT" class="form-control" />
+                <span asp-validation-for="CreateDT" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="UpdateDT" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="UpdateDT" class="form-control" />
+                <span asp-validation-for="UpdateDT" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="AuthorID" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="AuthorID" class="form-control" asp-items="ViewBag.AuthorID"></select>
+                <span asp-validation-for="AuthorID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Approved" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Approved" class="form-control" />
+                <span asp-validation-for="Approved" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Active" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Active" class="form-control" />
+                <span asp-validation-for="Active" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="IsDeleted" />
+                    <label asp-for="IsDeleted"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Note" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Note" class="form-control" />
+                <span asp-validation-for="Note" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+</body>
+</html>

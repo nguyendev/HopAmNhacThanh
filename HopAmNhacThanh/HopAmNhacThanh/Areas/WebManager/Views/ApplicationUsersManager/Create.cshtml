@@ -1,0 +1,249 @@
+@model HopAmNhacThanh.Models.ApplicationUser
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>ApplicationUser</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="FullName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="About" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="About" class="form-control" />
+                <span asp-validation-for="About" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PictureSmall" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PictureSmall" class="form-control" />
+                <span asp-validation-for="PictureSmall" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Picture65x65" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Picture65x65" class="form-control" />
+                <span asp-validation-for="Picture65x65" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Slug" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Slug" class="form-control" />
+                <span asp-validation-for="Slug" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PictureBig" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PictureBig" class="form-control" />
+                <span asp-validation-for="PictureBig" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="DateofBirth" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="DateofBirth" class="form-control" />
+                <span asp-validation-for="DateofBirth" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Facebook" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Facebook" class="form-control" />
+                <span asp-validation-for="Facebook" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="GooglePlus" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="GooglePlus" class="form-control" />
+                <span asp-validation-for="GooglePlus" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Linkedin" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Linkedin" class="form-control" />
+                <span asp-validation-for="Linkedin" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Twitter" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Twitter" class="form-control" />
+                <span asp-validation-for="Twitter" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="IdentityFacebook" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="IdentityFacebook" class="form-control" />
+                <span asp-validation-for="IdentityFacebook" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Score" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Score" class="form-control" />
+                <span asp-validation-for="Score" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Website" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Website" class="form-control" />
+                <span asp-validation-for="Website" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CreateDT" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="CreateDT" class="form-control" />
+                <span asp-validation-for="CreateDT" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="IsDeleted" />
+                    <label asp-for="IsDeleted"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="UserName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="NormalizedUserName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="NormalizedUserName" class="form-control" />
+                <span asp-validation-for="NormalizedUserName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="NormalizedEmail" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="NormalizedEmail" class="form-control" />
+                <span asp-validation-for="NormalizedEmail" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="EmailConfirmed" />
+                    <label asp-for="EmailConfirmed"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PasswordHash" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PasswordHash" class="form-control" />
+                <span asp-validation-for="PasswordHash" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SecurityStamp" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="SecurityStamp" class="form-control" />
+                <span asp-validation-for="SecurityStamp" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ConcurrencyStamp" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ConcurrencyStamp" class="form-control" />
+                <span asp-validation-for="ConcurrencyStamp" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PhoneNumber" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="PhoneNumberConfirmed" />
+                    <label asp-for="PhoneNumberConfirmed"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="TwoFactorEnabled" />
+                    <label asp-for="TwoFactorEnabled"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="LockoutEnd" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="LockoutEnd" class="form-control" />
+                <span asp-validation-for="LockoutEnd" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="LockoutEnabled" />
+                    <label asp-for="LockoutEnabled"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="AccessFailedCount" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="AccessFailedCount" class="form-control" />
+                <span asp-validation-for="AccessFailedCount" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+</body>
+</html>

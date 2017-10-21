@@ -11,10 +11,12 @@ using HopAmNhacThanh.Areas.WebManager.ViewModels;
 using HopAmNhacThanh.Areas.WebManager.Data;
 using HopAmNhacThanh.Areas.WebManager.ViewModels.SongViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HopAmNhacThanh.Areas.WebManager.Controllers
 {
     [Area("WebManager")]
+    [Authorize(Roles = "Admin, Manager")]
     public class SongManagerController : Controller
     {
         private readonly ApplicationDbContext _context;

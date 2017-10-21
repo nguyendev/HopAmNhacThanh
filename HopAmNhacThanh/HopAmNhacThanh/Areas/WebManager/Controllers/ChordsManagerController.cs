@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HopAmNhacThanh.Data;
 using HopAmNhacThanh.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HopAmNhacThanh.Areas.WebManager.Controllers
 {
     [Area("WebManager")]
+    [Authorize(Roles = "Admin, Manager")]
     public class ChordsManagerController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,14 +22,14 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
             _context = context;    
         }
 
-        // GET: WebManager/ChordsManager
+        // GET: WebManager/Chords
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Chords.Include(c => c.Author).Include(c => c.Style);
+            var applicationDbContext = _context.Chords.Include(c => c.Author).Include(c => c.Song).Include(c => c.Style);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: WebManager/ChordsManager/Details/5
+        // GET: WebManager/Chords/Details/5
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
 
             var chords = await _context.Chords
                 .Include(c => c.Author)
+                .Include(c => c.Song)
                 .Include(c => c.Style)
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (chords == null)
@@ -47,15 +50,16 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
             return View(chords);
         }
 
-        // GET: WebManager/ChordsManager/Create
+        // GET: WebManager/Chords/Create
         public IActionResult Create()
         {
-            ViewData["AuthorID"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["AuthorID"] = new SelectList(_context.ApplicationUser, "Id", "Id");
+            ViewData["SongID"] = new SelectList(_context.Song, "ID", "Name");
             ViewData["StyleID"] = new SelectList(_context.Style, "ID", "Name");
             return View();
         }
 
-        // POST: WebManager/ChordsManager/Create
+        // POST: WebManager/Chords/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -68,12 +72,13 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewData["AuthorID"] = new SelectList(_context.Users, "Id", "Id", chords.AuthorID);
+            ViewData["AuthorID"] = new SelectList(_context.ApplicationUser, "Id", "Id", chords.AuthorID);
+            ViewData["SongID"] = new SelectList(_context.Song, "ID", "Name", chords.SongID);
             ViewData["StyleID"] = new SelectList(_context.Style, "ID", "Name", chords.StyleID);
             return View(chords);
         }
 
-        // GET: WebManager/ChordsManager/Edit/5
+        // GET: WebManager/Chords/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -86,12 +91,13 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
             {
                 return NotFound();
             }
-            ViewData["AuthorID"] = new SelectList(_context.Users, "Id", "Id", chords.AuthorID);
+            ViewData["AuthorID"] = new SelectList(_context.ApplicationUser, "Id", "Id", chords.AuthorID);
+            ViewData["SongID"] = new SelectList(_context.Song, "ID", "Name", chords.SongID);
             ViewData["StyleID"] = new SelectList(_context.Style, "ID", "Name", chords.StyleID);
             return View(chords);
         }
 
-        // POST: WebManager/ChordsManager/Edit/5
+        // POST: WebManager/Chords/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -123,12 +129,13 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["AuthorID"] = new SelectList(_context.Users, "Id", "Id", chords.AuthorID);
+            ViewData["AuthorID"] = new SelectList(_context.ApplicationUser, "Id", "Id", chords.AuthorID);
+            ViewData["SongID"] = new SelectList(_context.Song, "ID", "Name", chords.SongID);
             ViewData["StyleID"] = new SelectList(_context.Style, "ID", "Name", chords.StyleID);
             return View(chords);
         }
 
-        // GET: WebManager/ChordsManager/Delete/5
+        // GET: WebManager/Chords/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -138,6 +145,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
 
             var chords = await _context.Chords
                 .Include(c => c.Author)
+                .Include(c => c.Song)
                 .Include(c => c.Style)
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (chords == null)
@@ -148,7 +156,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
             return View(chords);
         }
 
-        // POST: WebManager/ChordsManager/Delete/5
+        // POST: WebManager/Chords/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)

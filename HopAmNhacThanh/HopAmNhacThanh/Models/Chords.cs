@@ -13,6 +13,7 @@ namespace HopAmNhacThanh.Models
         [Key]
         public long ID { get; set; }
         public long SongID { get; set; }
+        public Song Song { get; set; }
         [StringLength(60, MinimumLength = 3)]
         [Display(Name = "Tên phiên bản")]
         public string Version { get; set; }

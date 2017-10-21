@@ -18,6 +18,7 @@ using Newtonsoft.Json.Serialization;
 using Microsoft.Net.Http.Headers;
 using HopAmNhacThanh.Areas.WebManager.Data;
 using HopAmNhacThanh.Data.HomeRepository;
+using HopAmNhacThanh.Data.SongRepository;
 
 namespace HopAmNhacThanh
 {
@@ -102,6 +103,7 @@ namespace HopAmNhacThanh
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddScoped<ISongManagerRepository, SongManagerRepository>();
+            services.AddScoped<ISongRepository, SongRepository>();
             services.AddScoped<IHomeRepository, HomeRepository>();
         }
 
@@ -174,8 +176,8 @@ namespace HopAmNhacThanh
                 //connect facebook in vps
                 app.UseFacebookAuthentication(new FacebookOptions()
                 {
-                    AppId = "283779168758487",
-                    AppSecret = "16cbd9eafd6d2b5f6c1fb8b2fda3b1c6"
+                    AppId = "155450018390476",
+                    AppSecret = "d8c237b1da4337e6af1559caae0e3302"
                 });
             }
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715

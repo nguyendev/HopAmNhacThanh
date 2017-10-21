@@ -1,0 +1,140 @@
+﻿@{
+    HopAmNhacThanh.Models.HomeViewModels.MainContentViewModel mainContent = ViewData["MainContent"] as HopAmNhacThanh.Models.HomeViewModels.MainContentViewModel;
+}
+<div class="row">
+    <div class="col-md-8" style="padding-right: 0px;">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <ul class="nav nav-pills">
+                    <li class="active"><a data-toggle="pill" href="#new">Mới nhất</a></li>
+                    <li><a data-toggle="pill" href="#popular">Phổ biến nhất</a></li>
+                    <li><a data-toggle="pill" href="#request">Đang được yêu cầu</a></li>
+                </ul>
+                <hr />
+                <div class="tab-content" style="margin-top:10px;">
+                    <div id="new" class="tab-pane fade in active">
+                        <div class="sort-new-song text-center">
+                            <a class="" asp-controller="Home" asp-action="Alphabet" asp-route-slug="A"><span class="label label-primary">A</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="B"><span class="label label-primary">B</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="C"><span class="label label-primary">C</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="D"><span class="label label-primary">D</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="E"><span class="label label-primary">E</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="F"><span class="label label-primary">F</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="G"><span class="label label-primary">G</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="H"><span class="label label-primary">H</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="I"><span class="label label-primary">I</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="J"><span class="label label-primary">J</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="K"><span class="label label-primary">K</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="L"><span class="label label-primary">L</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="M"><span class="label label-primary">M</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="N"><span class="label label-primary">N</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="O"><span class="label label-primary">O</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="P"><span class="label label-primary">P</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="Q"><span class="label label-primary">Q</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="R"><span class="label label-primary">R</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="S"><span class="label label-primary">S</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="T"><span class="label label-primary">T</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="U"><span class="label label-primary">U</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="V"><span class="label label-primary">V</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="W"><span class="label label-primary">W</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="X"><span class="label label-primary">X</span></a>
+                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="Y"><span class="label label-primary">Y</span></a>
+                        </div>
+                        <br />
+                        <div class="new-song-list">
+                            @foreach (var item in mainContent.ListNewSong)
+                            {
+                                @Html.Partial("_SimpleSongPartial", item)
+                            }
+                        </div>
+                        @Html.Partial("_PagePartial", mainContent)
+                    </div>
+                    <div id="popular" class="tab-pane fade">
+
+                    </div>
+                    <div id="request" class="tab-pane fade">
+                        @*<div class="col-md-12 text-center">
+                                <a class="btn btn-success btn-sm" style="text-align:center" asp-controller="" asp-action=""><i class="fa fa-arrow-right"></i> Xem thêm</a>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<div class="panel panel-default">
+                <div class="panel-body">
+                    <h2 class="text-primary" style="font-size:larger">Lịch sử bài hát</h2>
+                    <hr />
+                    <div class="col-md-12">
+                        <h4>
+                            <i class="fa fa-music fa-fw"></i>
+                            <a asp-controller="HistorySong" asp-action="Single">
+                                Linh âm giai điệu
+                            </a>
+                            <small>
+                                &nbsp;<i class="fa fa-user"></i> Sáng tác:
+                                <a href="https://hopamviet.vn/chord/composer/2260/bao-kun.html">Bảo Kun</a>
+                            </small>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="ct-heading"><a href="https://hopamviet.vn/info/composers.html">DANH SÁCH TÁC GIẢ</a> <a href="https://hopamviet.vn/info/composers.html" class="pull-right"><em>Xem thêm <i class="fa fa-arrow-right"></i></em> </a></div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3 col-xs-6">
+                            <div class="album">
+                                <a href="https://hopamviet.vn/info/composer/3297/johnny-dung.html" title="Johnny Dũng">
+                                    <img src="https://hopamviet.vn/assets/images/composers/duyengland4copyjpg.jpg" class="img-responsive">
+                                </a>
+                                <a href="https://hopamviet.vn/info/composer/3297/johnny-dung.html" title="Johnny Dũng" class="txt">Johnny Dũng</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+    </div>
+
+    <div class="col-md-4">
+        @Html.Partial("SidebarHome")
+    </div>
+</div>
+@section Style {
+    <style>
+        .chord {
+            color: blue;
+        }
+    </style>
+    <style>
+        small {
+            margin-left: 5px;
+        }
+
+        .tab-pane {
+            margin-bottom: 10px;
+        }
+    </style>
+
+
+}
+@section Scripts {
+    <script defer>
+        function bodyLoad() {
+
+
+            chord = "(([A-G][b#]?)((7sus4|7sus2|sus4|sus2|dim|aug|add9|m7M|maj7|m9|m7|m6|m|7M|9|7|6|4|11|m11)?(\\s*[-/]?\\s*)))";
+            openBracket = "[\\[\\(]";
+            closeBracket = "[\\]\\)]";
+            reOneChord = new RegExp(chord, "g");
+            reChords = new RegExp(openBracket + "(" + chord + "+)" + closeBracket, "g");
+            document.body.innerHTML = document.body.innerHTML.replace(reChords, "<span class=chord>$&</span>");
+            $('.lyric br').replaceWith(' ');
+        }
+        $(function () {
+            bodyLoad();
+            //render_tab_chords();
+        });
+    </script>
+
+}

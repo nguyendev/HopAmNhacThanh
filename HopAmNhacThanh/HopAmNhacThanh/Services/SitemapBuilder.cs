@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace DoVuiHaiNao.Services
+namespace HopAmNhacThanh.Services
 {
     public class SitemapBuilder
     {

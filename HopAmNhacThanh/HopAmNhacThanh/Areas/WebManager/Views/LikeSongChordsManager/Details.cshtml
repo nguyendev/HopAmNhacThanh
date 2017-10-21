@@ -1,0 +1,93 @@
+@model HopAmNhacThanh.Models.LikeSongChords
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+
+<div>
+    <h4>LikeSongChords</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SongID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SongID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ChordID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ChordID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Like)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Like)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UnLike)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UnLike)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDT)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateDT)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDT)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDT)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Approved)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Approved)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Author.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,207 @@
+@model HopAmNhacThanh.Models.ApplicationUser
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+
+<div>
+    <h4>ApplicationUser</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.About)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.About)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PictureSmall)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PictureSmall)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Picture65x65)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Picture65x65)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Slug)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Slug)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PictureBig)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PictureBig)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateofBirth)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateofBirth)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Facebook)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Facebook)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GooglePlus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GooglePlus)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Linkedin)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Linkedin)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Twitter)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Twitter)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdentityFacebook)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdentityFacebook)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Score)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Score)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Website)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Website)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDT)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateDT)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NormalizedUserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NormalizedUserName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NormalizedEmail)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NormalizedEmail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailConfirmed)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmailConfirmed)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PasswordHash)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PasswordHash)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SecurityStamp)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SecurityStamp)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ConcurrencyStamp)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ConcurrencyStamp)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumberConfirmed)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TwoFactorEnabled)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TwoFactorEnabled)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LockoutEnd)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LockoutEnd)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LockoutEnabled)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LockoutEnabled)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AccessFailedCount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AccessFailedCount)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+</body>
+</html>

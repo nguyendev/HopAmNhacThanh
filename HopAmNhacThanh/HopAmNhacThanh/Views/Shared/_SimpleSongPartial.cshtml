@@ -1,0 +1,29 @@
+﻿@model HopAmNhacThanh.Models.HomeViewModels.SimpleSongViewModel
+
+<div class="new-song-item col-md-12">
+    <h4>
+        <i class="fa fa-music fa-fw"></i>
+        <a asp-controller="Home" asp-action="single" asp-route-slug="@Model.Slug" asp-route-slugVersion="@Model.VersionSlug">
+            @Model.Name
+        </a>
+
+        <small>
+            <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
+            <a asp-controller="AuthorSong" asp-action="single" asp-route-slug="@Model.Slug"> @Model.AuthorSong.Name</a>
+        </small>
+        <small>
+            <i title="Album" class="fa fa fa-file-movie-o"></i> Album: <a asp-controller="Album" asp-action="single" asp-route-slug="@Model.Slug">@Model.Album.Name</a>
+        </small>
+        <small>
+            <i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: @Model.View
+        </small>
+    </h4>
+    <em class="lyric" style="text-align: justify">
+        @Html.Raw(Model.Lyric)
+        @*1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
+            Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
+            Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
+            Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.*@
+    </em>
+    <hr>
+</div>

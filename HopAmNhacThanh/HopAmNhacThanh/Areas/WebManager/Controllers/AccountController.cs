@@ -149,7 +149,7 @@ namespace HopAmNhacThanh.Areas.Admin.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation(4, "User logged out.");
-            return RedirectToAction(nameof(DashboardController.Index), "Dashboard");
+            return RedirectToAction("Index", "Dashboard");
         }
 
         //
@@ -181,7 +181,7 @@ namespace HopAmNhacThanh.Areas.Admin.Controllers
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return RedirectToLocal("");
             }
 
             // Sign in the user with this external login provider if the user already has a login.
@@ -191,7 +191,7 @@ namespace HopAmNhacThanh.Areas.Admin.Controllers
                 _logger.LogInformation(5, "User logged in with {Name} provider.", info.LoginProvider);
                 string currentUrl = HttpContext.Session.GetString("currentUrl");
                 if (String.IsNullOrEmpty(currentUrl))
-                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                    return RedirectToLocal("");
                 return RedirectToLocal(currentUrl);
             }
             if (result.RequiresTwoFactor)
@@ -229,11 +229,11 @@ namespace HopAmNhacThanh.Areas.Admin.Controllers
                         _logger.LogInformation(6, "User created an account using {Name} provider.", info.LoginProvider);
                         string currentUrl = HttpContext.Session.GetString("currentUrl");
                         if (String.IsNullOrEmpty(currentUrl))
-                            return RedirectToAction(nameof(HomeController.Index), "Home"); ;
+                            return RedirectToLocal("") ;
                         return RedirectToLocal(currentUrl);
                     }
                 }
-                return RedirectToAction(nameof(HomeController.Index), "Home"); 
+                return RedirectToLocal("");
             }
         }
 
@@ -509,7 +509,7 @@ namespace HopAmNhacThanh.Areas.Admin.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(DashboardController.Index), "Dashboard");
+                return RedirectToAction("Index", "Dashboard");
             }
         }
 

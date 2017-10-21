@@ -7,9 +7,11 @@
         <h2 style="margin-bottom: 20px; font-size: 14px;  margin-top: 5px;">
             <strong>Tính năng</strong>
         </h2>
-        <a class="btn btn-default btn-sm"><i class="fa fa-fw fa-music"></i> Sheet nhac</a>
-        <a class="btn btn-warning btn-sm"><i class="fa fa-fw fa-pencil"></i> Thêm phiên bản</a>
-        <a class="btn btn-danger btn-sm"><i class="fa fa-fw fa-flag"></i> Báo lỗi</a>
+        @if (Model.IsSheetExisted) {
+        <a asp-controller="Sheet" asp-route-slug="@Model.Slug" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-music"></i> Sheet nhac</a>
+        }
+        <button id="check-add-new-version" class="btn btn-default btn-sm" type="button" data-toggle="modal" data-target="#add-new-version"><i class="fa fa-fw fa-pencil"></i> Thêm phiên bản</button>
+        <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#report-error"><i class="fa fa-fw fa-flag"></i> Báo lỗi</button>
     </div>
 </div>
 <div class="panel panel-default">
@@ -65,15 +67,16 @@
     </div>
     <div id="morevideo" style="cursor:pointer" onclick="show_fullvideo();" align="right"></div>
 </div>
-@if (Model.AlbumName != "")
+@if (Model.Album != null)
 {
     <div class="panel panel-default">
         <div class="panel-body">
             <a asp-controller="category" asp-action="list" style="color:black">
                 <h2 style="margin-bottom: 10px; font-size: 14px;  margin-top: 5px;">
-                    <strong>Bài hát trong Album @Model.AlbumName</strong>
+                    <strong>Bài hát trong Album @Model.Album.Name</strong>
                 </h2>
             </a>
+            <hr style="margin-top: 0px;"/>
             @foreach (var item in Model.ListSongInAblum)
             {
                 <p> <a asp-controller="home" asp-action="single" asp-route-slug="@item.Slug"><i class="fa fa-music"></i> @item.Number. @item.Name</a></p>
@@ -88,6 +91,7 @@
                 <strong>Bài hát cùng chủ đề</strong>
             </h2>
         </a>
+        <hr style="margin-top: 0px;"/>
         @foreach (var item in Model.ListSongInCategory)
         {
             <p> <a asp-controller="home" asp-action="single" asp-route-slug="@item.Slug" class="text-primary"><i class="fa fa-music"></i> @item.Name</a></p>

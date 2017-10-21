@@ -79,6 +79,12 @@
         <dd>
             @Html.DisplayFor(model => model.SingleSong.Name)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Song)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Song.Name)
+        </dd>
     </dl>
     
     <form asp-action="Delete">

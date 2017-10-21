@@ -37,48 +37,67 @@
     <ul class="sidebar-menu" data-widget="tree">
         <li class="header">Danh mục bài hát</li>
         <!-- Optionally, you can add icons to the links -->
-        <li>
-            <a asp-action="Index" asp-controller="SongManager" asp-area="WebManager">
-                <i class="fa fa-picture-o"></i>
-                <span class="">Bài hát</span>
-                @*<span class="pull-right-container">
+        @*<li class="active treeview">
+            <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                <span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
-                </span>*@
+                </span>
             </a>
+            <ul class="treeview-menu">
+                <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+                <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+            </ul>
+        </li>*@
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Bài hát</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-music pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a asp-area="WebManager" asp-controller="SongManager" asp-action="Index"><i class="fa fa-music"></i> Bài hát</a></li>
+                <li><a asp-area="WebManager" asp-controller="ChordsManager" asp-action="Index"><i class="fa fa-list-ol"></i> Phiên bản hợp âm</a></li>
+                <li><a asp-area="WebManager" asp-controller="LinkSongsManager" asp-action="Index"><i class="fa fa-file-audio-o"></i> Audio</a></li>
+                <li><a asp-area="WebManager" asp-controller="VideosManager" asp-action="Index"><i class="fa fa-file-movie-o"></i> Video</a></li>
+                <li><a asp-area="WebManager" asp-controller="SheetMusicsManager" asp-action="Index"><i class="fa fa-file-pdf-o"></i> Sheet</a></li>
+            </ul>
         </li>
-        <li>
-            <a asp-action="Index" asp-controller="ChordsManager" asp-area="WebManager">
-                <i class="fa fa-puzzle-piece"></i>
-                <span class="">Hợp âm</span>
-                @*<span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>*@
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Danh mục</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-user pull-right"></i>
+                </span>
             </a>
+            <ul class="treeview-menu">
+                <li><a asp-area="WebManager" asp-controller="CategoriesManager" asp-action="Index"><i class="fa fa-music"></i> Thể loại</a></li>
+                <li><a asp-area="WebManager" asp-controller="AlbumsManager" asp-action="Index"><i class="fa fa-music"></i> Album</a></li>
+                <li><a asp-area="WebManager" asp-controller="StylesManager" asp-action="Index"><i class="fa fa-music"></i> Điệu</a></li>
+                <li><a asp-area="WebManager" asp-controller="AuthorSongsManager" asp-action="Index"><i class="fa fa-list-ol"></i> Sáng tác</a></li>
+                <li><a asp-area="WebManager" asp-controller="VietnameseLyricsManager" asp-action="Index"><i class="fa fa-file-audio-o"></i> Lời việt</a></li>
+            </ul>
         </li>
-        <li>
-            <a asp-action="Index" asp-controller="LinkSongsManager" asp-area="WebManager">
-                <i class="fa fa-puzzle-piece"></i>
-                <span class="">Link ca sỹ</span>
-                @*<span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>*@
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Khác</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-user pull-right"></i>
+                </span>
             </a>
-        </li>
-        <li>
-            <a asp-action="Index" asp-controller="Posts" asp-area="WebManager">
-                <i class="fa fa-file-word-o"></i>
-                <span class="">Bài viết</span>
-                @*<span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>*@
-            </a>
+            <ul class="treeview-menu">
+                <li><a asp-area="WebManager" asp-controller="ReportSongsManager" asp-action="Index"><i class="fa fa-music"></i> Báo lỗi bài hát</a></li>
+                <li><a asp-area="WebManager" asp-controller="RequestSongManager" asp-action="Index"><i class="fa fa-edge"></i> Yêu cầu bài hát</a></li>
+                <li><a asp-area="WebManager" asp-controller="LikeSongChordsManager" asp-action="Index"><i class="fa fa-list-ol"></i> Thích phiên bản hợp âm</a></li>
+                <li><a asp-area="WebManager" asp-controller="FavoriteSongManager" asp-action="Index"><i class="fa fa-arrow-circle-o-up"></i> Ưu thích bài hát</a></li>
+            </ul>
         </li>
         @if(User.IsInRole("Admin"))
         {
         <li class="header">Quản lý</li>
-        <li><a asp-area="WebManager" asp-controller="ApplicationUsers" asp-action="index"><i class="fa fa-book text-primary"></i> <span>Danh mục sách</span></a></li>
+        <li><a asp-area="WebManager" asp-controller="ApplicationUsersManager" asp-action="index"><i class="fa fa-book text-primary"></i> <span>Thành viên</span></a></li>
         <li><a asp-area="WebManager" asp-controller="role" asp-action="index"><i class="fa fa-level-up text-danger"></i> <span>Phân quyền</span></a></li>
-        <li><a asp-area="WebManager" asp-controller="score" asp-action="index"><i class="fa fa-money text-yellow"></i> <span>Điểm số</span></a></li>
         }
     </ul>
     <!-- /.sidebar-menu -->

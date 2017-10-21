@@ -13,6 +13,7 @@ namespace HopAmNhacThanh.Models
         [Key]
         public long ID { get; set; }
         public long SongID { get; set; }
+        public Song Song { get; set; }
         public string Name { get; set; }
         public string Link { get; set; }
         public int? Type { get; set; }

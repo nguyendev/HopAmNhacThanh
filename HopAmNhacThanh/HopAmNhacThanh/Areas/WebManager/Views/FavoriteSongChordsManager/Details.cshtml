@@ -1,0 +1,39 @@
+@model HopAmNhacThanh.Models.FavoriteSongChord
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+
+<div>
+    <h4>FavoriteSongChord</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SongID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SongID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ChordID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ChordID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+</body>
+</html>

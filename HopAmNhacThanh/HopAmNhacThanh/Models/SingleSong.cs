@@ -14,6 +14,7 @@ namespace HopAmNhacThanh.Models
         public int ID { get; set; }
         [Required]
         public string Name { get; set; }
+        public string Image { get; set; }
         public string Content { get; set; }
         public string Slug { get; set; }
     }
