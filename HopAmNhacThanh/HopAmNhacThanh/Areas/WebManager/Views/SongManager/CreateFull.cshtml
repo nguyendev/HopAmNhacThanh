@@ -1,0 +1,359 @@
+﻿@model HopAmNhacThanh.Areas.WebManager.ViewModels.SongViewModels.CreateSongFullViewModels
+@{
+    ViewData["Title"] = "Thêm mới";
+    ViewData["Heading"] = "Thêm mới";
+    ViewData["SmallHeading"] = "";
+    ViewData["BreadcrumbOne"] = "Quản lý web";
+    ViewData["BreadcrumbTwo"] = "Bài hát";
+    ViewData["BreadcrumbThree"] = "Tạo mới";
+    ViewData["BoxTitle"] = "Thêm bài hát mới";
+    ViewData["Search"] = "Tìm bài hát";
+    Layout = "_CreateLayout";
+}
+@*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="NameSong" class="control-label"></label>
+            <input id="name-song" placeholder="Ví dụ: Vững An" required class="form-control" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="OrtherNameSong" class="control-label"></label>
+            <input id="orther-name" placeholder="Ví dụ: Still" class="form-control" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label asp-for="CategoryID" class="control-label"></label>
+            <select id="category-id" class="form-control" asp-items="ViewBag.CategoryID"></select>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label asp-for="AuthorSongID" class="control-label"></label>
+            <select id="author-song-id" class="form-control" asp-items="ViewBag.AuthorSongID">
+                <option disabled selected>--- Chưa rõ ---</option>
+            </select>
+
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label asp-for="VietNameseLyric" class="control-label"></label>
+            <select id="vietnamese-lyric" class="form-control" asp-items="ViewBag.AuthorSongID">
+                <option disabled selected>--- Chưa rõ ---</option>
+            </select>
+            @*<input id="vietnamese-lyric" class="form-control" />*@
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label asp-for="YearPublish" class="control-label"></label>
+            <input id="year-publish" type="number" maxlength="4" class="form-control" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div id="version-lyric-list" class="version-lyric-list col-md-12">
+        <ul id="version-lyric-nav" class="nav nav-pills">
+            <li class="active"><a data-toggle="pill" href="#version-lyric-0">Phiên bản 1</a></li>
+        </ul>
+        <div id="version-lyric-tab-content" class="tab-content">
+            <div id="version-lyric-0" class="tab-pane fade in active version-lyric-check">
+                <div class="version-lyric-item">
+                    <div class="form-group">
+                        <label style="margin-top: 10px !important" class="control-label">Vòng hợp âm và giới thiệu</label>
+                        <textarea id="intro-0" rows="3" cols="3" class="form-control" placeholder="Ví dụ: Intro: [C] [Dm] [F] [G] [C]"></textarea>
+                        <span class="help-block"><em>Hợp âm phải bỏ trong dấu ngoặc vuông []</em></span>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label class="control-label">Lời và hợp âm</label>
+                        <textarea required id="lyric-0" rows="8" cols="3" class="form-control"></textarea>
+                        <span class="help-block"><em>Hợp âm phải bỏ trong dấu ngoặc vuông []</em></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-bottom: 20px;">
+    <a onclick="AddVersionLyricItem()" class="blue-link" id="add-version-lyric">
+        <i class="fa fa-plus"></i> Thêm bản hợp âm mới
+    </a>
+</div>
+<script type="text/javascript">
+    var numberVersionLyric = 1;
+    function AddVersionLyricItem() {
+        $("#version-lyric-nav").append('<li><a data-toggle="pill" href="#version-lyric-' + numberVersionLyric + '">Phiên bản '+(numberVersionLyric+1)+'</a></li>');
+        $("#version-lyric-tab-content").append(
+            '<div id="version-lyric-' + numberVersionLyric + '" class="tab-pane fade version-lyric-check">' +
+            '<div class="version-lyric-item">' +
+            '<div class="form-group">' +
+            '<label class="control-label">Vòng hợp âm và giới thiệu</label>' +
+            '<textarea id="intro-' + numberVersionLyric + '" rows="4" cols="3" class="form-control"></textarea>' +
+            '<span class="help-block"><em>Hợp âm phải bỏ trong dấu ngoặc vuông []</em></span>' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label class="control-label">Lời và hợp âm</label>' +
+            '<textarea id="lyric-' + numberVersionLyric + '" rows="10" cols="3" class="form-control"></textarea>' +
+            '<span class="help-block"><em>Hợp âm phải bỏ trong dấu ngoặc vuông []</em></span>' +
+            '</div>' +
+            '</div>' +
+            '</div>'
+        )
+        numberVersionLyric++;
+    };
+</script>
+<div class="row">
+    <div id="link-song-list" class="version-lyric col-md-12">
+    </div>
+</div>
+<div style="margin-bottom: 20px;">
+    <a onclick="AddLinkSongItem()" class="blue-link" id="add-singer">
+        <i class="fa fa-plus"></i> Thêm ca sĩ
+    </a>
+</div>
+<script>
+    var numberLinkSong = 0;
+    function AddLinkSongItem() {
+        $("#link-song-list").append('<div id="link-song-item-' + numberLinkSong +'" class="link-song-item">'+
+            '<div class="col-md-3">' +
+            '<div class="form-group">'+
+                '<label class="control-label">Tên ca sỹ</label>'+
+            '<select id="single-name-' + numberLinkSong + '" class="form-control" asp-items="ViewBag.AuthorSongID">' +
+            '<option disabled selected>--- Chưa rõ ---</option>' +
+            '</select>' +
+            '</div>'+
+            '</div>'+
+            '<div class="col-md-3">'+
+                '<div class="form-group">'+
+                    '<label class="control-label">Tông chủ</label>'+
+                    '<input id="tone-' + numberLinkSong +'" type="text" placeholder="Ví dụ: Am" class="form-control" />'+
+                    @*<span asp-validation-for="VietnameseLyric" class="text-danger"></span>*@
+                '</div>'+
+            '</div>'+
+            '<div class="col-md-6">'+
+                '<div class="form-group">'+
+                    '<label class="control-label">Link nhạc</label>'+
+                    '<input id="link-' + numberLinkSong+'" class="form-control"  placeholder="Ví dụ: https://mp3.zing.vn/embed/song/IW9F9WAU/>"'+
+                    @*<span asp-validation-for="YearPublish" class="text-danger"></span>*@
+                '</div>'+
+            '</div>'+
+            '</div>'
+        )
+        numberLinkSong++;
+    }
+</script>
+<div class="row">
+    <div id="video-list" class="video col-md-12">
+        
+    </div>
+</div>
+<div style="margin-bottom: 20px;">
+    <a onclick="AddVideoItem()" class="blue-link" id="add-singer">
+        <i class="fa fa-plus"></i> Thêm video liên quan
+    </a>
+</div>
+<script>
+    var numberVideo = 0;
+    function AddVideoItem() {
+        $("#video-list").append(
+            '<div id="video-item-' + numberVideo+'" class="video-item">'+
+                '<div class="col-md-3">'+
+                    '<div class="form-group">'+
+                        '<label class="control-label" placeholder="Ví du: Hướng dẫn chơi ghitar Chúa luôn mở lối">Tên</label>'+
+                        '<input id="video-name-' + numberVideo+'" type="text" class="form-control" />'+
+                '</div>'+
+            '</div>'+
+            '<div class="col-md-9">'+
+                '<div class="form-group">'+
+                    '<label class="control-label">Link video</label>'+
+                    '<input id="video-link-' + numberVideo +'" class="form-control" placeholder="Ví du: https://www.youtube.com/embed/uI8hGm5Jjlk"/>'+
+                    @*<span asp-validation-for="VietnameseLyric" class="text-danger"></span>*@
+                '</div>'+
+            '</div>'+
+        '</div>'
+        )
+    }
+</script>
+<div class="row">
+    <div id="sheet-music-list" class="sheet-music col-md-12">
+    </div>
+</div>
+<div style="margin-bottom: 20px;">
+    <a onclick="AddSheetSong()" class="blue-link" id="add-singer">
+        <i class="fa fa-plus"></i> Thêm sheet nhạc
+    </a>
+</div>
+<script>
+    var numberSheetSong = 0;
+    function AddSheetSong() {
+        $("#sheet-music-list").append(
+            '<div id="sheet-music-item-' + numberSheetSong+'" class="sheet-music-item">' +
+            '<div class="col-md-9">' +
+            '<div class="form-group">' +
+                '<label class="control-label">Đường dẫn</label>'+
+                '<input id="sheet-url-' + numberSheetSong +'" type="url" class="form-control" placeholder="Ví du: "/>'+
+                @*<select class="form-control" asp-items="ViewBag.AuthorSongID"></select>*@
+                    '</div>'+
+            '</div>'+
+            '<div class="col-md-3">' +
+            '<div class="form-group">' +
+                '<label class="control-label">Kiểu file</label>'+
+                '<input id="sheet-type-' + numberSheetSong +'" class="form-control" placeholder="Ví du: PDF/>'+
+                    @*<span asp-validation-for="VietnameseLyric" class="text-danger"></span>*@
+                '</div>'+
+            '</div>'+
+            '</div >'
+        )
+    }
+</script>
+@section ScriptCreate{ 
+<script>
+    $("#create").click(function (e) { // changed.
+        e.preventDefault();
+        //lay so thu tu toi da cua phien ban hop am
+        var maxVersionLyric = 0;
+        $('.version-lyric-check').each(function () {
+            var id = this.id.replace("version-lyric-", "");
+            maxVersionLyric = Math.max(id, maxVersionLyric);
+        });
+        console.log(maxVersionLyric);
+
+        //luu vao mang
+        var arrLyric = [];
+
+        for (var i = 0; i <= maxVersionLyric; i++) {
+            var Intro = 'intro-' + i;
+            var Lyric = 'lyric-' + i;
+            arrLyric.push({
+                Intro: $('#' + Intro).val(),
+                Lyric: $('#' + Lyric).val()
+            });
+        }
+
+        var maxVersionLinkSong = 0;
+        $('.link-song-item').each(function () {
+            var id = this.id.replace("link-song-item-", "");
+            maxVersionLinkSong = Math.max(id, maxVersionLinkSong);
+        });
+
+        var arrLinkSong = [];
+        for (var i = 0; i <= maxVersionLinkSong; i++) {
+            var SongID = 'single-name-' + i;
+            var Tone = 'tone-' + i;
+            var Link = 'link-' + i;
+            arrLinkSong.push({
+                SongID: $('#' + SongID).val(),
+                Tone: $('#' + Tone).val(),
+                Link: $('#' + Link).val()
+            });
+        }
+
+        var maxVideo = 0;
+        $('.video-item').each(function () {
+            var id = this.id.replace("video-item-", "");
+            maxVideo = Math.max(id, maxVideo);
+        });
+
+        var arrVideo = [];
+        for (var i = 0; i <= maxVideo; i++) {
+            var Name = 'video-name-' + i;
+            var Link = 'video-link-' + i;
+            arrVideo.push({
+                Name: $('#' + Name).val(),
+                Link: $('#' + Link).val()
+            });
+        }
+
+        var maxSheetMusic = 0;
+        $('.sheet-music-item').each(function () {
+            var id = this.id.replace("sheet-music-item-", "");
+            maxSheetMusic = Math.max(id, maxSheetMusic);
+        });
+
+        var arrSheetMusic = [];
+        for (var i = 0; i <= maxSheetMusic; i++) {
+            var Name = 'sheet-url-' + i;
+            var Type = 'sheet-type-' + i;
+
+            arrSheetMusic.push({
+                Name: $('#' + Name).val(),
+                Type: $('#' + Type).val()
+            });
+        }
+
+        var CreateSong = {
+            NameSong: $('#name-song').val(), //ten  bai hat
+            OrtherNameSong: $('#orther-name').val(), //ten khac
+            CategoryID: $('#category-id').val(),
+            AuthorSongID: $('#author-song-id').val(),
+            VietNameseLyric: $('#vietnamese-lyric').val(),
+            YearPublish: $('#year-publish').val(),
+            ArrChords: arrLyric,
+            ArrLinkSong: arrLinkSong,
+            ArrVideo: arrVideo,
+            ArrSheetMusic: arrSheetMusic,
+        };
+        $.ajax({
+            type: "POST",
+            url: "@(Url.Action("SaveAll", "SongManager"))",
+            data: {
+                CreateSongViewModels: CreateSong
+            },
+            dataType: "json",
+            success: function (response) {
+                window.location = response.url;
+            },
+            error: function (response) {
+                alert("error!");  // 
+            }
+            
+            //success: function (data) {
+            //    //var item = JSON.parse(data);
+            //    //for (var i = 0; i < item.length; i++)
+            //    //{
+            //    //    var Title = 'Title_' + i;
+            //    //    var Description = 'Description_' + i;
+            //    //    var Image = 'Image_' + Id;
+            //    //    var IsYesNo = 'IsYesNo_' + i;
+            //    //    var AnswerA = 'AnswerA_' + i;
+            //    //    var AnswerB = 'AnswerB_' + i;
+            //    //    var AnswerC = 'AnswerC_' + i;
+            //    //    var AnswerD = 'AnswerD_' + i;
+            //    //    var Correct = 'Correct_' + i;
+            //    //    var Reason = 'Reason_' + i;
+            //    //    var TempTag = 'TempTag_' + i;
+            //    //    $('#' + Title).val(item[i].Title);
+            //    //    $('#' + Description).val(item[i].Description);
+            //    //    $('#' + Image).val(item[i].Image);
+            //    //    $('#' + IsYesNo).val(item[i].IsYesNo);
+            //    //    $('#' + AnswerA).val(item[i].AnswerA);
+            //    //    $('#' + AnswerB).val(item[i].AnswerB);
+            //    //    $('#' + AnswerC).val(item[i].AnswerC);
+            //    //    $('#' + AnswerD).val(item[i].AnswerD);
+            //    //    $('#' + Correct).val(item[i].Correct);
+            //    //    $('#' + Reason).val(item[i].Reason);
+            //    //    $('#' + TempTag).val(item[i].TempTag);
+
+            //    //}
+            //    alert("success");
+            //},
+            //error: function (data) {
+            //    alert("error : ");
+            //}
+        });
+    });
+
+
+
+
+
+</script>
+
+}

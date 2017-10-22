@@ -21,6 +21,7 @@ namespace HopAmNhacThanh.Models.HomeViewModels
         [Display(Name = "Lời việt")]
         public VietnameseLyric VietnameseLyric { get; set; }
         public string Intro { get; set; }
+        public string Tone { get; set; }
         public string Lyric { get; set; }
         public Style Style { get; set; }
         [Display(Name = "Năm xuất bản")]

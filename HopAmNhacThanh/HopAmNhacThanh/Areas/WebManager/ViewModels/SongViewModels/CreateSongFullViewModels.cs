@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HopAmNhacThanh.Areas.WebManager.ViewModels.SongViewModels
 {
-    public class CreateSongViewModels
+    public class CreateSongFullViewModels
     {
         [Display(Name = "Tên bài hát")]
         [MaxLength(60)]

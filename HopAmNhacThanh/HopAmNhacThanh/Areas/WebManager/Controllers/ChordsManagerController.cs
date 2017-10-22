@@ -23,6 +23,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
         }
 
         // GET: WebManager/Chords
+        [Route("quan-ly-web/hop-am")]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Chords.Include(c => c.Author).Include(c => c.Song).Include(c => c.Style);
@@ -30,6 +31,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
         }
 
         // GET: WebManager/Chords/Details/5
+        [Route("quan-ly-web/hop-am/chi-tiet/{id}")]
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null)
@@ -51,6 +53,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
         }
 
         // GET: WebManager/Chords/Create
+        [Route("quan-ly-web/hop-am/tao-moi")]
         public IActionResult Create()
         {
             ViewData["AuthorID"] = new SelectList(_context.ApplicationUser, "Id", "Id");
@@ -63,6 +66,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Route("quan-ly-web/hop-am/tao-moi")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,SongID,Version,Slug,InfoShort,Info,StyleID,Tone,Lyric,Intro,CreateDT,UpdateDT,AuthorID,Approved,Active,IsDeleted,Note")] Chords chords)
         {
@@ -79,6 +83,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
         }
 
         // GET: WebManager/Chords/Edit/5
+        [Route("quan-ly-web/hop-am/chinh-sua/{id}")]
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -102,6 +107,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly-web/hop-am/chinh-sua/{id}")]
         public async Task<IActionResult> Edit(long id, [Bind("ID,SongID,Version,Slug,InfoShort,Info,StyleID,Tone,Lyric,Intro,CreateDT,UpdateDT,AuthorID,Approved,Active,IsDeleted,Note")] Chords chords)
         {
             if (id != chords.ID)
@@ -136,6 +142,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
         }
 
         // GET: WebManager/Chords/Delete/5
+        [Route("quan-ly-web/hop-am/xoa/{id}")]
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -158,6 +165,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
 
         // POST: WebManager/Chords/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Route("quan-ly-web/hop-am/xoa/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {

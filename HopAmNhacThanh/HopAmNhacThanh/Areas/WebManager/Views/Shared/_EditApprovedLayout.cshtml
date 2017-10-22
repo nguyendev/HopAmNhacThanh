@@ -1,0 +1,17 @@
+﻿@model HopAmNhacThanh.Areas.WebManager.ViewModels.CommonViewModels.ApprovedViewModels
+<form asp-action="EditApproved">
+    <div class="box-body">
+        <div class="form-horizontal">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <select asp-for="Approved">
+                <option value="A">Đã duyệt</option>
+                <option value="U">Chưa duyệt</option>
+            </select>
+        </div>
+    </div>
+    <div class="box-footer">
+        <a class="btn btn-default" asp-action="Index">Quay lai</a>
+        <input type="submit" value="Cập nhật" class="btn btn-info pull-right">
+    </div>
+</form>

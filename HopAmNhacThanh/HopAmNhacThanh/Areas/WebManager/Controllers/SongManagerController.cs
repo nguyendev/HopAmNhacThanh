@@ -12,6 +12,7 @@ using HopAmNhacThanh.Areas.WebManager.Data;
 using HopAmNhacThanh.Areas.WebManager.ViewModels.SongViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using HopAmNhacThanh.Areas.WebManager.ViewModels.CommonViewModels;
 
 namespace HopAmNhacThanh.Areas.WebManager.Controllers
 {
@@ -19,17 +20,17 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
     [Authorize(Roles = "Admin, Manager")]
     public class SongManagerController : Controller
     {
-        private readonly ApplicationDbContext _context;
         private readonly ISongManagerRepository _repository;
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public SongManagerController(ApplicationDbContext context,
-            ISongManagerRepository repository,
-            UserManager<ApplicationUser> userManager)
+        public SongManagerController(ISongManagerRepository repository,
+            UserManager<ApplicationUser> userManager,
+            ApplicationDbContext context)
         {
-            _context = context;
             _userManager = userManager;
             _repository = repository;
+            _context = context;
         }
 
         // GET: WebManager/SongManager
@@ -65,6 +66,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
         }
 
         // GET: WebManager/SongManager/Details/5
+        [Route("/quan-ly-web/bai-hat/chi-tiet/{id}")]
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null)
@@ -72,11 +74,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
                 return NotFound();
             }
 
-            var song = await _context.Song
-                .Include(s => s.Author)
-                .Include(s => s.AuthorSong)
-                .Include(s => s.Category)
-                .SingleOrDefaultAsync(m => m.ID == id);
+            var song = await _repository.Details(id);
             if (song == null)
             {
                 return NotFound();
@@ -86,8 +84,8 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
         }
 
         // GET: WebManager/SongManager/Create
-        [Route("quan-ly-web/bai-hat/tao-moi")]
-        public IActionResult Create()
+        [Route("quan-ly-web/bai-hat/tao-moi-day-du")]
+        public IActionResult CreateFull()
         {
             ViewData["AuthorID"] = new SelectList(_context.Users, "Id", "Id");
             ViewData["AuthorSongID"] = new SelectList(_context.Set<AuthorSong>(), "ID", "Name");
@@ -95,38 +93,55 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> SaveAll(CreateSongViewModels CreateSongViewModels)
+        public async Task<IActionResult> SaveAll(CreateSongFullViewModels CreateSongViewModels)
         {
             //if (login fails)
             //{
             //return Json(new { result = "InvalidLogin" }, JsonRequestBehavior.AllowGet);
             var user = await GetCurrentUser();
-            bool result = await _repository.Create(CreateSongViewModels, user);
+            bool result = await _repository.CreateFull(CreateSongViewModels, user);
             if(result)
                 return Json(new { success = true, url = Url.Action("Index") });
             ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
             return Json(new { success = false, url = Url.Action("Index") });
         }
-        // POST: WebManager/SongManager/Create
+        [Route("quan-ly-web/bai-hat/tao-moi")]
+        public IActionResult Create()
+        {
+            ViewData["AlbumID"] = new SelectList(_context.Album, "ID", "Name");
+            ViewData["AuthorSongID"] = new SelectList(_context.AuthorSong, "ID", "Name");
+            ViewData["CategoryID"] = new SelectList(_context.Category, "ID", "Name");
+            ViewData["VietnameseLyricID"] = new SelectList(_context.VietnameseLyric, "ID", "Name");
+            return View();
+        }
+
+        // POST: WebManager/SongsManager/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Route("quan-ly-web/bai-hat/tao-moi")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,OrtherName,CategoryID,AuthorSongID,VietnameseLyric,YearPublish,Views,CreateDT,UpdateDT,AuthorID,Approved,Active,IsDeleted,Note")] Song song)
+        public async Task<IActionResult> Create(CreateSongViewModel song)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(song);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                var user = await GetCurrentUser();
+                bool result = await _repository.Create(song, user);
+                if(result)
+                    return RedirectToAction("Index");
+                return NotFound();
             }
-            ViewData["AuthorID"] = new SelectList(_context.Users, "Id", "Id", song.AuthorID);
-            ViewData["AuthorSongID"] = new SelectList(_context.Set<AuthorSong>(), "ID", "ID", song.AuthorSongID);
+            ViewData["AlbumID"] = new SelectList(_context.Album, "ID", "Name", song.AlbumID);
+            ViewData["AuthorSongID"] = new SelectList(_context.AuthorSong, "ID", "Name", song.AuthorSongID);
             ViewData["CategoryID"] = new SelectList(_context.Category, "ID", "Name", song.CategoryID);
+            ViewData["VietnameseLyricID"] = new SelectList(_context.VietnameseLyric, "ID", "Name", song.VietnameseLyricID);
             return View(song);
         }
 
+
+
         // GET: WebManager/SongManager/Edit/5
+        [Route("/quan-ly-web/bai-hat/chinh-sua/{id}")]
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -134,13 +149,12 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
                 return NotFound();
             }
 
-            var song = await _context.Song.SingleOrDefaultAsync(m => m.ID == id);
+            var song = await _repository.GetEdit(id);
             if (song == null)
             {
                 return NotFound();
             }
-            ViewData["AuthorID"] = new SelectList(_context.Users, "Id", "Id", song.AuthorID);
-            ViewData["AuthorSongID"] = new SelectList(_context.Set<AuthorSong>(), "ID", "ID", song.AuthorSongID);
+            ViewData["AuthorSongID"] = new SelectList(_context.Set<AuthorSong>(), "ID", "Name", song.AuthorSongID);
             ViewData["CategoryID"] = new SelectList(_context.Category, "ID", "Name", song.CategoryID);
             return View(song);
         }
@@ -150,7 +164,8 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("ID,Name,OrtherName,CategoryID,AuthorSongID,VietnameseLyric,YearPublish,Views,CreateDT,UpdateDT,AuthorID,Approved,Active,IsDeleted,Note")] Song song)
+        [Route("/quan-ly-web/bai-hat/chinh-sua/{id}")]
+        public async Task<IActionResult> Edit(long id, EditSongViewModels song)
         {
             if (id != song.ID)
             {
@@ -161,8 +176,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
             {
                 try
                 {
-                    _context.Update(song);
-                    await _context.SaveChangesAsync();
+                    await _repository.Update(song);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -177,13 +191,13 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["AuthorID"] = new SelectList(_context.Users, "Id", "Id", song.AuthorID);
-            ViewData["AuthorSongID"] = new SelectList(_context.Set<AuthorSong>(), "ID", "ID", song.AuthorSongID);
+            ViewData["AuthorSongID"] = new SelectList(_context.Set<AuthorSong>(), "ID", "Name", song.AuthorSongID);
             ViewData["CategoryID"] = new SelectList(_context.Category, "ID", "Name", song.CategoryID);
             return View(song);
         }
 
         // GET: WebManager/SongManager/Delete/5
+        [Route("/quan-ly-web/bai-hat/xoa/{id}")]
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -191,11 +205,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
                 return NotFound();
             }
 
-            var song = await _context.Song
-                .Include(s => s.Author)
-                .Include(s => s.AuthorSong)
-                .Include(s => s.Category)
-                .SingleOrDefaultAsync(m => m.ID == id);
+            var song = await _repository.Get(id);
             if (song == null)
             {
                 return NotFound();
@@ -206,18 +216,79 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
 
         // POST: WebManager/SongManager/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Route("/quan-ly-web/bai-hat/xoa/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
-            var song = await _context.Song.SingleOrDefaultAsync(m => m.ID == id);
-            _context.Song.Remove(song);
-            await _context.SaveChangesAsync();
+            await _repository.Delete(id);
             return RedirectToAction("Index");
+        }
+
+        [Route("/quan-ly-web/bai-hat/chinh-sua-xuat-ban/{id}")]
+        public async Task<IActionResult> EditPublishDT(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var singlePuzzle = await _repository.GetEditPublishDT(id);
+            return View(singlePuzzle);
+        }
+
+        [Route("/quan-ly-web/bai-hat/chinh-sua-xuat-ban/{id}")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditPublishDT(PublishDTViewModels model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _repository.UpdatePublishDT(model);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return NotFound();
+                }
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
+        [Route("/quan-ly-web/bai-hat/chinh-sua-duyet/{id}")]
+        public async Task<IActionResult> EditApproved(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var singlePuzzle = await _repository.GetEditApproved(id);
+            return View(singlePuzzle);
+        }
+
+        [Route("/quan-ly-web/bai-hat/chinh-sua-duyet/{id}")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditApproved(ApprovedViewModels model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _repository.UpdateApproved(model);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return NotFound();
+                }
+                return RedirectToAction("Index");
+            }
+            return View(model);
         }
 
         private bool SongExists(long id)
         {
-            return _context.Song.Any(e => e.ID == id);
+            return _repository.Exists(id);
         }
         private async Task<ApplicationUser> GetCurrentUser()
         {

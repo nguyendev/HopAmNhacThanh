@@ -9,7 +9,7 @@ namespace DoVuiHaiNao.Services
     {
         public static string DIR_IMAGE = "images";
         public const string APPROVED = "A";
-        public const string UNAPPROVED = "A";
+        public const string UNAPPROVED = "U";
     }
     public enum TypeQuestion
     {

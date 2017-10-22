@@ -94,7 +94,14 @@
                 </style>
                 <div id="form-lyric">
                     <div class="btn-group">
-                        <div id="musicalKey" style="margin-right: 5px;" class="annotation btn-group"><span class="key btn btn-default btn-sm">G</span></div>
+                        @if (MainSingle.Tone != null)
+                        {
+                        <div id="musicalKey" style="margin-right: 5px;" class="annotation btn-group"><span class="key btn btn-default btn-sm">@MainSingle.Tone</span></div>
+                        }
+                        else
+                        {
+                            <div id="musicalKey" style="margin-right: 5px;" class="annotation btn-group"><span class="key btn btn-default btn-sm">G</span></div>
+                        }
                         <div class="btn-group" style="margin-right: 5px;">
                             <span id="fontsize" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="fa fa-font fa-1x"></i></span>
                             <a id="print" href="#" target="_blank" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="fa fa-print"></i></a>
@@ -104,9 +111,11 @@
                         </div>
                     </div>
                     <br />
+                    @if (MainSingle.Intro != null) {
                     <div id="intro">
                         @Html.Raw(MainSingle.Intro)
                     </div>
+                    }
                     <div id="lyric" style="position: relative">
                         @Html.Raw(MainSingle.Lyric)
                     </div>
@@ -223,9 +232,12 @@
             tone = tone.replace("]", "");
             $(".key").text(tone);
         }
+        var Tone = "@MainSingle.Tone" + " ";
         $(function () {
             bodyLoad();
-            findTone();
+            if (Tone == " "){
+                findTone();
+            }
             changeChords();
         });
     </script>
@@ -389,7 +401,14 @@
             //unique.forEach(myFunction);
             $("#mytab").empty();
             for (var i = 0; i < unique.length; i++) {
-                $("#mytab").append('<span class="col-md-3 col-xs-6 jtab chordonly left">' + unique[i] + '</span>');
+                if (unique[i].indexOf("/") > 0)
+                {
+                    $("#mytab").append('<span class="col-md-6 col-xs-12 jtab chordonly left">' + unique[i] + '</span>');
+                }
+                else
+                {
+                    $("#mytab").append('<span class="col-md-3 col-xs-6 jtab chordonly left">' + unique[i] + '</span>');
+                }
             }
             $("#mytab").append('<div class="clear"><div class="row"><span></span></div></div>');
             jtab.renderimplicit();

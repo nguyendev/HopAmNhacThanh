@@ -76,7 +76,7 @@ namespace HopAmNhacThanh.Data.HomeRepository
                         Slug = item.Slug,
                         VersionSlug = chords.Slug
                     };
-                    ListNewSong.Add(song);
+                    ListPupularSong.Add(song);
                 }
 
                 //Top week
@@ -135,6 +135,7 @@ namespace HopAmNhacThanh.Data.HomeRepository
             //{
                 string Intro = "";
                 string Lyric = "";
+                string Tone = "";
                 Style Style = null;
                 ApplicationUser AuthorChords = null;
                 var songContext = await _context.Song
@@ -167,6 +168,7 @@ namespace HopAmNhacThanh.Data.HomeRepository
                         Lyric = item.Lyric;
                         AuthorChords = item.Author;
                         Style = item.Style;
+                        Tone = item.Tone;
                     }
 
                     simpleChord.StyleName = item.StyleID.HasValue ? item.Style.Name : "";
@@ -207,7 +209,11 @@ namespace HopAmNhacThanh.Data.HomeRepository
                     listVideo.Add(simpleVideo);
                 };
 
-                var songInCategoryContext = await _context.Song.Where(p => p.CategoryID == songContext.CategoryID).Take(10).ToListAsync();
+                var songInCategoryContext = await _context.Song
+                        .Where(p => p.Approved == Global.APPROVED)
+                        .Where(p => p.CreateDT <= DateTime.Now)
+                        .Where(p => !p.IsDeleted)
+                        .Where(p => p.CategoryID == songContext.CategoryID).Take(10).ToListAsync();
                 List<SimpleSongInAblumViewModel> ListSongInCategory = new List<SimpleSongInAblumViewModel>();
                 foreach (var item in songInCategoryContext)
                 {
@@ -215,8 +221,9 @@ namespace HopAmNhacThanh.Data.HomeRepository
                     {
                         Name = item.Name,
                         Slug = item.Slug,
-                        Number = item.NumberSongInAlbum.Value,
+                        
                     };
+                    songInAblum.Number = item.NumberSongInAlbum.HasValue ? item.NumberSongInAlbum.Value : 0;
                     ListSongInCategory.Add(songInAblum);
                 }
 
@@ -237,6 +244,7 @@ namespace HopAmNhacThanh.Data.HomeRepository
                 model.ListVideos = listVideo;
                 model.Lyric = Lyric;
                 model.Intro = Intro;
+            model.Tone = Tone;
                 model.ListSongInCategory = ListSongInCategory;
                 model.Style = Style;
                 model.AuthorChords = AuthorChords;

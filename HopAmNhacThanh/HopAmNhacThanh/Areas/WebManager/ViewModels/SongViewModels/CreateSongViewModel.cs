@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace HopAmNhacThanh.Areas.WebManager.ViewModels.SongViewModels
 {
-    public class EditSongViewModels
+    public class CreateSongViewModel
     {
-        public long ID { get; set; }
         [StringLength(60, MinimumLength = 3)]
         [Required]
         [Display(Name = " Tên bài hát")]
@@ -18,8 +17,6 @@ namespace HopAmNhacThanh.Areas.WebManager.ViewModels.SongViewModels
         [MaxLength(60)]
         [Display(Name = " Tên khác")]
         public string OrtherName { get; set; }
-
-        public string Slug { get; set; }
         [Display(Name = " Thể loại")]
         [Required]
         public int CategoryID { get; set; }
@@ -37,8 +34,6 @@ namespace HopAmNhacThanh.Areas.WebManager.ViewModels.SongViewModels
         public VietnameseLyric VietnameseLyric { get; set; }
         [Display(Name = "Năm xuất bản")]
         public string YearPublish { get; set; }
-        [Display(Name = "Lượt xem")]
-        public int Views { get; set; }
         public string Note { get; set; }
     }
 }

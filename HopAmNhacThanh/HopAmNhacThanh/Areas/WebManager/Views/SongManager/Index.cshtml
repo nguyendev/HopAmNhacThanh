@@ -11,7 +11,7 @@
     ViewData["Search"] = "Tìm bài hát";
     Layout = "_TableIndexLayout";
 }
-
+<div class="text-center" style="margin-bottom: 10px;"><a asp-controller="SongManager" asp-action="CreateFull" class="btn btn-success">Thêm đầy đủ</a></div>
 <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 
     <div class="row">
@@ -99,8 +99,8 @@
                             <td>
                                 @if (item.Approved != "A")
                                 {
-                                    <a asp-action="EditPublishDT" asp-route-id="@item.ID" class="btn btn-warning fa fa-clock-o"></a>
-                                    <a asp-action="EditPublishDT" asp-route-id="@item.ID" class="btn btn-default fa fa-newspaper-o"></a>
+                                    <a asp-action="EditPublishDT" asp-route-id="@item.ID" class="btn btn-default fa fa-clock-o"></a>
+                                    <a asp-action="EditApproved" asp-route-id="@item.ID" class="btn btn-primary fa fa-check"></a>
                                 }
                                 <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-warning fa fa-edit"></a>
                                 <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-success fa fa-newspaper-o"></a>

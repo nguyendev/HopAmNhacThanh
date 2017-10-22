@@ -1,4 +1,5 @@
-﻿using HopAmNhacThanh.Areas.WebManager.ViewModels.SongViewModels;
+﻿using HopAmNhacThanh.Areas.WebManager.ViewModels.CommonViewModels;
+using HopAmNhacThanh.Areas.WebManager.ViewModels.SongViewModels;
 using HopAmNhacThanh.Models;
 using HopAmNhacThanh.Services;
 using System;
@@ -10,21 +11,21 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
 {
     public interface ISongManagerRepository
     {
-        Task<Song> Get(int? id);
-        bool Exists(int id);
+        Task<Song> Get(long? id);
+        bool Exists(long id);
         Task<PaginatedList<Song>> GetAll(string sortOrder, string searchString,
     int? page, int? pageSize);
-        Task<bool> Create(CreateSongViewModels model, ApplicationUser user);
-        Task<EditSongViewModels> GetEdit(int? ID);
+        Task<bool> CreateFull(CreateSongFullViewModels model, ApplicationUser user);
+        Task<bool> Create(CreateSongViewModel model, ApplicationUser user);
+        Task<EditSongViewModels> GetEdit(long? ID);
         Task Update(EditSongViewModels model);
+        Task<Song> Details(long? id);
         Task Delete(long id);
-
         // Save and Edit Publish Datetime
-        Task<PublishDTSongViewModels> GetEditPublishDT(int? ID);
-        Task UpdatePublishDT(PublishDTSongViewModels model);
-
+        Task<PublishDTViewModels> GetEditPublishDT(long? ID);
+        Task UpdatePublishDT(PublishDTViewModels model);
         // Save and Edit Approved
-        Task<ApprovedViewModels> GetEditApproved(int? ID);
+        Task<ApprovedViewModels> GetEditApproved(long? ID);
         Task UpdateApproved(ApprovedViewModels model);
     }
 

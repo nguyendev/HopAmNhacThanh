@@ -1,0 +1,21 @@
+﻿@model HopAmNhacThanh.Areas.WebManager.ViewModels.CommonViewModels.PublishDTViewModels
+<form asp-action="EditPublishDT">
+    <div class="box-body">
+        <div class="form-horizontal">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <p class="text-center">Thời gian xuất bản cũ: @Model.PublishDT</p>
+            <label for="dtp_input1" class="col-md-2 control-label">Thời gian xuất bản mới</label>
+            <div class="input-group date datetimepicker col-md-10" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+                <input class="form-control" size="16" type="text" value="" readonly>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+            </div>
+            <input asp-for="PublishDT" type="hidden" id="dtp_input1" value="" /><br />
+        </div>
+    </div>
+    <div class="box-footer">
+        <a class="btn btn-default" asp-action="Index">Quay lai</a>
+        <input type="submit" value="Cập nhật" class="btn btn-info pull-right">
+    </div>
+</form>

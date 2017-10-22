@@ -8,18 +8,55 @@ using HopAmNhacThanh.Services;
 using HopAmNhacThanh.Data;
 using Microsoft.EntityFrameworkCore;
 using DoVuiHaiNao.Services;
+using HopAmNhacThanh.Areas.WebManager.ViewModels.CommonViewModels;
 
 namespace HopAmNhacThanh.Areas.WebManager.Data
 {
     public class SongManagerRepository : ISongManagerRepository
     {
         protected readonly ApplicationDbContext _context;
-
         public SongManagerRepository(ApplicationDbContext context)
         {
             _context = context;
         }
-        public async Task<bool> Create(CreateSongViewModels model, ApplicationUser user)
+
+        public async Task<bool> Create(CreateSongViewModel model, ApplicationUser user)
+        {
+            try
+            {
+                Song song = new Song
+                {
+                    Name = model.Name,
+                    OrtherName = model.OrtherName,
+                    CategoryID = model.CategoryID,
+                    YearPublish = model.YearPublish,
+                    AlbumID = model.AlbumID,
+                    AuthorSongID = model.AuthorSongID,
+                    NumberSongInAlbum = model.NumberSongInAlbum,
+                    VietnameseLyricID = model.VietnameseLyricID,
+                    Slug = StringExtensions.ConvertToUnSign3(model.Name),
+                    Views = 0,
+                    Note = model.Note,
+
+
+                    Active = "A",
+                    AuthorID = user.Id,
+                    Approved = "U",
+                    IsDeleted = false,
+                    UpdateDT = null,
+                    CreateDT = DateTime.Now,
+                };
+                _context.Song.Add(song);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> CreateFull(CreateSongFullViewModels model, ApplicationUser user)
         {
             try
             {
@@ -137,21 +174,32 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
                 return false;
             }
         }
-
-
-        public Task Delete(long id)
+        private async Task Save()
         {
-            throw new NotImplementedException();
+            await _context.SaveChangesAsync();
         }
 
-        public bool Exists(int id)
+        public async Task Delete(long id)
         {
-            throw new NotImplementedException();
+            var songDbContext = await _context.Song.SingleOrDefaultAsync(m => m.ID == id);
+            if (songDbContext.IsDeleted || songDbContext.Approved == Global.UNAPPROVED)
+                _context.Song.Remove(songDbContext);
+            else
+            {
+                songDbContext.IsDeleted = true;
+                _context.Song.Update(songDbContext);
+            }
+            await Save();
         }
 
-        public Task<Song> Get(int? id)
+        public bool Exists(long id)
         {
-            throw new NotImplementedException();
+            return _context.Song.Any(e => e.ID == id);
+        }
+
+        public async Task<Song> Get(long? id)
+        {
+            return await _context.Song.SingleOrDefaultAsync(p => p.ID == id);
         }
 
         public async Task<PaginatedList<Song>> GetAll(string sortOrder, string searchString,
@@ -180,34 +228,135 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
             return await PaginatedList<Song>.CreateAsync(applicationDbContext.AsNoTracking(), page ?? 1, pageSize != null ? pageSize.Value : 10);
         }
 
-        public Task<EditSongViewModels> GetEdit(int? ID)
+        public async Task<EditSongViewModels> GetEdit(long? ID)
         {
-            throw new NotImplementedException();
+            var songDbContext = await _context.Song
+                .Include(p => p.Album)
+                .Include(p => p.AuthorSong)
+                .Include(p => p.Category)
+                .Include(p => p.VietnameseLyric)
+                .SingleOrDefaultAsync(p => p.ID == ID);
+            if (songDbContext != null)
+            {
+                EditSongViewModels editModel = new EditSongViewModels
+                {
+                    ID = songDbContext.ID,
+                    AlbumID = songDbContext.AlbumID,
+                    Album = songDbContext.Album,
+                    AuthorSongID = songDbContext.AuthorSongID,
+                    AuthorSong = songDbContext.AuthorSong,
+                    Category = songDbContext.Category,
+                    CategoryID = songDbContext.CategoryID,
+                    Name = songDbContext.Name,
+                    Slug= songDbContext.Slug,
+                    NumberSongInAlbum = songDbContext.NumberSongInAlbum,
+                    OrtherName = songDbContext.OrtherName,
+                    VietnameseLyric = songDbContext.VietnameseLyric,
+                    VietnameseLyricID = songDbContext.VietnameseLyricID,
+                    Views = songDbContext.Views,
+                    YearPublish = songDbContext.YearPublish,
+
+                };
+                return editModel;
+            }
+            return null;
         }
 
-        public Task<ApprovedViewModels> GetEditApproved(int? ID)
+        public async Task<ApprovedViewModels> GetEditApproved(long? ID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var single = await _context.Song.SingleOrDefaultAsync(p => p.ID == ID);
+                ApprovedViewModels model = new ApprovedViewModels
+                {
+                    ID = single.ID,
+                    Approved = single.Approved
+                };
+                return model;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
-        public Task<PublishDTSongViewModels> GetEditPublishDT(int? ID)
+        public async Task<PublishDTViewModels> GetEditPublishDT(long? ID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var single = await _context.Song.SingleOrDefaultAsync(p => p.ID == ID);
+                PublishDTViewModels model = new PublishDTViewModels
+                {
+                    ID = single.ID,
+                    PublishDT = single.CreateDT
+                };
+                return model;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
-        public Task Update(EditSongViewModels model)
+        public async Task Update(EditSongViewModels model)
         {
-            throw new NotImplementedException();
+            var songDbContext = await _context.Song.SingleOrDefaultAsync(p => p.ID == model.ID);
+
+            songDbContext.AlbumID = model.AlbumID;
+            songDbContext.AuthorSongID = model.AuthorSongID;
+            songDbContext.CategoryID = model.CategoryID;
+            songDbContext.Name = model.Name;
+
+            songDbContext.OrtherName = model.OrtherName;
+            songDbContext.YearPublish = model.YearPublish;
+            songDbContext.VietnameseLyricID = model.VietnameseLyricID;
+            songDbContext.NumberSongInAlbum = model.NumberSongInAlbum;
+            songDbContext.Views = model.Views;
+            songDbContext.Slug = model.Slug;
+            songDbContext.Note = model.Note;
+
+            _context.Song.Update(songDbContext);
+            await Save();
         }
 
-        public Task UpdateApproved(ApprovedViewModels model)
+        public async Task UpdateApproved(ApprovedViewModels model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var single = await _context.Song.SingleOrDefaultAsync(p => p.ID == model.ID);
+                single.Approved = model.Approved;
+                _context.Song.Update(single);
+                await _context.SaveChangesAsync();
+            }
+            catch
+            {
+
+            }
         }
 
-        public Task UpdatePublishDT(PublishDTSongViewModels model)
+        public async Task UpdatePublishDT(PublishDTViewModels model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var single = await _context.Song.SingleOrDefaultAsync(p => p.ID == model.ID);
+                single.CreateDT = model.PublishDT;
+                _context.Song.Update(single);
+                await _context.SaveChangesAsync();
+            }
+            catch
+            {
+
+            }
+        }
+
+        public async Task<Song> Details(long? id)
+        {
+            var song = await _context.Song
+                .Include(s => s.Author)
+                .Include(s => s.AuthorSong)
+                .Include(s => s.Category)
+                .SingleOrDefaultAsync(m => m.ID == id);
+            return song;
         }
     }
 }

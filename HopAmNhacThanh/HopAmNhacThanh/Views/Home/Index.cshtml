@@ -52,9 +52,10 @@
                         </div>*@
                     </div>
                     <div id="popular" class="tab-pane fade">
-                        @*<div class="col-md-12">
-                            <a class="pull-right" asp-controller="" asp-action=""><em>Xem thêm <i class="fa fa-arrow-right"></i></em></a>
-                        </div>*@
+                        @foreach (var item in mainContent.ListPupularSong)
+                        {
+                            @Html.Partial("_SimpleSongPartial", item)
+                        }
                     </div>
                     <div id="request" class="tab-pane fade">
                         @*<div class="col-md-12 text-center">
