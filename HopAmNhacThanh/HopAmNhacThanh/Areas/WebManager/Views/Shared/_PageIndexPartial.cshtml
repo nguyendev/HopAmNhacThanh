@@ -1,0 +1,109 @@
+﻿@model HopAmNhacThanh.Models.PageListItemTemplate
+<div class="col-sm-5">
+    <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
+        @{
+            int Min = (Model.PageIndex - 1) * Model.PageSize;
+            int Max = (Model.PageIndex) * Model.PageSize;
+        }
+        Hiển thị @Min to @Max trong @Model.Count phần tử
+
+    </div>
+</div>
+<div class="col-sm-7">
+    <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+        <ul class="pagination">
+@if (Model.PageIndex - 1 > 0)
+{ 
+            <li class="paginate_button previous " id="example1_previous">
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-page="@(Model.PageIndex - 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   asp-route-pageSize="@ViewData["CurrentSize"]"
+                   class="btn btn-default btn">
+                    Trước
+                </a>
+            </li>
+}
+@if (Model.PageIndex - 2 > 0)
+{
+            <li class="paginate_button">
+                @if (Model.PageIndex - 2 > 0)
+                {
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@ViewData["CurrentSort"]"
+                       asp-route-page="@(Model.PageIndex - 2)"
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       asp-route-pageSize="@ViewData["CurrentSize"]"
+                       class="btn btn-default btn">
+                        @(Model.PageIndex - 2)
+                    </a>
+                }
+            </li>
+}
+@if (Model.PageIndex - 1 > 0)
+{
+            <li class="paginate_button ">
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@ViewData["CurrentSort"]"
+                       asp-route-page="@(Model.PageIndex - 1)"
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       asp-route-pageSize="@ViewData["CurrentSize"]"
+                       class="btn btn-default btn">
+                        @(Model.PageIndex - 1)
+                    </a>
+            </li>
+}
+@if (Model.PageIndex < Model.TotalPages) {
+            <li class="paginate_button active">
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-page="@(Model.PageIndex)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   asp-route-pageSize="@ViewData["CurrentSize"]"
+                   class="btn btn-default btn">
+                    @(Model.PageIndex)
+                </a>
+            </li>
+} 
+@if (Model.PageIndex + 1 < Model.TotalPages)
+{ 
+            <li class="paginate_button ">
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-page="@(Model.PageIndex + 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   asp-route-pageSize="@ViewData["CurrentSize"]"
+                   class="btn btn-default btn">
+                    @(Model.PageIndex + 1)
+                </a>
+            </li>
+            }
+@if (Model.PageIndex + 2 < Model.TotalPages) { 
+            <li class="paginate_button ">
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-page="@(Model.PageIndex + 2)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   asp-route-pageSize="@ViewData["CurrentSize"]"
+                   class="btn btn-default btn">
+                    @(Model.PageIndex + 2)
+                </a>
+            </li>
+}
+@if (Model.PageIndex + 1 < Model.TotalPages)
+{
+            <li class="paginate_button next" id="example1_next">
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-page="@(Model.PageIndex + 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   asp-route-pageSize="@ViewData["CurrentSize"]"
+                   class="btn btn-default btn">
+                    Kế
+                </a>
+            </li>
+}
+        </ul>
+    </div>
+</div>

@@ -104,6 +104,8 @@ namespace HopAmNhacThanh
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddScoped<ISongManagerRepository, SongManagerRepository>();
             services.AddScoped<ISongRepository, SongRepository>();
+            services.AddScoped<IChordManagerRepository, ChordRepository>();
+
             services.AddScoped<IHomeRepository, HomeRepository>();
         }
 

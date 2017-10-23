@@ -4,7 +4,14 @@
         <div class="form-horizontal">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
+            @if (Model.PublishDT != null)
+            {
             <p class="text-center">Thời gian xuất bản cũ: @Model.PublishDT</p>
+            }
+            else
+            {
+                <p class="text-center">Thời gian xuất bản cũ: Chưa có</p>
+            }
             <label for="dtp_input1" class="col-md-2 control-label">Thời gian xuất bản mới</label>
             <div class="input-group date datetimepicker col-md-10" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
                 <input class="form-control" size="16" type="text" value="" readonly>

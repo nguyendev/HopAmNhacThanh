@@ -1,4 +1,4 @@
-﻿@model HopAmNhacThanh.Services.PaginatedList<HopAmNhacThanh.Models.Song>
+﻿@model HopAmNhacThanh.Areas.WebManager.ViewModels.SongViewModels.IndexSongViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -15,33 +15,8 @@
 <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 
     <div class="row">
-        <div class="col-sm-4">
-            <div class="dataTables_length" id="example1_length">
-                <form asp-action="Index" method="get">
-                    <label>
-                        Hiển thị
-                        <select asp-for="PageSize" asp-items="@(new SelectList(@ViewBag.SoLuong,"Value","Value"))" onchange="this.form.submit()" class="form-control input-sm"></select>
-
-                        phần tử
-                    </label>
-                </form>
-            </div>
-        </div>
-
-        <div class="col-sm-4 text-center">
-            <a asp-action="Create" class="btn btn-primary">Tạo mới</a>
-        </div>
-        <div class="col-sm-4">
-            <div id="example1_filter" class="dataTables_filter">
-                <form asp-action="Index" method="get">
-                    <label>@ViewData["Search"]:<input type="search" name="SearchString" value="@ViewData["currentFilter"]" class="form-control input-sm" placeholder="" aria-controls="example1"></label>
-                    <input type="submit" value="Tìm kiếm" class="btn btn-danger" />
-                </form>
-            </div>
-        </div>
+         @Html.Partial("_SearchIndexPartial",Model)
     </div>
-
-
 
     <div class="row">
         <div class="col-sm-12">
@@ -49,38 +24,43 @@
                 <thead>
                     <tr>
                         <th>
-                            <a asp-action="Index" asp-route-sortOrder="@ViewData["NameParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.t.Name)</a>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["NameParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.ListSong.First().Name)</a>
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.t.Slug)
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["CategoryParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.ListSong.First().Category.Name)</a>
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.t.Views)
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["AlbumParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.ListSong.First().Album.Name)</a>
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.t.CreateDT)
+                            @Html.DisplayNameFor(model => model.ListSong.First().Views)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.t.Approved)
+                            @Html.DisplayNameFor(model => model.ListSong.First().CreateDT)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.t.IsDeleted)
+                            @Html.DisplayNameFor(model => model.ListSong.First().Approved)
                         </th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.ListSong)
                     {
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Name)
                             </td>
-
+                            
                             <td>
-                                @Html.DisplayFor(modelItem => item.Slug)
+                                @Html.DisplayFor(modelItem => item.Category.Name)
                             </td>
-
+                            <td>
+                            @if (item.Album != null)
+                            { 
+                                @Html.DisplayFor(modelItem => item.Album.Name)
+                            }
+                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Views)
                             </td>
@@ -91,10 +71,6 @@
 
                             <td>
                                 @Html.DisplayFor(modelItem => item.Approved)
-                            </td>
-
-                            <td>
-                                @Html.DisplayFor(modelItem => item.IsDeleted)
                             </td>
                             <td>
                                 @if (item.Approved != "A")
@@ -113,104 +89,6 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-5">
-            <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
-                @{
-                    int Min = (Model.PageIndex - 1) * Model.PageSize;
-                    int Max = (Model.PageIndex) * Model.PageSize;
-                }
-                Hiển thị @Min to @Max trong @Model.Count phần tử
-
-            </div>
-        </div>
-        <div class="col-sm-7">
-            <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-                <ul class="pagination">
-                    @{
-                        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-                        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-                    }
-
-
-
-                    <li class="paginate_button previous disabled" id="example1_previous">
-                        <a asp-action="Index"
-                           asp-route-sortOrder="@ViewData["CurrentSort"]"
-                           asp-route-page="@(Model.PageIndex - 1)"
-                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                           asp-route-pageSize="@ViewData["CurrentSize"]"
-                           class="btn btn-default @prevDisabled btn">
-                            Trước
-                        </a>
-                    </li>
-                    <li class="paginate_button">
-                        @if (Model.PageIndex - 2 > 0)
-                        {
-                            <a asp-action="Index"
-                               asp-route-sortOrder="@ViewData["CurrentSort"]"
-                               asp-route-page="@(Model.PageIndex -2)"
-                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                               asp-route-pageSize="@ViewData["CurrentSize"]"
-                               class="btn btn-default @nextDisabled btn">
-                                @(Model.PageIndex - 2)
-                            </a>
-                        }
-                    </li>
-                    <li class="paginate_button ">
-                        @if (Model.PageIndex - 1 > 0)
-                        {
-                            <a asp-action="Index"
-                               asp-route-sortOrder="@ViewData["CurrentSort"]"
-                               asp-route-page="@(Model.PageIndex -1)"
-                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                               asp-route-pageSize="@ViewData["CurrentSize"]"
-                               class="btn btn-default @nextDisabled btn">
-                                @(Model.PageIndex - 1)
-                            </a>
-                        }
-                    </li>
-                    <li class="paginate_button active">
-                        <a asp-action="Index"
-                           asp-route-sortOrder="@ViewData["CurrentSort"]"
-                           asp-route-page="@(Model.PageIndex)"
-                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                           asp-route-pageSize="@ViewData["CurrentSize"]"
-                           class="btn btn-default @nextDisabled btn">
-                            @(Model.PageIndex)
-                        </a>
-                    </li>
-                    <li class="paginate_button ">
-                        <a asp-action="Index"
-                           asp-route-sortOrder="@ViewData["CurrentSort"]"
-                           asp-route-page="@(Model.PageIndex + 1)"
-                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                           asp-route-pageSize="@ViewData["CurrentSize"]"
-                           class="btn btn-default @nextDisabled btn">
-                            @(Model.PageIndex + 1)
-                        </a>
-                    </li>
-                    <li class="paginate_button ">
-                        <a asp-action="Index"
-                           asp-route-sortOrder="@ViewData["CurrentSort"]"
-                           asp-route-page="@(Model.PageIndex + 2)"
-                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                           asp-route-pageSize="@ViewData["CurrentSize"]"
-                           class="btn btn-default @nextDisabled btn">
-                            @(Model.PageIndex + 2)
-                        </a>
-                    </li>
-                    <li class="paginate_button next" id="example1_next">
-                        <a asp-action="Index"
-                           asp-route-sortOrder="@ViewData["CurrentSort"]"
-                           asp-route-page="@(Model.PageIndex + 1)"
-                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                           asp-route-pageSize="@ViewData["CurrentSize"]"
-                           class="btn btn-default @nextDisabled btn">
-                            Kế
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+         @Html.Partial("_PageIndexPartial",Model)
     </div>
 </div>

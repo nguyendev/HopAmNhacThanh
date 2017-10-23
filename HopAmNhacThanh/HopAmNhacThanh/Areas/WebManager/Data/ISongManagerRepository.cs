@@ -13,7 +13,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
     {
         Task<Song> Get(long? id);
         bool Exists(long id);
-        Task<PaginatedList<Song>> GetAll(string sortOrder, string searchString,
+        Task<IndexSongViewModel> GetAll(string sortOrder, string searchString,
     int? page, int? pageSize);
         Task<bool> CreateFull(CreateSongFullViewModels model, ApplicationUser user);
         Task<bool> Create(CreateSongViewModel model, ApplicationUser user);

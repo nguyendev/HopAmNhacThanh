@@ -202,7 +202,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
             return await _context.Song.SingleOrDefaultAsync(p => p.ID == id);
         }
 
-        public async Task<PaginatedList<Song>> GetAll(string sortOrder, string searchString,
+        public async Task<IndexSongViewModel> GetAll(string sortOrder, string searchString,
     int? page, int? pageSize)
         {
             var applicationDbContext = from s in _context.Song
@@ -218,14 +218,52 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
             }
             switch (sortOrder)
             {
-                case "name":
+                case "NameParm":
                     applicationDbContext = applicationDbContext.OrderBy(s => s.Name);
+                    break;
+                case "CategoryParm":
+                    applicationDbContext = applicationDbContext.OrderBy(s => s.Category.Name);
+                    break;
+                case "AlbumParm":
+                    applicationDbContext = applicationDbContext.OrderBy(s => s.Album.Name);
                     break;
                 default:
                     applicationDbContext = applicationDbContext.OrderByDescending(s => s.CreateDT);
                     break;
             }
-            return await PaginatedList<Song>.CreateAsync(applicationDbContext.AsNoTracking(), page ?? 1, pageSize != null ? pageSize.Value : 10);
+            var pageList = await PaginatedList<Song>.CreateAsync(applicationDbContext.AsNoTracking(), page ?? 1, pageSize != null ? pageSize.Value : 10);
+
+            List<SimpleIndexSongViewModel> listSong = new List<SimpleIndexSongViewModel>();
+            foreach (var item in pageList)
+            {
+                SimpleIndexSongViewModel song = new SimpleIndexSongViewModel
+                {
+                    AlbumID = item.AlbumID,
+                    Album = item.Album,
+                    Approved = item.Approved,
+                    Category = item.Category,
+                    CategoryID = item.CategoryID,
+                    ID = item.ID,
+                    Name = item.Name,
+                    Views = item.Views,
+                    CreateDT = item.CreateDT
+                };
+                listSong.Add(song);
+            }
+
+            IndexSongViewModel model = new IndexSongViewModel
+            {
+                PageSize = pageList.PageSize,
+                Areas = "WebManager",
+                Action = "Index",
+                Controller = "SongManager",
+                Count = pageList.Count,
+                TotalPages = pageList.TotalPages,
+                PageIndex = pageList.PageIndex,
+                ListSong = listSong
+                
+            };
+            return model; 
         }
 
         public async Task<EditSongViewModels> GetEdit(long? ID)

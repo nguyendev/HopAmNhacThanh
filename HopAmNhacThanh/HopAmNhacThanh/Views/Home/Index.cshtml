@@ -1,5 +1,8 @@
 ﻿@{ 
     HopAmNhacThanh.Models.HomeViewModels.MainContentViewModel mainContent = ViewData["MainContent"] as HopAmNhacThanh.Models.HomeViewModels.MainContentViewModel;
+
+    ViewData["Title"] = "Tổng hợp Chord, Lyric, Sheet Nhạc Thánh | Hợp Âm Nhạc Thánh";
+
 }
 <div class="row">
     <div class="col-md-8"style="padding-right: 0px;">
@@ -41,7 +44,7 @@
                             <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="y"><span class="label label-primary">Y</span></a>
                         </div>*@
                         <div class="new-song-list">
-                            @foreach(var item in mainContent.ListNewSong)
+                            @foreach (var item in mainContent.ListNewSong)
                             {
                                 @Html.Partial("_SimpleSongPartial", item)
                             }

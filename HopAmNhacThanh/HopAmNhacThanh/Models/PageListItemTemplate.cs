@@ -11,6 +11,7 @@ namespace HopAmNhacThanh.Models
         public int TotalPages { get; set; }
 
         public int PageSize { get; set; }
+        public string Areas { get; set; }
         public string Controller { get; set; }
         public string Action { get; set; }
         public int Count { get; set; }

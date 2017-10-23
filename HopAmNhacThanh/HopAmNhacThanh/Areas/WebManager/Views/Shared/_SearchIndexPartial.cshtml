@@ -1,0 +1,25 @@
+﻿@model HopAmNhacThanh.Models.PageListItemTemplate
+    <div class="col-sm-4">
+        <div class="dataTables_length" id="example1_length">
+            <form asp-action="Index" method="get">
+                <label>
+                    Hiển thị
+                    <select asp-for="PageSize" asp-items="@(new SelectList(ViewBag.SoLuong,"Value","Value"))" onchange="this.form.submit()" class="form-control input-sm"></select>
+
+                    phần tử
+                </label>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-sm-4 text-center">
+        <a asp-action="Create" class="btn btn-primary">Tạo mới</a>
+    </div>
+    <div class="col-sm-4">
+        <div id="example1_filter" class="dataTables_filter">
+            <form asp-action="Index" method="get">
+                <label>@ViewData["Search"]:<input type="search" name="SearchString" value="@ViewData["currentFilter"]" class="form-control input-sm" placeholder="" aria-controls="example1"></label>
+                <input type="submit" value="Tìm kiếm" class="btn btn-danger" />
+            </form>
+        </div>
+    </div>
