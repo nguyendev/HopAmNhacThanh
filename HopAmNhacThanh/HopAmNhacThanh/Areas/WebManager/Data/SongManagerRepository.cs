@@ -211,7 +211,8 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
                                 .Include(p => p.ListVideos)
                                 .Include(p => p.ListChords)
                                 .Include(p => p.Author)
-                                select s;
+                                .Where(p => !p.IsDeleted)
+                                       select s;
             if (!String.IsNullOrEmpty(searchString))
             {
                 applicationDbContext = applicationDbContext.Where(s => s.Name.Contains(searchString));

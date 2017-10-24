@@ -11,6 +11,7 @@ namespace HopAmNhacThanh.Models.HomeViewModels
         public List<SimpleSongViewModel> ListPupularSong { get; set; }
         public List<SimpleStyleViewModel> ListStyle { get; set; }
         public List<BestSimpleSongViewModel> ListTopSong { get; set; }
+        public List<SimpleAlbumViewModel> ListTopAlbum { get; set; }
     }
 
     public class SimpleStyleViewModel
@@ -22,8 +23,16 @@ namespace HopAmNhacThanh.Models.HomeViewModels
     {
         public string Name { get; set; }
         public string Slug { get; set; }
+        public int Views { get; set; }
         public string Version { get; set; }
     }
+
+    public class SimpleAlbumViewModel
+    {
+        public string Name { get; set; }
+        public string Slug { get; set; }
+    }
+
     public class SimpleSongViewModel
     {
         public string Name { get; set; }

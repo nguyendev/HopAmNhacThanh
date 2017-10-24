@@ -88,6 +88,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
             var applicationDbContext = from s in _context.Chords
                                 .Include(p => p.Song)
                                 .Include(p => p.Style)
+                                .Where(p => !p.IsDeleted)
                                        select s;
             if (!String.IsNullOrEmpty(searchString))
             {

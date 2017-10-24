@@ -104,9 +104,13 @@ namespace HopAmNhacThanh
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddScoped<ISongManagerRepository, SongManagerRepository>();
             services.AddScoped<ISongRepository, SongRepository>();
+            services.AddScoped<IAlbumManagerRepository, AlbumManagerRepository>();
             services.AddScoped<IChordManagerRepository, ChordRepository>();
-
+            services.AddScoped<ICategoryManagerRepository, CategoryManagerRepository>();
+            services.AddScoped<IStyleManagerRepository, StyleManagerRepository>();
             services.AddScoped<IHomeRepository, HomeRepository>();
+            services.AddScoped<IAuthorSongsManagerRepository, AuthorSongsManagerRepository>();
+            services.AddScoped<IVietnameseLyricsManagerRepository, VietnameseLyricsManagerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

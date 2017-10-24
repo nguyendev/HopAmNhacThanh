@@ -154,8 +154,10 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
             {
                 return NotFound();
             }
-            ViewData["AuthorSongID"] = new SelectList(_context.Set<AuthorSong>(), "ID", "Name", song.AuthorSongID);
+            ViewData["AlbumID"] = new SelectList(_context.Album, "ID", "Name", song.AlbumID);
+            ViewData["AuthorSongID"] = new SelectList(_context.AuthorSong, "ID", "Name", song.AuthorSongID);
             ViewData["CategoryID"] = new SelectList(_context.Category, "ID", "Name", song.CategoryID);
+            ViewData["VietnameseLyricID"] = new SelectList(_context.VietnameseLyric, "ID", "Name", song.VietnameseLyricID);
             return View(song);
         }
 
@@ -191,8 +193,10 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["AuthorSongID"] = new SelectList(_context.Set<AuthorSong>(), "ID", "Name", song.AuthorSongID);
+            ViewData["AlbumID"] = new SelectList(_context.Album, "ID", "Name", song.AlbumID);
+            ViewData["AuthorSongID"] = new SelectList(_context.AuthorSong, "ID", "Name", song.AuthorSongID);
             ViewData["CategoryID"] = new SelectList(_context.Category, "ID", "Name", song.CategoryID);
+            ViewData["VietnameseLyricID"] = new SelectList(_context.VietnameseLyric, "ID", "Name", song.VietnameseLyricID);
             return View(song);
         }
 

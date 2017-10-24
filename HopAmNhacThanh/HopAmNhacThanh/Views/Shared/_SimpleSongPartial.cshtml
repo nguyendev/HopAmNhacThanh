@@ -6,12 +6,13 @@
         <a asp-controller="Home" asp-action="single" asp-route-slug="@Model.Slug" asp-route-slugVersion="@Model.VersionSlug">
             @Model.Name
         </a>
-
+        @if (Model.AuthorSong != null) { 
         <small>
             <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
             <a asp-controller="AuthorSong" asp-action="single" asp-route-slug="@Model.Slug"> @Model.AuthorSong.Name</a>
         </small>
-        @if(Model.Album != null) { 
+        }
+        @if (Model.Album != null) {
         <small>
             <i title="Album" class="fa fa fa-file-movie-o"></i> Album: <a asp-controller="Album" asp-action="single" asp-route-slug="@Model.Slug">@Model.Album.Name</a>
         </small>
@@ -22,10 +23,6 @@
     </h4>
     <em class="lyric" style="text-align: justify">
         @Html.Raw(Model.Lyric)
-        @*1. Chạm l&ograve;ng [C] con Ch&uacute;a ơi, ngay giờ [Dm] n&agrave;y
-            Chạm l&ograve;ng [F] con để [E7] con kh&ocirc;ng xa [Am] Ng&agrave;i
-            Chạm l&ograve;ng [G] con Ch&uacute;a [A7] ơi, ngay giờ [Dm] n&agrave;y
-            Chạm l&ograve;ng [F] con để [G7] con say m&ecirc; [C] Ng&agrave;i.*@
     </em>
     <hr>
 </div>

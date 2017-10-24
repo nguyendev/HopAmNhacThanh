@@ -1,0 +1,100 @@
+﻿@model DoVuiHaiNao.Models.Images
+
+@{
+    ViewData["Title"] = "Xóa";
+    ViewData["Heading"] = "Hình ảnh";
+    ViewData["SmallHeading"] = "";
+    ViewData["BreadcrumbOne"] = "Quản lý web";
+    ViewData["BreadcrumbTwo"] = "Hình ảnh";
+    ViewData["BreadcrumbThree"] = "Xóa";
+    ViewData["BoxTitle"] = "Xóa";
+    ViewData["Search"] = "Tìm hình ảnh";
+    Layout = "_TableIndexLayout";
+}
+<h3>Bạn có muốn xóa không?</h3>
+<div class="box-body">
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ALT)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ALT)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PicFull)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PicFull)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Pic640x480)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Pic640x480)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDT)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateDT)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDT)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDT)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Approved)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Approved)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Author.Id)
+        </dd>
+    </dl>
+</div>
+<div class="box-footer">
+    <form asp-action="Delete">
+        <div class="form-actions no-color">
+            <input type="hidden" asp-for="ID" />
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </form>
+</div>

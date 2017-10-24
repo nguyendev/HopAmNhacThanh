@@ -1,33 +1,22 @@
-@model HopAmNhacThanh.Models.AuthorSong
-
+﻿@model HopAmNhacThanh.Models.AuthorSong
 @{
-    Layout = null;
+    ViewData["Title"] = "Chi tiết";
+    ViewData["Heading"] = "Tác giả bài hát";
+    ViewData["SmallHeading"] = "";
+    ViewData["BreadcrumbOne"] = "Quản lý web";
+    ViewData["BreadcrumbTwo"] = "Hợp âm";
+    ViewData["BreadcrumbThree"] = "Chi tiết tác giả bài hát";
+    ViewData["BoxTitle"] = "Chi tiết tác giả bài hát";
+    ViewData["Search"] = "Tìm tác giả bài hát";
+    Layout = "_TableIndexLayout";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
-
-<div>
-    <h4>AuthorSong</h4>
-    <hr />
+<div class="box-body">
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Image)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Slug)
@@ -83,11 +72,14 @@
         <dd>
             @Html.DisplayFor(model => model.Author.Id)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Image.ID)
+        </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="box-footer">
+    <a class="btn btn-default pull-right" asp-action="Index">Quay lai</a>
 </div>
-</body>
-</html>

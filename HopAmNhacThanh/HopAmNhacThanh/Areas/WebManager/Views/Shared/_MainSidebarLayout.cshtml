@@ -37,18 +37,18 @@
     <ul class="sidebar-menu" data-widget="tree">
         <li class="header">Danh mục bài hát</li>
         <!-- Optionally, you can add icons to the links -->
-        @*<li class="active treeview">
+        <li class="treeview">
             <a href="#">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                <i class="fa fa-dashboard"></i> <span>Thư viện hình ảnh</span>
                 <span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                <li class=""><a asp-controller="Media" asp-action="index"><i class="fa fa-circle-o"></i> Danh sách</a></li>
+                <li><a asp-controller="media" asp-action="create"><i class="fa fa-circle-o"></i> Tạo mới</a></li>
             </ul>
-        </li>*@
+        </li>
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-dashboard"></i> <span>Bài hát</span>

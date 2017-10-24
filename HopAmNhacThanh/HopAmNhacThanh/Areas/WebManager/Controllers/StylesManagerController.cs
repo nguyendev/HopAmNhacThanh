@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using HopAmNhacThanh.Data;
 using HopAmNhacThanh.Models;
 using Microsoft.AspNetCore.Authorization;
+using HopAmNhacThanh.Areas.WebManager.Data;
+using HopAmNhacThanh.Areas.WebManager.ViewModels;
 
 namespace HopAmNhacThanh.Areas.WebManager.Controllers
 {
@@ -15,81 +17,112 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
     [Authorize(Roles = "Admin, Manager")]
     public class StylesManagerController : Controller
     {
-        private readonly ApplicationDbContext _context;
-
-        public StylesManagerController(ApplicationDbContext context)
+        private readonly IStyleManagerRepository _repository;
+        private const string ROOT_SLUG = "quan-ly-web/dieu/";
+        public StylesManagerController(IStyleManagerRepository repository)
         {
-            _context = context;    
+            _repository = repository;
         }
 
-        // GET: WebManager/StylesManager
-        public async Task<IActionResult> Index()
+        // GET: WebManager/Chords
+        [Route(ROOT_SLUG)]
+        public async Task<IActionResult> Index(string sortOrder,
+ string currentFilter,
+    string searchString,
+    int? page, int? pageSize)
         {
-            return View(await _context.Style.ToListAsync());
+            List<NumberItem> SoLuong = new List<NumberItem>
+            {
+                new NumberItem { Value = 10},
+                new NumberItem { Value = 20},
+                new NumberItem { Value = 50},
+                new NumberItem { Value = 100},
+            };
+            ViewData["SoLuong"] = SoLuong;
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameParm"] = String.IsNullOrEmpty(sortOrder) ? "name" : "";
+            ViewData["CurrentSize"] = pageSize;
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+            var applicationDbContext = await _repository.GetAll(sortOrder, searchString, page, pageSize);
+            return View(applicationDbContext);
         }
 
-        // GET: WebManager/StylesManager/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: WebManager/Chords/Details/5
+        [Route(ROOT_SLUG + "chi-tiet/{id}")]
+        public async Task<IActionResult> Details(long? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var style = await _context.Style
-                .SingleOrDefaultAsync(m => m.ID == id);
-            if (style == null)
+            var chords = await _repository.Details(id);
+            if (chords == null)
             {
                 return NotFound();
             }
 
-            return View(style);
+            return View(chords);
         }
 
-        // GET: WebManager/StylesManager/Create
+        // GET: WebManager/Chords/Create
+        [Route(ROOT_SLUG + "tao-moi")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: WebManager/StylesManager/Create
+        // POST: WebManager/Chords/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Route(ROOT_SLUG + "tao-moi")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Slug,Note")] Style style)
+        public async Task<IActionResult> Create(Style model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(style);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                bool result = await _repository.Create(model);
+                if (result)
+                    return RedirectToAction("Index");
+                return NotFound();
             }
-            return View(style);
+            return View(model);
         }
 
-        // GET: WebManager/StylesManager/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: WebManager/Chords/Edit/5
+        [Route(ROOT_SLUG + "chinh-sua/{id}")]
+        public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var style = await _context.Style.SingleOrDefaultAsync(m => m.ID == id);
-            if (style == null)
+            var single = await _repository.GetEdit(id);
+            if (single == null)
             {
                 return NotFound();
             }
-            return View(style);
+            return View(single);
         }
 
-        // POST: WebManager/StylesManager/Edit/5
+        // POST: WebManager/Chords/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Slug,Note")] Style style)
+        [Route(ROOT_SLUG + "chinh-sua/{id}")]
+        public async Task<IActionResult> Edit(long id, Style style)
         {
             if (id != style.ID)
             {
@@ -100,8 +133,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
             {
                 try
                 {
-                    _context.Update(style);
-                    await _context.SaveChangesAsync();
+                    await _repository.Update(style);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -119,38 +151,37 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
             return View(style);
         }
 
-        // GET: WebManager/StylesManager/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: WebManager/Chords/Delete/5
+        [Route(ROOT_SLUG + "xoa/{id}")]
+        public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var style = await _context.Style
-                .SingleOrDefaultAsync(m => m.ID == id);
-            if (style == null)
+            var category = await _repository.Get(id);
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return View(style);
+            return View(category);
         }
 
-        // POST: WebManager/StylesManager/Delete/5
+        // POST: WebManager/Chords/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Route(ROOT_SLUG + "xoa/{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(long id)
         {
-            var style = await _context.Style.SingleOrDefaultAsync(m => m.ID == id);
-            _context.Style.Remove(style);
-            await _context.SaveChangesAsync();
+            await _repository.Delete(id);
             return RedirectToAction("Index");
         }
 
-        private bool StyleExists(int id)
+        private bool StyleExists(long id)
         {
-            return _context.Style.Any(e => e.ID == id);
+            return _repository.Exists(id);
         }
     }
 }

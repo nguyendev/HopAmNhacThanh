@@ -21,111 +21,128 @@ namespace HopAmNhacThanh.Data.HomeRepository
         public async Task<MainContentViewModel> GetMainHome()
         {
 
-                List<SimpleSongViewModel> ListNewSong = new List<SimpleSongViewModel>();
-                var application = await _context.Song
-                    .Include(p => p.Album)
-                    .Include(p => p.AuthorSong)
+            List<SimpleSongViewModel> ListNewSong = new List<SimpleSongViewModel>();
+            var application = await _context.Song
+                .Include(p => p.Album)
+                .Include(p => p.AuthorSong)
+                .Where(p => p.Approved == Global.APPROVED)
+                .Where(p => p.CreateDT <= DateTime.Now)
+                .Where(p => !p.IsDeleted)
+                .OrderByDescending(p => p.CreateDT).Take(10).ToListAsync();
+            foreach (var item in application)
+            {
+                var chords = _context.Chords
+                    .Where(p => p.SongID == item.ID)
                     .Where(p => p.Approved == Global.APPROVED)
                     .Where(p => p.CreateDT <= DateTime.Now)
                     .Where(p => !p.IsDeleted)
-                    .OrderByDescending(p => p.CreateDT).Take(10).ToListAsync();
-                foreach (var item in application)
+                    .First();
+                SimpleSongViewModel song = new SimpleSongViewModel
                 {
-                    var chords = _context.Chords
-                        .Where(p => p.SongID == item.ID)
-                        .Where(p => p.Approved == Global.APPROVED)
-                        .Where(p => p.CreateDT <= DateTime.Now)
-                        .Where(p => !p.IsDeleted)
-                        .First();
-                    SimpleSongViewModel song = new SimpleSongViewModel
-                    {
-                        Name = item.Name,
-                        Album = item.Album,
-                        AuthorSong = item.AuthorSong,
-                        OrtherName = item.OrtherName,
-                        View = item.Views,
-                        Lyric = SEOExtension.GetStringToLength(chords.Lyric, LENGTH_LYRIC),
-                        Slug = item.Slug,
-                        VersionSlug = chords.Slug
-                    };
-                    ListNewSong.Add(song);
-                }
+                    Name = item.Name,
+                    Album = item.Album,
+                    AuthorSong = item.AuthorSong,
+                    OrtherName = item.OrtherName,
+                    View = item.Views,
+                    Lyric = SEOExtension.GetStringToLength(chords.Lyric, LENGTH_LYRIC),
+                    Slug = item.Slug,
+                    VersionSlug = chords.Slug
+                };
+                ListNewSong.Add(song);
+            }
 
-                List<SimpleSongViewModel> ListPupularSong = new List<SimpleSongViewModel>();
-                application = await _context.Song
-                    .Include(p => p.Album)
-                    .Include(p => p.AuthorSong)
-                    .Where(p => p.Approved == Global.APPROVED)
-                    .Where(p => p.CreateDT <= DateTime.Now)
-                    .Where(p => !p.IsDeleted)
-                    .OrderByDescending(p => p.Views)
-                    .Take(10).ToListAsync();
-                foreach (var item in application)
+            List<SimpleSongViewModel> ListPupularSong = new List<SimpleSongViewModel>();
+            application = await _context.Song
+                .Include(p => p.Album)
+                .Include(p => p.AuthorSong)
+                .Where(p => p.Approved == Global.APPROVED)
+                .Where(p => p.CreateDT <= DateTime.Now)
+                .Where(p => !p.IsDeleted)
+                .OrderByDescending(p => p.Views)
+                .Take(10).ToListAsync();
+            foreach (var item in application)
+            {
+                var chords = _context.Chords
+                    .Where(p => p.SongID == item.ID)
+                    .First();
+                SimpleSongViewModel song = new SimpleSongViewModel
                 {
-                    var chords = _context.Chords
-                        .Where(p => p.SongID == item.ID)
-                        .First();
-                    SimpleSongViewModel song = new SimpleSongViewModel
-                    {
-                        Name = item.Name,
-                        Album = item.Album,
-                        AuthorSong = item.AuthorSong,
-                        OrtherName = item.OrtherName,
-                        View = item.Views,
-                        Lyric = SEOExtension.GetStringToLength(chords.Lyric, LENGTH_LYRIC),
-                        Slug = item.Slug,
-                        VersionSlug = chords.Slug
-                    };
-                    ListPupularSong.Add(song);
-                }
+                    Name = item.Name,
+                    Album = item.Album,
+                    AuthorSong = item.AuthorSong,
+                    OrtherName = item.OrtherName,
+                    View = item.Views,
+                    Lyric = SEOExtension.GetStringToLength(chords.Lyric, LENGTH_LYRIC),
+                    Slug = item.Slug,
+                    VersionSlug = chords.Slug
+                };
+                ListPupularSong.Add(song);
+            }
 
-                //Top week
-                var topWeekContext = await _context.Song
+
+            #region Sidebar
+            //Top week
+            var topWeekContext = await _context.Song
                 .Where(p => p.Approved == Global.APPROVED)
                 .Where(p => p.CreateDT <= DateTime.Now)
                     .Where(p => !p.IsDeleted)
                     .OrderByDescending(p => p.Views)
                .Take(10).ToListAsync();
-                List<BestSimpleSongViewModel> ListTopSong = new List<BestSimpleSongViewModel>();
-                foreach (var item in topWeekContext)
+            List<BestSimpleSongViewModel> ListTopSong = new List<BestSimpleSongViewModel>();
+            foreach (var item in topWeekContext)
+            {
+                var chords = _context.Chords
+                    .Where(p => p.SongID == item.ID)
+                    .Where(p => p.Approved == Global.APPROVED)
+                    .Where(p => p.CreateDT <= DateTime.Now)
+                    .Where(p => !p.IsDeleted)
+                    .First();
+                BestSimpleSongViewModel song = new BestSimpleSongViewModel
                 {
-                    var chords = _context.Chords
-                        .Where(p => p.SongID == item.ID)
-                        .Where(p => p.Approved == Global.APPROVED)
-                        .Where(p => p.CreateDT <= DateTime.Now)
-                        .Where(p => !p.IsDeleted)
-                        .First();
-                    BestSimpleSongViewModel song = new BestSimpleSongViewModel
-                    {
-                        Name = item.Name,
-                        Slug = item.Slug,
-                        Version = item.Slug,
-                    };
-                    ListTopSong.Add(song);
-                }
-
-                var styleDbContext = await _context.Style.ToListAsync();
-
-                List<SimpleStyleViewModel> ListStyle = new List<SimpleStyleViewModel>();
-                foreach (var item in styleDbContext)
-                {
-                    SimpleStyleViewModel style = new SimpleStyleViewModel
-                    {
-                        Name = item.Name,
-                        Slug = item.Slug,
-                    };
-                    ListStyle.Add(style);
-                }
-
-                MainContentViewModel model = new MainContentViewModel
-                {
-                    ListNewSong = ListNewSong,
-                    ListPupularSong = ListPupularSong,
-                    ListTopSong = ListTopSong,
-                    ListStyle = ListStyle
+                    Name = item.Name,
+                    Slug = item.Slug,
+                    Version = item.Slug,
+                    Views = item.Views
                 };
-                return model;
-    
+                ListTopSong.Add(song);
+            }
+
+            var styleDbContext = await _context.Style.ToListAsync();
+
+            List<SimpleStyleViewModel> ListStyle = new List<SimpleStyleViewModel>();
+            foreach (var item in styleDbContext)
+            {
+                SimpleStyleViewModel style = new SimpleStyleViewModel
+                {
+                    Name = item.Name,
+                    Slug = item.Slug,
+                };
+                ListStyle.Add(style);
+            }
+
+            var albumDbContext = await _context.Album.Take(10).ToListAsync();
+
+            List<SimpleAlbumViewModel> ListAlbum = new List<SimpleAlbumViewModel>();
+            foreach (var item in albumDbContext)
+            {
+                SimpleAlbumViewModel album = new SimpleAlbumViewModel
+                {
+                    Name = item.Name,
+                    Slug = item.Slug,
+                };
+                ListAlbum.Add(album);
+            }
+            #endregion
+            MainContentViewModel model = new MainContentViewModel
+            {
+                ListNewSong = ListNewSong,
+                ListPupularSong = ListPupularSong,
+                ListTopSong = ListTopSong,
+                ListStyle = ListStyle,
+                ListTopAlbum = ListAlbum,
+            };
+            return model;
+
 
         }
 
@@ -418,6 +435,15 @@ namespace HopAmNhacThanh.Data.HomeRepository
                 //logger.LogError(ex.Message, "An error occurred seeding the DB.");
                 return null;
             }
+        }
+
+        public async Task IncreaseView(string slug)
+        {
+            var single = await _context.Song.SingleOrDefaultAsync(p => p.Slug == slug);
+            single.Views++;
+
+            _context.Song.Update(single);
+            await _context.SaveChangesAsync();
         }
     }
 }

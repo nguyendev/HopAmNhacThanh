@@ -13,5 +13,11 @@ namespace HopAmNhacThanh.Controllers
         {
             return View();
         }
+
+        [Route("album")]
+        public IActionResult List()
+        {
+            return View();
+        }
     }
 }

@@ -70,6 +70,7 @@ namespace HopAmNhacThanh.Controllers
                 string path = HttpContext.Request.Path.ToString();
                 HttpContext.Session.SetString("currentUrl", path);
             }
+            await _repostitory.IncreaseView(slug);
             ViewData["MainSingle"] = await _repostitory.GetMainSingle(slug,slugVersion);
             return View();
         }

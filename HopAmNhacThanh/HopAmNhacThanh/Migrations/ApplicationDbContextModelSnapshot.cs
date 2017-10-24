@@ -165,7 +165,7 @@ namespace HopAmNhacThanh.Migrations
 
                     b.Property<DateTime?>("CreateDT");
 
-                    b.Property<string>("Image");
+                    b.Property<int?>("ImageID");
 
                     b.Property<bool>("IsDeleted");
 
@@ -182,6 +182,8 @@ namespace HopAmNhacThanh.Migrations
 
                     b.HasIndex("AuthorID");
 
+                    b.HasIndex("ImageID");
+
                     b.ToTable("AuthorSong");
                 });
 
@@ -191,6 +193,8 @@ namespace HopAmNhacThanh.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Image");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -272,6 +276,44 @@ namespace HopAmNhacThanh.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("FavoriteSongChord");
+                });
+
+            modelBuilder.Entity("HopAmNhacThanh.Models.Images", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ALT")
+                        .HasMaxLength(150);
+
+                    b.Property<string>("Active")
+                        .HasMaxLength(1);
+
+                    b.Property<string>("Approved")
+                        .HasMaxLength(1);
+
+                    b.Property<string>("AuthorID");
+
+                    b.Property<DateTime?>("CreateDT");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Note")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Title")
+                        .HasMaxLength(150);
+
+                    b.Property<DateTime?>("UpdateDT");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("AuthorID");
+
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("HopAmNhacThanh.Models.LikeSongChords", b =>
@@ -553,6 +595,8 @@ namespace HopAmNhacThanh.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("IsDeleted");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(60);
@@ -593,13 +637,17 @@ namespace HopAmNhacThanh.Migrations
 
                     b.Property<string>("Content");
 
-                    b.Property<string>("Image");
+                    b.Property<int?>("ImageID");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<string>("Name");
 
                     b.Property<string>("Slug");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("ImageID");
 
                     b.ToTable("VietnameseLyric");
                 });
@@ -723,6 +771,10 @@ namespace HopAmNhacThanh.Migrations
                     b.HasOne("HopAmNhacThanh.Models.ApplicationUser", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorID");
+
+                    b.HasOne("HopAmNhacThanh.Models.Images", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageID");
                 });
 
             modelBuilder.Entity("HopAmNhacThanh.Models.Chords", b =>
@@ -739,6 +791,13 @@ namespace HopAmNhacThanh.Migrations
                     b.HasOne("HopAmNhacThanh.Models.Style", "Style")
                         .WithMany()
                         .HasForeignKey("StyleID");
+                });
+
+            modelBuilder.Entity("HopAmNhacThanh.Models.Images", b =>
+                {
+                    b.HasOne("HopAmNhacThanh.Models.ApplicationUser", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorID");
                 });
 
             modelBuilder.Entity("HopAmNhacThanh.Models.LikeSongChords", b =>
@@ -828,6 +887,13 @@ namespace HopAmNhacThanh.Migrations
                         .WithMany("ListVideos")
                         .HasForeignKey("SongID")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("HopAmNhacThanh.Models.VietnameseLyric", b =>
+                {
+                    b.HasOne("HopAmNhacThanh.Models.Images", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

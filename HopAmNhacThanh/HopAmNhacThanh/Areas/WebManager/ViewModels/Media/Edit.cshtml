@@ -1,0 +1,75 @@
+﻿@model DoVuiHaiNao.Models.Images
+
+@{
+    ViewData["Title"] = "Chỉnh sửa";
+    ViewData["Heading"] = "Học phần";
+    ViewData["SmallHeading"] = "";
+    ViewData["BreadcrumbOne"] = "QLSV";
+    ViewData["BreadcrumbTwo"] = "Học phần";
+    ViewData["BreadcrumbThree"] = "Chỉnh sửa học phần";
+    ViewData["BoxTitle"] = "Chỉnh sửa học phần";
+    ViewData["Search"] = "Tìm học phần";
+    Layout = "_EditLayout";
+}
+    <div class="form-horizontal">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="ID" />
+        <div class="form-group">
+            <label asp-for="Name" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ALT" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ALT" class="form-control" />
+                <span asp-validation-for="ALT" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Title" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PicFull" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PicFull" class="form-control" />
+                <span asp-validation-for="PicFull" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Pic640x480" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Pic640x480" class="form-control" />
+                <span asp-validation-for="Pic640x480" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Approved" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Approved" class="form-control" />
+                <span asp-validation-for="Approved" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="IsDeleted" />
+                    <label asp-for="IsDeleted"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Note" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Note" class="form-control" />
+                <span asp-validation-for="Note" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+

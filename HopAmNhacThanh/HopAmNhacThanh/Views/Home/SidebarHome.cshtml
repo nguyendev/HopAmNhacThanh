@@ -45,6 +45,46 @@
         </div>
     </div>
 </div>*@
+<style>
+    #list-album .panel-body {
+        background: #ffffff;
+        padding: 10px 15px;
+        box-shadow: 1px 1px 0px #e5e5e5;
+    }
+    .listMenu ul li {
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+        border-bottom: solid 1px #dcdcdc;
+    }
+        .listMenu ul li a {
+            display: block;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            font-size: 15px;
+            line-height: 23px;
+            text-transform: capitalize;
+        }
+    .listMenu ul li {
+        list-style-type: none;
+    }
+</style>
+@if (Model.ListTopAlbum.Any()) {
+<div id="list-album" class="panel panel-default">
+    <div class="panel-heading" style="background-color: #337ab7; color: white">
+        <h2 class="panel-title" style="font-size:larger; margin-top: 0px;">Album</h2>
+    </div>
+    <div class="panel-body">
+        <div class="listMenu">
+            <ul style="padding-left: 0px;">
+                @foreach(var item in Model.ListTopAlbum) { 
+                <li><a asp-controller="Album" asp-action="Single" asp-route-slug="@item.Slug">@item.Name</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+}
 
 <div id="rhythm" class="panel panel-default">
     <style>
@@ -91,76 +131,23 @@
 
 <div id="hot-today" class="panel panel-default">
 
-    <style>
-        .hot-today-item:nth-child(1) .hot-today-views {
-            color: #ff5722;
-        }
-
-        .hot-today-item:nth-child(2) .hot-today-views {
-            color: #ff9800;
-        }
-
-        .hot-today-item:nth-child(3) .hot-today-views {
-            color: #FFC107;
-        }
-
-        .hot-today-item:nth-child(4) .hot-today-views {
-            color: #8bc34a;
-        }
-
-        .hot-today-item .hot-today-views {
-            vertical-align: middle;
-            position: relative;
-            width: 40px;
-            height: 30px;
-            display: inline-block;
-            text-align: center;
-            color: #cddc39;
-        }
-
-        .hot-today-item-song {
-            color: black;
-        }
-
-        .hot-today-item .hot-today-views .hot-today-view-count {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            font-size: 10px;
-        }
-
-        .hot-today-item .hot-today-item-song:hover {
-            text-decoration: underline;
-        }
-
-        .hot-today-item .hot-today-item-song {
-            font-weight: 600;
-        }
-
-        .hot-today-item .hot-today-item-singers a {
-            margin-left: 10px !important;
-            font-size: 13px !important;
-            color: #888 !important;
-        }
-    </style>
     <div class="panel-body">
-        <h2 style="font-size:larger">Bài hát xem nhiều trong tuần</h2>
-        <hr />
-        <div class="hot-today-item">
-            <span class="hot-today-views">
-                <i class="fa fa-star"></i>
-                @*<span class="hot-today-view-count">3257</span>*@
-            </span>
+        <h2 style="font-size:larger; margin-top: 0px;">Bài hát xem nhiều trong tuần</h2>
+        <hr style="margin-top: 0px;"/>
+        <div>
+            
             @{ 
                 var number = 1;
             }
             @foreach (var item in Model.ListTopSong)
-            { 
-            <a class="hot-today-item-song" asp-controller="home" asp-action="single" asp-route-slug="@item.Slug" asp-route-slugVersion="@item.Version">
-                @number.
-                @item.Name
-            </a>
+            {
+                <p>
+                    <a asp-controller="home" asp-action="single" asp-route-slug="@item.Slug" asp-route-slugVersion="@item.Version">
+                        @number.
+                        @item.Name
+                    </a>
+                    <span style="float:right">@item.Views <i class="fa fa-eye"></i></span> 
+                </p>
             @*<span class="hot-today-item-singers">
                 <a href="/artist/23465/jayk">
                     JayK
@@ -169,7 +156,7 @@
                 number++;
             }
         </div>
-
+  
     </div>
 </div>
 

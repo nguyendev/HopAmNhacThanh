@@ -13,10 +13,15 @@ namespace HopAmNhacThanh.Models
         [Key]
         public int ID { get; set; }
         [Required]
+        [Display(Name="Tên")]
         [MaxLength(60)]
         public string Name { get; set; }
+        [Display(Name = "Hình ảnh")]
         public string Image { get; set; }
+        [Display(Name = "Slug")]
         public string Slug { get; set; }
+        [Display(Name = "Ghi chú")]
+        public bool IsDeleted { get; set; }
         public string Note { get; set; }
     }
 }

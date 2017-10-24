@@ -1,63 +1,46 @@
-@model HopAmNhacThanh.Models.VietnameseLyric
-
+﻿@model HopAmNhacThanh.Areas.WebManager.ViewModels.VietnameseLyricViewModels.EditVietnameseLyricViewModel
 @{
-    Layout = null;
+    ViewData["Title"] = "Chỉnh sửa";
+    ViewData["Heading"] = "Dịch giả bài hát";
+    ViewData["SmallHeading"] = "";
+    ViewData["BreadcrumbOne"] = "Quản lý web";
+    ViewData["BreadcrumbTwo"] = "Tác giả bài hát";
+    ViewData["BreadcrumbThree"] = "Chỉnh sửa dịch giả bài hát";
+    ViewData["BoxTitle"] = "Chỉnh sửa dịch giả bài hát";
+    ViewData["Search"] = "Tìm dịch giả";
+    Layout = "_EditLayout";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Edit</title>
-</head>
-<body>
-
-<form asp-action="Edit">
-    <div class="form-horizontal">
-        <h4>VietnameseLyric</h4>
-        <hr />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="ID" />
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<input type="hidden" asp-for="ID" />
+<div class="row">
+    <div class="col-md-4">
         <div class="form-group">
-            <label asp-for="Name" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Slug" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Slug" class="form-control" />
-                <span asp-validation-for="Slug" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Image" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Image" class="form-control" />
-                <span asp-validation-for="Image" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Content" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Content" class="form-control" />
-                <span asp-validation-for="Content" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
     </div>
-</form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="Slug" class="control-label"></label>
+            <input asp-for="Slug" class="form-control" />
+            <span asp-validation-for="Slug" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="ImageID" class="control-label"></label>
+            <select asp-for="ImageID" class="form-control" asp-items="ViewBag.ImageID">
+                <option disabled selected>-- Chưa có -- </option>
+            </select>
+            <span asp-validation-for="ImageID" class="text-danger"></span>
+        </div>
+    </div>
 </div>
-
-</body>
-</html>
+<div class="row col-md-12">
+    <div class="form-group">
+        <label asp-for="Content" class="control-label"></label>
+        <textarea asp-for="Content" class="form-control ckeditor"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+</div>

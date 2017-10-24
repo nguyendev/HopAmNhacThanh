@@ -38,5 +38,6 @@ namespace HopAmNhacThanh.Data
         public DbSet<LikeSongChords> LikeSongChords { get; set; }
         public DbSet<HopAmNhacThanh.Models.ApplicationUser> ApplicationUser { get; set; }
         public DbSet<HopAmNhacThanh.Models.RequestSong> RequestSong { get; set; }
+        public DbSet<HopAmNhacThanh.Models.Images> Images { get; set; }
     }
 }

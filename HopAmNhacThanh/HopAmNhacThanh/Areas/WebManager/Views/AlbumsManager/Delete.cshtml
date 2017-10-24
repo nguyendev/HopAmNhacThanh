@@ -1,24 +1,20 @@
-@model HopAmNhacThanh.Models.Album
+﻿@model HopAmNhacThanh.Models.Album
 
 @{
-    Layout = null;
+    string title = "Album";
+    ViewData["Title"] = "Xóa";
+    ViewData["Heading"] = title;
+    ViewData["SmallHeading"] = "";
+    ViewData["BreadcrumbOne"] = "Quản lý web";
+    ViewData["BreadcrumbTwo"] = title;
+    ViewData["BreadcrumbThree"] = "Xóa";
+    ViewData["BoxTitle"] = "Xóa";
+    ViewData["Search"] = "Tìm " + title;
+    Layout = "_TableIndexLayout";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Delete</title>
-</head>
-<body>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Album</h4>
-    <hr />
+<h3>Bạn có muốn xóa không?</h3>
+<div class="box-body">
     <dl class="dl-horizontal">
-        <input type="hidden" asp-for="ID" />
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -86,13 +82,13 @@
             @Html.DisplayFor(model => model.Author.Id)
         </dd>
     </dl>
-    
+</div>
+<div class="box-footer">
     <form asp-action="Delete">
         <div class="form-actions no-color">
+            <input type="hidden" asp-for="ID" />
             <input type="submit" value="Delete" class="btn btn-default" /> |
             <a asp-action="Index">Back to List</a>
         </div>
     </form>
 </div>
-</body>
-</html>

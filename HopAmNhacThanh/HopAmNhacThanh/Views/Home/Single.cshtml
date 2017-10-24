@@ -63,13 +63,13 @@
                             }
                             @if (MainSingle.Style != null)
                             {
-                                <i class="fa fa-music"></i> @Html.Raw("Điệu") <a asp-controller="Style" asp-action="Single" asp-route-slug="@MainSingle.Slug"> @MainSingle.Style.Name</a>
+                                <i class="fa fa-music"></i> <a asp-controller="Style" asp-action="Single" asp-route-slug="@MainSingle.Slug"> @MainSingle.Style.Name</a>
                             }
                             else
                             {
-                                <i class="fa fa-music"></i> @Html.Raw("Điệu")<a asp-controller="Style" asp-action="Single" asp-route-slug="@MainSingle.Slug"> @Html.Raw("Chưa phân loại")</a>
+                                <i class="fa fa-music"></i> <a asp-controller="Style" asp-action="Single" asp-route-slug="@MainSingle.Slug"> @Html.Raw("Chưa phân loại")</a>
                             }
-                            <i title="Lượt xem" class="fa fa-eye"></i> 25
+                            <i title="Lượt xem" class="fa fa-eye"></i> @MainSingle.Views 
 
                         </div>
                     </div>
@@ -302,8 +302,10 @@
                 if (KhongGopDong) {
                     $("span.chord").css('position', 'relative');
                     $("span.chord").css('display', 'inline-block');
-                    $("span.chord").css('top', 'inline');
-                    $("span.chord").css('width', '-1em');
+                    $("span.chord").css('top', '-1em');
+                    $("span.chord").css('width', '0');
+                    $("#lyric").css('line-height', '250%');
+                    $("#lyric").css('padding-top', '1em');
                     KhongGopDong = false;
                     $(this).empty();
                     $(this).append('Gộp dòng <i class="fa fa-fw fa-square-o" ></i>')
@@ -313,6 +315,8 @@
                     $("span.chord").css('display', '');
                     $("span.chord").css('top', '');
                     $("span.chord").css('width', '');
+                    $("#lyric").css('line-height', '');
+                    $("#lyric").css('padding-top', '');
                     KhongGopDong = true;
                     $(this).empty();
                     $(this).append('Gộp dòng <i class="fa fa-fw fa-check-square-o" ></i>')

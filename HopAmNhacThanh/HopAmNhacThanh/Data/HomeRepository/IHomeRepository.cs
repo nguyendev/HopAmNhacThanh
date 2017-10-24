@@ -12,5 +12,6 @@ namespace HopAmNhacThanh.Data.HomeRepository
         Task<MainContentViewModel> GetMainHome(char slug,int page,int pageSize);
         Task<MainSingleViewModel> GetMainSingle(string slugSong, string slugVersion);
         Task<MainSearchViewModel> GetSearch(string searchString,int page,int pageSize);
+        Task IncreaseView(string slug);
     }
 }
