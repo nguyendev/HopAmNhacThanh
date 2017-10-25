@@ -39,7 +39,9 @@
     <div class="col-md-3">
         <div class="form-group">
             <label asp-for="CategoryID" class="control-label"></label>
-            <select asp-for="CategoryID" class="form-control" asp-items="ViewBag.CategoryID"></select>
+            <select asp-for="CategoryID" class="form-control" asp-items="ViewBag.CategoryID">
+                
+            </select>
             <span asp-validation-for="CategoryID" class="text-danger"></span>
         </div>
     </div>
@@ -62,14 +64,18 @@
     <div class="col-md-3">
         <div class="form-group">
             <label asp-for="AuthorSongID" class="control-label"></label>
-            <select asp-for="AuthorSongID" class="form-control" asp-items="ViewBag.AuthorSongID"></select>
+            <select asp-for="AuthorSongID" class="form-control" asp-items="ViewBag.AuthorSongID">
+                <option disabled>-- Chưa rõ --</option>
+            </select>
             <span asp-validation-for="AuthorSongID" class="text-danger"></span>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
             <label asp-for="VietnameseLyricID" class="control-label"></label>
-            <select asp-for="VietnameseLyricID" class="form-control" asp-items="ViewBag.VietnameseLyricID"></select>
+            <select asp-for="VietnameseLyricID" class="form-control" asp-items="ViewBag.VietnameseLyricID">
+                <option disabled>-- Chưa rõ --</option>
+            </select>
             <span asp-validation-for="VietnameseLyricID" class="text-danger"></span>
         </div>
     </div>

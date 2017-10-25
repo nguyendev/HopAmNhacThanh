@@ -19,6 +19,8 @@ using Microsoft.Net.Http.Headers;
 using HopAmNhacThanh.Areas.WebManager.Data;
 using HopAmNhacThanh.Data.HomeRepository;
 using HopAmNhacThanh.Data.SongRepository;
+using HopAmNhacThanh.Data.SidebarRepository;
+using HopAmNhacThanh.Data.AlbumRepository;
 
 namespace HopAmNhacThanh
 {
@@ -111,6 +113,8 @@ namespace HopAmNhacThanh
             services.AddScoped<IHomeRepository, HomeRepository>();
             services.AddScoped<IAuthorSongsManagerRepository, AuthorSongsManagerRepository>();
             services.AddScoped<IVietnameseLyricsManagerRepository, VietnameseLyricsManagerRepository>();
+            services.AddScoped<ISidebarRepository, SidebarRepository>();
+            services.AddScoped<IAlbumRepository, AlbumRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,4 @@
-﻿@model HopAmNhacThanh.Models.HomeViewModels.MainContentViewModel
+﻿@model HopAmNhacThanh.Models.SidebarViewModels.CommonSidebarViewModel
 
 <style>
     .sidebar-search {
@@ -71,8 +71,8 @@
 </style>
 @if (Model.ListTopAlbum.Any()) {
 <div id="list-album" class="panel panel-default">
-    <div class="panel-heading" style="background-color: #337ab7; color: white">
-        <h2 class="panel-title" style="font-size:larger; margin-top: 0px;">Album</h2>
+    <div class="panel-heading sidebar-panel-heading">
+        <h2 class="panel-title sidebar-panel-title"><a asp-controller="album" asp-action="list">Album</a></h2>
     </div>
     <div class="panel-body">
         <div class="listMenu">
@@ -139,7 +139,7 @@
             @{ 
                 var number = 1;
             }
-            @foreach (var item in Model.ListTopSong)
+            @foreach (var item in Model.ListSong)
             {
                 <p>
                     <a asp-controller="home" asp-action="single" asp-route-slug="@item.Slug" asp-route-slugVersion="@item.Version">

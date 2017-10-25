@@ -1,1 +1,8 @@
-﻿
+﻿.sidebar-panel-heading {
+    background-color: #0099cd !important;
+    color: white !important;
+}
+.sidebar-panel-title {
+    font-size: larger;
+    margin-top: 0px;
+}

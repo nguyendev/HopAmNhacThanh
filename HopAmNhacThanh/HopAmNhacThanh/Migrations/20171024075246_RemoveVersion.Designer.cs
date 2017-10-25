@@ -8,9 +8,10 @@ using HopAmNhacThanh.Data;
 namespace HopAmNhacThanh.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171024075246_RemoveVersion")]
+    partial class RemoveVersion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -33,9 +34,7 @@ namespace HopAmNhacThanh.Migrations
 
                     b.Property<DateTime?>("CreateDT");
 
-                    b.Property<string>("Description");
-
-                    b.Property<int?>("ImageID");
+                    b.Property<string>("Image");
 
                     b.Property<bool>("IsDeleted");
 
@@ -51,8 +50,6 @@ namespace HopAmNhacThanh.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("AuthorID");
-
-                    b.HasIndex("ImageID");
 
                     b.ToTable("Album");
                 });
@@ -768,10 +765,6 @@ namespace HopAmNhacThanh.Migrations
                     b.HasOne("HopAmNhacThanh.Models.ApplicationUser", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorID");
-
-                    b.HasOne("HopAmNhacThanh.Models.Images", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageID");
                 });
 
             modelBuilder.Entity("HopAmNhacThanh.Models.AuthorSong", b =>

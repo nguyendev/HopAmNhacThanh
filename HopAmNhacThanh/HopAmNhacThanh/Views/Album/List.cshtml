@@ -1,0 +1,43 @@
+﻿@{ 
+    HopAmNhacThanh.Models.SidebarViewModels.CommonSidebarViewModel sidebar = ViewData["Sidebar"] as HopAmNhacThanh.Models.SidebarViewModels.CommonSidebarViewModel;
+    HopAmNhacThanh.Models.AlbumViewModels.ListAlbumViewModel list = ViewData["List"] as HopAmNhacThanh.Models.AlbumViewModels.ListAlbumViewModel;
+
+    ViewData["Title"] = "Danh sách Album | Hợp Âm Nhạc Thánh";
+    ViewData["Desciption"] = "Tổng hợp tất cả album Nhạc Thánh có hợp âm như Thánh Ca Tin Lành 1000 bài, Dâng lời ca, Tôn Vinh Chúa Hằng Hữu, và nhiều album Cơ Đốc khác nữa";
+}
+
+<div class="row">
+    <div class="col-md-8" style="padding-right: 0px;">
+        <div class="panel panel-primary">
+            <div class="panel-heading sidebar-panel-heading">
+                <h1 style="font-size: medium" class="panel-title">Danh sách album</h1>
+            </div>
+            <div class="panel-body">
+                @foreach (var item in list.List)
+                {
+                    <div class="row">                    
+                        <div class="col-md-4">
+                            @if (!item.ImageID.HasValue)
+                            {
+                            <img src="~/images/album-sample.jpg" class="img-responsive"/>
+                            }
+                            else
+                            {
+                                <img src="@item.Image." alt="@item.Image.ALT" class="img-responsive" />
+                            }
+                        </div>
+                        <div class="col-md-8">
+                            <h2 style="font-size: larger"><a asp-controller="album" asp-action="single" asp-route-slug="@item.Slug">@item.Name</a></h2>
+                            <p>@item.Description </p>
+                            <p><a asp-controller="album" asp-action="single" asp-route-slug="@item.Slug" style="float:right">Xem thêm <i class="fa fa-arrow-right"></i></a></p>
+                        </div>
+                    </div>
+                    <hr />
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        @Html.Partial("SidebarCommon", sidebar)
+    </div>
+</div>

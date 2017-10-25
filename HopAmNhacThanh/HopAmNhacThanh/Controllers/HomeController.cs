@@ -8,21 +8,25 @@ using System.Text;
 using HopAmNhacThanh.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
+using HopAmNhacThanh.Data.SidebarRepository;
 
 namespace HopAmNhacThanh.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IHomeRepository _repostitory;
+        private readonly ISidebarRepository _sidebarRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         public HomeController(IHomeRepository repository,
+            ISidebarRepository sidebarRepository,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
         {
             _repostitory = repository;
             _userManager = userManager;
             _signInManager = signInManager;
+            _sidebarRepository = sidebarRepository;
         }
         public async Task<IActionResult> Index()
         {
@@ -31,7 +35,8 @@ namespace HopAmNhacThanh.Controllers
                 string path = HttpContext.Request.Path.ToString();
                 HttpContext.Session.SetString("currentUrl", path);
             }
-            ViewData["MainContent"] = await _repostitory.GetMainHome();
+            ViewData["Main"] = await _repostitory.GetMainHome();
+            ViewData["Sidebar"] = await _sidebarRepository.GetSidebarCommon();
             return View();
         }
 

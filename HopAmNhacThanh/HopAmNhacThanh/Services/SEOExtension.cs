@@ -17,7 +17,9 @@ namespace DoVuiHaiNao.Services
             if (s.Length < Length)
             {
                 length = s.Length - 1;
-                endLine = " ?";
+                endLine = ".";
+                s = s + endLine;
+                return s;
             }
             try
             {

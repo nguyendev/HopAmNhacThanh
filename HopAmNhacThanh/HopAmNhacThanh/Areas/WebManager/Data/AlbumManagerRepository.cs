@@ -28,7 +28,8 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
                 Album album = new Album
                 {
                     Content = model.Content,
-                    Image = model.Image,
+                    ImageID = model.ImageID,
+                    Description = model.Description,
                     Name = model.Name,
                     Slug = StringExtensions.ConvertToUnSign3(model.Name),
                     Active = "A",
@@ -104,7 +105,6 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
                     Content = item.Content,
                     Slug = item.Slug,
                     Name = item.Name,
-                    Image = item.Image,
                     Approved = item.Approved,
                     ID = item.ID,
                     CreateDT = item.CreateDT
@@ -137,7 +137,9 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
                     ID = single.ID,
                     Slug = single.Slug,
                     Content = single.Content,
+                    Description = single.Description,
                     Image = single.Image,
+                    ImageID = single.ImageID,
                     Name = single.Name
                 };
                 return editModel;
@@ -187,8 +189,9 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
 
             single.Slug = model.Slug;
             single.UpdateDT = DateTime.Now;
-            single.Image = model.Image;
+            single.ImageID = model.ImageID;
             single.Name = model.Name;
+            single.Description = model.Description;
             single.Slug = model.Slug;
             single.Content = model.Content;
 

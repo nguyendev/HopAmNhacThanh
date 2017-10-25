@@ -8,9 +8,10 @@ using HopAmNhacThanh.Data;
 namespace HopAmNhacThanh.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171024093533_1.4")]
+    partial class _14
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -32,8 +33,6 @@ namespace HopAmNhacThanh.Migrations
                     b.Property<string>("Content");
 
                     b.Property<DateTime?>("CreateDT");
-
-                    b.Property<string>("Description");
 
                     b.Property<int?>("ImageID");
 

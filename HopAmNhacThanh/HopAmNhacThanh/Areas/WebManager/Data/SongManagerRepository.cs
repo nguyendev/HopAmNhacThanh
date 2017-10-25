@@ -125,7 +125,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
                         SongID = song.ID,
                         StyleID = null,
                         UpdateDT = null,
-                        Version = "",
+                        Name = "",
                     };
                     _context.Chords.Add(chords);
                 }

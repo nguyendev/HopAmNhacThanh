@@ -23,7 +23,9 @@
     <div class="col-md-4">
         <div class="form-group">
             <label asp-for="Image" class="control-label"></label>
-            <input asp-for="Image" class="form-control" />
+            <select asp-for="Image" class="form-control" asp-items="ViewBag.ImageID">
+                <option disabled selected>- Chưa chọn -</option>
+            </select>
             <span asp-validation-for="Image" class="text-danger"></span>
         </div>
     </div>
@@ -37,10 +39,15 @@
 </div>
 <div class="row col-md-12">
     <div class="form-group">
+        <label asp-for="Description" class="control-label"></label>
+        <textarea asp-for="Description" cols="3" rows="3" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+</div>
+<div class="row col-md-12">
+    <div class="form-group">
         <label asp-for="Content" class="control-label"></label>
-        <div class="col-md-10">
-            <textarea asp-for="Content" class="form-control ckeditor"></textarea>
-            <span asp-validation-for="Content" class="text-danger"></span>
-        </div>
+        <textarea asp-for="Content" class="form-control ckeditor"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
     </div>
 </div>

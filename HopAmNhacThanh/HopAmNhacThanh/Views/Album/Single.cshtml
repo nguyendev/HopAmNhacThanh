@@ -1,1 +1,43 @@
-﻿<h2>Tính năng đang xây dựng. Vui lòng quay lại sau</h2>
+﻿@{
+    HopAmNhacThanh.Models.SidebarViewModels.CommonSidebarViewModel sidebar = ViewData["Sidebar"] as HopAmNhacThanh.Models.SidebarViewModels.CommonSidebarViewModel;
+    HopAmNhacThanh.Models.AlbumViewModels.SingleAlbumViewModel single = ViewData["Single"] as HopAmNhacThanh.Models.AlbumViewModels.SingleAlbumViewModel;
+
+    ViewData["Title"] = "Hợp âm " + single.Name + " | Hợp Âm Nhạc Thánh";
+    ViewData["Desciption"] = single.Description;
+}
+
+<div class="row">
+    @*<ul class="breadcrumb">
+        <li><a asp-controller="album" asp-action="list">Album</a></li>
+        <li class="active">@single.Name</li>
+    </ul>*@
+    <div class="col-md-8" style="padding-right: 0px;">
+        
+        <div class="panel panel-primary">
+            <div class="panel-heading sidebar-panel-heading">
+                <h1 style="font-size: medium" class="panel-title">Danh sách album</h1>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div align="center">
+                            @if (single.ImageID.HasValue)
+                            {
+                                <img src="https://hopamviet.vn/assets/images/composers/duyengland4copyjpg.jpg" class="img-rounded img-responsive">
+                            }
+                        </div>
+                        <h2 align="center">@Html.Raw(single.Name)</h2>
+                        @if (single.Content != null
+                   )
+                        {
+                            @Html.Raw(single.Content)
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        @Html.Partial("SidebarCommon", sidebar)
+    </div>
+</div>

@@ -21,13 +21,16 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
     public class AlbumsManagerController : Controller
     {
         private readonly IAlbumManagerRepository _repository;
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
         public AlbumsManagerController(IAlbumManagerRepository repository,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            ApplicationDbContext context)
         {
             _repository = repository;
             _userManager = userManager;
+            _context = context;
         }
 
         [Route("/quan-ly-web/album")]
@@ -83,6 +86,7 @@ string currentFilter,
         [Route("quan-ly-web/album/tao-moi")]
         public IActionResult Create()
         {
+            ViewData["ImageID"] = new SelectList(_context.Album, "ID", "Name");
             return View();
         }
 
@@ -102,6 +106,7 @@ string currentFilter,
                     return RedirectToAction("Index");
                 return NotFound();
             }
+            ViewData["ImageID"] = new SelectList(_context.Album, "ID", "Name", model.ImageID);
             return View(model);
         }
 
@@ -121,6 +126,7 @@ string currentFilter,
             {
                 return NotFound();
             }
+            ViewData["ImageID"] = new SelectList(_context.Album, "ID", "Name", song.ImageID);
             return View(song);
         }
 
@@ -156,6 +162,7 @@ string currentFilter,
                 }
                 return RedirectToAction("Index");
             }
+            ViewData["ImageID"] = new SelectList(_context.Album, "ID", "Name", model.ImageID);
             return View(model);
         }
 

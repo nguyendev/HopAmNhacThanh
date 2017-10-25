@@ -31,7 +31,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
                     Intro = model.Intro,
                     Tone = model.Tone,
                     SongID = model.SongID,
-                    Version = model.Version,
+                    Name = model.Version,
                     StyleID = model.StyleID,
                     Lyric = model.Lyric,
                     Slug = user.Slug + "-" + StringExtensions.RandomNumber(2),
@@ -118,7 +118,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
                     SongID = item.SongID,
                     StyleID = item.StyleID,
                     Tone = item.Tone,
-                    Version = item.Version,
+                    Version = item.Name,
                     Approved = item.Approved,
                     ID = item.ID,
                     CreateDT = item.CreateDT
@@ -152,7 +152,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
                 {
                     ID = chordDbContext.ID,
                     Slug = chordDbContext.Slug,
-                    Version = chordDbContext.Version,
+                    Version = chordDbContext.Name,
                     Info = chordDbContext.Info,
                     InfoShort = chordDbContext.InfoShort,
                     Intro = chordDbContext.Intro,
@@ -217,7 +217,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
             chordDbContext.StyleID = model.StyleID;
             chordDbContext.Tone = model.Tone;
             chordDbContext.UpdateDT = DateTime.Now;
-            chordDbContext.Version = model.Version;
+            chordDbContext.Name = model.Version;
 
 
             _context.Chords.Update(chordDbContext);

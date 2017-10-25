@@ -1,8 +1,8 @@
 ﻿@{ 
-    HopAmNhacThanh.Models.HomeViewModels.MainContentViewModel mainContent = ViewData["MainContent"] as HopAmNhacThanh.Models.HomeViewModels.MainContentViewModel;
-
+    HopAmNhacThanh.Models.HomeViewModels.MainContentViewModel mainContent = ViewData["Main"] as HopAmNhacThanh.Models.HomeViewModels.MainContentViewModel;
+    HopAmNhacThanh.Models.SidebarViewModels.CommonSidebarViewModel sidebar = ViewData["Sidebar"] as HopAmNhacThanh.Models.SidebarViewModels.CommonSidebarViewModel;
     ViewData["Title"] = "Tổng hợp Chord, Lyric, Sheet Nhạc Thánh | Hợp Âm Nhạc Thánh";
-
+    ViewData["Desciption"] = "Tổng hợp sheet, chord (hợp âm), lyric (lời) bài hát Nhạc Thánh Tin Lành dành cho Cơ Đốc Nhân có hướng dẫn sử dụng hợp âm dành cho đàn ghitar, piano ukulele";
 }
 <div class="row">
     <div class="col-md-8"style="padding-right: 0px;">
@@ -105,7 +105,7 @@
     </div>
    
     <div class="col-md-4">
-        @Html.Partial("SidebarHome",mainContent)
+        @Html.Partial("SidebarCommon",sidebar)
     </div>
 </div>
 @section Style {
