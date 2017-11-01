@@ -4,17 +4,24 @@
     <h4>
         <i class="fa fa-music fa-fw"></i>
         <a asp-controller="Home" asp-action="single" asp-route-slug="@Model.Slug" asp-route-slugVersion="@Model.VersionSlug">
-            @Model.Name
+            @if (Model.Number != null)
+            {
+                @Html.Raw(Model.Number + "." + Model.Name)
+            }
+            else
+            {
+                @Model.Name
+            }
         </a>
         @if (Model.AuthorSong != null) { 
         <small>
             <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
-            <a asp-controller="AuthorSong" asp-action="single" asp-route-slug="@Model.Slug"> @Model.AuthorSong.Name</a>
+            <a asp-controller="AuthorSong" asp-action="single" asp-route-slug="@Model.AuthorSong.Slug"> @Model.AuthorSong.Name</a>
         </small>
         }
         @if (Model.Album != null) {
         <small>
-            <i title="Album" class="fa fa fa-file-movie-o"></i> Album: <a asp-controller="Album" asp-action="single" asp-route-slug="@Model.Slug">@Model.Album.Name</a>
+            <i title="Album" class="fa fa fa-file-movie-o"></i> Album: <a asp-controller="Album" asp-action="single" asp-route-slug="@Model.Album.Slug">@Model.Album.Name</a>
         </small>
         }
         <small>

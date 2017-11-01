@@ -55,7 +55,7 @@
                             }
                             @if (MainSingle.Category != null)
                             {
-                                <i class="fa fa-book"></i> @Html.Raw("Danh mục:") <a asp-controller="Category" asp - action="single"> @MainSingle.Category.Name </a>
+                                <i class="fa fa-book"></i> @Html.Raw("Danh mục:") <a asp-controller="Category" asp-action="single" asp-route-slug="@MainSingle.Category.Slug"> @MainSingle.Category.Name </a>
                             }
                             else
                             {
@@ -91,6 +91,10 @@
                         padding: 10px 10px;
                         display: inline-block;
                     }
+                    /*span.chord ~ span.chord {
+                        margin-right: 30px;
+                        margin-left: 30px;
+                    }*/
                 </style>
                 <div id="form-lyric">
                     <div class="btn-group">
@@ -303,6 +307,7 @@
                     $("span.chord").css('position', 'relative');
                     $("span.chord").css('display', 'inline-block');
                     $("span.chord").css('top', '-1em');
+                    
                     $("span.chord").css('width', '0');
                     $("#lyric").css('line-height', '250%');
                     $("#lyric").css('padding-top', '1em');

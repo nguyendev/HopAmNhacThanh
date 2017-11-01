@@ -18,5 +18,6 @@ namespace HopAmNhacThanh.Models
         public Images Image { get; set; }
         public string Content { get; set; }
         public bool IsDeleted { get; set; }
+        public string Description { get; set; }
     }
 }

@@ -169,6 +169,8 @@ namespace HopAmNhacThanh.Migrations
 
                     b.Property<DateTime?>("CreateDT");
 
+                    b.Property<string>("Description");
+
                     b.Property<int?>("ImageID");
 
                     b.Property<bool>("IsDeleted");
@@ -196,7 +198,9 @@ namespace HopAmNhacThanh.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Image");
+                    b.Property<string>("Description");
+
+                    b.Property<int?>("ImageID");
 
                     b.Property<bool>("IsDeleted");
 
@@ -209,6 +213,8 @@ namespace HopAmNhacThanh.Migrations
                     b.Property<string>("Slug");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("ImageID");
 
                     b.ToTable("Category");
                 });
@@ -511,7 +517,9 @@ namespace HopAmNhacThanh.Migrations
 
                     b.Property<DateTime?>("CreateDT");
 
-                    b.Property<string>("Image");
+                    b.Property<string>("Description");
+
+                    b.Property<int?>("ImageID");
 
                     b.Property<bool>("IsDeleted");
 
@@ -528,6 +536,8 @@ namespace HopAmNhacThanh.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("AuthorID");
+
+                    b.HasIndex("ImageID");
 
                     b.ToTable("SingleSong");
                 });
@@ -599,6 +609,10 @@ namespace HopAmNhacThanh.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Description");
+
+                    b.Property<int?>("ImageID");
+
                     b.Property<bool>("IsDeleted");
 
                     b.Property<string>("Name")
@@ -610,6 +624,8 @@ namespace HopAmNhacThanh.Migrations
                     b.Property<string>("Slug");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("ImageID");
 
                     b.ToTable("Style");
                 });
@@ -640,6 +656,8 @@ namespace HopAmNhacThanh.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Content");
+
+                    b.Property<string>("Description");
 
                     b.Property<int?>("ImageID");
 
@@ -785,6 +803,13 @@ namespace HopAmNhacThanh.Migrations
                         .HasForeignKey("ImageID");
                 });
 
+            modelBuilder.Entity("HopAmNhacThanh.Models.Category", b =>
+                {
+                    b.HasOne("HopAmNhacThanh.Models.Images", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageID");
+                });
+
             modelBuilder.Entity("HopAmNhacThanh.Models.Chords", b =>
                 {
                     b.HasOne("HopAmNhacThanh.Models.ApplicationUser", "Author")
@@ -863,6 +888,10 @@ namespace HopAmNhacThanh.Migrations
                     b.HasOne("HopAmNhacThanh.Models.ApplicationUser", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorID");
+
+                    b.HasOne("HopAmNhacThanh.Models.Images", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageID");
                 });
 
             modelBuilder.Entity("HopAmNhacThanh.Models.Song", b =>
@@ -887,6 +916,13 @@ namespace HopAmNhacThanh.Migrations
                     b.HasOne("HopAmNhacThanh.Models.VietnameseLyric", "VietnameseLyric")
                         .WithMany()
                         .HasForeignKey("VietnameseLyricID");
+                });
+
+            modelBuilder.Entity("HopAmNhacThanh.Models.Style", b =>
+                {
+                    b.HasOne("HopAmNhacThanh.Models.Images", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageID");
                 });
 
             modelBuilder.Entity("HopAmNhacThanh.Models.Video", b =>

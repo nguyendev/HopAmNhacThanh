@@ -1,0 +1,17 @@
+@model List<HopAmNhacThanh.Models.SidebarViewModels.SimpleAlbumViewModel>
+<div class="panel-heading sidebar-panel-heading">
+    <h2 class="panel-title sidebar-panel-title"><a asp-controller="album" asp-action="list">Album</a></h2>
+</div>
+<div class="panel-body">
+    <div class="listMenu">
+        <ul id="albumData" style="padding-left: 0px;">
+            @foreach (var item in Model)
+            {
+                <li>
+                    <a asp-controller="Album" asp-action="Single" asp-route-slug="@item.Slug">@item.Name</a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+

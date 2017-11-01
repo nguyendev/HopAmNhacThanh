@@ -9,7 +9,6 @@ namespace HopAmNhacThanh.Models.SidebarViewModels
     {
         public List<SimpleStyleViewModel> ListStyle { get; set; }
         public List<BestSimpleSongViewModel> ListSong { get; set; }
-        public List<SimpleAlbumViewModel> ListTopAlbum { get; set; }
     }
     public class SimpleStyleViewModel
     {
@@ -28,5 +27,12 @@ namespace HopAmNhacThanh.Models.SidebarViewModels
     {
         public string Name { get; set; }
         public string Slug { get; set; }
+    }
+
+    public class SimpleCategoryViewModel
+    {
+        public string Name { get; set; }
+        public string Slug { get; set; }
+        public int Count { get; set; }
     }
 }

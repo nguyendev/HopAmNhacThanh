@@ -17,6 +17,7 @@ namespace HopAmNhacThanh.Models.HomeViewModels
     {
         public string Name { get; set; }
         public string OrtherName { get; set; }
+        public int? Number { get; set; }
         public AuthorSong AuthorSong { get; set; }
         public Album Album { get; set; }
         public int View { get; set; }

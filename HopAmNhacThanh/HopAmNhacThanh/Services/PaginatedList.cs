@@ -52,5 +52,11 @@ namespace HopAmNhacThanh.Services
             var items = source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
             return new PaginatedList<T>(items, count, pageIndex, pageSize);
         }
+        public static PaginatedList<T> Create(List<T> source, int pageIndex, int pageSize)
+        {
+            var count = source.Count();
+            var items = source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            return new PaginatedList<T>(items, count, pageIndex, pageSize);
+        }
     }
 }

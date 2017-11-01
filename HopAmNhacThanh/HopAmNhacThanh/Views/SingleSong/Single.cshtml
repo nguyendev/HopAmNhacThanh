@@ -1,0 +1,24 @@
+﻿@{
+    HopAmNhacThanh.Models.CommonViewModels.CommonSingleViewModel single = ViewData["Single"] as HopAmNhacThanh.Models.CommonViewModels.CommonSingleViewModel;
+    ViewData["Title"] = "Thông tin ca sỹ " + single.Name + " | Hợp Âm Nhạc Thánh";
+    ViewData["Desciption"] = single.Description;
+}
+
+<div class="row">
+    @*<ul class="breadcrumb">
+            <li><a asp-controller="album" asp-action="list">Album</a></li>
+            <li class="active">@single.Name</li>
+        </ul>*@
+    <div id="single-template1" class="col-md-8" style="padding-right: 0px;">
+        @await Html.PartialAsync("_CommonSinglePartial", single)
+    </div>
+    <div class="col-md-4">
+        @Html.Partial("SidebarCommon")
+    </div>
+</div>
+@section Style {
+    <link href="~/css/siteCommont.min.css" rel="stylesheet" asp-append-version="true" />
+}
+@section Scripts {
+    <script defer src="~/js/siteCommon.js" asp-append-version="true"></script>
+}

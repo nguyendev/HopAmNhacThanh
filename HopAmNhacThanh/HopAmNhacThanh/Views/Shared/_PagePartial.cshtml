@@ -1,4 +1,5 @@
 ﻿@model HopAmNhacThanh.Models.PageListItemTemplate
+@if (Model.PageIndex < Model.TotalPages) { 
 <div class="text-center">
     @{
             int Min = (Model.PageIndex - 1) * Model.PageSize;
@@ -57,3 +58,4 @@
         }
     </ul>
 </div>
+        }

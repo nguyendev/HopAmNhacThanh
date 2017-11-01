@@ -38,5 +38,23 @@
     "inputFiles": [
       "wwwroot/lib/jtab-tardate/javascripts/raphael.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/siteCommon.min.js",
+    "inputFiles": [
+      "wwwroot/js/siteCommon.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/siteCommont.min.css",
+    "inputFiles": [
+      "wwwroot/css/siteCommont.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/sidebarCommon.min.js",
+    "inputFiles": [
+      "wwwroot/js/sidebarCommon.js"
+    ]
   }
 ]

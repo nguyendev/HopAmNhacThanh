@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using DoVuiHaiNao.Services;
 using HopAmNhacThanh.Services;
 using HopAmNhacThanh.Models;
+using HopAmNhacThanh.Models.HomeViewModels;
+using HopAmNhacThanh.Models.CommonViewModels;
 
 namespace HopAmNhacThanh.Data.AlbumRepository
 {
@@ -17,7 +19,7 @@ namespace HopAmNhacThanh.Data.AlbumRepository
         {
             _context = context;
         }
-        public async Task<ListAlbumViewModel> GetListAlbum(int page, int pageSize)
+        public async Task<CommonListViewModel> GetListAlbum(int page, int pageSize)
         {
             var albumDbContext = from s in _context.Album
                 .Where(p => p.Approved == Global.APPROVED)
@@ -27,11 +29,11 @@ namespace HopAmNhacThanh.Data.AlbumRepository
                                  select s;
             var albumPaginatedList = await PaginatedList<Album>.CreateAsync(albumDbContext.AsNoTracking(), page, pageSize);
 
-            List<SimpleAlbumViewModel> listAlbum = new List<SimpleAlbumViewModel>();
+            List<CommonSimpleViewModel> listAlbum = new List<CommonSimpleViewModel>();
 
             foreach (var item in albumPaginatedList)
             {
-                SimpleAlbumViewModel simpleAlbum = new SimpleAlbumViewModel
+                CommonSimpleViewModel simpleAlbum = new CommonSimpleViewModel
                 {
                     Content = item.Content,
                     ImageID = item.ImageID,
@@ -42,7 +44,7 @@ namespace HopAmNhacThanh.Data.AlbumRepository
                 simpleAlbum.Description = item.Description != null ? SEOExtension.GetStringToLength(item.Description, 300) : "";
                 listAlbum.Add(simpleAlbum);
             }
-            ListAlbumViewModel model = new ListAlbumViewModel
+            CommonListViewModel model = new CommonListViewModel
             {
                 Action = "List",
                 Areas = "",
@@ -56,21 +58,74 @@ namespace HopAmNhacThanh.Data.AlbumRepository
             return model;
         }
 
-        public async Task<SingleAlbumViewModel> GetSingleAlbum(string slug)
+        public async Task<CommonSingleViewModel> GetSingleAlbum(string slug, int page, int pageSize)
         {
             var single = await _context.Album
                 .Include(p => p.Image)
+                .Where(p => p.Approved == Global.APPROVED)
+                .Where(p => p.CreateDT <= DateTime.Now)
+                .Where(p => !p.IsDeleted)
                 .SingleOrDefaultAsync(p => p.Slug == slug);
 
-            SingleAlbumViewModel model = new SingleAlbumViewModel
+            var songDbContext = await _context.Song
+                .Include(p => p.Album)
+                .Include(p => p.AuthorSong)
+                .Where(p => p.AlbumID == single.ID)
+                .Where(p => p.Approved == Global.APPROVED)
+                .Where(p => p.CreateDT <= DateTime.Now)
+                .Where(p => !p.IsDeleted)
+                .OrderBy(p => p.NumberSongInAlbum).Take(10).ToListAsync();
+
+            List<SimpleSongViewModel> ListSong = new List<SimpleSongViewModel>();
+
+            foreach (var item in songDbContext)
+            {
+                var chords = _context.Chords
+                    .Where(p => p.SongID == item.ID)
+                    .Where(p => p.Approved == Global.APPROVED)
+                    .Where(p => p.CreateDT <= DateTime.Now)
+                    .Where(p => !p.IsDeleted)
+                    .First();
+                if (chords != null)
+                {
+                    SimpleSongViewModel song = new SimpleSongViewModel
+                    {
+                        Name = item.Name,
+                        Album = item.Album,
+                        AuthorSong = item.AuthorSong,
+                        OrtherName = item.OrtherName,
+                        View = item.Views,
+                        Lyric = SEOExtension.GetStringToLength(chords.Lyric, Global.LENGTH_LYRIC),
+                        Slug = item.Slug,
+                        VersionSlug = chords.Slug,
+                        Number = item.NumberSongInAlbum,
+
+                    };
+                    ListSong.Add(song);
+                }
+            }
+
+
+            var songPaginatedList = PaginatedList<SimpleSongViewModel>.Create(ListSong, page, pageSize);
+
+
+
+
+            CommonSingleViewModel model = new CommonSingleViewModel
             {
                 ImageID = single.ImageID,
                 Image = single.Image,
                 Content = single.Content,
                 Description = single.Description,
                 Name = single.Name,
-                Slug =single.Slug
-
+                Slug =single.Slug,
+                ListSong = ListSong,
+                Count = songPaginatedList.Count,
+                PageIndex = songPaginatedList.PageIndex,
+                PageSize = songPaginatedList.PageSize,
+                TotalPages = songPaginatedList.TotalPages,
+                Action = "single",
+                Controller = "album",
             };
             model.Description = single.Description != null ? SEOExtension.GetStringToLength(single.Description, 300) : "";
             return model;

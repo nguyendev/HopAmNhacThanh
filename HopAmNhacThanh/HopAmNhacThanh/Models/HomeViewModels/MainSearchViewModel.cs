@@ -8,6 +8,6 @@ namespace HopAmNhacThanh.Models.HomeViewModels
     public class MainSearchViewModel : PageListItemTemplate
     {
         public string Search { get; set; }
-        public List<SimpleSongViewModel> ListSong { get; set; }
+        public IEnumerable<SimpleSongViewModel> ListSong { get; set; }
     }
 }

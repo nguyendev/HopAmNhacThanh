@@ -21,6 +21,9 @@ using HopAmNhacThanh.Data.HomeRepository;
 using HopAmNhacThanh.Data.SongRepository;
 using HopAmNhacThanh.Data.SidebarRepository;
 using HopAmNhacThanh.Data.AlbumRepository;
+using HopAmNhacThanh.Data.AuthorSongRepository;
+using HopAmNhacThanh.Data.SingleSongRepository;
+using HopAmNhacThanh.Data.CategoryRepository;
 
 namespace HopAmNhacThanh
 {
@@ -115,6 +118,11 @@ namespace HopAmNhacThanh
             services.AddScoped<IVietnameseLyricsManagerRepository, VietnameseLyricsManagerRepository>();
             services.AddScoped<ISidebarRepository, SidebarRepository>();
             services.AddScoped<IAlbumRepository, AlbumRepository>();
+            services.AddScoped<IAuthorSongRepository, AuthorSongRepository>();
+            services.AddScoped<ISingleSongRepository, SingleSongRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IViewRenderService, ViewRenderService>();
+            //services.AddSingleton();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

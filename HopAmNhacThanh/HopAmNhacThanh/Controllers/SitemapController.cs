@@ -1,4 +1,5 @@
-﻿using HopAmNhacThanh.Data;
+﻿using DoVuiHaiNao.Services;
+using HopAmNhacThanh.Data;
 using HopAmNhacThanh.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -96,7 +97,9 @@ namespace HopAmNhacThanh.Controllers
             //}
 
             var song = await _blogService.Song
-                .Where(p => p.CreateDT < DateTime.Now)
+                .Where(p => p.Approved == Global.APPROVED)
+                .Where(p => p.CreateDT <= DateTime.Now)
+                .Where(p => !p.IsDeleted)
                 .ToListAsync();
             string songRoot = root + "/bai-hat/";
             foreach (var item in song)
@@ -107,7 +110,7 @@ namespace HopAmNhacThanh.Controllers
                         .ToListAsync();
                 foreach(var itemChord in chords)
                 {
-                    siteMapBuilder.AddUrl(songRoot + item.Slug + "/" + item.Slug);
+                    siteMapBuilder.AddUrl(songRoot + item.Slug + "/" + itemChord.Slug, modified: itemChord.CreateDT, changeFrequency: null, priority: 0.9);
                 }
             }
 

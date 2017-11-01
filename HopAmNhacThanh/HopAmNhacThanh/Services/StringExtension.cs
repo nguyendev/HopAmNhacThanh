@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace DoVuiHaiNao.Services
 {
@@ -87,6 +85,8 @@ namespace DoVuiHaiNao.Services
             temp = temp.ToLower();
             return regex.Replace(temp, String.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D').Replace(" ", "-");
         }
+
+
     }
 
 }

@@ -30,13 +30,8 @@ namespace HopAmNhacThanh.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            if (!_signInManager.IsSignedIn(HttpContext.User))
-            {
-                string path = HttpContext.Request.Path.ToString();
-                HttpContext.Session.SetString("currentUrl", path);
-            }
+            SaveCurrentURL();
             ViewData["Main"] = await _repostitory.GetMainHome();
-            ViewData["Sidebar"] = await _sidebarRepository.GetSidebarCommon();
             return View();
         }
 
@@ -70,11 +65,7 @@ namespace HopAmNhacThanh.Controllers
         [Route("bai-hat/{slug}/{slugVersion}")]
         public async Task<IActionResult> Single(string slug, string slugVersion)
         {
-            if (!_signInManager.IsSignedIn(HttpContext.User))
-            {
-                string path = HttpContext.Request.Path.ToString();
-                HttpContext.Session.SetString("currentUrl", path);
-            }
+            
             await _repostitory.IncreaseView(slug);
             ViewData["MainSingle"] = await _repostitory.GetMainSingle(slug,slugVersion);
             return View();
@@ -101,7 +92,7 @@ namespace HopAmNhacThanh.Controllers
         {
             return View();
         }
-        [Route("/tim-kiem")]
+        [Route("/tim-kiem/")]
         public async Task<IActionResult> Search(
     string search,
     int? page)
@@ -130,6 +121,15 @@ namespace HopAmNhacThanh.Controllers
         private Task<ApplicationUser> GetCurrentUserAsync()
         {
             return _userManager.GetUserAsync(HttpContext.User);
+        }
+
+        private void SaveCurrentURL()
+        {
+            if (!_signInManager.IsSignedIn(HttpContext.User))
+            {
+                string path = HttpContext.Request.Path.ToString();
+                HttpContext.Session.SetString("currentUrl", path);
+            }
         }
     }
 }

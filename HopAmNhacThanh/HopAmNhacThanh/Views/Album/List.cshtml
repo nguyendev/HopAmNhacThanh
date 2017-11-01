@@ -1,43 +1,27 @@
 ﻿@{ 
-    HopAmNhacThanh.Models.SidebarViewModels.CommonSidebarViewModel sidebar = ViewData["Sidebar"] as HopAmNhacThanh.Models.SidebarViewModels.CommonSidebarViewModel;
-    HopAmNhacThanh.Models.AlbumViewModels.ListAlbumViewModel list = ViewData["List"] as HopAmNhacThanh.Models.AlbumViewModels.ListAlbumViewModel;
+    HopAmNhacThanh.Models.CommonViewModels.CommonListViewModel list = ViewData["List"] as HopAmNhacThanh.Models.CommonViewModels.CommonListViewModel;
 
-    ViewData["Title"] = "Danh sách Album | Hợp Âm Nhạc Thánh";
-    ViewData["Desciption"] = "Tổng hợp tất cả album Nhạc Thánh có hợp âm như Thánh Ca Tin Lành 1000 bài, Dâng lời ca, Tôn Vinh Chúa Hằng Hữu, và nhiều album Cơ Đốc khác nữa";
+    ViewData["Title"] = "Danh sách ca sỹ | Hợp Âm Nhạc Thánh";
+    ViewData["Desciption"] = "Tổng hợp tất cả ca sỹ Cơ Đốc";
 }
-
 <div class="row">
     <div class="col-md-8" style="padding-right: 0px;">
         <div class="panel panel-primary">
             <div class="panel-heading sidebar-panel-heading">
-                <h1 style="font-size: medium" class="panel-title">Danh sách album</h1>
+                <h1 style="font-size: medium" class="panel-title">Danh sách nhạc sỹ</h1>
             </div>
             <div class="panel-body">
-                @foreach (var item in list.List)
-                {
-                    <div class="row">                    
-                        <div class="col-md-4">
-                            @if (!item.ImageID.HasValue)
-                            {
-                            <img src="~/images/album-sample.jpg" class="img-responsive"/>
-                            }
-                            else
-                            {
-                                <img src="@item.Image." alt="@item.Image.ALT" class="img-responsive" />
-                            }
-                        </div>
-                        <div class="col-md-8">
-                            <h2 style="font-size: larger"><a asp-controller="album" asp-action="single" asp-route-slug="@item.Slug">@item.Name</a></h2>
-                            <p>@item.Description </p>
-                            <p><a asp-controller="album" asp-action="single" asp-route-slug="@item.Slug" style="float:right">Xem thêm <i class="fa fa-arrow-right"></i></a></p>
-                        </div>
-                    </div>
-                    <hr />
-                }
+                @await Html.PartialAsync("_CommonListPartial", list)
             </div>
         </div>
     </div>
     <div class="col-md-4">
-        @Html.Partial("SidebarCommon", sidebar)
+        @await Html.Partial("SidebarCommon")
     </div>
 </div>
+@section Style {
+    <link href="~/css/siteCommont.min.css" rel="stylesheet" asp-append-version="true" />
+}
+@section Scripts {
+    <script defer src="~/js/siteCommon.js" asp-append-version="true"></script>
+}

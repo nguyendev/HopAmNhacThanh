@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
     <UserSecretsId>aspnet-HopAmNhacThanh-2CB83202-6D13-49C7-B100-1D2DA8A0CBA6</UserSecretsId>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
 
 
@@ -38,7 +39,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\AuthorSong\" />
     <Folder Include="Views\Album\" />
     <Folder Include="Views\AuthorChords\" />
     <Folder Include="Views\Sheet\" />

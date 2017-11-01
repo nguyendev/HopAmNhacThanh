@@ -1,0 +1,47 @@
+﻿@model HopAmNhacThanh.Models.CommonViewModels.CommonSingleViewModel
+<div class="panel panel-primary">
+    <div class="panel-heading sidebar-panel-heading">
+        <h1 style="font-size: medium" class="panel-title">Thông tin album @Model.Name</h1>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div align="center">
+                    @if (Model.ImageID.HasValue)
+                            {
+                        <img src="https://hopamviet.vn/assets/images/composers/duyengland4copyjpg.jpg" class="img-rounded img-responsive">
+                            }
+                            else
+                            {
+                        <img src="~/images/images-null.png" class="img-rounded img-responsive">
+                            }
+                </div>
+                <h2 align="center">@Html.Raw(Model.Name)</h2>
+                @if (Model.Content != null
+                      )
+                        {
+                    @Html.Raw(Model.Content)
+                        }
+                        else
+                        {
+                    <p align="center">Chưa có thông tin về album này</p>
+                        }
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h2 style="font-size:medium" class="panel-title">Bài hát trong album</h2>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-12">
+            @foreach (var item in Model.ListSong)
+                    {
+                @Html.Partial("_SimpleSongPartial", item)
+                    }
+            @Html.Partial("_PagePartial", Model)
+        </div>
+    </div>
+</div>

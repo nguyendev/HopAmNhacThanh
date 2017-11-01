@@ -22,10 +22,11 @@ namespace HopAmNhacThanh.Controllers
         }
 
         [Route("album/{slug}")]
-        public async Task<IActionResult> Single(string slug)
+        public async Task<IActionResult> Single(string slug, int? page)
         {
-            ViewData["Single"] = await _repository.GetSingleAlbum(slug);
-            ViewData["Sidebar"] = await _sidebarRepository.GetSidebarCommon();
+            if (!page.HasValue)
+                page = 1;
+            ViewData["Single"] = await _repository.GetSingleAlbum(slug, page.Value, PAGE_SIZE);
             return View();
         }
 
@@ -38,7 +39,6 @@ namespace HopAmNhacThanh.Controllers
                 page = 1;
 
             ViewData["List"] = await _repository.GetListAlbum(page.Value, pageSize);
-            ViewData["Sidebar"] = await _sidebarRepository.GetSidebarCommon();
             return View();
         }
     }

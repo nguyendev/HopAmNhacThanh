@@ -1,4 +1,5 @@
 ﻿using HopAmNhacThanh.Models.AlbumViewModels;
+using HopAmNhacThanh.Models.CommonViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace HopAmNhacThanh.Data.AlbumRepository
 {
     public interface IAlbumRepository
     {
-        Task<ListAlbumViewModel> GetListAlbum(int page, int size);
-        Task<SingleAlbumViewModel> GetSingleAlbum(string slug);
+        Task<CommonListViewModel> GetListAlbum(int page, int size);
+        Task<CommonSingleViewModel> GetSingleAlbum(string slug, int page, int pageSize);
     }
 }

@@ -1,6 +1,5 @@
 ﻿@{ 
     HopAmNhacThanh.Models.HomeViewModels.MainContentViewModel mainContent = ViewData["Main"] as HopAmNhacThanh.Models.HomeViewModels.MainContentViewModel;
-    HopAmNhacThanh.Models.SidebarViewModels.CommonSidebarViewModel sidebar = ViewData["Sidebar"] as HopAmNhacThanh.Models.SidebarViewModels.CommonSidebarViewModel;
     ViewData["Title"] = "Tổng hợp Chord, Lyric, Sheet Nhạc Thánh | Hợp Âm Nhạc Thánh";
     ViewData["Desciption"] = "Tổng hợp sheet, chord (hợp âm), lyric (lời) bài hát Nhạc Thánh Tin Lành dành cho Cơ Đốc Nhân có hướng dẫn sử dụng hợp âm dành cho đàn ghitar, piano ukulele";
 }
@@ -10,8 +9,8 @@
             <div class="panel-body">
                 <ul class="nav nav-pills">
                     <li class="active"><a data-toggle="pill" href="#new">Mới nhất</a></li>
-                    <li><a data-toggle="pill" href="#popular">Phổ biến nhất</a></li>
-                    <li><a data-toggle="pill" href="#request">Đang được yêu cầu</a></li>
+                    <li><a data-toggle="pill" href="#popular">Phổ biến</a></li>
+                    <li><a data-toggle="pill" href="#request">Được yêu cầu</a></li>
                 </ul>
                 <hr />
                 <div class="tab-content" style="margin-top:10px;">
@@ -105,43 +104,13 @@
     </div>
    
     <div class="col-md-4">
-        @Html.Partial("SidebarCommon",sidebar)
+        @Html.Partial("SidebarCommon")
     </div>
 </div>
 @section Style {
-<style>
-    .chord {
-        color: blue;
-    }
-</style>
-<style>
-    small {
-        margin-left: 5px;
-    }
-    .tab-pane {
-        margin-bottom: 10px;
-    }
-</style>
-   
-
+<link href="~/css/siteCommont.min.css" rel="stylesheet" asp-append-version="true" />
 }
 @section Scripts {
-<script defer>
-        function bodyLoad() {
-            
-
-            chord = "(([A-G][b#]?)((7sus4|7sus2|sus4|sus2|dim|aug|add9|m7M|maj7|m9|m7|m6|m|7M|9|7|6|4|11|m11)?(\\s*[-/]?\\s*)))";
-            openBracket = "[\\[\\(]";
-            closeBracket = "[\\]\\)]";
-            reOneChord = new RegExp(chord, "g");
-            reChords = new RegExp(openBracket + "(" + chord + "+)" + closeBracket, "g");
-            document.body.innerHTML = document.body.innerHTML.replace(reChords, "<span class=chord>$&</span>");
-            $('.lyric br').replaceWith(' ');
-        }
-        $(function () {
-            bodyLoad();
-            //render_tab_chords();
-        });
-</script>
+<script defer src="~/js/siteCommon.js" asp-append-version="true" ></script>
 
 }

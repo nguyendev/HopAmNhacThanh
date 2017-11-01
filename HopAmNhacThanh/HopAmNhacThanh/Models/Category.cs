@@ -16,8 +16,10 @@ namespace HopAmNhacThanh.Models
         [Display(Name="Tên")]
         [MaxLength(60)]
         public string Name { get; set; }
+        public string Description { get; set; }
         [Display(Name = "Hình ảnh")]
-        public string Image { get; set; }
+        public int? ImageID { get; set; }
+        public Images Image { get; set; }
         [Display(Name = "Slug")]
         public string Slug { get; set; }
         [Display(Name = "Ghi chú")]

@@ -15,6 +15,9 @@ namespace HopAmNhacThanh.Models
         [Required]
         [MaxLength(60)]
         public string Name { get; set; }
+        public string Description { get; set; }
+        public int? ImageID { get; set; }
+        public Images Image { get; set; }
         public string Slug { get; set; }
         public string Note { get; set; }
         public bool IsDeleted { get; set; }

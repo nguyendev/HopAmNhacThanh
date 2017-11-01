@@ -45,125 +45,25 @@
         </div>
     </div>
 </div>*@
-<style>
-    #list-album .panel-body {
-        background: #ffffff;
-        padding: 10px 15px;
-        box-shadow: 1px 1px 0px #e5e5e5;
-    }
-    .listMenu ul li {
-        padding-bottom: 5px;
-        margin-bottom: 10px;
-        border-bottom: solid 1px #dcdcdc;
-    }
-        .listMenu ul li a {
-            display: block;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-            font-size: 15px;
-            line-height: 23px;
-            text-transform: capitalize;
-        }
-    .listMenu ul li {
-        list-style-type: none;
-    }
-</style>
-@if (Model.ListTopAlbum.Any()) {
-<div id="list-album" class="panel panel-default">
+<div id="list-album-widget" style="display:none" class="panel panel-primary">
+</div>
+<div id="list-category-widget" style="display:none" class="panel panel-primary">
+</div>
+<div id="list-rhythm-widget" style="display:none" class="panel panel-primary">
+    
+</div>
+
+<div id="list-top-song-widget" style="display:none" class="panel panel-primary">
+</div>
+
+<div id="list-fanpage-facebook-widget" class="panel panel-primary">
     <div class="panel-heading sidebar-panel-heading">
-        <h2 class="panel-title sidebar-panel-title"><a asp-controller="album" asp-action="list">Album</a></h2>
+        <h2 class="panel-title sidebar-panel-title">
+            Tìm chúng tôi trên facebook
+        </h2>
     </div>
     <div class="panel-body">
-        <div class="listMenu">
-            <ul style="padding-left: 0px;">
-                @foreach(var item in Model.ListTopAlbum) { 
-                <li><a asp-controller="Album" asp-action="Single" asp-route-slug="@item.Slug">@item.Name</a></li>
-                }
-            </ul>
-        </div>
+        <div class="fb-page" data-href="https://www.facebook.com/hopamnhacthanh/" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/H%E1%BB%A3p-%C3%A2m-Nh%E1%BA%A1c-Th%C3%A1nh-883153405186191/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/H%E1%BB%A3p-%C3%A2m-Nh%E1%BA%A1c-Th%C3%A1nh-883153405186191/">Hợp âm Nhạc Thánh</a></blockquote></div>
     </div>
 </div>
-}
-
-<div id="rhythm" class="panel panel-default">
-    <style>
-        .rhythm-item:hover {
-            text-decoration: none;
-            color: blue;
-        }
-        .rhythm-item {
-            white-space: nowrap;
-            background-color: #ddd;
-            padding: 10px 7px;
-            font-size: 12px;
-            line-height: 24px;
-            border-radius: 4px;
-            cursor: pointer;
-            -webkit-transition: box-shadow .1s,background-color .1s;
-            -moz-transition: box-shadow .1s,background-color .1s;
-            -ms-transition: box-shadow .1s,background-color .1s;
-            -o-transition: box-shadow .1s,background-color .1s;
-            color: white;
-            text-decoration: none;
-            margin: 5px;
-            transition: box-shadow .1s,background-color .1s;
-            display: inline-block;
-        }
-    </style>
-    <div class="panel-body text-center">
-        <h2 class="text-primary" style="font-size:larger; font-weight:bold">Điệu bài hát</h2><hr />
-       
-        <div class="rhythm-list">
-            @{ 
-                var random = new Random();
-            }
-            @foreach (var item in Model.ListStyle)
-            {
-                var color = String.Format("#{0:X6}", random.Next(0x1000000));
-                <a style="background-color: @color" class="rhythm-item" data-rhythm="ballad" href="">
-                    Điệu @item.Name 
-                </a>
-            }
-        </div>
-    </div>
-</div>
-
-<div id="hot-today" class="panel panel-default">
-
-    <div class="panel-body">
-        <h2 style="font-size:larger; margin-top: 0px;">Bài hát xem nhiều trong tuần</h2>
-        <hr style="margin-top: 0px;"/>
-        <div>
-            
-            @{ 
-                var number = 1;
-            }
-            @foreach (var item in Model.ListSong)
-            {
-                <p>
-                    <a asp-controller="home" asp-action="single" asp-route-slug="@item.Slug" asp-route-slugVersion="@item.Version">
-                        @number.
-                        @item.Name
-                    </a>
-                    <span style="float:right">@item.Views <i class="fa fa-eye"></i></span> 
-                </p>
-            @*<span class="hot-today-item-singers">
-                <a href="/artist/23465/jayk">
-                    JayK
-                </a>
-            </span>*@
-                number++;
-            }
-        </div>
-  
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-body">
-        <h2 class="text-primary" style="font-size: larger">Tìm chúng tôi trên facebook</h2>
-        <hr />
-        <div class="fb-page" data-href="https://www.facebook.com/H%E1%BB%A3p-%C3%A2m-Nh%E1%BA%A1c-Th%C3%A1nh-883153405186191/" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/H%E1%BB%A3p-%C3%A2m-Nh%E1%BA%A1c-Th%C3%A1nh-883153405186191/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/H%E1%BB%A3p-%C3%A2m-Nh%E1%BA%A1c-Th%C3%A1nh-883153405186191/">Hợp âm Nhạc Thánh</a></blockquote></div>
-    </div>
-</div>
+<script async src="~/js/sidebarCommon.min.js" asp-append-version="true"></script>

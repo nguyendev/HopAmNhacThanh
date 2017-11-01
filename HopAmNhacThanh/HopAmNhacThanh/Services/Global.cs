@@ -10,6 +10,7 @@ namespace DoVuiHaiNao.Services
         public static string DIR_IMAGE = "images";
         public const string APPROVED = "A";
         public const string UNAPPROVED = "U";
+        public const int LENGTH_LYRIC = 196;
     }
     public enum TypeQuestion
     {

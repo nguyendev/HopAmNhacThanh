@@ -1,0 +1,18 @@
+﻿@model List<HopAmNhacThanh.Models.SidebarViewModels.SimpleStyleViewModel>
+<div class="panel-heading sidebar-panel-heading">
+    <h2 class="panel-title sidebar-panel-title">Điệu bài hát</h2>
+</div>
+<div class="panel-body text-center">
+    <div id="rhythm-list" class="rhythm-list">
+        @{
+            var random = new Random();
+        }
+        @foreach (var item in Model)
+            {
+                var color = String.Format("#{0:X6}", random.Next(0x1000000));
+            <a style="background-color: @color" class="rhythm-item" data-rhythm="ballad" href="">
+                Điệu @item.Name
+            </a>
+        }
+    </div>
+</div>

@@ -1,0 +1,74 @@
+﻿small {
+    margin-left: 5px;
+}
+
+.tab-pane {
+    margin-bottom: 10px;
+}
+
+.chord {
+    color: blue;
+}
+
+panel-primary > .sidebar-panel-heading {
+    background-color: #0099cd !important;
+    color: white !important;
+}
+
+panel-primary > .sidebar-panel-title {
+    font-size: larger;
+    margin-top: 0px;
+}
+#list-album .panel-body {
+    background: #ffffff;
+    padding: 10px 15px;
+    box-shadow: 1px 1px 0px #e5e5e5;
+}
+
+.listMenu ul li {
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    border-bottom: solid 1px #dcdcdc;
+}
+
+    .listMenu ul li a {
+        display: block;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        font-size: 15px;
+        line-height: 23px;
+        text-transform: capitalize;
+    }
+
+.listMenu ul li {
+    list-style-type: none;
+}
+
+#rhythm-list > .rhythm-item:hover {
+    text-decoration: none;
+    color: blue;
+}
+
+#rhythm-list > .rhythm-item {
+    white-space: nowrap;
+    background-color: #ddd;
+    padding: 10px 7px;
+    font-size: 12px;
+    line-height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-transition: box-shadow .1s,background-color .1s;
+    -moz-transition: box-shadow .1s,background-color .1s;
+    -ms-transition: box-shadow .1s,background-color .1s;
+    -o-transition: box-shadow .1s,background-color .1s;
+    color: white;
+    text-decoration: none;
+    margin: 5px;
+    transition: box-shadow .1s,background-color .1s;
+    display: inline-block;
+}
+
+#category > .list-group > a.list-group-item {
+    color: #337ab7 !important;
+}

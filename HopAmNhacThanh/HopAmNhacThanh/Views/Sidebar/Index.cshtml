@@ -1,0 +1,50 @@
+﻿<div id="category" class="panel panel-primary">
+    <div id="categoryData" class="list-group">
+
+    </div>
+</div>
+
+<script defer id="data-template" type="x-tmpl-mustache">
+    <a asp-controller="category" asp-action="single" asp-route-slug="{{Slug}}" class="list-group-item"><span class="badge">{{Count}}</span><i class="fa fa-book"></i> {{Name}}</a>
+</script>
+
+
+@section Style {
+    <link href="~/css/siteCommont.min.css" rel="stylesheet" asp-append-version="true" />
+}
+@section Scripts {
+
+    <script defer src="~/js/siteCommon.js" asp-append-version="true"></script>
+    <script defer>
+    function LoadCategory() {
+        debugger;
+        $.ajax({
+            type: "GET",
+            url: "Sidebar/GetListCategory",
+            //data: { userId: Id },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                var result = "";
+                var booksDiv = $('#categoryData').html('');
+                $.each(data.data, function (index, SimpleCategoryViewModel) {
+
+                    result += '<a asp-controller="category" asp-action="single" asp-route-slug="' + SimpleCategoryViewModel.Slug + '" ' +
+                        'class="list-group-item"><span class="badge">' + SimpleCategoryViewModel.Count +
+                        '</span><i class="fa fa-book"></i> ' + SimpleCategoryViewModel.Name + '</a>';
+                });
+                booksDiv.html(result);
+            },
+
+            error: function () {
+                alert('Failed to retrieve books.');
+            }
+        });
+        };
+
+        $(function () {
+            LoadCategory();
+        });
+</script>
+
+}
