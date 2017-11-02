@@ -20,8 +20,9 @@
         </small>
         }
         @if (Model.Album != null) {
+
         <small>
-            <i title="Album" class="fa fa fa-file-movie-o"></i> Album: <a asp-controller="Album" asp-action="single" asp-route-slug="@Model.Album.Slug">@Model.Album.Name</a>
+            <i title="Album" class="fa fa fa-file-movie-o"></i> <a asp-controller="Album" asp-action="single" asp-route-slug="@Model.Album.Slug">@Model.Album.Name</a>
         </small>
         }
         <small>

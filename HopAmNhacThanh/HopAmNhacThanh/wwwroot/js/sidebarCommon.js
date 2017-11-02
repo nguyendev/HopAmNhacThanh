@@ -2,10 +2,11 @@
     debugger;
     $.ajax({
         type: "GET",
-        url: "Sidebar/GetListCategory",
+        url: "/Sidebar/GetListCategory",
         //data: {userId: Id },
         contentType: "application/text;charset=utf-8",
         dataType: "text",
+        cache: true, 
         success: function (data) {
             var result = "";
             var booksDiv = $('#list-category-widget').html('');
@@ -20,7 +21,7 @@
         },
 
         error: function () {
-            alert('Error Category.');
+            //alert('Error Category.');
         }
     });
 };
@@ -28,10 +29,11 @@ function LoadAlbum() {
     debugger;
     $.ajax({
         type: "GET",
-        url: "Sidebar/GetListAlbum",
+        url: "/Sidebar/GetListAlbum",
         //data: {userId: Id },
         contentType: "application/text;charset=utf-8",
         dataType: "text",
+        cache: true, 
         success: function (data) {
             var result = "";
             var booksDiv = $('#list-album-widget').html('');
@@ -45,7 +47,7 @@ function LoadAlbum() {
         },
 
         error: function () {
-            alert('Error Album');
+            //alert('Error Album');
         }
     });
 };
@@ -53,10 +55,11 @@ function LoadStyle() {
     debugger;
     $.ajax({
         type: "GET",
-        url: "Sidebar/GetListStyle",
+        url: "/Sidebar/GetListStyle",
         //data: {userId: Id },
         contentType: "application/text;charset=utf-8",
         dataType: "text",
+        cache: true, 
         success: function (data) {
             var result = "";
             var booksDiv = $('#list-rhythm-widget').html('');
@@ -70,7 +73,7 @@ function LoadStyle() {
         },
 
         error: function () {
-            alert('error Style');
+            //alert('error Style');
         }
     });
 };
@@ -79,10 +82,11 @@ function LoadTopSong() {
     debugger;
     $.ajax({
         type: "GET",
-        url: "Sidebar/GetListTopSong",
+        url: "/Sidebar/GetListTopSong",
         //data: {userId: Id },
         contentType: "application/text;charset=utf-8",
         dataType: "text",
+        cache: true, 
         success: function (data) {
             var result = "";
             var booksDiv = $('#list-top-song-widget').html('');
@@ -96,7 +100,7 @@ function LoadTopSong() {
         },
 
         error: function () {
-            alert('Error TopSong');
+            //alert('Error TopSong');
         }
     });
 };
@@ -104,10 +108,11 @@ function LoadFanpageFacebook() {
     debugger;
     $.ajax({
         type: "GET",
-        url: "Sidebar/GetFanpageFacebook",
+        url: "/Sidebar/GetFanpageFacebook",
         //data: {userId: Id },
         contentType: "application/text;charset=utf-8",
         dataType: "text",
+        cache: true, 
         success: function (data) {
             var result = "";
             var booksDiv = $('#list-fanpage-facebook-widget').html('');
@@ -121,7 +126,34 @@ function LoadFanpageFacebook() {
         },
 
         error: function () {
-            alert('Error FanpageFaceBook');
+            //alert('Error FanpageFaceBook');
+        }
+    });
+};
+
+function LoadSongAphabet() {
+    debugger;
+    $.ajax({
+        type: "GET",
+        url: "/Sidebar/GetSongAphabet",
+        //data: {userId: Id },
+        contentType: "application/text;charset=utf-8",
+        dataType: "text",
+        cache: true,
+        success: function (data) {
+            var result = "";
+            var booksDiv = $('#song-aphabet-widget').html('');
+            //$.each(data.data, function (index, SimpleAlbumViewModel) {
+
+            //    result += '<li><a asp-controller="Album" asp-action="Single" asp-route-slug="' + SimpleAlbumViewModel.Slug + 
+            //    '">'+SimpleAlbumViewModel.Name+'</a></li>';
+            //});
+            booksDiv.html(data);
+            $('#song-aphabet-widget').css('display', 'block');
+        },
+
+        error: function () {
+            //alert('Error FanpageFaceBook');
         }
     });
 };
@@ -134,5 +166,6 @@ $(function () {
     LoadCategory();
     LoadStyle();
     LoadTopSong();
+    LoadSongAphabet();
     //LoadFanpageFacebook();
 });    

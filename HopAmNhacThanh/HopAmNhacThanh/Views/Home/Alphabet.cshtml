@@ -1,103 +1,38 @@
 ﻿@{
-    HopAmNhacThanh.Models.HomeViewModels.MainContentViewModel mainContent = ViewData["MainContent"] as HopAmNhacThanh.Models.HomeViewModels.MainContentViewModel;
+    HopAmNhacThanh.Models.HomeViewModels.MainSearchViewModel mainContent = ViewData["Search"] as HopAmNhacThanh.Models.HomeViewModels.MainSearchViewModel;
 }
 <div class="row">
     <div class="col-md-8" style="padding-right: 0px;">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <ul class="nav nav-pills">
-                    <li class="active"><a data-toggle="pill" href="#new">Mới nhất</a></li>
-                    <li><a data-toggle="pill" href="#popular">Phổ biến nhất</a></li>
-                    <li><a data-toggle="pill" href="#request">Đang được yêu cầu</a></li>
-                </ul>
-                <hr />
-                <div class="tab-content" style="margin-top:10px;">
-                    <div id="new" class="tab-pane fade in active">
-                        <div class="sort-new-song text-center">
-                            <a class="" asp-controller="Home" asp-action="Alphabet" asp-route-slug="A"><span class="label label-primary">A</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="B"><span class="label label-primary">B</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="C"><span class="label label-primary">C</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="D"><span class="label label-primary">D</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="E"><span class="label label-primary">E</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="F"><span class="label label-primary">F</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="G"><span class="label label-primary">G</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="H"><span class="label label-primary">H</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="I"><span class="label label-primary">I</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="J"><span class="label label-primary">J</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="K"><span class="label label-primary">K</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="L"><span class="label label-primary">L</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="M"><span class="label label-primary">M</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="N"><span class="label label-primary">N</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="O"><span class="label label-primary">O</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="P"><span class="label label-primary">P</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="Q"><span class="label label-primary">Q</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="R"><span class="label label-primary">R</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="S"><span class="label label-primary">S</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="T"><span class="label label-primary">T</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="U"><span class="label label-primary">U</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="V"><span class="label label-primary">V</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="W"><span class="label label-primary">W</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="X"><span class="label label-primary">X</span></a>
-                            <a asp-controller="Home" asp-action="Alphabet" asp-route-slug="Y"><span class="label label-primary">Y</span></a>
-                        </div>
-                        <br />
-                        <div class="new-song-list">
-                            @foreach (var item in mainContent.ListNewSong)
-                            {
-                                @Html.Partial("_SimpleSongPartial", item)
-                            }
-                        </div>
-                        @Html.Partial("_PagePartial", mainContent)
-                    </div>
-                    <div id="popular" class="tab-pane fade">
-
-                    </div>
-                    <div id="request" class="tab-pane fade">
-                        @*<div class="col-md-12 text-center">
-                                <a class="btn btn-success btn-sm" style="text-align:center" asp-controller="" asp-action=""><i class="fa fa-arrow-right"></i> Xem thêm</a>
-                            </div>*@
-                    </div>
-                </div>
-            </div>
-        </div>
         @*<div class="panel panel-default">
                 <div class="panel-body">
-                    <h2 class="text-primary" style="font-size:larger">Lịch sử bài hát</h2>
-                    <hr />
-                    <div class="col-md-12">
-                        <h4>
-                            <i class="fa fa-music fa-fw"></i>
-                            <a asp-controller="HistorySong" asp-action="Single">
-                                Linh âm giai điệu
-                            </a>
-                            <small>
-                                &nbsp;<i class="fa fa-user"></i> Sáng tác:
-                                <a href="https://hopamviet.vn/chord/composer/2260/bao-kun.html">Bảo Kun</a>
-                            </small>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="ct-heading"><a href="https://hopamviet.vn/info/composers.html">DANH SÁCH TÁC GIẢ</a> <a href="https://hopamviet.vn/info/composers.html" class="pull-right"><em>Xem thêm <i class="fa fa-arrow-right"></i></em> </a></div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-md-3 col-xs-6">
-                            <div class="album">
-                                <a href="https://hopamviet.vn/info/composer/3297/johnny-dung.html" title="Johnny Dũng">
-                                    <img src="https://hopamviet.vn/assets/images/composers/duyengland4copyjpg.jpg" class="img-responsive">
-                                </a>
-                                <a href="https://hopamviet.vn/info/composer/3297/johnny-dung.html" title="Johnny Dũng" class="txt">Johnny Dũng</a>
-                            </div>
-                        </div>
+                    <div>
+                        <a href="https://hopamviet.vn/chord/alphabet/a.html"><span class="label label-primary">A</span></a> <a href="https://hopamviet.vn/chord/alphabet/b.html"><span class="label label-primary">B</span></a> <a href="https://hopamviet.vn/chord/alphabet/c.html"><span class="label label-primary">C</span></a> <a href="https://hopamviet.vn/chord/alphabet/d.html"><span class="label label-primary">D</span></a> <a href="https://hopamviet.vn/chord/alphabet/e.html"><span class="label label-primary">E</span></a> <a href="https://hopamviet.vn/chord/alphabet/f.html"><span class="label label-primary">F</span></a> <a href="https://hopamviet.vn/chord/alphabet/g.html"><span class="label label-primary">G</span></a> <a href="https://hopamviet.vn/chord/alphabet/h.html"><span class="label label-primary">H</span></a> <a href="https://hopamviet.vn/chord/alphabet/i.html"><span class="label label-primary">I</span></a> <a href="https://hopamviet.vn/chord/alphabet/j.html"><span class="label label-primary">J</span></a> <a href="https://hopamviet.vn/chord/alphabet/k.html"><span class="label label-primary">K</span></a> <a href="https://hopamviet.vn/chord/alphabet/l.html"><span class="label label-primary">L</span></a> <a href="https://hopamviet.vn/chord/alphabet/m.html"><span class="label label-primary">M</span></a> <a href="https://hopamviet.vn/chord/alphabet/n.html"><span class="label label-primary">N</span></a> <a href="https://hopamviet.vn/chord/alphabet/o.html"><span class="label label-primary">O</span></a> <a href="https://hopamviet.vn/chord/alphabet/p.html"><span class="label label-primary">P</span></a> <a href="https://hopamviet.vn/chord/alphabet/q.html"><span class="label label-primary">Q</span></a> <a href="https://hopamviet.vn/chord/alphabet/r.html"><span class="label label-primary">R</span></a> <a href="https://hopamviet.vn/chord/alphabet/s.html"><span class="label label-primary">S</span></a> <a href="https://hopamviet.vn/chord/alphabet/t.html"><span class="label label-primary">T</span></a> <a href="https://hopamviet.vn/chord/alphabet/u.html"><span class="label label-primary">U</span></a> <a href="https://hopamviet.vn/chord/alphabet/v.html"><span class="label label-primary">V</span></a> <a href="https://hopamviet.vn/chord/alphabet/w.html"><span class="label label-primary">W</span></a> <a href="https://hopamviet.vn/chord/alphabet/x.html"><span class="label label-primary">X</span></a> <a href="https://hopamviet.vn/chord/alphabet/y.html"><span class="label label-primary">Y</span></a>
                     </div>
                 </div>
             </div>*@
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title">Bài hát theo chữ cái: @mainContent.Search</h1>
+            </div>
+            <div class="panel-body">
+                @if (mainContent.ListSong.Count() == 0)
+                {
+                    <h3>Không tìm thấy, vui lòng thử từ khóa khác hoặc quay lại <a asp-controller="home" asp-action="index">trang chủ</a></h3>
+                }
+                @foreach (var item in mainContent.ListSong)
+                {
+                    @Html.Partial("_SimpleSongPartial", item)
+                }
+                @{
+                    ViewData["search"] = mainContent.Search;
+                }
+                @Html.Partial("_PagePartial", mainContent)
+            </div>
+        </div>
     </div>
 
     <div class="col-md-4">
-        @Html.Partial("SidebarHome")
+        @Html.Partial("SidebarCommon")
     </div>
 </div>
 @section Style {
@@ -115,7 +50,7 @@
             margin-bottom: 10px;
         }
     </style>
-
+<link href="~/css/siteCommont.min.css" rel="stylesheet" asp-append-version="true" />
 
 }
 @section Scripts {
@@ -136,5 +71,6 @@
             //render_tab_chords();
         });
     </script>
+<script defer src="~/js/siteCommon.js" asp-append-version="true"></script>
 
 }

@@ -66,5 +66,13 @@ namespace HopAmNhacThanh.Controllers
             string result = await _viewRenderService.RenderViewToStringAsync("Shared/Widget/FanpageFacebookPartial", null);
             return result;
         }
+
+        [HttpGet]
+        public async Task<String> GetSongAphabet()
+        {
+            //List<BestSimpleSongViewModel> listSong = await _repository.GetListTopSong();
+            string result = await _viewRenderService.RenderViewToStringAsync("Shared/Widget/SongAphabetPartial", null);
+            return result;
+        }
     }
 }

@@ -12,13 +12,10 @@ namespace HopAmNhacThanh.Controllers
     {
         private const int PAGE_SIZE = 20;
         private readonly IAlbumRepository _repository;
-        private readonly ISidebarRepository _sidebarRepository;
 
-        public AlbumController(IAlbumRepository repository,
-            ISidebarRepository sidebarRepository)
+        public AlbumController(IAlbumRepository repository)
         {
             _repository = repository;
-            _sidebarRepository = sidebarRepository;
         }
 
         [Route("album/{slug}")]

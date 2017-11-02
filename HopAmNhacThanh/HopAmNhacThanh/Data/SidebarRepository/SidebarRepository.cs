@@ -23,10 +23,14 @@ namespace HopAmNhacThanh.Data.SidebarRepository
             List<SimpleAlbumViewModel> ListAlbum = new List<SimpleAlbumViewModel>();
             foreach (var item in albumDbContext)
             {
+                int count = _context.Song
+                    .Where(p => p.AlbumID == item.ID)
+                    .Count();
                 SimpleAlbumViewModel album = new SimpleAlbumViewModel
                 {
                     Name = item.Name,
                     Slug = item.Slug,
+                    Count = count,
                 };
                 ListAlbum.Add(album);
             }

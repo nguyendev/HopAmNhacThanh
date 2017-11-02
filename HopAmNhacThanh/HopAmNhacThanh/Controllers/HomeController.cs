@@ -15,18 +15,15 @@ namespace HopAmNhacThanh.Controllers
     public class HomeController : Controller
     {
         private readonly IHomeRepository _repostitory;
-        private readonly ISidebarRepository _sidebarRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         public HomeController(IHomeRepository repository,
-            ISidebarRepository sidebarRepository,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
         {
             _repostitory = repository;
             _userManager = userManager;
             _signInManager = signInManager;
-            _sidebarRepository = sidebarRepository;
         }
         public async Task<IActionResult> Index()
         {
@@ -36,15 +33,14 @@ namespace HopAmNhacThanh.Controllers
         }
 
         [Route("theo-chu-cai/{slug}")]
-        public async Task<IActionResult> Alphabet(string slug, int? page)
+        public async Task<IActionResult> Alphabet(char slug, int? page)
         {
-            ViewData["MainContent"] = await _repostitory.GetMainHome();
-            int pageSize = 10;
-            if (!page.HasValue)
-                page = 1;
-            char text = slug.First();
-            ViewData["MainContent"] = await _repostitory.GetMainHome(text, page.Value, pageSize);
-            return View();
+                int pageSize = 10;
+                if (!page.HasValue)
+                    page = 1;
+
+                ViewData["Search"] = await _repostitory.GetAphabet(slug, page.Value, pageSize);
+                return View();
         }
 
         public IActionResult About()

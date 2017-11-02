@@ -33,47 +33,124 @@
                             </h3>
                         </div>
                     </div>
-                    <style>
-                        .sub-info > a {
-                            margin-right: 5px;
-                        }
-                    </style>
                     <div class="row">
-                        <div class="col-md-12 sub-info" style="vertical-align: middle; padding-top: 5px; line-height: 1.5;
-    border-radius: 3px">
-                            @if (MainSingle.AuthorSong != null)
-                            {
-                                <i title="Sáng tác" class="fa fa-leaf"></i> @Html.Raw("Sáng tác:") <a asp-controller="AuthorSong" asp-action="Single" asp-route-slug="@MainSingle.AuthorSong.Slug">@MainSingle.AuthorSong.Name</a>
+                        <style>
+                            .song-single-info .col-md-4 {
+                                margin-bottom: 10px;
                             }
-                            else
-                            {
-                                <i title="Sáng tác" class="fa fa-leaf"></i> @Html.Raw("Sáng tác:") <a href="#"> @Html.Raw("Chưa rõ") </a>
+                            .att {
+                                font-style: italic;
+                                color: #bb1e1b;
+                                width: 90px;
+                                display: block;
+                                font-size: 13px;
+                                /*line-height: 21px;*/
+                                float: left;
                             }
-                            @if (MainSingle.Album != null)
-                            {
-                                <i title="Album" class="fa fa-book"></i> @Html.Raw("Album:") <a asp-controller="Album" asp-action="Single" asp-route-slug="@MainSingle.Album.Slug"> @MainSingle.Album.Name </a>
-                            }
-                            @if (MainSingle.Category != null)
-                            {
-                                <i class="fa fa-book"></i> @Html.Raw("Danh mục:") <a asp-controller="Category" asp-action="single" asp-route-slug="@MainSingle.Category.Slug"> @MainSingle.Category.Name </a>
-                            }
-                            else
-                            {
-                                <i class="fa fa-book"></i> @Html.Raw("Danh mục:") <a href="#"> @Html.Raw("Chưa phân loại") </a>
-                            }
-                            @if (MainSingle.Style != null)
-                            {
-                                <i class="fa fa-music"></i> <a asp-controller="Style" asp-action="Single" asp-route-slug="@MainSingle.Slug"> @MainSingle.Style.Name</a>
-                            }
-                            else
-                            {
-                                <i class="fa fa-music"></i> <a asp-controller="Style" asp-action="Single" asp-route-slug="@MainSingle.Slug"> @Html.Raw("Chưa phân loại")</a>
-                            }
-                            <i title="Lượt xem" class="fa fa-eye"></i> @MainSingle.Views 
 
+                            .ats {
+                                font-weight: 500;
+                                color: #666666;
+                                display: block;
+                                overflow: hidden;
+                                margin-top: -2px;
+                            }
+                            .song-single-info {
+                                margin-top: 10px;
+                            }
+                        </style>
+                        <div class="form-group song-single-info">
+                            <div class="col-md-4">
+                                @if (MainSingle.AuthorSong != null)
+                                {
+                                    <span class="att"><i title="Sáng tác" class="fa fa-leaf"></i> @Html.Raw("Sáng tác:")</span>
+                                    <span class="ats">
+                                        <a asp-controller="AuthorSong" asp-action="Single" asp-route-slug="@MainSingle.AuthorSong.Slug">@MainSingle.AuthorSong.Name</a>
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="att">
+                                        <i title="Sáng tác" class="fa fa-leaf"></i> @Html.Raw("Sáng tác:")
+                                    </span>
+                                    <span class="ats">
+                                        <a href="#"> @Html.Raw("Chưa rõ") </a>
+                                    </span>
+                                }
+                            </div>
+                            <div class="col-md-4">
+                                @if (MainSingle.Album != null)
+                                {
+                                    <span class="att"><i title="Album" class="fa fa-book"></i> @Html.Raw("Album:")</span>
+                                    <span class="ats">
+                                        <a asp-controller="Album" asp-action="Single" asp-route-slug="@MainSingle.Album.Slug"> @MainSingle.Album.Name </a>
+                                    </span>
+                                }
+                            </div>
+                            <div class="col-md-4">
+                                @if (MainSingle.Category != null)
+                                {
+                                    <span class="att">
+                                        <i class="fa fa-book"></i> @Html.Raw("Danh mục:")
+                                    </span>
+                                        <span class="ats">
+                                            <a asp-controller="Category" asp-action="single" asp-route-slug="@MainSingle.Category.Slug"> @MainSingle.Category.Name </a>
+                                        </span>
+                                }
+                                else
+                                {
+
+                                    <span class="att">
+                                        <i class="fa fa-book"></i> @Html.Raw("Danh mục:")
+                                    </span>
+                                    <span class="ats">
+                                        <a> @Html.Raw("Chưa phân loại") </a>
+                                    </span>
+                                }
+                            </div>
+                            <div class="col-md-4">
+                                @if (MainSingle.Style != null)
+                                {
+                                    <span class="att">
+                                        <i class="fa fa-music"> @Html.Raw("Điệu:")</i>
+                                    </span>
+                                    <span class="ats">
+                                        <a asp-controller="Style" asp-action="Single" asp-route-slug="@MainSingle.Slug"> @MainSingle.Style.Name</a>
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="att">
+                                        <i class="fa fa-music"> @Html.Raw("Điệu:")</i>
+                                    </span>
+                                    <span class="ats">
+                                        <a asp-controller="Style" asp-action="Single" asp-route-slug="@MainSingle.Slug"> @Html.Raw("Chưa phân loại")</a>
+                                    </span>
+                                }
+                            </div>
+                            @if (MainSingle.CreateDate.HasValue) { 
+                            <div class="col-md-4">
+                                <span class="att">
+                                    <i title="Người đăng" class="fa fa-calendar"> @Html.Raw("Ngày đăng:")</i>
+                                </span>
+                                <span class="ats"> @MainSingle.CreateDate.Value.ToString("dd/mm/yyyy")</span>
+                            </div>
+                            }
+                            <div class="col-md-4">
+                                <span class="att">
+                                    <i title="Lượt xem" class="fa fa-eye"> @Html.Raw("Lượt xem:")</i>
+                                </span>
+                                <span class="ats">@MainSingle.Views</span>
+                            </div>
                         </div>
+
+                        
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
                 <style>
                     .transpose-keys a {
                         color: #333;
@@ -82,7 +159,9 @@
                     }
 
                     #lyric, #form-lyric, #intro {
-                        margin-top: 20px;
+                        /*margin-top: 20px;*/
+                        font-size: 16px;
+                        line-height: 190%;
                     }
 
                     #intro {
@@ -96,29 +175,36 @@
                         margin-left: 30px;
                     }*/
                 </style>
-                <div id="form-lyric">
+                <div class="text-center" style="margin-bottom: 20px;">
                     <div class="btn-group">
                         @if (MainSingle.Tone != null)
                         {
-                        <div id="musicalKey" style="margin-right: 5px;" class="annotation btn-group"><span class="key btn btn-default btn-sm">@MainSingle.Tone</span></div>
+                            <div id="musicalKey" style="margin-right: 5px;" class="annotation btn-group"><span class="key btn btn-default btn-sm">@MainSingle.Tone</span></div>
                         }
                         else
                         {
                             <div id="musicalKey" style="margin-right: 5px;" class="annotation btn-group"><span class="key btn btn-default btn-sm">G</span></div>
                         }
-                        <div class="btn-group" style="margin-right: 5px;">
-                            <span id="fontsize" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="fa fa-font fa-1x"></i></span>
-                            <a id="print" href="#" target="_blank" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="fa fa-print"></i></a>
-                            <span id="clone" class="btn btn-default btn-sm">x2</span>
-                            <span id="gopdong" class="btn btn-default btn-sm">Gộp dòng <i class="fa fa-fw fa-check-square-o"></i></span>
-                            <span id="fullscreen" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="glyphicon glyphicon-fullscreen"></i></span>
+
+                    </div>
+                    <div class="btn-group" style="margin-right: 5px;">
+                        <span id="fontsize" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="fa fa-font fa-1x"></i></span>
+                        <a id="print" href="#" target="_blank" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="fa fa-print"></i></a>
+                        <span id="clone" class="btn btn-default btn-sm">x2</span>
+
+                    </div>
+                    <div class="btn-group" style="margin-right: 5px;">
+                        <span id="gopdong" class="btn btn-default btn-sm">Gộp dòng <i class="fa fa-fw fa-check-square-o"></i></span>
+                        <span id="fullscreen" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="glyphicon glyphicon-fullscreen"></i></span>
+                    </div>
+                </div>
+
+                <div id="form-lyric">
+                    @if (MainSingle.Intro != null)
+                    {
+                        <div id="intro">
+                            @Html.Raw(MainSingle.Intro)
                         </div>
-                    </div>
-                    <br />
-                    @if (MainSingle.Intro != null) {
-                    <div id="intro">
-                        @Html.Raw(MainSingle.Intro)
-                    </div>
                     }
                     <div id="lyric" style="position: relative">
                         @Html.Raw(MainSingle.Lyric)
@@ -264,21 +350,21 @@
                     $("#form-new-version-body").hide();
                     $("#form-new-version-footer").hide();
                     $("#thanks-new-version").show();
-                    
+
                     $("#new-version-submit").prop("type", "submit");
                     $("#new-version-submit").submit();
                 }
-                else { 
+                else {
                     $("#error-add-version").show();
                 }
-                });
+            });
 
             $("#reportSong").click(function () {
                 if ($.trim($("#error").val())) {
                     $("#form-report").hide();
                     $("#reportSong").hide();
                     $("#footer-report").hide();
-                   
+
                     $("#thank-report").show();
                     $("#reportSong").prop("type", "submit");
                     $("#reportSong").submit();
@@ -307,7 +393,7 @@
                     $("span.chord").css('position', 'relative');
                     $("span.chord").css('display', 'inline-block');
                     $("span.chord").css('top', '-1em');
-                    
+
                     $("span.chord").css('width', '0');
                     $("#lyric").css('line-height', '250%');
                     $("#lyric").css('padding-top', '1em');
@@ -410,12 +496,10 @@
             //unique.forEach(myFunction);
             $("#mytab").empty();
             for (var i = 0; i < unique.length; i++) {
-                if (unique[i].indexOf("/") > 0)
-                {
+                if (unique[i].indexOf("/") > 0) {
                     $("#mytab").append('<span class="col-md-6 col-xs-12 jtab chordonly left">' + unique[i] + '</span>');
-                } 
-                else
-                {
+                }
+                else {
                     $("#mytab").append('<span class="col-md-3 col-xs-6 jtab chordonly left">' + unique[i] + '</span>');
                 }
             }

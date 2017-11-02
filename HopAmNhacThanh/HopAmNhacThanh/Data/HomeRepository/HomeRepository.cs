@@ -31,27 +31,31 @@ namespace HopAmNhacThanh.Data.HomeRepository
                 .OrderByDescending(p => p.CreateDT).Take(10).ToListAsync();
             foreach (var item in application)
             {
-                var chords = _context.Chords
-                    .Where(p => p.SongID == item.ID)
-                    .Where(p => p.Approved == Global.APPROVED)
-                    .Where(p => p.CreateDT <= DateTime.Now)
-                    .Where(p => !p.IsDeleted)
-                    .First();
-                if (chords != null)
+                try
                 {
-                    SimpleSongViewModel song = new SimpleSongViewModel
+                 var chords = _context.Chords
+                        .Where(p => p.SongID == item.ID)
+                        .Where(p => p.Approved == Global.APPROVED)
+                        .Where(p => p.CreateDT <= DateTime.Now)
+                        .Where(p => !p.IsDeleted)
+                        .First();
+                    if (chords != null)
                     {
-                        Name = item.Name,
-                        Album = item.Album,
-                        AuthorSong = item.AuthorSong,
-                        OrtherName = item.OrtherName,
-                        View = item.Views,
-                        Lyric = SEOExtension.GetStringToLength(chords.Lyric, Global.LENGTH_LYRIC),
-                        Slug = item.Slug,
-                        VersionSlug = chords.Slug
-                    };
-                    ListNewSong.Add(song);
+                        SimpleSongViewModel song = new SimpleSongViewModel
+                        {
+                            Name = item.Name,
+                            Album = item.Album,
+                            AuthorSong = item.AuthorSong,
+                            OrtherName = item.OrtherName,
+                            View = item.Views,
+                            Lyric = SEOExtension.GetStringToLength(chords.Lyric, Global.LENGTH_LYRIC),
+                            Slug = item.Slug,
+                            VersionSlug = chords.Slug
+                        };
+                        ListNewSong.Add(song);
+                    }
                 }
+                catch { }
             }
 
             List<SimpleSongViewModel> ListPupularSong = new List<SimpleSongViewModel>();
@@ -103,147 +107,150 @@ namespace HopAmNhacThanh.Data.HomeRepository
         {
             //try
             //{
-                string Intro = "";
-                string Lyric = "";
-                string Tone = "";
-                Style Style = null;
-                ApplicationUser AuthorChords = null;
-                var songContext = await _context.Song
-                    .Include(p => p.Album)
-                    .Include(p => p.AuthorSong)
-                    .Include(p => p.Category)
-                    .Include(p => p.VietnameseLyric)
+            string Intro = "";
+            string Lyric = "";
+            string Tone = "";
+            DateTime? CreateDate = null;
+            Style Style = null;
+            ApplicationUser AuthorChords = null;
+            var songContext = await _context.Song
+                .Include(p => p.Album)
+                .Include(p => p.AuthorSong)
+                .Include(p => p.Category)
+                .Include(p => p.VietnameseLyric)
+                .Where(p => p.Approved == Global.APPROVED)
+                .Where(p => p.CreateDT <= DateTime.Now)
+                .Where(p => !p.IsDeleted)
+                .FirstOrDefaultAsync(p => p.Slug == slugSong);
+
+            var chordsContext = await _context.Chords
+                .Include(p => p.Author)
+                .Include(p => p.Style)
+                .Where(p => p.SongID == songContext.ID)
+                .Where(p => p.Approved == Global.APPROVED)
+                .Where(p => p.CreateDT <= DateTime.Now)
+                .Where(p => !p.IsDeleted)
+                .ToListAsync();
+            List<SimpleChordsViewModel> simpleChords = new List<SimpleChordsViewModel>();
+            foreach (var item in chordsContext)
+            {
+                bool selected = item.Slug == slugVersion ? true : false;
+                SimpleChordsViewModel simpleChord = new SimpleChordsViewModel
+                {
+                    Name = item.Info,
+                    Author = item.Author,
+                    Description = item.InfoShort,
+                    Slug = item.Slug,
+                    Selected = selected,
+                };
+                if (selected)
+                {
+                    Intro = item.Intro;
+                    Lyric = item.Lyric;
+                    AuthorChords = item.Author;
+                    Style = item.Style;
+                    Tone = item.Tone;
+                    CreateDate = item.CreateDT;
+                }
+
+                simpleChord.StyleName = item.StyleID.HasValue ? item.Style.Name : "";
+                simpleChords.Add(simpleChord);
+            };
+
+            var linkSongContext = await _context.LinkSong
+                .Include(p => p.SingleSong)
+                .Where(p => p.SongID == songContext.ID)
+                .ToListAsync();
+            List<SimpleLinkSongViewModel> listLinkSongs = new List<SimpleLinkSongViewModel>();
+            foreach (var item in linkSongContext)
+            {
+                SimpleLinkSongViewModel simpleLinkSong = new SimpleLinkSongViewModel
+                {
+                    Link = item.Link,
+                    SingleSongName = item.SingleSong.Name,
+                    Slug = item.SingleSong.Slug
+                };
+                listLinkSongs.Add(simpleLinkSong);
+            };
+
+            bool isSheetExisted = await _context.SheetMusic.AnyAsync(p => p.SongID == songContext.ID);
+
+            var videoContext = await _context.Video
+                .Where(p => p.SongID == songContext.ID)
+                .ToListAsync();
+            List<SimpleVideoViewModel> listVideo = new List<SimpleVideoViewModel>();
+            foreach (var item in videoContext)
+            {
+                SimpleVideoViewModel simpleVideo = new SimpleVideoViewModel
+                {
+                    Link = item.Link,
+                    Name = item.Name,
+
+                };
+                simpleVideo.Type = item.Type.HasValue ? item.Type.Value : 1;
+                listVideo.Add(simpleVideo);
+            };
+
+            var songInCategoryContext = await _context.Song
                     .Where(p => p.Approved == Global.APPROVED)
                     .Where(p => p.CreateDT <= DateTime.Now)
                     .Where(p => !p.IsDeleted)
-                    .FirstOrDefaultAsync(p => p.Slug == slugSong);
-
-                var chordsContext = await _context.Chords
-                    .Include(p => p.Author)
-                    .Include(p => p.Style)
-                    .Where(p => p.SongID == songContext.ID)
-                    .Where(p => p.Approved == Global.APPROVED)
-                    .Where(p => p.CreateDT <= DateTime.Now)
-                    .Where(p => !p.IsDeleted)
-                    .ToListAsync();
-                List<SimpleChordsViewModel> simpleChords = new List<SimpleChordsViewModel>();
-                foreach (var item in chordsContext)
+                    .Where(p => p.CategoryID == songContext.CategoryID).Take(10).ToListAsync();
+            List<SimpleSongInAblumViewModel> ListSongInCategory = new List<SimpleSongInAblumViewModel>();
+            foreach (var item in songInCategoryContext)
+            {
+                SimpleSongInAblumViewModel songInAblum = new SimpleSongInAblumViewModel
                 {
-                    bool selected = item.Slug == slugVersion ? true : false;
-                    SimpleChordsViewModel simpleChord = new SimpleChordsViewModel
-                    {
-                        Name = item.Info,
-                        Author = item.Author,
-                        Description = item.InfoShort,
-                        Slug = item.Slug,
-                        Selected = selected,
-                    };
-                    if (selected)
-                    {
-                        Intro = item.Intro;
-                        Lyric = item.Lyric;
-                        AuthorChords = item.Author;
-                        Style = item.Style;
-                        Tone = item.Tone;
-                    }
+                    Name = item.Name,
+                    Slug = item.Slug,
 
-                    simpleChord.StyleName = item.StyleID.HasValue ? item.Style.Name : "";
-                    simpleChords.Add(simpleChord);
                 };
+                songInAblum.Number = item.NumberSongInAlbum.HasValue ? item.NumberSongInAlbum.Value : 0;
+                ListSongInCategory.Add(songInAblum);
+            }
 
-                var linkSongContext = await _context.LinkSong
-                    .Include(p => p.SingleSong)
-                    .Where(p => p.SongID == songContext.ID)
-                    .ToListAsync();
-                List<SimpleLinkSongViewModel> listLinkSongs = new List<SimpleLinkSongViewModel>();
-                foreach (var item in linkSongContext)
-                {
-                    SimpleLinkSongViewModel simpleLinkSong = new SimpleLinkSongViewModel
-                    {
-                        Link = item.Link,
-                        SingleSongName = item.SingleSong.Name,
-                        Slug = item.SingleSong.Slug
-                    };
-                    listLinkSongs.Add(simpleLinkSong);
-                };
 
-                bool isSheetExisted = await _context.SheetMusic.AnyAsync(p => p.SongID == songContext.ID);
 
-                var videoContext = await _context.Video
-                    .Where(p => p.SongID == songContext.ID)
-                    .ToListAsync();
-                List<SimpleVideoViewModel> listVideo = new List<SimpleVideoViewModel>();
-                foreach (var item in videoContext)
-                {
-                    SimpleVideoViewModel simpleVideo = new SimpleVideoViewModel
-                    {
-                        Link = item.Link,
-                        Name = item.Name,
-                        
-                    };
-                    simpleVideo.Type = item.Type.HasValue ? item.Type.Value : 1;
-                    listVideo.Add(simpleVideo);
-                };
-
-                var songInCategoryContext = await _context.Song
-                        .Where(p => p.Approved == Global.APPROVED)
-                        .Where(p => p.CreateDT <= DateTime.Now)
-                        .Where(p => !p.IsDeleted)
-                        .Where(p => p.CategoryID == songContext.CategoryID).Take(10).ToListAsync();
-                List<SimpleSongInAblumViewModel> ListSongInCategory = new List<SimpleSongInAblumViewModel>();
-                foreach (var item in songInCategoryContext)
+            MainSingleViewModel model = new MainSingleViewModel();
+            model.Album = songContext.Album;
+            model.Name = songContext.Name;
+            model.AuthorSong = songContext.AuthorSong;
+            model.Category = songContext.Category;
+            model.OrtherName = songContext.OrtherName;
+            model.Slug = songContext.Slug;
+            model.Views = songContext.Views;
+            model.VietnameseLyric = songContext.VietnameseLyric;
+            model.ListChords = simpleChords;
+            model.ListLinkSong = listLinkSongs;
+            model.IsSheetExisted = isSheetExisted;
+            model.ListVideos = listVideo;
+            model.Lyric = Lyric;
+            model.Intro = Intro;
+            model.Tone = Tone;
+            model.CreateDate = CreateDate;
+            model.ListSongInCategory = ListSongInCategory;
+            model.Style = Style;
+            model.AuthorChords = AuthorChords;
+            if (songContext.AlbumID.HasValue)
+            {
+                var songInAlbumContext = await _context.Song.Where(p => p.AlbumID == songContext.AlbumID).Take(10).ToListAsync();
+                List<SimpleSongInAblumViewModel> ListSongInAlbum = new List<SimpleSongInAblumViewModel>();
+                foreach (var item in songInAlbumContext)
                 {
                     SimpleSongInAblumViewModel songInAblum = new SimpleSongInAblumViewModel
                     {
                         Name = item.Name,
                         Slug = item.Slug,
-                        
+                        Number = item.NumberSongInAlbum.Value,
                     };
-                    songInAblum.Number = item.NumberSongInAlbum.HasValue ? item.NumberSongInAlbum.Value : 0;
-                    ListSongInCategory.Add(songInAblum);
+                    ListSongInAlbum.Add(songInAblum);
                 }
+                model.ListSongInAblum = ListSongInAlbum;
+            }
+            else
+                model.ListSongInAblum = null;
 
-                
-
-            MainSingleViewModel model = new MainSingleViewModel();
-                model.Album = songContext.Album;
-                model.Name = songContext.Name;
-                model.AuthorSong = songContext.AuthorSong;
-                model.Category = songContext.Category;
-                model.OrtherName = songContext.OrtherName;
-                model.Slug = songContext.Slug;
-                model.Views = songContext.Views;
-                model.VietnameseLyric = songContext.VietnameseLyric;
-                model.ListChords = simpleChords;
-                model.ListLinkSong = listLinkSongs;
-                model.IsSheetExisted = isSheetExisted;
-                model.ListVideos = listVideo;
-                model.Lyric = Lyric;
-                model.Intro = Intro;
-            model.Tone = Tone;
-                model.ListSongInCategory = ListSongInCategory;
-                model.Style = Style;
-                model.AuthorChords = AuthorChords;
-                if (songContext.AlbumID.HasValue)
-                {
-                    var songInAlbumContext = await _context.Song.Where(p => p.AlbumID == songContext.AlbumID).Take(10).ToListAsync();
-                    List<SimpleSongInAblumViewModel> ListSongInAlbum = new List<SimpleSongInAblumViewModel>();
-                    foreach (var item in songInAlbumContext)
-                    {
-                        SimpleSongInAblumViewModel songInAblum = new SimpleSongInAblumViewModel
-                        {
-                            Name = item.Name,
-                            Slug = item.Slug,
-                            Number = item.NumberSongInAlbum.Value,
-                        };
-                        ListSongInAlbum.Add(songInAblum);
-                    }
-                    model.ListSongInAblum = ListSongInAlbum;
-                }
-                else
-                    model.ListSongInAblum = null;
-
-                return model;
+            return model;
             //}
             //catch
             //{
@@ -464,6 +471,95 @@ namespace HopAmNhacThanh.Data.HomeRepository
 
             _context.Song.Update(single);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<MainSearchViewModel> GetAphabet(char searchString, int page, int pageSize)
+        {
+            List<SimpleSongViewModel> listSong = new List<SimpleSongViewModel>();
+
+            char searchUpperCase = Char.ToUpper(searchString);
+
+            var songDbContext = from s in _context.Song
+                                .Include(p => p.Album)
+                    .Include(p => p.AuthorSong)
+                    .Include(p => p.Category)
+                    .Include(p => p.VietnameseLyric)
+                    .Where(p => p.Approved == Global.APPROVED)
+                    .Where(p => p.CreateDT <= DateTime.Now)
+                    .Where(p => !p.IsDeleted)
+                                select s;
+            if (Char.IsLetter(searchString))
+            {
+                #region search in name
+                var searchInName = songDbContext.Where(p => p.Name.First() == searchUpperCase)
+                    .OrderByDescending(p => p.CreateDT);
+                foreach (var item in searchInName)
+                {
+                    var chords = _context.Chords
+                            .Where(p => p.SongID == item.ID)
+                            .Where(p => p.Approved == Global.APPROVED)
+                            .Where(p => p.CreateDT <= DateTime.Now)
+                            .Where(p => !p.IsDeleted)
+                            .First();
+                    SimpleSongViewModel song = new SimpleSongViewModel
+                    {
+                        Name = item.Name,
+                        Album = item.Album,
+                        AuthorSong = item.AuthorSong,
+                        OrtherName = item.OrtherName,
+                        View = item.Views,
+                        Lyric = SEOExtension.GetStringToLength(chords.Lyric, Global.LENGTH_LYRIC),
+                        Slug = item.Slug,
+                        VersionSlug = chords.Slug
+                    };
+                    listSong.Add(song);
+                }
+                #endregion
+                #region seach in OtherName
+                var searchInOtherName = songDbContext.Where(p => p.Name.First() ==  searchUpperCase)
+                        .OrderByDescending(p => p.CreateDT);
+                foreach (var item in searchInName)
+                {
+                    if (!listSong.Any(p => p.Slug == item.Slug))
+                    {
+                        var chords = _context.Chords
+                            .Where(p => p.SongID == item.ID)
+                            .Where(p => p.Approved == Global.APPROVED)
+                            .Where(p => p.CreateDT <= DateTime.Now)
+                            .Where(p => !p.IsDeleted)
+                            .First();
+                        SimpleSongViewModel song = new SimpleSongViewModel
+                        {
+                            Name = item.Name,
+                            Album = item.Album,
+                            AuthorSong = item.AuthorSong,
+                            OrtherName = item.OrtherName,
+                            View = item.Views,
+                            Lyric = SEOExtension.GetStringToLength(chords.Lyric, Global.LENGTH_LYRIC),
+                            Slug = item.Slug,
+                            VersionSlug = chords.Slug
+                        };
+                        listSong.Add(song);
+                    }
+                }
+                #endregion
+                
+            }
+
+
+            var songPaginatedList = PaginatedList<SimpleSongViewModel>.Create(listSong, page, pageSize);
+            MainSearchViewModel search = new MainSearchViewModel
+            {
+                Count = songPaginatedList.Count,
+                PageIndex = songPaginatedList.PageIndex,
+                PageSize = songPaginatedList.PageSize,
+                TotalPages = songPaginatedList.TotalPages,
+                ListSong = listSong,
+                Action = "alphabet",
+                Controller = "home",
+                Search = searchUpperCase.ToString()
+            };
+            return search;
         }
     }
 }
