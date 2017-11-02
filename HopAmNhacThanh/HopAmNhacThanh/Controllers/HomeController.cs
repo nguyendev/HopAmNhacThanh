@@ -9,6 +9,7 @@ using HopAmNhacThanh.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using HopAmNhacThanh.Data.SidebarRepository;
+using HopAmNhacThanh.Models.HomeViewModels;
 
 namespace HopAmNhacThanh.Controllers
 {
@@ -88,16 +89,34 @@ namespace HopAmNhacThanh.Controllers
         {
             return View();
         }
-        [Route("/tim-kiem/")]
+        [Route("/tim-kiem")]
         public async Task<IActionResult> Search(
     string search,
+    string q,
     int? page)
         {
-            int pageSize = 10;
-            if (!page.HasValue)
-                page = 1;
-
-            ViewData["Search"] = await _repostitory.GetSearch(search, page.Value, pageSize);
+            if (search != null)
+            {
+                int pageSize = 10;
+                if (!page.HasValue)
+                    page = 1;
+                MainSearchViewModel model = await _repostitory.GetSearch(search, page.Value, pageSize);
+                ViewData["Search"] = model;
+                if (!model.ListSong.Any() && q == null)
+                {
+                    return RedirectToAction("Search", "Home", new { q = search});
+                }
+                ViewData["Search"] = model;
+                ViewData["TuKhoaTimKiem"] = search;
+            }
+            else {
+                ViewData["TuKhoaTimKiem"] = q;
+            }
+            return View();
+        }
+        [Route("/tim-kiem-voi-google")]
+        public IActionResult SearchGoogle(string q)
+        {
             return View();
         }
 

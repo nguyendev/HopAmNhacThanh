@@ -1,7 +1,4 @@
-﻿@{
-    HopAmNhacThanh.Models.HomeViewModels.MainSearchViewModel mainContent = ViewData["Search"] as HopAmNhacThanh.Models.HomeViewModels.MainSearchViewModel;
-}
-<div class="row">
+﻿<div class="row">
     <div class="col-md-8" style="padding-right: 0px;">
         @*<div class="panel panel-default">
                 <div class="panel-body">
@@ -12,25 +9,13 @@
             </div>*@
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h1 class="panel-title">Tìm kiếm với từ khóa: @Html.Raw(ViewData["TuKhoaTimKiem"] as string)</h1>
+                <h1 class="panel-title">Tìm kiếm với từ khóa: Search</h1>
             </div>
             <div class="panel-body">
-                @if(mainContent == null)
-                { 
-                    <h3 style="font-size: small">Không tìm thấy, chúng tôi sẽ tự động tìm với Google</h3>
+                    <h3>Không tìm thấy, vui lòng thử từ khóa khác hoặc quay lại <a asp-controller="home" asp-action="index">trang chủ</a></h3>
                     <div>
                         <gcse:searchresults-only></gcse:searchresults-only>
                     </div>
-                }
-                else
-                { 
-                @foreach (var item in mainContent.ListSong)
-                {
-                    @Html.Partial("_SimpleSongPartial", item)
-                }
-                ViewData["search"] = mainContent.Search;
-                @Html.Partial("_PagePartial", mainContent)
-                }
             </div>
         </div>
     </div>
@@ -54,7 +39,7 @@
             margin-bottom: 10px;
         }
     </style>
-<link href="~/css/siteCommont.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/siteCommont.min.css" rel="stylesheet" asp-append-version="true" />
 
 }
 @section Scripts {
@@ -73,8 +58,8 @@
             //render_tab_chords();
         });
     </script>
-<script defer src="~/js/siteCommon.js" asp-append-version="true"></script>
-<script defer asp-append-version="true">
+    <script defer src="~/js/siteCommon.js" asp-append-version="true"></script>
+    <script defer asp-append-version="true">
         (function () {
             var cx = '000395357193399492958:r2wqqknckac';
             var gcse = document.createElement('script');
@@ -84,6 +69,6 @@
             var s = document.getElementsByTagName('script')[0];
             s.parentNode.insertBefore(gcse, s);
         })();
-</script>
+    </script>
 
 }

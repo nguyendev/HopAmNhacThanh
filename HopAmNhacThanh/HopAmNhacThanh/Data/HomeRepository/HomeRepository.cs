@@ -365,7 +365,6 @@ namespace HopAmNhacThanh.Data.HomeRepository
                     #endregion
             }
 
-
             var songPaginatedList = PaginatedList<SimpleSongViewModel>.Create(listSong, page, pageSize);
             MainSearchViewModel search = new MainSearchViewModel
             {
