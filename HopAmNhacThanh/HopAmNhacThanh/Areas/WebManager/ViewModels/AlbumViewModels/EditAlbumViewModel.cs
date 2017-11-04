@@ -10,6 +10,7 @@ namespace HopAmNhacThanh.Areas.WebManager.ViewModels.AlbumViewModels
     {
         public int ID { get; set; }
         public string Name { get; set; }
+        public string ShortName { get; set; }
         public string Description { get; set; }
         public int? ImageID { get; set; }
         public Images Image { get; set; }

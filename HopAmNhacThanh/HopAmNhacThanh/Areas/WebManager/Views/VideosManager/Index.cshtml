@@ -1,61 +1,69 @@
-@model IEnumerable<HopAmNhacThanh.Models.Video>
+﻿@model HopAmNhacThanh.Areas.WebManager.ViewModels.VideoViewModels.IndexVideoViewModel
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Index";
+    ViewData["Heading"] = "Danh sách video theo bài hát";
+    ViewData["SmallHeading"] = "";
+    ViewData["BreadcrumbOne"] = "Quản lý web";
+    ViewData["BreadcrumbTwo"] = "Video";
+    ViewData["BreadcrumbThree"] = "Danh sách video";
+    ViewData["BoxTitle"] = "Danh sách video";
+    ViewData["Search"] = "Tìm video";
+    Layout = "_TableIndexLayout";
 }
+<div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 
-<!DOCTYPE html>
+    <div class="row">
+        @Html.Partial("_SearchIndexPartial", Model)
+    </div>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Link)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Type)
-                </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Song)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Link)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Song.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-</body>
-</html>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["NameParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.List.First().Name)</a>
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.List.First().Song)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.List.First().Image)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.List)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Song.Name)
+                            </td>
+                            <td>
+                                @if(item.Image != null) { 
+                                @Html.DisplayFor(modelItem => item.Image.Name)
+                                }
+                            </td>
+
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-warning fa fa-edit"></a>
+                                <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-success fa fa-newspaper-o"></a>
+                                <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger fa fa-remove"></a>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        @Html.Partial("_PageIndexPartial", Model)
+    </div>
+</div>

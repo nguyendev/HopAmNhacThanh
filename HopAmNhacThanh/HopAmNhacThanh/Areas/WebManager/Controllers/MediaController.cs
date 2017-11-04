@@ -113,11 +113,14 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
 
                         using (Image<Rgba32> image = ImageSharp.Image.Load(physicalPath))
                         {
-                            var folderSave = Path.Combine(HostingEnvironment.WebRootPath, DIR_IMAGE + "\\1440X900", fileName);
-                            image.Resize(1440, 900)
+                            var folderSave = Path.Combine(HostingEnvironment.WebRootPath, DIR_IMAGE + "\\Video", fileName);
+                            image.Resize(300, 170)
                                  .Save(folderSave); // automatic encoder selected based on extension.
-                            folderSave = Path.Combine(HostingEnvironment.WebRootPath, DIR_IMAGE + "\\640X480", fileName);
-                            image.Resize(640, 480)
+                            folderSave = Path.Combine(HostingEnvironment.WebRootPath, DIR_IMAGE + "\\Book", fileName);
+                            image.Resize(280, 400)
+                                 .Save(folderSave); // automatic encoder selected based on extension.
+                            folderSave = Path.Combine(HostingEnvironment.WebRootPath, DIR_IMAGE + "\\People", fileName);
+                            image.Resize(220, 240)
                                  .Save(folderSave); // automatic encoder selected based on extension.
 
                             var user = await GetCurrentUserAsync();
@@ -125,8 +128,10 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
                             {
                                 CreateDT = System.DateTime.Now,
                                 Name = fileName,
-                                //PicFull = "\\" + DIR_IMAGE + "\\1440x900\\" + fileName,
-                                //Pic640x480 = "\\" + DIR_IMAGE + "\\640x480\\" + fileName,
+                                PicFull = "\\" + DIR_IMAGE + "\\Full\\" + fileName,
+                                PicBook = "\\" + DIR_IMAGE + "\\Book\\" + fileName,
+                                PicPeople = "\\" + DIR_IMAGE + "\\People\\" + fileName,
+                                PicVideo = "\\" + DIR_IMAGE + "\\Video\\" + fileName,
                                 Active = "A",
                                 Approved = "A",
                                 AuthorID = user.Id,
@@ -151,25 +156,31 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
                 return NotFound();
             _context.Images.Remove(image);
             await _context.SaveChangesAsync();
-            string root = HostingEnvironment.WebRootPath;            // Remove in folder
-            string physicalPath = Path.Combine(root + "\\images\\", image.Name);
+            string root = HostingEnvironment.WebRootPath + "\\images\\";            // Remove in folder
+            string physicalPath = Path.Combine(root, "Full\\", image.Name);
             if (System.IO.File.Exists(physicalPath))
             {
                 // The files are not actually removed in this demo
                 System.IO.File.Delete(physicalPath);
             }
-            //string physicalPathPicFull = Path.Combine(root, image.PicFull);
-            //if (System.IO.File.Exists(physicalPathPicFull))
-            //{
-            //    // The files are not actually removed in this demo
-            //    System.IO.File.Delete(physicalPathPicFull);
-            //}
-            //string physicalPathPic640x480 = Path.Combine(root, image.Pic640x480);
-            //if (System.IO.File.Exists(physicalPathPic640x480))
-            //{
-            //    // The files are not actually removed in this demo
-            //    System.IO.File.Delete(physicalPathPic640x480);
-            //}
+            string physicalPathPicVideo = Path.Combine(root,"Video\\", image.PicFull);
+            if (System.IO.File.Exists(physicalPathPicVideo))
+            {
+                // The files are not actually removed in this demo
+                System.IO.File.Delete(physicalPathPicVideo);
+            }
+            string physicalPathPicBook = Path.Combine(root, "Book\\", image.PicFull);
+            if (System.IO.File.Exists(physicalPathPicBook))
+            {
+                // The files are not actually removed in this demo
+                System.IO.File.Delete(physicalPathPicBook);
+            }
+            string physicalPathPicPeople = Path.Combine(root, "People\\", image.PicFull);
+            if (System.IO.File.Exists(physicalPathPicPeople))
+            {
+                // The files are not actually removed in this demo
+                System.IO.File.Delete(physicalPathPicBook);
+            }
             return RedirectToAction("Index");
         }
         private async Task<ApplicationUser> GetCurrentUserAsync()
@@ -185,14 +196,30 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
                 foreach (var fullName in fileNames)
                 {
                     var fileName = Path.GetFileName(fullName);
-                    var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, DIR_IMAGE, fileName);
-
-                    // TODO: Verify user permissions
-
+                    string root = HostingEnvironment.WebRootPath + "\\images\\";            // Remove in folder
+                    string physicalPath = Path.Combine(root, "Full\\", fileName);
                     if (System.IO.File.Exists(physicalPath))
                     {
                         // The files are not actually removed in this demo
                         System.IO.File.Delete(physicalPath);
+                    }
+                    string physicalPathPicVideo = Path.Combine(root, "Video\\", fileName);
+                    if (System.IO.File.Exists(physicalPathPicVideo))
+                    {
+                        // The files are not actually removed in this demo
+                        System.IO.File.Delete(physicalPathPicVideo);
+                    }
+                    string physicalPathPicBook = Path.Combine(root, "Book\\", fileName);
+                    if (System.IO.File.Exists(physicalPathPicBook))
+                    {
+                        // The files are not actually removed in this demo
+                        System.IO.File.Delete(physicalPathPicBook);
+                    }
+                    string physicalPathPicPeople = Path.Combine(root, "People\\", fileName);
+                    if (System.IO.File.Exists(physicalPathPicPeople))
+                    {
+                        // The files are not actually removed in this demo
+                        System.IO.File.Delete(physicalPathPicBook);
                     }
                 }
             }
@@ -244,7 +271,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
         [HttpPost]
         [Route("/quan-ly-web/thu-vien/chinh-sua/{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,ALT,Title,PicFull,Pic640x480,Approved,IsDeleted,Note")] Images images)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,ALT,Title,PicFull,PicBook,PicVideo,PicPeople,Approved,IsDeleted,Note")] Images images)
         {
             if (id != images.ID)
             {

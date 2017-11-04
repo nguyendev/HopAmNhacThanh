@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using HopAmNhacThanh.Data;
 using HopAmNhacThanh.Models;
 using Microsoft.AspNetCore.Authorization;
+using HopAmNhacThanh.Areas.WebManager.Data;
+using HopAmNhacThanh.Areas.WebManager.ViewModels;
 
 namespace HopAmNhacThanh.Areas.WebManager.Controllers
 {
@@ -16,20 +18,48 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
     public class VideosManagerController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public VideosManagerController(ApplicationDbContext context)
+        private readonly IVideoManagerRepository _repository;
+        public VideosManagerController(IVideoManagerRepository repository,
+            ApplicationDbContext context)
         {
-            _context = context;    
+            _repository = repository;
+            _context = context;
         }
 
-        // GET: WebManager/VideosManager
-        public async Task<IActionResult> Index()
+        // GET: WebManager/Chords
+        [Route("quan-ly-web/video")]
+        public async Task<IActionResult> Index(string sortOrder,
+ string currentFilter,
+    string searchString,
+    int? page, int? pageSize)
         {
-            var applicationDbContext = _context.Video.Include(v => v.Song);
-            return View(await applicationDbContext.ToListAsync());
+            List<NumberItem> SoLuong = new List<NumberItem>
+            {
+                new NumberItem { Value = 10},
+                new NumberItem { Value = 20},
+                new NumberItem { Value = 50},
+                new NumberItem { Value = 100},
+            };
+            ViewData["SoLuong"] = SoLuong;
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameParm"] = String.IsNullOrEmpty(sortOrder) ? "name" : "";
+            ViewData["CurrentSize"] = pageSize;
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+            var applicationDbContext = await _repository.GetAll(sortOrder, searchString, page, pageSize);
+            return View(applicationDbContext);
         }
 
-        // GET: WebManager/VideosManager/Details/5
+        // GET: WebManager/Chords/Details/5
+        [Route("quan-ly-web/video/chi-tiet/{id}")]
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null)
@@ -37,42 +67,46 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
                 return NotFound();
             }
 
-            var video = await _context.Video
-                .Include(v => v.Song)
-                .SingleOrDefaultAsync(m => m.ID == id);
-            if (video == null)
+            var chords = await _repository.Details(id);
+            if (chords == null)
             {
                 return NotFound();
             }
 
-            return View(video);
+            return View(chords);
         }
 
-        // GET: WebManager/VideosManager/Create
+        // GET: WebManager/Chords/Create
+        [Route("quan-ly-web/video/tao-moi")]
         public IActionResult Create()
         {
+            ViewData["ImageID"] = new SelectList(_context.Images, "ID", "Name");
             ViewData["SongID"] = new SelectList(_context.Song, "ID", "Name");
             return View();
         }
 
-        // POST: WebManager/VideosManager/Create
+        // POST: WebManager/Chords/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Route("quan-ly-web/video/tao-moi")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,SongID,Name,Link,Type")] Video video)
+        public async Task<IActionResult> Create(Video model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(video);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                bool result = await _repository.Create(model);
+                if (result)
+                    return RedirectToAction("Index");
+                return NotFound();
             }
-            ViewData["SongID"] = new SelectList(_context.Song, "ID", "Name", video.SongID);
-            return View(video);
+            ViewData["ImageID"] = new SelectList(_context.Images, "ID", "Name", model.ImageID);
+            ViewData["SongID"] = new SelectList(_context.Song, "ID", "Name", model.SongID);
+            return View(model);
         }
 
-        // GET: WebManager/VideosManager/Edit/5
+        // GET: WebManager/Chords/Edit/5
+        [Route("quan-ly-web/video/chinh-sua/{id}")]
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -80,23 +114,25 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
                 return NotFound();
             }
 
-            var video = await _context.Video.SingleOrDefaultAsync(m => m.ID == id);
-            if (video == null)
+            var model = await _repository.GetEdit(id);
+            if (model == null)
             {
                 return NotFound();
             }
-            ViewData["SongID"] = new SelectList(_context.Song, "ID", "Name", video.SongID);
-            return View(video);
+            ViewData["ImageID"] = new SelectList(_context.Images, "ID", "Name", model.ImageID);
+            ViewData["SongID"] = new SelectList(_context.Song, "ID", "Name", model.SongID);
+            return View(model);
         }
 
-        // POST: WebManager/VideosManager/Edit/5
+        // POST: WebManager/Chords/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("ID,SongID,Name,Link,Type")] Video video)
+        [Route("quan-ly-web/video/chinh-sua/{id}")]
+        public async Task<IActionResult> Edit(long id, Video model)
         {
-            if (id != video.ID)
+            if (id != model.ID)
             {
                 return NotFound();
             }
@@ -105,12 +141,11 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
             {
                 try
                 {
-                    _context.Update(video);
-                    await _context.SaveChangesAsync();
+                    await _repository.Update(model);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!VideoExists(video.ID))
+                    if (!VideoExists(model.ID))
                     {
                         return NotFound();
                     }
@@ -121,11 +156,13 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["SongID"] = new SelectList(_context.Song, "ID", "Name", video.SongID);
-            return View(video);
+            ViewData["ImageID"] = new SelectList(_context.Images, "ID", "Name", model.ImageID);
+            ViewData["SongID"] = new SelectList(_context.Song, "ID", "Name", model.SongID);
+            return View(model);
         }
 
-        // GET: WebManager/VideosManager/Delete/5
+        // GET: WebManager/Chords/Delete/5
+        [Route("quan-ly-web/video/xoa/{id}")]
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -133,31 +170,28 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
                 return NotFound();
             }
 
-            var video = await _context.Video
-                .Include(v => v.Song)
-                .SingleOrDefaultAsync(m => m.ID == id);
-            if (video == null)
+            var model = await _repository.Get(id);
+            if (model == null)
             {
                 return NotFound();
             }
 
-            return View(video);
+            return View(model);
         }
 
-        // POST: WebManager/VideosManager/Delete/5
+        // POST: WebManager/Chords/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Route("quan-ly-web/video/xoa/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
-            var video = await _context.Video.SingleOrDefaultAsync(m => m.ID == id);
-            _context.Video.Remove(video);
-            await _context.SaveChangesAsync();
+            await _repository.Delete(id);
             return RedirectToAction("Index");
         }
 
         private bool VideoExists(long id)
         {
-            return _context.Video.Any(e => e.ID == id);
+            return _repository.Exists(id);
         }
     }
 }

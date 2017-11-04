@@ -1,0 +1,44 @@
+﻿@model HopAmNhacThanh.Areas.WebManager.ViewModels.SingleSongViewModels.CreateSingleSongViewModel
+@{
+    ViewData["Title"] = "Tạo mới";
+    ViewData["Heading"] = "Tạo mới";
+    ViewData["SmallHeading"] = "";
+    ViewData["BreadcrumbOne"] = "Quản lý web";
+    ViewData["BreadcrumbTwo"] = "Ca sỹ";
+    ViewData["BreadcrumbThree"] = "Tạo mới";
+    ViewData["BoxTitle"] = "Tạo link ca sỹ mới";
+    ViewData["Search"] = "Tìm ca sỹ";
+    Layout = "_CreateLayout";
+}
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="form-group">
+            <label asp-for="Description" class="control-label"></label>
+            <textarea asp-for="Description" class="form-control" cols="3" rows="3"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="form-group">
+            <label asp-for="ImageID" class="control-label"></label>
+            <select asp-for="ImageID" class="form-control" asp-items="ViewBag.ImageID">
+                <option selected disabled>-- Không có --</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="form-group">
+            <label asp-for="Content" class="control-label"></label>
+            <textarea asp-for="Content" class="form-control ckeditor"></textarea>
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+    </div>
+</div>

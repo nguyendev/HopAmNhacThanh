@@ -162,21 +162,26 @@ namespace HopAmNhacThanh.Data.HomeRepository
                 .Where(p => p.SongID == songContext.ID)
                 .ToListAsync();
             List<SimpleLinkSongViewModel> listLinkSongs = new List<SimpleLinkSongViewModel>();
-            foreach (var item in linkSongContext)
+            if (linkSongContext != null)
             {
-                SimpleLinkSongViewModel simpleLinkSong = new SimpleLinkSongViewModel
+                
+                foreach (var item in linkSongContext)
                 {
-                    Link = item.Link,
-                    SingleSongName = item.SingleSong.Name,
-                    Slug = item.SingleSong.Slug
+                    SimpleLinkSongViewModel simpleLinkSong = new SimpleLinkSongViewModel
+                    {
+                        Link = item.Link,
+                        SingleSong = item.SingleSong,
+                        Tone = item.Tone
+                    };
+                    listLinkSongs.Add(simpleLinkSong);
                 };
-                listLinkSongs.Add(simpleLinkSong);
-            };
+            }
 
             bool isSheetExisted = await _context.SheetMusic.AnyAsync(p => p.SongID == songContext.ID);
 
             var videoContext = await _context.Video
                 .Where(p => p.SongID == songContext.ID)
+                .Include(p => p.Image)
                 .ToListAsync();
             List<SimpleVideoViewModel> listVideo = new List<SimpleVideoViewModel>();
             foreach (var item in videoContext)
@@ -185,7 +190,9 @@ namespace HopAmNhacThanh.Data.HomeRepository
                 {
                     Link = item.Link,
                     Name = item.Name,
-
+                    ID = item.ID,
+                    Images = item.Image
+                    
                 };
                 simpleVideo.Type = item.Type.HasValue ? item.Type.Value : 1;
                 listVideo.Add(simpleVideo);

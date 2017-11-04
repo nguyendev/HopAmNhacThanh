@@ -82,9 +82,18 @@
                                 @if (MainSingle.Album != null)
                                 {
                                     <span class="att"><i title="Album" class="fa fa-book"></i> @Html.Raw("Album:")</span>
+                                    @if (MainSingle.Album.Name.Length < 20)
+                                    {
                                     <span class="ats">
                                         <a asp-controller="Album" asp-action="Single" asp-route-slug="@MainSingle.Album.Slug"> @MainSingle.Album.Name </a>
                                     </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="ats">
+                                            <a asp-controller="Album" asp-action="Single" asp-route-slug="@MainSingle.Album.Slug"> @MainSingle.Album.ShortName </a>
+                                        </span>
+                                    }
                                 }
                             </div>
                             <div class="col-md-4">
@@ -133,7 +142,7 @@
                                 <span class="att">
                                     <i title="Người đăng" class="fa fa-calendar"> @Html.Raw("Ngày đăng:")</i>
                                 </span>
-                                <span class="ats"> @MainSingle.CreateDate.Value.ToString("dd/mm/yyyy")</span>
+                                <span class="ats"> @MainSingle.CreateDate.Value.ToString("dd/MM/yyyy")</span>
                             </div>
                             }
                             <div class="col-md-4">
@@ -525,35 +534,5 @@
         //        scrolldelay = setTimeout('startScroll()', 200 / scrollValue);
         //    }
         //}
-
-        //xo ca si the hien
-        var song_expand = '<p>Xem thêm các ca sĩ khác <i class="fa fa-chevron-down"></i></p>';
-        var song_collapse = '<p>Thu gọn <i class="fa fa-chevron-up"></i></p>';
-        function show_fullsong() {
-            if (document.getElementById('moresong').innerHTML == song_expand) {
-                document.getElementById('fullsong').setAttribute('style', "overflow: auto;");
-                document.getElementById('moresong').innerHTML = song_collapse;
-            }
-            else if (document.getElementById('fullsong').offsetHeight > 350) {
-                document.getElementById('fullsong').setAttribute('style', "max-height: 150px; overflow: hidden;");
-                document.getElementById('moresong').innerHTML = song_expand;
-            }
-        }
-        show_fullsong();
-
-        ////xo ca si the hien
-        var video_expand = '<p>Xem thêm các video khác <i class="fa fa-chevron-down"></i></p>';
-        var video_collapse = '<p>Thu gọn <i class="fa fa-chevron-up"></i></p>';
-        function show_fullvideo() {
-            if (document.getElementById('morevideo').innerHTML == video_expand) {
-                document.getElementById('fullvideo').setAttribute('style', "overflow: auto;");
-                document.getElementById('morevideo').innerHTML = video_collapse;
-            }
-            else if (document.getElementById('fullvideo').offsetHeight > 350) {
-                document.getElementById('fullvideo').setAttribute('style', "max-height: 230px; overflow: hidden;");
-                document.getElementById('morevideo').innerHTML = video_expand;
-            }
-        }
-        show_fullvideo();
     </script>
 }

@@ -13,6 +13,7 @@ namespace HopAmNhacThanh.Models
         [Key]
         public int ID { get; set; }
         [Required]
+        [Display(Name="Tên ca sỹ")]
         public string Name { get; set; }
         public string Description { get; set; }
         public int? ImageID { get; set; }

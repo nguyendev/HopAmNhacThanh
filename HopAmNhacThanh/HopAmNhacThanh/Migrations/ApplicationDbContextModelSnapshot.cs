@@ -33,18 +33,24 @@ namespace HopAmNhacThanh.Migrations
 
                     b.Property<DateTime?>("CreateDT");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .HasMaxLength(300);
 
                     b.Property<int?>("ImageID");
 
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(50);
 
                     b.Property<string>("Note")
                         .HasMaxLength(200);
 
-                    b.Property<string>("Slug");
+                    b.Property<string>("ShortName")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("Slug")
+                        .HasMaxLength(30);
 
                     b.Property<DateTime?>("UpdateDT");
 
@@ -150,6 +156,41 @@ namespace HopAmNhacThanh.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("HopAmNhacThanh.Models.Audio", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Active")
+                        .HasMaxLength(1);
+
+                    b.Property<string>("Approved")
+                        .HasMaxLength(1);
+
+                    b.Property<string>("AuthorID");
+
+                    b.Property<DateTime?>("CreateDT");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Note")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Source")
+                        .HasMaxLength(150);
+
+                    b.Property<DateTime?>("UpdateDT");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("AuthorID");
+
+                    b.ToTable("Audio");
                 });
 
             modelBuilder.Entity("HopAmNhacThanh.Models.AuthorSong", b =>
@@ -314,6 +355,18 @@ namespace HopAmNhacThanh.Migrations
                     b.Property<string>("Note")
                         .HasMaxLength(200);
 
+                    b.Property<string>("PicBook")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("PicFull")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("PicPeople")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("PicVideo")
+                        .HasMaxLength(200);
+
                     b.Property<string>("Title")
                         .HasMaxLength(150);
 
@@ -383,12 +436,14 @@ namespace HopAmNhacThanh.Migrations
                     b.Property<string>("Link")
                         .IsRequired();
 
+                    b.Property<string>("Name");
+
                     b.Property<string>("Note")
                         .HasMaxLength(200);
 
                     b.Property<int?>("SingleSongID");
 
-                    b.Property<long>("SongID");
+                    b.Property<long?>("SongID");
 
                     b.Property<string>("Tone")
                         .HasMaxLength(5);
@@ -635,6 +690,10 @@ namespace HopAmNhacThanh.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("ImageID");
+
+                    b.Property<bool>("IsDeleted");
+
                     b.Property<string>("Link");
 
                     b.Property<string>("Name");
@@ -644,6 +703,8 @@ namespace HopAmNhacThanh.Migrations
                     b.Property<int?>("Type");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("ImageID");
 
                     b.HasIndex("SongID");
 
@@ -792,6 +853,13 @@ namespace HopAmNhacThanh.Migrations
                         .HasForeignKey("ImageID");
                 });
 
+            modelBuilder.Entity("HopAmNhacThanh.Models.Audio", b =>
+                {
+                    b.HasOne("HopAmNhacThanh.Models.ApplicationUser", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorID");
+                });
+
             modelBuilder.Entity("HopAmNhacThanh.Models.AuthorSong", b =>
                 {
                     b.HasOne("HopAmNhacThanh.Models.ApplicationUser", "Author")
@@ -852,8 +920,7 @@ namespace HopAmNhacThanh.Migrations
 
                     b.HasOne("HopAmNhacThanh.Models.Song", "Song")
                         .WithMany("ListLinkSong")
-                        .HasForeignKey("SongID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("SongID");
                 });
 
             modelBuilder.Entity("HopAmNhacThanh.Models.ReportSong", b =>
@@ -927,6 +994,10 @@ namespace HopAmNhacThanh.Migrations
 
             modelBuilder.Entity("HopAmNhacThanh.Models.Video", b =>
                 {
+                    b.HasOne("HopAmNhacThanh.Models.Images", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageID");
+
                     b.HasOne("HopAmNhacThanh.Models.Song", "Song")
                         .WithMany("ListVideos")
                         .HasForeignKey("SongID")

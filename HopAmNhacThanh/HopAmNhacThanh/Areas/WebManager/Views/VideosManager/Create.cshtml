@@ -1,61 +1,50 @@
-@model HopAmNhacThanh.Models.Video
-
+﻿@model HopAmNhacThanh.Models.Video
 @{
-    Layout = null;
+    ViewData["Title"] = "Tạo mới";
+    ViewData["Heading"] = "Tạo mới";
+    ViewData["SmallHeading"] = "";
+    ViewData["BreadcrumbOne"] = "Quản lý web";
+    ViewData["BreadcrumbTwo"] = "Video";
+    ViewData["BreadcrumbThree"] = "Tạo mới";
+    ViewData["BoxTitle"] = "Tạo video mới";
+    ViewData["Search"] = "Tìm video";
+    Layout = "_CreateLayout";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
-</head>
-<body>
-
-<form asp-action="Create">
-    <div class="form-horizontal">
-        <h4>Video</h4>
-        <hr />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="row">
+    <div class="col-md-4">
         <div class="form-group">
-            <label asp-for="SongID" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <select asp-for="SongID" class ="form-control" asp-items="ViewBag.SongID"></select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Name" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Link" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Link" class="form-control" />
-                <span asp-validation-for="Link" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Type" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Type" class="form-control" />
-                <span asp-validation-for="Type" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+            <label asp-for="SongID" class="control-label"></label>
+            <select asp-for="SongID" class="form-control" asp-items="ViewBag.SongID"></select>
         </div>
     </div>
-</form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+    <div class="col-md-8">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="Link" class="control-label"></label>
+            <input asp-for="Link" class="form-control" />
+            <span asp-validation-for="Link" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="ImageID" class="control-label"></label>
+            <select asp-for="ImageID" class="form-control" asp-items="ViewBag.ImageID">
+                <option selected disabled>-- Chưa chọn --</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="Type" class="control-label"></label>
+            <input asp-for="Type" class="form-control" />
+            <span asp-validation-for="Type" class="text-danger"></span>
+        </div>
+    </div>
 </div>
-
-</body>
-</html>

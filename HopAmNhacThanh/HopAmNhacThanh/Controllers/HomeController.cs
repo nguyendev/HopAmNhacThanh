@@ -146,5 +146,10 @@ namespace HopAmNhacThanh.Controllers
                 HttpContext.Session.SetString("currentUrl", path);
             }
         }
+
+        public IActionResult TestAudio()
+        {
+            return View();
+        }
     }
 }

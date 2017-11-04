@@ -56,5 +56,11 @@
     "inputFiles": [
       "wwwroot/js/sidebarCommon.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/transposer/jquery.transposer.min.js",
+    "inputFiles": [
+      "wwwroot/lib/transposer/jquery.transposer.js"
+    ]
   }
 ]

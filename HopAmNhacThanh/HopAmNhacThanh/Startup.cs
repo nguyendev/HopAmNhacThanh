@@ -122,7 +122,11 @@ namespace HopAmNhacThanh
             services.AddScoped<ISingleSongRepository, SingleSongRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IViewRenderService, ViewRenderService>();
+            services.AddScoped<ILinkSongManagerRepository, LinkSongManagerRepository>();
+            services.AddScoped<ISingleSongManagerRepository, SingleSongManagerRepository>();
+            services.AddScoped<IVideoManagerRepository, VideoManagerRepository>();
             //services.AddSingleton();
+            services.AddKendo();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -208,6 +212,7 @@ namespace HopAmNhacThanh
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            app.UseKendo(env);
         }
     }
 }

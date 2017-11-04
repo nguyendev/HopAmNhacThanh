@@ -1,0 +1,16 @@
+﻿@model HopAmNhacThanh.Areas.WebManager.ViewModels.CommonViewModels.ApprovedViewModels
+
+@{
+    ViewData["Title"] = "Duyệt";
+    ViewData["Heading"] = "Ca sỹ";
+    ViewData["SmallHeading"] = "";
+    ViewData["BreadcrumbOne"] = "Quản lý web";
+    ViewData["BreadcrumbTwo"] = "Ca sỹ";
+    ViewData["BreadcrumbThree"] = "Duyệt";
+    ViewData["BoxTitle"] = "Chế độ duyệt";
+    ViewData["Search"] = "Tìm câu đố";
+
+    Layout = "_TableIndexLayout";
+}
+@Html.Partial("_EditApprovedLayout",Model)
+

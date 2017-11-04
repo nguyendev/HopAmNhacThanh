@@ -18,8 +18,14 @@ namespace HopAmNhacThanh.Models
         public string ALT { get; set; }
         [MaxLength(150)]
         public string Title { get; set; }
-        //[MaxLength(200)]
-        //public string PicFull { get; set; }
+        [MaxLength(200)]
+        public string PicFull { get; set; }
+        [MaxLength(200)]
+        public string PicVideo { get; set; } //300x170
+        [MaxLength(200)]
+        public string PicBook { get; set; } //280x400
+        [MaxLength(200)]
+        public string PicPeople { get; set; } //220x240
         //[MaxLength(200)]
         //public string Pic640x480 { get; set; }
         //[MaxLength(200)]

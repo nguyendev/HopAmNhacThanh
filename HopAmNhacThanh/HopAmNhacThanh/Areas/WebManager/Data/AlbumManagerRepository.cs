@@ -31,6 +31,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
                     ImageID = model.ImageID,
                     Description = model.Description,
                     Name = model.Name,
+                    ShortName = model.ShortName,
                     Slug = StringExtensions.ConvertToUnSign3(model.Name),
                     Active = "A",
                     AuthorID = user.Id,
@@ -140,7 +141,8 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
                     Description = single.Description,
                     Image = single.Image,
                     ImageID = single.ImageID,
-                    Name = single.Name
+                    Name = single.Name,
+                    ShortName = single.ShortName
                 };
                 return editModel;
             }
@@ -194,7 +196,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
             single.Description = model.Description;
             single.Slug = model.Slug;
             single.Content = model.Content;
-
+            single.ShortName = model.ShortName;
             _context.Album.Update(single);
             await Save();
         }

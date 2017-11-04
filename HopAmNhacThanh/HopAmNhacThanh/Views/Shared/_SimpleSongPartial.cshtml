@@ -13,17 +13,27 @@
                 @Model.Name
             }
         </a>
-        @if (Model.AuthorSong != null) { 
-        <small>
-            <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
-            <a asp-controller="AuthorSong" asp-action="single" asp-route-slug="@Model.AuthorSong.Slug"> @Model.AuthorSong.Name</a>
-        </small>
+        @if (Model.AuthorSong != null)
+        {
+            <small>
+                <i title="Sáng tác" class="fa fa-user"></i> Sáng tác:
+                <a asp-controller="AuthorSong" asp-action="single" asp-route-slug="@Model.AuthorSong.Slug"> @Model.AuthorSong.Name</a>
+            </small>
         }
-        @if (Model.Album != null) {
+        @if (Model.Album != null)
+        {
 
-        <small>
-            <i title="Album" class="fa fa fa-file-movie-o"></i> <a asp-controller="Album" asp-action="single" asp-route-slug="@Model.Album.Slug">@Model.Album.Name</a>
-        </small>
+            <small>
+                <i title="Album" class="fa fa fa-file-movie-o"></i>
+                @if (Model.Album.Name.Length < 20)
+                {
+                    <a asp-controller="Album" asp-action="single" asp-route-slug="@Model.Album.Slug">@Model.Album.Name</a>
+                }
+                else
+                {
+                    <a asp-controller="Album" asp-action="single" asp-route-slug="@Model.Album.Slug">@Model.Album.ShortName</a>
+                }
+            </small>
         }
         <small>
             <i title="Lượt xem" class="fa fa fa-eye"></i> Lượt xem: @Model.View
