@@ -13,7 +13,7 @@ namespace HopAmNhacThanh.Models
         [Key]
         public int ID { get; set; }
         [Required]
-        [Display(Name="Tên")]
+        [Display(Name="Tên danh mục")]
         [MaxLength(60)]
         public string Name { get; set; }
         public string Description { get; set; }

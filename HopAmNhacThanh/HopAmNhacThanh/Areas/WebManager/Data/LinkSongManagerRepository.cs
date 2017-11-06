@@ -88,12 +88,24 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
                                        select s;
             if (!String.IsNullOrEmpty(searchString))
             {
-                applicationDbContext = applicationDbContext.Where(s => s.Song.Name.Contains(searchString));
+                applicationDbContext = applicationDbContext.Where(s => s.Name.Contains(searchString));
             }
             switch (sortOrder)
             {
-                case "SongParm":
+                case "song":
                     applicationDbContext = applicationDbContext.OrderBy(s => s.Song.Name);
+                    break;
+                case "name":
+                    applicationDbContext = applicationDbContext.OrderBy(s => s.Name);
+                    break;
+                case "singleSong":
+                    applicationDbContext = applicationDbContext.OrderBy(s => s.SingleSong.Name);
+                    break;
+                case "createDT":
+                    applicationDbContext = applicationDbContext.OrderByDescending(s => s.CreateDT);
+                    break;
+                case "approved":
+                    applicationDbContext = applicationDbContext.OrderBy(s => s.Approved);
                     break;
                 default:
                     applicationDbContext = applicationDbContext.OrderByDescending(s => s.CreateDT);

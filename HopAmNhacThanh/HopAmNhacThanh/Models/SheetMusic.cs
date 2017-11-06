@@ -12,9 +12,11 @@ namespace HopAmNhacThanh.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public long ID { get; set; }
-        public long SongID { get; set; }
+        public long? SongID { get; set; }
         public Song Song { get; set; }
         public string Name { get; set; }
+        public string Source { get; set; }
+        public int Number { get; set; }
         public string Type { get; set; }
     }
 }

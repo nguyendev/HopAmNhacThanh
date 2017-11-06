@@ -6,7 +6,7 @@
         <a asp-controller="Home" asp-action="single" asp-route-slug="@Model.Slug" asp-route-slugVersion="@Model.VersionSlug">
             @if (Model.Number != null)
             {
-                @Html.Raw(Model.Number + "." + Model.Name)
+                @Html.Raw(Model.Number + ". " + Model.Name)
             }
             else
             {

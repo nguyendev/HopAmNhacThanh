@@ -123,7 +123,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
             {
                 return NotFound();
             }
-            ViewData["ImageID"] = new SelectList(_context.Images, "ID", "Namr", single.ImageID);
+            ViewData["ImageID"] = new SelectList(_context.Images, "ID", "Name", single.ImageID);
             return View(single);
         }
 
@@ -159,7 +159,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["ImageID"] = new SelectList(_context.Images, "ID", "Namr", style.ImageID);
+            ViewData["ImageID"] = new SelectList(_context.Images, "ID", "Name", style.ImageID);
             return View(style);
         }
 

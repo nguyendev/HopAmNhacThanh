@@ -62,7 +62,6 @@ namespace HopAmNhacThanh.Controllers
         [Route("bai-hat/{slug}/{slugVersion}")]
         public async Task<IActionResult> Single(string slug, string slugVersion)
         {
-            
             await _repostitory.IncreaseView(slug);
             ViewData["MainSingle"] = await _repostitory.GetMainSingle(slug,slugVersion);
             return View();
@@ -114,11 +113,8 @@ namespace HopAmNhacThanh.Controllers
             }
             return View();
         }
-        [Route("/tim-kiem-voi-google")]
-        public IActionResult SearchGoogle(string q)
-        {
-            return View();
-        }
+
+
 
         [Route("robots.txt", Name = "GetRobotsText")]
         public ContentResult RobotsText()

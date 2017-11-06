@@ -1,1 +1,102 @@
-﻿<h2>Tính năng đang xây dựng</h2>
+﻿@{
+    HopAmNhacThanh.Models.SheetMusicViewModels.SingleSheetMusicViewModel single = ViewData["single"] as HopAmNhacThanh.Models.SheetMusicViewModels.SingleSheetMusicViewModel;
+    ViewData["Title"] = "Sheet nhạc bài hát " + single.Title +" | Hợp Âm Nhạc Thánh";
+    //ViewData["Desciption"] = "Tổng hợp sheet, chord (hợp âm), lyric (lời) bài hát Nhạc Thánh Tin Lành dành cho Cơ Đốc Nhân có hướng dẫn sử dụng hợp âm dành cho đàn ghitar, piano ukulele";
+    if (single.Title.Length > 110)
+    {
+        ViewData["Title"] = "Sheet nhạc bài hát " + single.Title;
+    }
+    else
+    {
+        ViewData["Title"] = "Sheet nhạc bài hát " + single.Title + " | Hợp Âm Nhạc Thánh";
+    }
+    string scheme = Context.Request.Scheme;
+    string host = Context.Request.Host.Host;
+    string port = Context.Request.Host.Port.ToString();
+    string path = Context.Request.Path;
+    string url = string.Format("{0}://{1}:{2}{3}", scheme, host, port, path);
+}
+<div class="row">
+    <div class="col-md-8" style="padding-right: 0px;">
+        <div class="panel panel-primary">
+            <div id="list-sheet-song" class="panel-body">
+                <h2 class="text-center">Sheet nhạc bài <strong>@single.Title</strong></h2>
+                <br />
+                <div class="form-group text-center">
+                    <a asp-controller="Home" asp-action="Single" asp-route-slug="@single.Slug" asp-route-slugVersion="@single.SlugVersion" class="btn btn-success btn-sm"><i class="fa fa-fw fa-music"></i> Xem hợp âm</a>
+                    <a asp-controller="Sheet" asp-action="Download" asp-route-slug="@single.Slug" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-download"></i> Tải về</a>
+                    <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#report-error"><i class="fa fa-fw fa-flag"></i> Báo lỗi</button>
+                </div>
+                
+                <ul class="nav nav-tabs">
+                    @if(single.ListJPG.Any())
+                    {
+                        <li class=""><a data-toggle="tab" href="#jpg">JPG</a></li>
+                    }
+                    @if(single.ListPNG.Any())
+                    {
+                    <li class=""><a data-toggle="tab" href="#png">PNG</a></li>
+                    }
+                    @if (single.ListPDF.Any())
+                    {
+                    <li class=""><a data-toggle="tab" href="#pdf">PDF</a></li>
+                    }
+                </ul>
+                <div class="tab-content" style="margin-top:10px;">
+                    @if (single.ListJPG.Any())
+                    {
+                    <div id="jpg" class="tab-pane fade in">
+                        @foreach (var item in single.ListJPG)
+                        {
+                            <p align="center"><img src="@item.Source" width="100%"></p>
+                        }
+                    </div>
+                    }
+                    @if (single.ListPNG.Any())
+                    {
+                        <div id="png" class="tab-pane fade in">
+                            @foreach (var item in single.ListPNG)
+                            {
+                                <p align="center"><img src="@item.Source" width="100%"></p>
+                            }
+                        </div>
+                    }
+                    @if (single.ListPDF.Any())
+                    {
+                        <div id="pdf" class="tab-pane fade in">
+                            @foreach (var item in single.ListPDF)
+                            {
+                                <p align="center">
+                                    <object data="@item.Source" height="1000px" width="100%"></object>
+                                </p>
+                            }
+                        </div>
+                    }
+                    <script defer>
+                        $(document).ready(function () {
+                            $("#list-sheet-song > ul > li:first").addClass("active");
+                            $("#list-sheet-song > .tab-content > div:first").addClass("active");
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="fb-comments" data-width="100%" data-href="@string.Format("{0}",url)" data-numposts="10"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        @Html.Partial("SidebarCommon")
+    </div>
+</div>
+@Html.Partial("ReportSongPartial", new HopAmNhacThanh.Models.HomeViewModels.ReportSongViewModel { Name = single.Title, Slug = single.Slug,Type=3, Url = url })
+@section Style {
+    <link href="~/css/siteCommont.min.css" rel="stylesheet" asp-append-version="true" />
+}
+@section Scripts {
+    <script defer src="~/js/siteCommon.js" asp-append-version="true"></script>
+
+}

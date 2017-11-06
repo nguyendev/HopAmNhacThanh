@@ -43,6 +43,8 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
             ViewData["SoLuong"] = SoLuong;
             ViewData["CurrentSort"] = sortOrder;
             ViewData["NameParm"] = String.IsNullOrEmpty(sortOrder) ? "name" : "";
+            ViewData["SongParm"] = String.IsNullOrEmpty(sortOrder) ? "song" : "";
+            ViewData["ImageParm"] = String.IsNullOrEmpty(sortOrder) ? "image" : "";
             ViewData["CurrentSize"] = pageSize;
             if (searchString != null)
             {

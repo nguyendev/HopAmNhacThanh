@@ -44,6 +44,7 @@
     <Folder Include="Views\AuthorChords\" />
     <Folder Include="Views\Sheet\" />
     <Folder Include="wwwroot\audio\" />
+    <Folder Include="wwwroot\sheetmusic\" />
     <Folder Include="wwwroot\plugins\" />
   </ItemGroup>
 

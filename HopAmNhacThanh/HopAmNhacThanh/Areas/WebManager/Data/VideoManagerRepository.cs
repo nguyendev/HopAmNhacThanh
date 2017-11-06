@@ -74,8 +74,14 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
             }
             switch (sortOrder)
             {
-                case "NameParm":
+                case "name":
                     applicationDbContext = applicationDbContext.OrderBy(s => s.Name);
+                    break;
+                case "song":
+                    applicationDbContext = applicationDbContext.OrderBy(s => s.Song.Name);
+                    break;
+                case "image":
+                    applicationDbContext = applicationDbContext.OrderBy(s => s.Image.Name);
                     break;
                 default:
                     applicationDbContext = applicationDbContext.OrderByDescending(s => s.Name);

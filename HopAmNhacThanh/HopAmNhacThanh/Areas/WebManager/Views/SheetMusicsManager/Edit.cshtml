@@ -1,106 +1,53 @@
-@model HopAmNhacThanh.Models.SheetMusic
-
+﻿@model HopAmNhacThanh.Areas.WebManager.ViewModels.SheetMusicViewModels.EditSheetMusicViewModel
 @{
-    Layout = null;
+    ViewData["Title"] = "Chỉnh sửa";
+    ViewData["Heading"] = "Sheet music";
+    ViewData["SmallHeading"] = "";
+    ViewData["BreadcrumbOne"] = "Quản lý web";
+    ViewData["BreadcrumbTwo"] = "Sheet music";
+    ViewData["BreadcrumbThree"] = "Chỉnh sửa sheet music";
+    ViewData["BoxTitle"] = "Chỉnh sửa sheet music";
+    ViewData["Search"] = "Tìm bài hát";
+    Layout = "_EditLayout";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Edit</title>
-</head>
-<body>
-
-<form asp-action="Edit">
-    <div class="form-horizontal">
-        <h4>SheetMusic</h4>
-        <hr />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="ID" />
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<input type="hidden" asp-for="ID" />
+<div class="row">
+    <div class="col-md-4">
         <div class="form-group">
-            <label asp-for="SongID" class="control-label col-md-2"></label>
-            <div class="col-md-10">
-                <select asp-for="SongID" class="form-control" asp-items="ViewBag.SongID"></select>
-                <span asp-validation-for="SongID" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Name" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Type" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Type" class="form-control" />
-                <span asp-validation-for="Type" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="CreateDT" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="CreateDT" class="form-control" />
-                <span asp-validation-for="CreateDT" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="UpdateDT" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="UpdateDT" class="form-control" />
-                <span asp-validation-for="UpdateDT" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="AuthorID" class="control-label col-md-2"></label>
-            <div class="col-md-10">
-                <select asp-for="AuthorID" class="form-control" asp-items="ViewBag.AuthorID"></select>
-                <span asp-validation-for="AuthorID" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Approved" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Approved" class="form-control" />
-                <span asp-validation-for="Approved" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Active" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Active" class="form-control" />
-                <span asp-validation-for="Active" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <div class="checkbox">
-                    <input asp-for="IsDeleted" />
-                    <label asp-for="IsDeleted"></label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Note" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Note" class="form-control" />
-                <span asp-validation-for="Note" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+            <label asp-for="SongID" class="control-label"></label>
+            <select asp-for="SongID" class="form-control" asp-items="ViewBag.SongID">
+                <option selected disabled>-- Chưa chọn --</option>
+            </select>
+            <span asp-validation-for="SongID" class="text-danger"></span>
         </div>
     </div>
-</form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="Type" class="control-label"></label>
+            <input asp-for="Type" class="form-control" />
+            <span asp-validation-for="Type" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="form-group">
+            <label asp-for="Source" class="control-label"></label>
+            <input asp-for="Source" class="form-control" />
+            <span asp-validation-for="Source" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="Number" class="control-label"></label>
+            <input asp-for="Number" type="number" class="form-control" />
+            <span asp-validation-for="Number" class="text-danger"></span>
+        </div>
+    </div>
 </div>
-
-</body>
-</html>

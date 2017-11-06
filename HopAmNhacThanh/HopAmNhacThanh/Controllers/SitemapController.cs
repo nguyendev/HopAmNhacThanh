@@ -33,75 +33,15 @@ namespace HopAmNhacThanh.Controllers
 
             // add the home page to the sitemap
             siteMapBuilder.AddUrl(root, modified: DateTime.UtcNow, changeFrequency: ChangeFrequency.Weekly, priority: 1.0);
-            // get a list of published articles
-            //var images = await _blogService.Images.ToListAsync();
-
-
-
-            //string picFull = root + "/images/";
-            //string pic640x480 = root + "/images/640x480/";
-
-            //// add the blog posts to the sitemap
-            //foreach (var item in images)
-            //{
-            //    siteMapBuilder.AddUrl(picFull + item.Name, modified: item.CreateDT, changeFrequency: null, priority: 0.9);
-            //    siteMapBuilder.AddUrl(pic640x480 + item.Name, modified: item.CreateDT, changeFrequency: null, priority: 0.9);
-            //}
-
-            //var singlePuzzles = await _blogService.SinglePuzzle
-            //    .Where(p => !p.IsMMultiPuzzle && p.Approved == "A" && !p.IsDeleted)
-            //    .Where(p => p.CreateDT < DateTime.Now)
-            //    .ToListAsync();
-            //string singlePuzzlesRoot = root + "/cau-do-moi-ngay/";
-            //foreach (var item in singlePuzzles)
-            //{
-            //    siteMapBuilder.AddUrl(singlePuzzlesRoot + item.Slug, modified: item.CreateDT, changeFrequency: null, priority: 0.9);
-            //}
-
-            //var multiPuzzles = await _blogService.MultiPuzzle
-            //    .Where(p => p.Approved == "A" && !p.IsDeleted)
-            //    .Where(p => p.CreateDT < DateTime.Now)
-            //    .ToListAsync();
-            //string multiPuzzlesRoot = root + "/cau-do-dac-biet/";
-            //foreach (var item in multiPuzzles)
-            //{
-            //    siteMapBuilder.AddUrl(multiPuzzlesRoot + item.Slug, modified: item.CreateDT, changeFrequency: null, priority: 0.9);
-            //}
-
-            //var blogs = await _blogService.Post
-            //    .Where(p => p.Approved == "A" && !p.IsDeleted)
-            //    .Where(p => p.CreateDT < DateTime.Now)
-            //    .ToListAsync();
-            //string blogRoot = root + "/blogs/";
-            //foreach (var item in blogs)
-            //{
-            //    siteMapBuilder.AddUrl(blogRoot + item.Slug, modified: item.CreateDT, changeFrequency: null, priority: 0.9);
-            //}
-
-            //var tags = await _blogService.Tag
-            //    .Where(p => p.CreateDT < DateTime.Now)
-            //    .ToListAsync();
-            //string tagsRoot = root + "/the/";
-            //foreach (var item in tags)
-            //{
-            //    siteMapBuilder.AddUrl(tagsRoot + item.Slug, modified: item.CreateDT, changeFrequency: null, priority: 0.9);
-            //}
-
-            //var member = await _blogService.Member
-            //    .Where(p => p.CreateDT < DateTime.Now)
-            //    .ToListAsync();
-            //string memberRoot = root + "/thanh-vien/";
-            //foreach (var item in member)
-            //{
-            //    siteMapBuilder.AddUrl(memberRoot + item.Slug, modified: item.CreateDT, changeFrequency: null, priority: 0.9);
-            //}
-
+#region song, sheet, chord
             var song = await _blogService.Song
                 .Where(p => p.Approved == Global.APPROVED)
                 .Where(p => p.CreateDT <= DateTime.Now)
                 .Where(p => !p.IsDeleted)
                 .ToListAsync();
-            string songRoot = root + "/bai-hat/";
+            string DIR_SONG= root + "/bai-hat/";
+            string DIR_SHEET = root + "/sheet/";
+            string DIR_DOWNLOAD_SHEET = root + "/sheet/tai-ve/";
             foreach (var item in song)
             {
                 var chords = await _blogService.Chords
@@ -110,9 +50,98 @@ namespace HopAmNhacThanh.Controllers
                         .ToListAsync();
                 foreach(var itemChord in chords)
                 {
-                    siteMapBuilder.AddUrl(songRoot + item.Slug + "/" + itemChord.Slug, modified: itemChord.CreateDT, changeFrequency: null, priority: 0.9);
+                    siteMapBuilder.AddUrl(DIR_SONG + item.Slug + "/" + itemChord.Slug, modified: itemChord.CreateDT, changeFrequency: null, priority: 0.9);
+                }
+                var sheet = await _blogService.SheetMusic
+                    .Where(p => p.SongID == item.ID)
+                        .Where(p => p.Approved == APPROVED)
+                        .ToListAsync();
+                if (sheet.Any()) { 
+                    siteMapBuilder.AddUrl(DIR_SHEET +item.Slug, modified: item.CreateDT, changeFrequency: null, priority: 0.9);
+                    siteMapBuilder.AddUrl(DIR_DOWNLOAD_SHEET + item.Slug, modified: item.CreateDT, changeFrequency: null, priority: 0.9);
                 }
             }
+#endregion
+            #region singleSong
+            var singleSong = await _blogService.SingleSong
+                .Where(p => p.Approved == Global.APPROVED)
+                .Where(p => p.CreateDT <= DateTime.Now)
+                .Where(p => !p.IsDeleted)
+                .ToListAsync();
+            string DIR_SINGLESONG = "/ca-sy/";
+            foreach (var item in singleSong)
+            {
+                siteMapBuilder.AddUrl(DIR_SINGLESONG + item.Slug, modified: item.CreateDT, changeFrequency: null, priority: 0.9);
+            }
+            #endregion
+
+            #region album
+            var album = await _blogService.Album
+                .Where(p => p.Approved == Global.APPROVED)
+                .Where(p => p.CreateDT <= DateTime.Now)
+                .Where(p => !p.IsDeleted)
+                .ToListAsync();
+            string DIR_ALBUM = "/album/";
+            foreach (var item in album)
+            {
+                siteMapBuilder.AddUrl(DIR_ALBUM + item.Slug, modified: item.CreateDT, changeFrequency: null, priority: 0.9);
+            }
+            #endregion
+
+            #region Category
+            var category = await _blogService.Category
+                .Where(p => !p.IsDeleted)
+                .ToListAsync();
+            string DIR_CATEGORY = "/danh-muc/";
+            foreach (var item in category)
+            {
+                siteMapBuilder.AddUrl(DIR_CATEGORY + item.Slug, null, changeFrequency: null, priority: 0.9);
+            }
+            #endregion
+
+            #region Style
+            var style = await _blogService.Style
+                .Where(p => !p.IsDeleted)
+                .ToListAsync();
+            string DIR_STYLE = "/dieu/";
+            foreach (var item in style)
+            {
+                siteMapBuilder.AddUrl(DIR_STYLE + item.Slug, null, changeFrequency: null, priority: 0.9);
+            }
+            #endregion
+
+            #region VietnameseLyric
+            var vietnames = await _blogService.VietnameseLyric
+                .Where(p => !p.IsDeleted)
+                .ToListAsync();
+            string DIR_VN = "/loi-viet/";
+            foreach (var item in vietnames)
+            {
+                siteMapBuilder.AddUrl(DIR_VN + item.Slug, null, changeFrequency: null, priority: 0.9);
+            }
+            #endregion
+
+            #region audio in wwwroot
+            var audio = await _blogService.LinkSong
+                .Where(p => !p.IsDeleted)
+                .ToListAsync();
+            string DIR_LINKSONG = "/audio/";
+            foreach (var item in audio)
+            {
+                siteMapBuilder.AddUrl(DIR_LINKSONG + item.Name, modified: item.CreateDT, changeFrequency: null, priority: 0.9);
+            }
+            #endregion
+
+            #region sheet in wwwroot
+            var sheetmusic = await _blogService.LinkSong
+                .Where(p => !p.IsDeleted)
+                .ToListAsync();
+            string DIR_SHEETMUSIC_WWW = "/sheetmusic/";
+            foreach (var item in sheetmusic)
+            {
+                siteMapBuilder.AddUrl(DIR_SHEETMUSIC_WWW + item.Name, modified: item.CreateDT, changeFrequency: null, priority: 0.9);
+            }
+            #endregion
 
             // generate the sitemap xml
             string xml = siteMapBuilder.ToString();

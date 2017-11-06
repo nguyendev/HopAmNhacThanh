@@ -206,6 +206,8 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
     int? page, int? pageSize)
         {
             var applicationDbContext = from s in _context.Song
+                                       .Include(p => p.Category)
+                                       .Include(p => p.Album)
                                 .Include(p => p.ListLinkSong)
                                 .Include(p => p.ListSheetMusic)
                                 .Include(p => p.ListVideos)
@@ -219,14 +221,23 @@ namespace HopAmNhacThanh.Areas.WebManager.Data
             }
             switch (sortOrder)
             {
-                case "NameParm":
+                case "name":
                     applicationDbContext = applicationDbContext.OrderBy(s => s.Name);
                     break;
-                case "CategoryParm":
+                case "category":
                     applicationDbContext = applicationDbContext.OrderBy(s => s.Category.Name);
                     break;
-                case "AlbumParm":
+                case "album":
                     applicationDbContext = applicationDbContext.OrderBy(s => s.Album.Name);
+                    break;
+                case "approved":
+                    applicationDbContext = applicationDbContext.OrderBy(s => s.Approved);
+                    break;
+                case "views":
+                    applicationDbContext = applicationDbContext.OrderByDescending(s => s.Views);
+                    break;
+                case "createDT":
+                    applicationDbContext = applicationDbContext.OrderByDescending(s => s.CreateDT);
                     break;
                 default:
                     applicationDbContext = applicationDbContext.OrderByDescending(s => s.CreateDT);

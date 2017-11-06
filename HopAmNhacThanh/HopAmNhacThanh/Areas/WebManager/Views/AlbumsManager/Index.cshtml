@@ -50,7 +50,14 @@
                                 @Html.DisplayFor(modelItem => item.CreateDT)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Approved)
+                                @if (item.Approved == "A")
+                                {
+                                    @Html.Raw("Đã duyệt")
+                                }
+                                else
+                                {
+                                    @Html.Raw("Chưa duyệt")
+                                }
                             </td>
                             <td>
                                 @if (item.Approved != "A")

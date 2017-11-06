@@ -1,0 +1,143 @@
+﻿@{
+    HopAmNhacThanh.Models.SheetMusicViewModels.SingleSheetMusicViewModel download = ViewData["download"] as HopAmNhacThanh.Models.SheetMusicViewModels.SingleSheetMusicViewModel;
+    //ViewData["Desciption"] = "Tổng hợp sheet, chord (hợp âm), lyric (lời) bài hát Nhạc Thánh Tin Lành dành cho Cơ Đốc Nhân có hướng dẫn sử dụng hợp âm dành cho đàn ghitar, piano ukulele";
+    if (download.Title.Length > 105)
+    {
+        ViewData["Title"] = "Tải Sheet nhạc bài hát " + download.Title;
+    }
+    else
+    {
+        ViewData["Title"] = "Tải Sheet nhạc bài hát " + download.Title + " | Hợp Âm Nhạc Thánh";
+    }
+    string scheme = Context.Request.Scheme;
+    string host = Context.Request.Host.Host;
+    string port = Context.Request.Host.Port.ToString();
+    string path = Context.Request.Path;
+    string url = string.Format("{0}://{1}:{2}{3}", scheme, host, port, path);
+}
+<div class="row">
+    <div class="col-md-8" style="padding-right: 0px;">
+        <div class="panel panel-primary">
+            <div id="list-download-sheet-song" class="panel-body">
+                <h2 class="text-center">Tải Sheet nhạc bài <strong>@download.Title</strong></h2>
+                <br />
+                <div class="form-group text-center">
+                    <a asp-controller="Home" asp-action="Single" asp-route-slug="@download.Slug" asp-route-slugVersion="@download.SlugVersion" class="btn btn-success btn-sm"><i class="fa fa-fw fa-music"></i> Xem hợp âm</a>
+                    <a asp-controller="Sheet" asp-action="Single" asp-route-slug="@download.Slug" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-file-pdf-o"></i> Sheet Music</a>
+                    <button class="btn btn-danger btn-sm" type="button" data-toggle="modal" data-target="#report-error"><i class="fa fa-fw fa-flag"></i> Báo lỗi</button>
+                </div>
+                <div class="form-group" id="validate">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Yêu cầu xác thực</h3>
+                        </div>
+                        <div class="panel-body">
+                            <p style="margin-bottom: 5px;"><strong>Vui lòng xác thực để download phim này: </strong></p>
+                            <div class="g-recaptcha text-center" data-sitekey="6Lfd2A8UAAAAAEBsxMi4memnS3SB3IZnXnZddGMb" data-callback='doSomething'></div>
+                            <span class="text-danger" id="recaptchaErrorMessage"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary" id="download" style="display:none">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Tải về</h3>
+                    </div>
+                    <div class="panel-body" style="color: black">
+                        <table class="table table-bordered table-responsive">
+                            <thead>
+                                <tr>
+                                    <th class="bg-success">Định dạng file</th>
+                                    <th class="bg-success">Liên kết tải</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ 
+                                    int number = 0;
+                                }
+                                @if (download.ListJPG.Any())
+                                {
+                                    number++;
+                                    <tr>
+                                        <th> JPG</th>
+                                        <th>
+                                            @foreach(var item in download.ListJPG)
+                                            { 
+                                                <a asp-controller="Sheet" target="_blank" asp-action="DownloadFile"  asp-route-filename="@item.Name" class="btn btn-primary"><i class="fa fa-file-image-o"></i> Tập tin @number</a>
+                                            }
+                                        </th>
+                                    </tr>
+                                            }
+                                @if (download.ListPNG.Any())
+                                {
+                                    number++;
+                                    <tr>
+                                        <th> PNG</th>
+                                        <th>
+                                            @foreach (var item in download.ListPNG)
+                                            {
+                                                <a asp-controller="Sheet" target="_blank" asp-action="DownloadFile" asp-route-filename="@item.Name" class="btn btn-info"><i class="fa fa-file-picture-o"></i> Tập tin @number</a>
+                                            }
+                                        </th>
+                                    </tr>
+                                            }
+                                @if (download.ListPDF.Any())
+                                {
+                                    number++;
+                                    <tr>
+                                        <th> PDF</th>
+                                        <th>
+                                            @foreach (var item in download.ListPDF)
+                                            {
+                                                <a asp-controller="Sheet" target="_blank" asp-action="DownloadFile" asp-route-filename="@item.Name" class="btn btn-warning"><i class="fa fa-file-pdf-o"></i> Tập tin @item.Number</a>
+                                            }
+                                        </th>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="fb-comments" data-width="100%" data-href="@string.Format("{0}",url)" data-numposts="10"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        @Html.Partial("SidebarCommon")
+    </div>
+</div>
+@Html.Partial("ReportSongPartial", new HopAmNhacThanh.Models.HomeViewModels.ReportSongViewModel { Name = download.Title, Slug = download.Slug, Type = 4, Url = url })
+@section Style {
+    <link href="~/css/siteCommont.min.css" rel="stylesheet" asp-append-version="true" />
+}
+@section Scripts {
+    <script defer src="~/js/siteCommon.js" asp-append-version="true"></script>
+<script async src='https://www.google.com/recaptcha/api.js'></script>
+<script defer type="text/javascript" language="javascript">
+    function doSomething() {
+        var isCaptchaValidated = false;
+        var response = grecaptcha.getResponse();
+        if (response.length == 0) {
+            isCaptchaValidated = false;
+            alert('vui lòng xác thực bạn không là robot');
+        } else {
+            isCaptchaValidated = true;
+        }
+
+
+        if (isCaptchaValidated) {
+            document.getElementById('download').style.display = 'block';
+            document.getElementById('validate').style.display = 'none';
+            //you can now submit your form
+        }
+    }
+
+</script>
+}

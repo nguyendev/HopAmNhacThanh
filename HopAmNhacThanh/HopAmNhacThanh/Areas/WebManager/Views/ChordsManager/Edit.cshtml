@@ -16,15 +16,15 @@
     <div class="col-md-4">
         <div class="form-group">
             <label asp-for="SongID" class="control-label"></label>
-                <select asp-for="SongID" class="form-control" asp-items="ViewBag.SongID"></select>
-                <span asp-validation-for="SongID" class="text-danger"></span>
+            <select asp-for="SongID" class="form-control" asp-items="ViewBag.SongID"></select>
+            <span asp-validation-for="SongID" class="text-danger"></span>
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label asp-for="Version" class="control-label"></label>
-                <input asp-for="Version" class="form-control" />
-                <span asp-validation-for="Version" class="text-danger"></span>
+            <input asp-for="Version" class="form-control" />
+            <span asp-validation-for="Version" class="text-danger"></span>
         </div>
     </div>
     <div class="col-md-4">
@@ -37,37 +37,35 @@
 </div>
 <div class="row">
 
-    
+
     <div class="col-md-3">
         <div class="form-group">
             <label asp-for="InfoShort" class="control-label"></label>
-                <input asp-for="InfoShort" class="form-control" />
-                <span asp-validation-for="InfoShort" class="text-danger"></span>
+            <input asp-for="InfoShort" class="form-control" />
+            <span asp-validation-for="InfoShort" class="text-danger"></span>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
             <label asp-for="Info" class="control-label"></label>
-                <input asp-for="Info" class="form-control" />
-                <span asp-validation-for="Info" class="text-danger"></span>
+            <input asp-for="Info" class="form-control" />
+            <span asp-validation-for="Info" class="text-danger"></span>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <label asp-for="StyleID" class="control-label col-md-2"></label>
-            <div class="col-md-10">
-                <select asp-for="StyleID" class="form-control" asp-items="ViewBag.StyleID">
-                    <option disabled selected>-- Chưa xác định --</option>
-                </select>
-                <span asp-validation-for="StyleID" class="text-danger"></span>
-            </div>
+            <label asp-for="StyleID" class="control-label"></label>
+            <select asp-for="StyleID" class="form-control" asp-items="ViewBag.StyleID">
+                <option disabled selected>-- Chưa xác định --</option>
+            </select>
+            <span asp-validation-for="StyleID" class="text-danger"></span>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
             <label asp-for="Tone" class="control-label"></label>
-                <input asp-for="Tone" class="form-control" />
-                <span asp-validation-for="Tone" class="text-danger"></span>
+            <input asp-for="Tone" class="form-control" />
+            <span asp-validation-for="Tone" class="text-danger"></span>
         </div>
     </div>
 </div>
@@ -81,7 +79,7 @@
 <div class="row col-md-12">
     <div class="form-group">
         <label asp-for="Lyric" class="control-label"></label>
-            <textarea cols="5" rows="5" asp-for="Lyric" class="form-control"></textarea>
-            <span asp-validation-for="Lyric" class="text-danger"></span>
+        <textarea cols="5" rows="5" asp-for="Lyric" class="form-control"></textarea>
+        <span asp-validation-for="Lyric" class="text-danger"></span>
     </div>
 </div>

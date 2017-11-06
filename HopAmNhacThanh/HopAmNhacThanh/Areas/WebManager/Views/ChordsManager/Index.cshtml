@@ -19,7 +19,7 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <table class="table">
+            <table class="table table-responsive">
                 <thead>
                     <tr>
                         <th>
@@ -32,13 +32,13 @@
                             <a asp-action="Index" asp-route-sortOrder="@ViewData["StyleParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.ListChord.First().Style.Name)</a>
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ListChord.First().Tone)
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["ToneParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.ListChord.First().Tone)</a>
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ListChord.First().CreateDT)
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["CreateDTParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.ListChord.First().CreateDT)</a>
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ListChord.First().Approved)
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["ApprovedParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.ListChord.First().Approved)</a>
                         </th>
                         <th></th>
                     </tr>
@@ -67,9 +67,15 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.CreateDT)
                             </td>
-
                             <td>
-                                @Html.DisplayFor(modelItem => item.Approved)
+                                @if (item.Approved == "A")
+                                {
+                                    @Html.Raw("Đã duyệt")
+                                }
+                                else
+                                {
+                                    @Html.Raw("Chưa duyệt")
+                                }
                             </td>
                             <td>
                                 @if (item.Approved != "A")

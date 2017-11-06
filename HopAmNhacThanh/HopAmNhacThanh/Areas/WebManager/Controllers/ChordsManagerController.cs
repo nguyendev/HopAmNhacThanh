@@ -49,7 +49,14 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
             };
             ViewData["SoLuong"] = SoLuong;
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["TitleParm"] = String.IsNullOrEmpty(sortOrder) ? "title" : "";
+
+            ViewData["SongParm"] = String.IsNullOrEmpty(sortOrder) ? "song" : "";
+            ViewData["VersionParm"] = String.IsNullOrEmpty(sortOrder) ? "version" : "";
+            ViewData["StyleParm"] = String.IsNullOrEmpty(sortOrder) ? "style" : "";
+            ViewData["ToneParm"] = String.IsNullOrEmpty(sortOrder) ? "tone" : "";
+            ViewData["CreateDTParm"] = String.IsNullOrEmpty(sortOrder) ? "createDT" : "";
+            ViewData["ApprovedParm"] = String.IsNullOrEmpty(sortOrder) ? "approved" : "";
+
             ViewData["CurrentSize"] = pageSize;
             if (searchString != null)
             {

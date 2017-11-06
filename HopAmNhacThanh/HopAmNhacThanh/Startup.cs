@@ -24,6 +24,7 @@ using HopAmNhacThanh.Data.AlbumRepository;
 using HopAmNhacThanh.Data.AuthorSongRepository;
 using HopAmNhacThanh.Data.SingleSongRepository;
 using HopAmNhacThanh.Data.CategoryRepository;
+using HopAmNhacThanh.Data.SheetMusicRepository;
 
 namespace HopAmNhacThanh
 {
@@ -125,6 +126,8 @@ namespace HopAmNhacThanh
             services.AddScoped<ILinkSongManagerRepository, LinkSongManagerRepository>();
             services.AddScoped<ISingleSongManagerRepository, SingleSongManagerRepository>();
             services.AddScoped<IVideoManagerRepository, VideoManagerRepository>();
+            services.AddScoped<ISheetMusicManagerRepository, SheetMusicManagerRepository>();
+            services.AddScoped<ISheetMusicRepository, SheetMusicRepository>();
             //services.AddSingleton();
             services.AddKendo();
         }

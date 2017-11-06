@@ -1,4 +1,5 @@
-﻿using HopAmNhacThanh.Models;
+﻿using HopAmNhacThanh.Areas.WebManager.ViewModels.CommonViewModels;
+using HopAmNhacThanh.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,7 +15,7 @@ namespace HopAmNhacThanh.Areas.WebManager.ViewModels.SongViewModels
         public List<SimpleIndexSongViewModel> ListSong { get; set; }
     }
 
-    public class SimpleIndexSongViewModel
+    public class SimpleIndexSongViewModel: BaseIndexViewModel
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
@@ -33,8 +34,5 @@ namespace HopAmNhacThanh.Areas.WebManager.ViewModels.SongViewModels
         public Album Album { get; set; }
         [Display(Name = "Lượt xem")]
         public int Views { get; set; }
-        public DateTime? CreateDT { get; set; }
-
-        public string Approved { get; set; }
     }
 }

@@ -540,7 +540,11 @@ namespace HopAmNhacThanh.Migrations
                     b.Property<string>("Note")
                         .HasMaxLength(200);
 
-                    b.Property<long>("SongID");
+                    b.Property<int>("Number");
+
+                    b.Property<long?>("SongID");
+
+                    b.Property<string>("Source");
 
                     b.Property<string>("Type");
 
@@ -946,8 +950,7 @@ namespace HopAmNhacThanh.Migrations
 
                     b.HasOne("HopAmNhacThanh.Models.Song", "Song")
                         .WithMany("ListSheetMusic")
-                        .HasForeignKey("SongID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("SongID");
                 });
 
             modelBuilder.Entity("HopAmNhacThanh.Models.SingleSong", b =>

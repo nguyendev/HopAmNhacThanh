@@ -1,97 +1,91 @@
-@model IEnumerable<HopAmNhacThanh.Models.SheetMusic>
+﻿@model HopAmNhacThanh.Areas.WebManager.ViewModels.SheetMusicViewModels.IndexSheetMusicViewModel
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Index";
+    ViewData["Heading"] = "Danh sách sheet";
+    ViewData["SmallHeading"] = "";
+    ViewData["BreadcrumbOne"] = "Quản lý web";
+    ViewData["BreadcrumbTwo"] = "Sheet";
+    ViewData["BreadcrumbThree"] = "Danh sách sheet";
+    ViewData["BoxTitle"] = "Danh sách sheet";
+    ViewData["Search"] = "Tìm sheet";
+    Layout = "_TableIndexLayout";
 }
+<div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 
-<!DOCTYPE html>
+    <div class="row">
+        @Html.Partial("_SearchIndexPartial", Model)
+    </div>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Type)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreateDT)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UpdateDT)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Approved)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Active)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IsDeleted)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Note)
-                </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Author)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Song)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateDT)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdateDT)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Approved)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Active)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDeleted)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Note)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Song.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-</body>
-</html>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["NameParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.ListSheetMusic.First().Name)</a>
+                        </th>
+                        <th>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["SongParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.ListSheetMusic.First().Song.Name)</a>
+                        </th>
+                        <th>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["TypeParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.ListSheetMusic.First().Type)</a>
+                        </th>
+                        <th>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["CreateDTParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.ListSheetMusic.First().CreateDT)</a>
+                        </th>
+                        <th>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["ApprovedParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.ListSheetMusic.First().Approved)</a>
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ListSheetMusic)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Song.Name)
+                            </td>
+                            <td>
+                                    @Html.DisplayFor(modelItem => item.Type)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreateDT)
+                            </td>
+
+                            <td>
+                                @if (item.Approved == "A")
+                                {
+                                    @Html.Raw("Đã duyệt")
+                                }
+                                else
+                                {
+                                    @Html.Raw("Chưa duyệt")
+                                }
+                            </td>
+                            <td>
+                                @if (item.Approved != "A")
+                                {
+                                    <a asp-action="EditPublishDT" asp-route-id="@item.ID" class="btn btn-default fa fa-clock-o"></a>
+                                    <a asp-action="EditApproved" asp-route-id="@item.ID" class="btn btn-primary fa fa-check"></a>
+                                }
+                                <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-warning fa fa-edit"></a>
+                                <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-success fa fa-newspaper-o"></a>
+                                <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger fa fa-remove"></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        @Html.Partial("_PageIndexPartial", Model)
+    </div>
+</div>

@@ -19,18 +19,18 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <table class="table">
+            <table class="table table-responsive">
                 <thead>
                     <tr>
                         <th>
                             <a asp-action="Index" asp-route-sortOrder="@ViewData["NameParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.List.First().Name)</a>
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.List.First().Song)
-                        </th>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["SongParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.List.First().Song.Name)</a>
+</th>
                         <th>
-                            @Html.DisplayNameFor(model => model.List.First().Image)
-                        </th>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["ImageParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.List.First().Image.Name)</a>
+</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -46,16 +46,12 @@
                                 @Html.DisplayFor(modelItem => item.Song.Name)
                             </td>
                             <td>
-                                @if(item.Image != null) { 
                                 @Html.DisplayFor(modelItem => item.Image.Name)
-                                }
                             </td>
-
                             <td>
                                 <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-warning fa fa-edit"></a>
                                 <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-success fa fa-newspaper-o"></a>
                                 <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger fa fa-remove"></a>
-
                             </td>
                         </tr>
                     }

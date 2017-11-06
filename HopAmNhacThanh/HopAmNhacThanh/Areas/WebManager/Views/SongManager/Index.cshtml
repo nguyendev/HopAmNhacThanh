@@ -20,7 +20,7 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <table class="table">
+            <table class="table table-responsive">
                 <thead>
                     <tr>
                         <th>
@@ -33,15 +33,19 @@
                             <a asp-action="Index" asp-route-sortOrder="@ViewData["AlbumParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.ListSong.First().Album.Name)</a>
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ListSong.First().Views)
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["ViewsParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                                @Html.DisplayNameFor(model => model.ListSong.First().Views)
+                            </a>
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ListSong.First().CreateDT)
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["CreateParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                                @Html.DisplayNameFor(model => model.ListSong.First().CreateDT)
+                            </a>
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ListSong.First().Approved)
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["ApprovedParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.ListSong.First().Approved)</a>
                         </th>
-                        <th></th>
+                        <th>Lựa chọn</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,32 +60,34 @@
                                 @Html.DisplayFor(modelItem => item.Category.Name)
                             </td>
                             <td>
-                            @if (item.Album != null)
-                            { 
                                 @Html.DisplayFor(modelItem => item.Album.Name)
-                            }
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Views)
                             </td>
-
                             <td>
                                 @Html.DisplayFor(modelItem => item.CreateDT)
                             </td>
-
                             <td>
-                                @Html.DisplayFor(modelItem => item.Approved)
-                            </td>
-                            <td>
-                                @if (item.Approved != "A")
+                                @if (item.Approved == "A")
                                 {
-                                    <a asp-action="EditPublishDT" asp-route-id="@item.ID" class="btn btn-default fa fa-clock-o"></a>
-                                    <a asp-action="EditApproved" asp-route-id="@item.ID" class="btn btn-primary fa fa-check"></a>
+                                    @Html.Raw("Đã duyệt")
                                 }
-                                <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-warning fa fa-edit"></a>
-                                <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-success fa fa-newspaper-o"></a>
-                                <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger fa fa-remove"></a>
+                                else
+                                {
+                                    @Html.Raw("Chưa duyệt")
+                                }
                             </td>
+                            <td>
+                                    @if (item.Approved != "A")
+                                    {
+                                        <a asp-action="EditPublishDT" asp-route-id="@item.ID" class="btn btn-default fa fa-clock-o"></a>
+                                        <a asp-action="EditApproved" asp-route-id="@item.ID" class="btn btn-primary fa fa-check"></a>
+                                    }
+                                    <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-warning fa fa-edit"></a>
+                                    <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-success fa fa-newspaper-o"></a>
+                                    <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger fa fa-remove"></a>
+                                    </td>
                         </tr>
                     }
                 </tbody>
