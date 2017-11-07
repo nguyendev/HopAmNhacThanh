@@ -1,5 +1,6 @@
 ﻿@{
     HopAmNhacThanh.Models.SheetMusicViewModels.SingleSheetMusicViewModel download = ViewData["download"] as HopAmNhacThanh.Models.SheetMusicViewModels.SingleSheetMusicViewModel;
+    HopAmNhacThanh.Models.SidebarViewModels.CommonSidebarViewModel sidebar = ViewData["Sidebar"] as HopAmNhacThanh.Models.SidebarViewModels.CommonSidebarViewModel;
     //ViewData["Desciption"] = "Tổng hợp sheet, chord (hợp âm), lyric (lời) bài hát Nhạc Thánh Tin Lành dành cho Cơ Đốc Nhân có hướng dẫn sử dụng hợp âm dành cho đàn ghitar, piano ukulele";
     if (download.Title.Length > 105)
     {
@@ -51,7 +52,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @{ 
+                                @{
                                     int number = 0;
                                 }
                                 @if (download.ListJPG.Any())
@@ -60,13 +61,13 @@
                                     <tr>
                                         <th> JPG</th>
                                         <th>
-                                            @foreach(var item in download.ListJPG)
-                                            { 
-                                                <a asp-controller="Sheet" target="_blank" asp-action="DownloadFile"  asp-route-filename="@item.Name" class="btn btn-primary"><i class="fa fa-file-image-o"></i> Tập tin @number</a>
+                                            @foreach (var item in download.ListJPG)
+                                            {
+                                                <a asp-controller="Sheet" target="_blank" asp-action="DownloadFile" asp-route-filename="@item.Name" class="btn btn-primary"><i class="fa fa-file-image-o"></i> Tập tin @number</a>
                                             }
                                         </th>
                                     </tr>
-                                            }
+                                }
                                 @if (download.ListPNG.Any())
                                 {
                                     number++;
@@ -79,7 +80,7 @@
                                             }
                                         </th>
                                     </tr>
-                                            }
+                                }
                                 @if (download.ListPDF.Any())
                                 {
                                     number++;
@@ -110,7 +111,7 @@
     </div>
 
     <div class="col-md-4">
-        @Html.Partial("SidebarCommon")
+        @await Html.PartialAsync("SidebarCommon", sidebar)
     </div>
 </div>
 @Html.Partial("ReportSongPartial", new HopAmNhacThanh.Models.HomeViewModels.ReportSongViewModel { Name = download.Title, Slug = download.Slug, Type = 4, Url = url })
@@ -118,26 +119,28 @@
     <link href="~/css/siteCommont.min.css" rel="stylesheet" asp-append-version="true" />
 }
 @section Scripts {
-    <script defer src="~/js/siteCommon.js" asp-append-version="true"></script>
-<script async src='https://www.google.com/recaptcha/api.js'></script>
-<script defer type="text/javascript" language="javascript">
-    function doSomething() {
-        var isCaptchaValidated = false;
-        var response = grecaptcha.getResponse();
-        if (response.length == 0) {
-            isCaptchaValidated = false;
-            alert('vui lòng xác thực bạn không là robot');
-        } else {
-            isCaptchaValidated = true;
+    <script async src='https://www.google.com/recaptcha/api.js'></script>
+    <script defer type="text/javascript" language="javascript">
+        function doSomething() {
+            var isCaptchaValidated = false;
+            var response = grecaptcha.getResponse();
+            if (response.length == 0) {
+                isCaptchaValidated = false;
+                alert('vui lòng xác thực bạn không là robot');
+            } else {
+                isCaptchaValidated = true;
+            }
+
+
+            if (isCaptchaValidated) {
+                document.getElementById('download').style.display = 'block';
+                document.getElementById('validate').style.display = 'none';
+                //you can now submit your form
+            }
         }
 
+    </script>
 
-        if (isCaptchaValidated) {
-            document.getElementById('download').style.display = 'block';
-            document.getElementById('validate').style.display = 'none';
-            //you can now submit your form
-        }
-    }
+    <script src="~/js/siteCommon.min.js" asp-append-version="true"></script>
 
-</script>
 }

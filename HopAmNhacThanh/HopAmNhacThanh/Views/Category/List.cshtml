@@ -1,6 +1,6 @@
 ﻿@{ 
     HopAmNhacThanh.Models.CommonViewModels.CommonListViewModel list = ViewData["List"] as HopAmNhacThanh.Models.CommonViewModels.CommonListViewModel;
-
+    HopAmNhacThanh.Models.SidebarViewModels.CommonSidebarViewModel sidebar = ViewData["Sidebar"] as HopAmNhacThanh.Models.SidebarViewModels.CommonSidebarViewModel;
     ViewData["Title"] = "Danh sách danh mục | Hợp Âm Nhạc Thánh";
     ViewData["Desciption"] = "Tổng hợp tất cả danh mục bài hát Cơ Đốc";
 }
@@ -16,12 +16,12 @@
         </div>
     </div>
     <div class="col-md-4">
-        @Html.Partial("SidebarCommon")
+        @await Html.PartialAsync("SidebarCommon",sidebar)
     </div>
 </div>
 @section Style {
     <link href="~/css/siteCommont.min.css" rel="stylesheet" asp-append-version="true" />
 }
 @section Scripts {
-    <script defer src="~/js/siteCommon.js" asp-append-version="true"></script>
+    <script src="~/js/siteCommon.min.js" asp-append-version="true"></script>
 }

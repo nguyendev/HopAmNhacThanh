@@ -49,14 +49,19 @@
     <a class="btn btn-success btn-block" href="https://hopamviet.vn/chord/request.html" role="button">Nhấn vào đây để yêu cầu hợp âm bài hát</a>
 </div>*@
 <div id="song-aphabet-widget" class="panel panel-primary">
+    @Html.Partial("~/Views/Shared/Widget/SongAphabetPartial.cshtml")
 </div>
-<div id="list-album-widget" style="display:none" class="panel panel-primary">
+<div id="list-album-widget" class="panel panel-primary">
+    @await Html.PartialAsync("~/Views/Shared/Widget/ListAlbumPartial.cshtml", Model.ListAlbum)
 </div>
-<div id="list-category-widget" style="display:none" class="panel panel-primary">
+<div id="list-category-widget" class="panel panel-primary">
+    @await Html.PartialAsync("~/Views/Shared/Widget/ListCategoryPartial.cshtml", Model.ListCategory)
 </div>
-<div id="list-rhythm-widget" style="display:none" class="panel panel-primary">
+<div id="list-rhythm-widget" class="panel panel-primary">
+    @await Html.PartialAsync("~/Views/Shared/Widget/ListStylePartial.cshtml", Model.ListStyle)
 </div>
-<div id="list-top-song-widget" style="display:none" class="panel panel-primary">
+<div id="list-top-song-widget" class="panel panel-primary">
+    @await Html.PartialAsync("~/Views/Shared/Widget/ListTopSongPartial.cshtml", Model.ListTopSong)
 </div>
 <div id="list-fanpage-facebook-widget" class="panel panel-primary">
     <div class="panel-heading sidebar-panel-heading">
@@ -68,4 +73,3 @@
         <div class="fb-page" data-href="https://www.facebook.com/hopamnhacthanh/" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/H%E1%BB%A3p-%C3%A2m-Nh%E1%BA%A1c-Th%C3%A1nh-883153405186191/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/H%E1%BB%A3p-%C3%A2m-Nh%E1%BA%A1c-Th%C3%A1nh-883153405186191/">Hợp âm Nhạc Thánh</a></blockquote></div>
     </div>
 </div>
-<script async src="~/js/sidebarCommon.min.js" asp-append-version="true"></script>

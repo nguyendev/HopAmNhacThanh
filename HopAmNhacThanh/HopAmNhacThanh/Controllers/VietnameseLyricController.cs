@@ -27,6 +27,7 @@ namespace HopAmNhacThanh.Controllers
             if (!page.HasValue)
                 page = 1;
             ViewData["Single"] = await _repository.GetSingleVietnameseLyric(slug, page.Value, PAGE_SIZE);
+            ViewData["Sidebar"] = await _sidebarRepository.GetCommonSidebar();
             return View();
         }
 
@@ -39,6 +40,7 @@ namespace HopAmNhacThanh.Controllers
                 page = 1;
 
             ViewData["List"] = await _repository.GetListVietnameseLyric(page.Value, pageSize);
+            ViewData["Sidebar"] = await _sidebarRepository.GetCommonSidebar();
             return View();
         }
     }

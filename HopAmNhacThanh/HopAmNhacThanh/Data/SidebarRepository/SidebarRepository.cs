@@ -17,6 +17,20 @@ namespace HopAmNhacThanh.Data.SidebarRepository
             _context = context;
         }
 
+        public async Task<CommonSidebarViewModel> GetCommonSidebar()
+        {
+            CommonSidebarViewModel model = new CommonSidebarViewModel
+            {
+                ListAlbum = await GetListAlbum(),
+                ListCategory = await GetListCategory(),
+                ListStyle = await GetListStyle(),
+                ListTopSong = await GetListTopSong()
+            };
+            return model;
+        }
+
+        #region common sidebar 
+
         public async Task<List<SimpleAlbumViewModel>> GetListAlbum()
         {
             var albumDbContext = await _context.Album.Take(10).ToListAsync();
@@ -102,5 +116,7 @@ namespace HopAmNhacThanh.Data.SidebarRepository
             }
             return ListTopSong;
         }
+
+        #endregion
     }
 }

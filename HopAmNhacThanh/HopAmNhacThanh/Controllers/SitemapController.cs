@@ -68,7 +68,7 @@ namespace HopAmNhacThanh.Controllers
                 .Where(p => p.CreateDT <= DateTime.Now)
                 .Where(p => !p.IsDeleted)
                 .ToListAsync();
-            string DIR_SINGLESONG = "/ca-sy/";
+            string DIR_SINGLESONG = root + "/ca-sy/";
             foreach (var item in singleSong)
             {
                 siteMapBuilder.AddUrl(DIR_SINGLESONG + item.Slug, modified: item.CreateDT, changeFrequency: null, priority: 0.9);
@@ -81,7 +81,7 @@ namespace HopAmNhacThanh.Controllers
                 .Where(p => p.CreateDT <= DateTime.Now)
                 .Where(p => !p.IsDeleted)
                 .ToListAsync();
-            string DIR_ALBUM = "/album/";
+            string DIR_ALBUM = root + "/album/";
             foreach (var item in album)
             {
                 siteMapBuilder.AddUrl(DIR_ALBUM + item.Slug, modified: item.CreateDT, changeFrequency: null, priority: 0.9);
@@ -92,7 +92,7 @@ namespace HopAmNhacThanh.Controllers
             var category = await _blogService.Category
                 .Where(p => !p.IsDeleted)
                 .ToListAsync();
-            string DIR_CATEGORY = "/danh-muc/";
+            string DIR_CATEGORY = root + "/danh-muc/";
             foreach (var item in category)
             {
                 siteMapBuilder.AddUrl(DIR_CATEGORY + item.Slug, null, changeFrequency: null, priority: 0.9);
@@ -103,7 +103,7 @@ namespace HopAmNhacThanh.Controllers
             var style = await _blogService.Style
                 .Where(p => !p.IsDeleted)
                 .ToListAsync();
-            string DIR_STYLE = "/dieu/";
+            string DIR_STYLE = root + "/dieu/";
             foreach (var item in style)
             {
                 siteMapBuilder.AddUrl(DIR_STYLE + item.Slug, null, changeFrequency: null, priority: 0.9);
@@ -114,7 +114,7 @@ namespace HopAmNhacThanh.Controllers
             var vietnames = await _blogService.VietnameseLyric
                 .Where(p => !p.IsDeleted)
                 .ToListAsync();
-            string DIR_VN = "/loi-viet/";
+            string DIR_VN = root + "/loi-viet/";
             foreach (var item in vietnames)
             {
                 siteMapBuilder.AddUrl(DIR_VN + item.Slug, null, changeFrequency: null, priority: 0.9);
@@ -125,7 +125,7 @@ namespace HopAmNhacThanh.Controllers
             var audio = await _blogService.LinkSong
                 .Where(p => !p.IsDeleted)
                 .ToListAsync();
-            string DIR_LINKSONG = "/audio/";
+            string DIR_LINKSONG = root + "/audio/";
             foreach (var item in audio)
             {
                 siteMapBuilder.AddUrl(DIR_LINKSONG + item.Name, modified: item.CreateDT, changeFrequency: null, priority: 0.9);
@@ -136,7 +136,7 @@ namespace HopAmNhacThanh.Controllers
             var sheetmusic = await _blogService.LinkSong
                 .Where(p => !p.IsDeleted)
                 .ToListAsync();
-            string DIR_SHEETMUSIC_WWW = "/sheetmusic/";
+            string DIR_SHEETMUSIC_WWW = root + "/sheetmusic/";
             foreach (var item in sheetmusic)
             {
                 siteMapBuilder.AddUrl(DIR_SHEETMUSIC_WWW + item.Name, modified: item.CreateDT, changeFrequency: null, priority: 0.9);

@@ -1,5 +1,6 @@
 ﻿@{ 
     HopAmNhacThanh.Models.HomeViewModels.MainContentViewModel mainContent = ViewData["Main"] as HopAmNhacThanh.Models.HomeViewModels.MainContentViewModel;
+    HopAmNhacThanh.Models.SidebarViewModels.CommonSidebarViewModel sidebar = ViewData["Sidebar"] as HopAmNhacThanh.Models.SidebarViewModels.CommonSidebarViewModel;
     ViewData["Title"] = "Tổng hợp Chord, Lyric, Sheet Nhạc Thánh | Hợp Âm Nhạc Thánh";
     ViewData["Desciption"] = "Tổng hợp sheet, chord (hợp âm), lyric (lời) bài hát Nhạc Thánh Tin Lành dành cho Cơ Đốc Nhân có hướng dẫn sử dụng hợp âm dành cho đàn ghitar, piano ukulele";
 }
@@ -104,13 +105,12 @@
     </div>
    
     <div class="col-md-4">
-        @Html.Partial("SidebarCommon")
+        @await Html.PartialAsync("SidebarCommon", sidebar)
     </div>
 </div>
 @section Style {
 <link href="~/css/siteCommont.min.css" rel="stylesheet" asp-append-version="true" />
 }
 @section Scripts {
-<script defer src="~/js/siteCommon.js" asp-append-version="true" ></script>
-
+<script src="~/js/siteCommon.min.js" asp-append-version="true"></script>
 }

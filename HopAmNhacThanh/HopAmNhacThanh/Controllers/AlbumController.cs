@@ -12,10 +12,13 @@ namespace HopAmNhacThanh.Controllers
     {
         private const int PAGE_SIZE = 20;
         private readonly IAlbumRepository _repository;
+        private readonly ISidebarRepository _sidebarRepository;
 
-        public AlbumController(IAlbumRepository repository)
+        public AlbumController(IAlbumRepository repository,
+            ISidebarRepository sidebarRepository)
         {
             _repository = repository;
+            _sidebarRepository = sidebarRepository;
         }
 
         [Route("album/{slug}")]
@@ -24,6 +27,7 @@ namespace HopAmNhacThanh.Controllers
             if (!page.HasValue)
                 page = 1;
             ViewData["Single"] = await _repository.GetSingleAlbum(slug, page.Value, PAGE_SIZE);
+            ViewData["Sidebar"] = await _sidebarRepository.GetCommonSidebar();
             return View();
         }
 
@@ -36,6 +40,7 @@ namespace HopAmNhacThanh.Controllers
                 page = 1;
 
             ViewData["List"] = await _repository.GetListAlbum(page.Value, pageSize);
+            ViewData["Sidebar"] = await _sidebarRepository.GetCommonSidebar();
             return View();
         }
     }

@@ -1,5 +1,6 @@
 ﻿@{
     HopAmNhacThanh.Models.SheetMusicViewModels.SingleSheetMusicViewModel single = ViewData["single"] as HopAmNhacThanh.Models.SheetMusicViewModels.SingleSheetMusicViewModel;
+    HopAmNhacThanh.Models.SidebarViewModels.CommonSidebarViewModel sidebar = ViewData["Sidebar"] as HopAmNhacThanh.Models.SidebarViewModels.CommonSidebarViewModel;
     ViewData["Title"] = "Sheet nhạc bài hát " + single.Title +" | Hợp Âm Nhạc Thánh";
     //ViewData["Desciption"] = "Tổng hợp sheet, chord (hợp âm), lyric (lời) bài hát Nhạc Thánh Tin Lành dành cho Cơ Đốc Nhân có hướng dẫn sử dụng hợp âm dành cho đàn ghitar, piano ukulele";
     if (single.Title.Length > 110)
@@ -89,14 +90,14 @@
     </div>
 
     <div class="col-md-4">
-        @Html.Partial("SidebarCommon")
+        @await Html.PartialAsync("SidebarCommon",sidebar)
     </div>
 </div>
 @Html.Partial("ReportSongPartial", new HopAmNhacThanh.Models.HomeViewModels.ReportSongViewModel { Name = single.Title, Slug = single.Slug,Type=3, Url = url })
 @section Style {
     <link href="~/css/siteCommont.min.css" rel="stylesheet" asp-append-version="true" />
 }
-@section Scripts {
-    <script defer src="~/js/siteCommon.js" asp-append-version="true"></script>
 
+@section Scripts {
+    <script src="~/js/siteCommon.min.js" asp-append-version="true"></script>
 }

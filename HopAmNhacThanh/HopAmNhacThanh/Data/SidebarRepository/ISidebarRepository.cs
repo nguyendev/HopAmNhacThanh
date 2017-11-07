@@ -13,5 +13,7 @@ namespace HopAmNhacThanh.Data.SidebarRepository
         Task<List<SimpleCategoryViewModel>> GetListCategory();
         Task<List<SimpleStyleViewModel>> GetListStyle();
         Task<List<SimpleAlbumViewModel>> GetListAlbum();
+
+        Task<CommonSidebarViewModel> GetCommonSidebar();
     }
 }

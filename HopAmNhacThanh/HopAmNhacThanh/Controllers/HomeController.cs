@@ -16,20 +16,24 @@ namespace HopAmNhacThanh.Controllers
     public class HomeController : Controller
     {
         private readonly IHomeRepository _repostitory;
+        private readonly ISidebarRepository _sidebarRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         public HomeController(IHomeRepository repository,
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            ISidebarRepository sidebarRepository)
         {
             _repostitory = repository;
             _userManager = userManager;
             _signInManager = signInManager;
+            _sidebarRepository = sidebarRepository;
         }
         public async Task<IActionResult> Index()
         {
             SaveCurrentURL();
             ViewData["Main"] = await _repostitory.GetMainHome();
+            ViewData["Sidebar"] = await _sidebarRepository.GetCommonSidebar();
             return View();
         }
 
@@ -41,6 +45,7 @@ namespace HopAmNhacThanh.Controllers
                     page = 1;
 
                 ViewData["Search"] = await _repostitory.GetAphabet(slug, page.Value, pageSize);
+            ViewData["Sidebar"] = await _sidebarRepository.GetCommonSidebar();
                 return View();
         }
 
@@ -111,6 +116,7 @@ namespace HopAmNhacThanh.Controllers
             else {
                 ViewData["TuKhoaTimKiem"] = q;
             }
+            ViewData["Sidebar"] = await _sidebarRepository.GetCommonSidebar();
             return View();
         }
 

@@ -14,12 +14,12 @@
         @await Html.PartialAsync("_CommonSinglePartial", single)
     </div>
     <div class="col-md-4">
-        @Html.Partial("SidebarCommon", sidebar)
+        @await Html.PartialAsync("SidebarCommon", sidebar)
     </div>
 </div>
 @section Style {
     <link href="~/css/siteCommont.min.css" rel="stylesheet" asp-append-version="true" />
 }
 @section Scripts {
-    <script defer src="~/js/siteCommon.js" asp-append-version="true"></script>
+    <script src="~/js/siteCommon.min.js" asp-append-version="true"></script>
 }

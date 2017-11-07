@@ -7,8 +7,11 @@ namespace HopAmNhacThanh.Models.SidebarViewModels
 {
     public class CommonSidebarViewModel
     {
+        public List<BestSimpleSongViewModel> ListTopSong { get; set; }
+        public List<SimpleCategoryViewModel> ListCategory { get; set; }
         public List<SimpleStyleViewModel> ListStyle { get; set; }
-        public List<BestSimpleSongViewModel> ListSong { get; set; }
+        public List<SimpleAlbumViewModel> ListAlbum { get; set; }
+
     }
     public class SimpleStyleViewModel
     {

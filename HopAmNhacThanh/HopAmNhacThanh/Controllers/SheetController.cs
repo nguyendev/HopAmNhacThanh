@@ -7,20 +7,24 @@ using HopAmNhacThanh.Data.SheetMusicRepository;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.FileProviders;
+using HopAmNhacThanh.Data.SidebarRepository;
 
 namespace HopAmNhacThanh.Controllers
 {
     public class SheetController : Controller
     {
         private readonly ISheetMusicRepository _repository;
+        private readonly ISidebarRepository _sidebarRepository;
         private const string DIR_SHEET = "sheetmusic";
         public IHostingEnvironment HostingEnvironment { get; set; }
 
         public SheetController(IHostingEnvironment hostingEnvironment,
-            ISheetMusicRepository repository)
+            ISheetMusicRepository repository,
+            ISidebarRepository sidebarRepository)
         {
             HostingEnvironment = hostingEnvironment;
             _repository = repository;
+            _sidebarRepository = sidebarRepository;
         }
 
 
@@ -28,6 +32,7 @@ namespace HopAmNhacThanh.Controllers
         public async Task<IActionResult> Single(string slug)
         {
             ViewData["single"] = await  _repository.GetSingle(slug);
+            ViewData["Sidebar"] = await _sidebarRepository.GetCommonSidebar();
             return View();
         }
 
@@ -36,6 +41,7 @@ namespace HopAmNhacThanh.Controllers
         public async Task<IActionResult> Download(string slug)
         {
             ViewData["download"] = await _repository.GetSingle(slug);
+            ViewData["Sidebar"] = await _sidebarRepository.GetCommonSidebar();
             return View();
         }
         [Route("/sheet/tai-ve-tap-tin/{filename}")]

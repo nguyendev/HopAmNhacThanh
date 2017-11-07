@@ -296,7 +296,7 @@ namespace HopAmNhacThanh.Areas.WebManager.Controllers
                             CreateDT = System.DateTime.Now,
                             Source = "\\" + DIR_SHEETMUSIC + "\\" + fileName,
                             Type = ext,
-                            Name = fileName,
+                            Name = fileName.ToLower(),
                             Active = "A",
                             Approved = "U",
                             AuthorID = user.Id,
