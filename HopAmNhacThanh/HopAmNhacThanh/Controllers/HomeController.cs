@@ -69,6 +69,7 @@ namespace HopAmNhacThanh.Controllers
         {
             await _repostitory.IncreaseView(slug);
             ViewData["MainSingle"] = await _repostitory.GetMainSingle(slug,slugVersion);
+            ViewData["Sidebar"] = await _sidebarRepository.GetSingleSong(slug, slugVersion);
             return View();
         }
         public IActionResult SingleWithFullScreen()
@@ -152,6 +153,13 @@ namespace HopAmNhacThanh.Controllers
         public IActionResult TestAudio()
         {
             return View();
+        }
+
+        [Route("bai-hat/{slug}/")]
+        public async Task<IActionResult> FindSong(string slug)
+        {
+            string slugVersion = await _repostitory.FindSong(slug);
+            return RedirectToAction("single", new { slug = slug, slugVersion = slugVersion });
         }
     }
 }

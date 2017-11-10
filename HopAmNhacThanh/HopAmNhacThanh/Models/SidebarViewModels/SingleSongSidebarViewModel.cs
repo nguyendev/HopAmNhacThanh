@@ -8,11 +8,18 @@ namespace HopAmNhacThanh.Models.SidebarViewModels
 {
     public class SingleSongSidebarViewModel
     {
+        public string Name { get; set; }
+        public string Slug { get; set; }
+        [Display(Name = " Thể loại")]
+        public Category Category { get; set; }
+        [Display(Name = "Album")]
+        public Album Album { get; set; }
+        [Display(Name = "Tác giả")]
         public List<SimpleLinkSongViewModel> ListLinkSong { get; set; }
-        public List<SimpleChordsViewModel> ListChords { get; set; }
         public List<SimpleVideoViewModel> ListVideos { get; set; }
         public List<SimpleSongInAblumViewModel> ListSongInAblum { get; set; }
         public List<SimpleSongInAblumViewModel> ListSongInCategory { get; set; }
+        public bool IsSheetExisted {get;set;}
     }
 
 
@@ -30,22 +37,23 @@ namespace HopAmNhacThanh.Models.SidebarViewModels
     {
         public string Tone { get; set; }
         public string Link { get; set; }
-        [Display(Name = "Tên ca sỹ")]
-        public string SingleSongName { get; set; }
+        public SingleSong SingleSong { get; set; }
         public string Slug { get; set; }
     }
 
     public class SimpleVideoViewModel
     {
+        public long ID { get; set; }
         public string Name { get; set; }
         public string Link { get; set; }
         public int Type { get; set; }
+        public Images Images { get; set; }
     }
 
     public class SimpleSongInAblumViewModel
     {
         public string Name { get; set; }
         public string Slug { get; set; }
-        public int Number { get; set; }
+        public int? Number { get; set; }
     }
 }

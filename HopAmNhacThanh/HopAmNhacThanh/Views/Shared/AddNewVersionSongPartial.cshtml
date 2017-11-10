@@ -50,9 +50,12 @@ else
     <h5>Bạn không thể sử dụng tính năng này. Vui lòng <a class="animate" data-toggle="modal" data-target="#login"><i class="fa fa-lock fa-fw"></i> Đăng nhập</a> hoặc <a class="animate" data-toggle="modal" data-target="#login"><i class="fa fa-key fa-fw"></i> Đăng ký</a> để sử dụng tính năng này </h5>
 }
                 </div>
+@if (SignInManager.IsSignedIn(User))
+{
                 <div class="modal-footer" id="form-new-version-footer">
                     <button id="new-version-submit" type="button" class="btn btn-primary">Save</button>
                 </div>
+}
             </div>
         </form>
     </div>

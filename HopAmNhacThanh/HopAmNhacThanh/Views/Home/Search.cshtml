@@ -1,5 +1,8 @@
 ﻿@{
+    HopAmNhacThanh.Models.SidebarViewModels.CommonSidebarViewModel sidebar = ViewData["Sidebar"] as HopAmNhacThanh.Models.SidebarViewModels.CommonSidebarViewModel;
     HopAmNhacThanh.Models.HomeViewModels.MainSearchViewModel mainContent = ViewData["Search"] as HopAmNhacThanh.Models.HomeViewModels.MainSearchViewModel;
+    ViewData["Title"] = "Tìm kiếm Chord, Lyric, Sheet, Ablum Nhạc Thánh | Hợp Âm Nhạc Thánh";
+    ViewData["Desciption"] = "Tìm kiếm sheet, chord (hợp âm), lyric (lời) bài hát, ablum, ca sỹ Nhạc Thánh Tin Lành dành cho Cơ Đốc Nhân có hướng dẫn sử dụng hợp âm dành cho đàn ghitar, piano ukulele";
 }
 <div class="row">
     <div class="col-md-8" style="padding-right: 0px;">
@@ -36,7 +39,7 @@
     </div>
 
     <div class="col-md-4">
-        @Html.Partial("SidebarCommon")
+        @await Html.PartialAsync("SidebarCommon",sidebar)
     </div>
 </div>
 @section Style {

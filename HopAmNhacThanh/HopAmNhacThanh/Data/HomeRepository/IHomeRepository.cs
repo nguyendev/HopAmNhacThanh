@@ -14,5 +14,6 @@ namespace HopAmNhacThanh.Data.HomeRepository
         Task<MainSearchViewModel> GetSearch(string searchString,int page,int pageSize);
         Task<MainSearchViewModel> GetAphabet(char searchString, int page, int pageSize);
         Task IncreaseView(string slug);
+        Task<String> FindSong(string slug);
     }
 }

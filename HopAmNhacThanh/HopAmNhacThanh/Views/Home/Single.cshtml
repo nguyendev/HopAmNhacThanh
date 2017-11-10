@@ -1,5 +1,7 @@
 ﻿@{
     HopAmNhacThanh.Models.HomeViewModels.MainSingleViewModel MainSingle = ViewData["MainSingle"] as HopAmNhacThanh.Models.HomeViewModels.MainSingleViewModel;
+    HopAmNhacThanh.Models.SidebarViewModels.SingleSongSidebarViewModel Sidebar = ViewData["Sidebar"] as HopAmNhacThanh.Models.SidebarViewModels.SingleSongSidebarViewModel;
+
     if (MainSingle.Name.Length > 140)
     {
         ViewData["Title"] = MainSingle.Name;
@@ -306,7 +308,7 @@
         </div>
     </div>
     <div class="col-md-4">
-        @await Html.PartialAsync("SidebarSingle", MainSingle)
+        @await Html.PartialAsync("SidebarSingle", Sidebar)
     </div>
 </div>
 @await Html.PartialAsync("ModelSingle", MainSingle)

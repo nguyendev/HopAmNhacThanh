@@ -157,65 +157,8 @@ namespace HopAmNhacThanh.Data.HomeRepository
                 simpleChords.Add(simpleChord);
             };
 
-            var linkSongContext = await _context.LinkSong
-                .Include(p => p.SingleSong)
-                .Where(p => p.SongID == songContext.ID)
-                .ToListAsync();
-            List<SimpleLinkSongViewModel> listLinkSongs = new List<SimpleLinkSongViewModel>();
-            if (linkSongContext != null)
-            {
-                
-                foreach (var item in linkSongContext)
-                {
-                    SimpleLinkSongViewModel simpleLinkSong = new SimpleLinkSongViewModel
-                    {
-                        Link = item.Link,
-                        SingleSong = item.SingleSong,
-                        Tone = item.Tone
-                    };
-                    listLinkSongs.Add(simpleLinkSong);
-                };
-            }
-
-            bool isSheetExisted = await _context.SheetMusic.AnyAsync(p => p.SongID == songContext.ID);
-
-            var videoContext = await _context.Video
-                .Where(p => p.SongID == songContext.ID)
-                .Include(p => p.Image)
-                .ToListAsync();
-            List<SimpleVideoViewModel> listVideo = new List<SimpleVideoViewModel>();
-            foreach (var item in videoContext)
-            {
-                SimpleVideoViewModel simpleVideo = new SimpleVideoViewModel
-                {
-                    Link = item.Link,
-                    Name = item.Name,
-                    ID = item.ID,
-                    Images = item.Image
-                    
-                };
-                simpleVideo.Type = item.Type.HasValue ? item.Type.Value : 1;
-                listVideo.Add(simpleVideo);
-            };
-
-            var songInCategoryContext = await _context.Song
-                    .Where(p => p.Approved == Global.APPROVED)
-                    .Where(p => p.CreateDT <= DateTime.Now)
-                    .Where(p => !p.IsDeleted)
-                    .Where(p => p.CategoryID == songContext.CategoryID).Take(10).ToListAsync();
-            List<SimpleSongInAblumViewModel> ListSongInCategory = new List<SimpleSongInAblumViewModel>();
-            foreach (var item in songInCategoryContext)
-            {
-                SimpleSongInAblumViewModel songInAblum = new SimpleSongInAblumViewModel
-                {
-                    Name = item.Name,
-                    Slug = item.Slug,
-
-                };
-                songInAblum.Number = item.NumberSongInAlbum.HasValue ? item.NumberSongInAlbum.Value : 0;
-                ListSongInCategory.Add(songInAblum);
-            }
-
+            
+            
 
 
             MainSingleViewModel model = new MainSingleViewModel();
@@ -228,34 +171,13 @@ namespace HopAmNhacThanh.Data.HomeRepository
             model.Views = songContext.Views;
             model.VietnameseLyric = songContext.VietnameseLyric;
             model.ListChords = simpleChords;
-            model.ListLinkSong = listLinkSongs;
-            model.IsSheetExisted = isSheetExisted;
-            model.ListVideos = listVideo;
             model.Lyric = Lyric;
             model.Intro = Intro;
             model.Tone = Tone;
             model.CreateDate = CreateDate;
-            model.ListSongInCategory = ListSongInCategory;
             model.Style = Style;
             model.AuthorChords = AuthorChords;
-            if (songContext.AlbumID.HasValue)
-            {
-                var songInAlbumContext = await _context.Song.Where(p => p.AlbumID == songContext.AlbumID).Take(10).ToListAsync();
-                List<SimpleSongInAblumViewModel> ListSongInAlbum = new List<SimpleSongInAblumViewModel>();
-                foreach (var item in songInAlbumContext)
-                {
-                    SimpleSongInAblumViewModel songInAblum = new SimpleSongInAblumViewModel
-                    {
-                        Name = item.Name,
-                        Slug = item.Slug,
-                        Number = item.NumberSongInAlbum.Value,
-                    };
-                    ListSongInAlbum.Add(songInAblum);
-                }
-                model.ListSongInAblum = ListSongInAlbum;
-            }
-            else
-                model.ListSongInAblum = null;
+            
 
             return model;
             //}
@@ -566,6 +488,24 @@ namespace HopAmNhacThanh.Data.HomeRepository
                 Search = searchUpperCase.ToString()
             };
             return search;
+        }
+
+        public async Task<String> FindSong(string slug)
+        {
+            var songContext = await _context.Song
+                .Where(p => p.Approved == Global.APPROVED)
+                .Where(p => p.CreateDT <= DateTime.Now)
+                .Where(p => !p.IsDeleted)
+                .FirstOrDefaultAsync(p => p.Slug == slug);
+
+            var chordsContext = await _context.Chords
+                .Include(p => p.Author)
+                .Include(p => p.Style)
+                .Where(p => p.Approved == Global.APPROVED)
+                .Where(p => p.CreateDT <= DateTime.Now)
+                .Where(p => !p.IsDeleted)
+                .FirstOrDefaultAsync(p => p.SongID == songContext.ID);
+            return chordsContext.Slug;
         }
     }
 }
