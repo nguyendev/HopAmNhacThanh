@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="2.5.357" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.6.5" />
+    <PackageReference Include="ImageSharp" Version="1.0.0-alpha9-00194" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.2" />
@@ -29,8 +31,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.2" />
-    <PackageReference Include="ImageSharp" Version="1.0.0-alpha9-00171" />
-    <PackageReference Include="Telerik.UI.for.AspNet.Core.Trial" Version="2017.2.621" />
+    <PackageReference Include="Telerik.UI.for.AspNet.Core.Trial" Version="2017.3.1026" />
+  
   </ItemGroup>
 
   <ItemGroup>
@@ -40,6 +42,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\AutoGetTool\Controllers\" />
+    <Folder Include="Areas\AutoGetTool\Data\" />
+    <Folder Include="Areas\AutoGetTool\Views\GetLyrics\" />
+    <Folder Include="Areas\AutoGetTool\Views\NhanDienMau\" />
     <Folder Include="Views\Album\" />
     <Folder Include="Views\AuthorChords\" />
     <Folder Include="Views\Sheet\" />
