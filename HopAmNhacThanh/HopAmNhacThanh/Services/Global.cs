@@ -8,9 +8,10 @@ namespace DoVuiHaiNao.Services
     public static class Global
     {
         public static string DIR_IMAGE = "images";
-        public const string APPROVED = "A";
-        public const string UNAPPROVED = "U";
-        public const int LENGTH_LYRIC = 196;
+        public static string APPROVED = "A";
+        public static string UNAPPROVED = "U";
+        public static int LENGTH_LYRIC = 196;
+        public static string API_KEY = "NGUYENIT";
     }
     public enum TypeQuestion
     {
