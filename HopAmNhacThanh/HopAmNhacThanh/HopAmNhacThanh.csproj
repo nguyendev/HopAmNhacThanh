@@ -43,8 +43,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\APIManager\Controllers\" />
-    <Folder Include="Areas\APIManager\Data\" />
-    <Folder Include="Areas\APIManager\Models\" />
     <Folder Include="Areas\APIManager\Views\" />
     <Folder Include="Areas\AutoGetTool\Controllers\" />
     <Folder Include="Areas\AutoGetTool\Data\" />

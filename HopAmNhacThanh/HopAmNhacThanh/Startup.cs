@@ -25,6 +25,7 @@ using HopAmNhacThanh.Data.AuthorSongRepository;
 using HopAmNhacThanh.Data.SingleSongRepository;
 using HopAmNhacThanh.Data.CategoryRepository;
 using HopAmNhacThanh.Data.SheetMusicRepository;
+using HopAmNhacThanh.Areas.APIManager.Data;
 
 namespace HopAmNhacThanh
 {
@@ -128,6 +129,8 @@ namespace HopAmNhacThanh
             services.AddScoped<IVideoManagerRepository, VideoManagerRepository>();
             services.AddScoped<ISheetMusicManagerRepository, SheetMusicManagerRepository>();
             services.AddScoped<ISheetMusicRepository, SheetMusicRepository>();
+            services.AddScoped<ISearchApiRepository, SearchApiRepository>();
+            
             //services.AddSingleton();
             services.AddKendo();
         }

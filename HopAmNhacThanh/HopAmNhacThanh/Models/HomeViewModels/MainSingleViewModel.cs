@@ -51,7 +51,8 @@ namespace HopAmNhacThanh.Models.HomeViewModels
     {
         public string Tone { get; set; }
         public string Link { get; set; }
-        public SingleSong SingleSong { get; set; }
+        public SingleSong SingleSong { get; set; }          
+        public string SongName { get; set; }
     }
 
     public class SimpleVideoViewModel
