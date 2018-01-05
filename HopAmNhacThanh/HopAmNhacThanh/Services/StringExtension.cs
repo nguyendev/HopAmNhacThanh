@@ -86,7 +86,10 @@ namespace DoVuiHaiNao.Services
             temp = temp.ToLower();
             return regex.Replace(temp, String.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D').Replace(" ", "-");
         }
-
+        public static string RemoveBr(string s)
+        {
+            return Regex.Replace(s, @"(<br */>)|(\[br */\])", " ");
+        }
 
     }
 

@@ -35,5 +35,28 @@ namespace DoVuiHaiNao.Services
                 return "";
             }
         }
+        public static string GetStringToLengthNoEndLine(string s, int Length)
+        {
+            
+            int length = Length;
+            if (s.Length < Length)
+            {
+                length = s.Length - 1;
+                return s;
+            }
+            try
+            {
+                while (s[length] != ' ')
+                {
+                    length--;
+                }
+                s = s.Substring(0, length);
+                return s;
+            }
+            catch
+            {
+                return "";
+            }
+        }
     }
 }

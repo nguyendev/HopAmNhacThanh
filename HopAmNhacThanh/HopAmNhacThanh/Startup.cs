@@ -130,7 +130,7 @@ namespace HopAmNhacThanh
             services.AddScoped<ISheetMusicManagerRepository, SheetMusicManagerRepository>();
             services.AddScoped<ISheetMusicRepository, SheetMusicRepository>();
             services.AddScoped<ISearchApiRepository, SearchApiRepository>();
-            
+            services.AddScoped<ISongApiRepository, SongApiRepository>();
             //services.AddSingleton();
             services.AddKendo();
         }

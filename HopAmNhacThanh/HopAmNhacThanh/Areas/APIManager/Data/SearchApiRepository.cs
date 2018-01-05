@@ -50,7 +50,7 @@ namespace HopAmNhacThanh.Areas.APIManager.Data
                         AuthorSong = item.AuthorSong,
                         OrtherName = item.OrtherName,
                         View = item.Views,
-                        Lyric = SEOExtension.GetStringToLength(chords.Lyric, Global.LENGTH_LYRIC),
+                        Lyric = SEOExtension.GetStringToLengthNoEndLine(StringExtensions.RemoveBr(chords.Lyric), Global.LENGTH_LYRIC_MOBILE),
                         Slug = item.Slug,
                         VersionSlug = chords.Slug
                     };
