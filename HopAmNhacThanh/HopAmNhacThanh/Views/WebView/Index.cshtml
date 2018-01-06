@@ -1,0 +1,467 @@
+﻿@{
+    Layout = null;
+    HopAmNhacThanh.Models.HomeViewModels.MainSingleViewModel MainSingle = ViewData["MainSingle"] as HopAmNhacThanh.Models.HomeViewModels.MainSingleViewModel;
+
+    if (MainSingle.Name.Length > 140)
+    {
+        ViewData["Title"] = MainSingle.Name;
+    }
+    else
+    {
+        ViewData["Title"] = MainSingle.Name + " | Hợp Âm Nhạc Thánh";
+    }
+    ViewData["Desciption"] = MainSingle.Lyric;
+    string scheme = Context.Request.Scheme;
+    string host = Context.Request.Host.Host;
+    string port = Context.Request.Host.Port.ToString();
+    string path = Context.Request.Path;
+    string url = string.Format("{0}://{1}:{2}{3}", scheme, host, port, path);
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@Html.Raw(ViewData["Title"] as string)</title>
+    <meta name="title" content="@Html.Raw(ViewData["Title"])" />
+    <meta name="description" content="@Html.Raw(ViewData["Desciption"])" />
+    <meta name="keywords" content="@Html.Raw(ViewData["Keyword"])" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="content-language" content="vi">
+    <meta itemprop="homeLocation" content="Vietnam">
+    <meta name="robots" content="noodp">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="@Html.Raw(ViewData["Title"])">
+    <meta property="og:description" content="@Html.Raw(ViewData["Desciption"])">
+    <meta property="og:url" content="@url">
+    @if (!String.IsNullOrEmpty(ViewData["Images"] as string))
+    {
+        <meta property="og:image" content="@Html.Raw(ViewData["Images"])" />
+    }
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="@Html.Raw(ViewData["Desciption"])">
+    <meta name="twitter:title" content="@Html.Raw(ViewData["Title"])">
+    <link rel="dns-prefetch" href="//s.w.org/">
+    @*<link rel="alternate" type="application/rss+xml" href="feed/">
+        <link rel="alternate" type="application/rss+xml" href="comments/feed/">*@
+    <link rel="https://api.w.org/" href="wp-json/">
+    <link rel="alternate" href="/" hreflang="vi-vn">
+    <link rel="profile" href="//gmpg.org/xfn/11">
+    <link rel="canonical" href="@url">
+    <link rel="apple-touch-icon" href="/favicon.ico" />
+    <link rel="icon" sizes="192x192" href="/favicon.ico" />
+    <link rel="shortcut icon" href="~/favicon.ico">
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="~/lib/jtab-tardate/css/jtab-helper.css" rel="stylesheet" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" asp-append-version="true" />
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" asp-append-version="true" rel="stylesheet">
+        <link href="~/lib/jtab-tardate/css/jtab-helper.min.css" asp-append-version="true" rel="stylesheet" />
+        <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
+    </environment>
+    <link href="~/lib/ChordPro/css/chopro.css" rel="stylesheet" />
+    <environment names="Development">
+        <script src="~/js/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/jtab-tardate/javascripts/raphael.js"></script>
+        <script src="~/lib/jtab-tardate/javascripts/jtab.js"></script>
+
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" asp-append-version="true"></script>
+        <script defer src="~/lib/jtab-tardate/javascripts/raphael.min.js" asp-append-version="true"></script>
+        <script defer src="~/lib/jtab-tardate/javascripts/jtab.min.js" asp-append-version="true"></script>
+    </environment>
+    <script defer>
+        function bodyLoad() {
+            chord = "(([A-G][b#]?)((7sus4|7sus2|sus4|sus2|dim|aug|add9|m7M|maj7|m9|m7|m6|m|7M|9|7|6|4|11|m11)?(\\s*[-/]?\\s*)))";
+            openBracket = "[\\[\\(]";
+            closeBracket = "[\\]\\)]";
+            reOneChord = new RegExp(chord, "g");
+            reChords = new RegExp(openBracket + "(" + chord + "+)" + closeBracket, "g");
+            document.body.innerHTML = document.body.innerHTML.replace(reChords, "<span class=chord>$&</span>");
+        }
+        function findTone() {
+            var tone = $('#lyric > span.chord').first().text();
+            tone = tone.replace("[", "");
+            tone = tone.replace("]", "");
+            $(".key").text(tone);
+        }
+        var Tone = "@MainSingle.Tone" + " ";
+        $(function () {
+            bodyLoad();
+            if (Tone == " "){
+                findTone();
+            }
+            changeChords();
+        });
+    </script>
+    <script defer src="~/lib/ChordPro/js/elb.js"></script>
+    @*<script src="~/lib/ChordPro/js/jquery-1.6.2.min.js"></script>/////*@
+    <script defer src="~/lib/ChordPro/js/Transposer.js"></script>
+    <script defer>
+        jQuery(document).ready(function () {
+            var ourKeyElement, ourTransposer;
+            ourKeyElement = jQuery("#musicalKey");
+            ourTransposer = ELB.Music.aTransposer(ourKeyElement);
+        });
+    </script>
+
+</head>
+<body style="background-color: #f1f4f9 !important">
+    <script src="~/lib/transposer/jquery.transposer.min.js" asp-append-version="true"></script>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <style>
+                            /*@@media (max-width: 360px) {
+                                #group-btn-3{
+                                    margin-top: 10px;
+                                }
+                            }*/
+                                .transpose-keys a {
+                                    color: #333;
+                                    background-color: #fff;
+                                    border-color: #ccc;
+                                }
+
+                                #lyric, #form-lyric, #intro {
+                                    /*margin-top: 20px;*/
+                                    font-size: 16px;
+                                    line-height: 190%;
+                                }
+
+                                #intro {
+                                    border: 1px dashed #969696;
+                                    background-color: #fffce0;
+                                    padding: 10px 10px;
+                                    display: inline-block;
+                                }
+                                /*span.chord ~ span.chord {
+                                margin-right: 30px;
+                                margin-left: 30px;
+                            }*/
+                        </style>
+                        <div class="text-center" style="margin-bottom: 20px;">
+                            <div class="btn-group">
+                                @if (MainSingle.Tone != null)
+                                {
+                                <div id="musicalKey" style="margin-right: 5px;" class="annotation btn-group"><span class="key btn btn-default btn-sm">@MainSingle.Tone</span></div>
+                                }
+                                else
+                                {
+                                <div id="musicalKey" style="margin-right: 5px;" class="annotation btn-group"><span class="key btn btn-default btn-sm">G</span></div>
+                                }
+
+                            </div>
+                            <div class="btn-group" style="margin-right: 5px;">
+                                <span id="fontsize" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="fa fa-font fa-1x"></i></span>
+                                <a id="print" href="#" target="_blank" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="fa fa-print"></i></a>
+                                <span id="clone" class="btn btn-default btn-sm">x2</span>
+
+                            </div>
+                            <div class="btn-group" id="group-btn-3" style="margin-right: 5px;">
+                                <span id="gopdong" class="btn btn-default btn-sm">Gộp dòng <i class="fa fa-fw fa-check-square-o"></i></span>
+                                <span id="fullscreen" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="glyphicon glyphicon-fullscreen"></i></span>
+                            </div>
+                        </div>
+
+                        <div id="form-lyric">
+                            @if (MainSingle.Intro != null)
+                            {
+                            <div id="intro">
+                                @Html.Raw(MainSingle.Intro)
+                            </div>
+                            }
+                            <div id="lyric" style="position: relative">
+                                @Html.Raw(MainSingle.Lyric)
+                            </div>
+                            <div id="draw-chords"></div>
+                            <style>
+                                #draw-chords {
+                                    background: #ffffff;
+                                    display: none;
+                                    border-radius: 10px;
+                                    background: #fff;
+                                    box-shadow: 0 1px 2px rgba(0,0,0,.3);
+                                    text-align: center;
+                                    transform: translate3d(0,0,0);
+                                    user-select: none;
+                                    outline-style: none;
+                                }
+                            </style>
+                        </div>
+                        <style>
+                            .clearfix {
+                                zoom: 1 !important;
+                                margin-top: 20px !important;
+                                margin-bottom: 20px !important;
+                                border: 0 !important;
+                                border-top: 1px solid #eee !important;
+                            }
+
+                            .height_10 {
+                                height: 10px !important;
+                            }
+
+                            .center-pills {
+                                display: inline-block;
+                            }
+
+                            span.song-item {
+                                margin-right: 15px;
+                            }
+                        </style>
+                        <div style="margin-top: 50px;">
+                            <span class="song-item"><i title="Sáng tác" class="fa fa-user"></i> Người đăng: <a asp-controller="AuthorChords" asp-action="Single" asp-route-slug="@MainSingle.AuthorChords.Slug">@MainSingle.AuthorChords.FullName</a></span>
+                            @*<span class="song-item">
+                                    <i class="fa fa-book"></i> <a href="https://hopamviet.vn/chord/category/3/nhac-tre.html">@MainSingle.AlbumName</a>
+                                </span>
+                                <span class="song-item">
+                                    <i class="fa fa-book"></i> <a href="https://hopamviet.vn/chord/category/3/nhac-tre.html">@MainSingle.CategoryName</a>
+                                </span>    <span class="song-item">
+                                    <i class="fa fa-music"></i> <a href="https://hopamviet.vn/chord/category/3/nhac-tre.html">Điệu: @MainSingle.StyleName</a>
+                                </span>
+                                <span class="song-item"> <i title="Lượt xem" class="fa fa-eye"></i> 25</span>*@
+                            <div class="btn-group text-center" style="float:right">
+                                <button style="float:right" type="button"
+                                        id="testBtn"
+                                        class="btn btn-xs btn-warning glyphicon glyphicon-thumbs-down"
+                                        data-loading-text=" ... ">
+                                    4
+                                </button>
+                                <button style="float: right" type="button" id="testBtnDown" class="btn btn-xs btn-primary glyphicon glyphicon-thumbs-up" data-loading-text=" ... ">
+                                    4
+                                </button>
+                            </div>
+                        </div>
+                        <div class="clearfix height_10"></div>
+                        <div class="text-center">
+                            <ul class="nav nav-tabs center-pills">
+                                <li class="active"><a data-toggle="tab" href="#guitar"><i class="fa fa-book"> Guitar </i></a></li>
+                                <li><a data-toggle="tab" href="#ukulele"> Ukulele</a></li>
+                                <li><a data-toggle="tab" href="#piano"> Piano</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="guitar" class="tab-pane fade in active">
+                                    <div id="mytab"></div>
+                                </div>
+                                <div id="ukulele" class="tab-pane fade">
+                                    <p>Sẽ cập nhật sau </p>
+                                </div>
+                                <div id="piano" class="tab-pane fade">
+                                    <p>Sẽ cập nhật sau </p>
+                                </div>
+                            </div>
+                            <hr />
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="fb-comments" data-width="100%" data-href="@string.Format("{0}",url)" data-numposts="10"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="fb-root"></div>
+    <script defer>
+        $(document).ready(function () {
+            
+            $(".tbutton").click(function () {
+                changeChords();
+            });
+            $('#lyric').bind("cut copy paste", function (e) {
+                /* alert('Copy Paste is disabled');*/
+                e.preventDefault();
+            });
+            $("#fullscreen").click(function () {
+                alert("Xin lỗi bạn, tính năng này đang xây dựng. Hãy quay lại khi khác");
+            });
+
+            $("#print").click(function () {
+                alert("Xin lỗi bạn, tính năng này đang xây dựng. Hãy quay lại khi khác");
+            });
+            var KhongGopDong = true;
+            $("#gopdong").click(function () {
+                if (KhongGopDong) {
+                    $("span.chord").css('position', 'relative');
+                    $("span.chord").css('display', 'inline-block');
+                    $("span.chord").css('top', '-1em');
+
+                    $("span.chord").css('width', '0');
+                    $("#lyric").css('line-height', '250%');
+                    $("#lyric").css('padding-top', '1em');
+                    KhongGopDong = false;
+                    $(this).empty();
+                    $(this).append('Gộp dòng <i class="fa fa-fw fa-square-o" ></i>')
+                }
+                else {
+                    $("span.chord").css('position', '');
+                    $("span.chord").css('display', '');
+                    $("span.chord").css('top', '');
+                    $("span.chord").css('width', '');
+                    $("#lyric").css('line-height', '');
+                    $("#lyric").css('padding-top', '');
+                    KhongGopDong = true;
+                    $(this).empty();
+                    $(this).append('Gộp dòng <i class="fa fa-fw fa-check-square-o" ></i>')
+                }
+            });
+
+            $("#fontsize").click(function () {
+                var ourText = $("#lyric");
+                var currFontSize = ourText.css("fontSize");
+                var finalNum = parseFloat(currFontSize, 10);
+                var stringEnding = currFontSize.slice(-2);
+                var minSize = 14;
+                var maxSize = 18;
+                if (maxSize > finalNum) {
+                    finalNum++;
+                } else {
+                    finalNum = minSize;
+                }
+                ourText.css("fontSize", finalNum + stringEnding);
+            });
+            $("#clone").click(function () {
+                $("#lyric").append($("#lyric").clone());
+            });
+            $('span.chord').mouseover(function () {
+                //("#userblock").show();
+                var txtChords = $(this).text();
+                txtChords = txtChords.replace('[', '');
+                txtChords = txtChords.replace(']', '');
+                txtChords = txtChords.replace('♭', 'b');
+                txtChords = txtChords.replace('♯', '#');
+                $("#draw-chords").empty();
+                $("#draw-chords").append('<span class="col-md-3 col-xs-6 jtab chordonly left">' + txtChords + '</span>');
+                var showChords = $("#draw-chords");
+                var currentChords = $(this);
+                setTimeout(function () {
+                    var positionChords = currentChords.offset();
+                    showChords.css({
+                        position: "absolute",
+                        top: positionChords.top - 150 + "px",
+                        left: positionChords.left - 70 + "px",
+
+                    }).show();
+
+                    jtab.renderimplicit();
+                }, 300);
+
+            }).mouseleave(function () {
+                setTimeout(function () {
+                    $("#draw-chords").hide();
+                }, 300);
+            });
+        });
+        //Change Chords
+        function changeChords() {
+            var chords = [];
+            $('span.chord').each(function () {
+                var txtChords = $(this).text()
+                txtChords = txtChords.replace('[', '');
+                txtChords = txtChords.replace(']', '');
+                txtChords = txtChords.replace('♭', 'b');
+                txtChords = txtChords.replace('♯', '#');
+                chords.push(txtChords);
+            });
+
+            //unique string
+            var unique = chords.filter(function (itm, i, chords) {
+                return i == chords.indexOf(itm);
+            });
+            var formatText = unique.toString();
+
+
+            //var repaceText = formatText.split(",").join(" ");
+            //var length = repaceText.length;
+            //var rowChords = Math.floor(length / 4);
+            //alert(rowChords);
+
+            //function myFunction(item, index) {
+            //    //demoP.innerHTML = demoP.innerHTML + "index[" + index + "]: " + item + "<br>";
+            //    $("#mytab").append('<div class="col-md-3">dfaadfads</div>');
+
+            //    jtab.render($('#mytab'), item);
+            //    alert(item);
+
+            //}
+            //alert(unique);
+            //unique.forEach(myFunction);
+            $("#mytab").empty();
+            for (var i = 0; i < unique.length; i++) {
+                if (unique[i].indexOf("/") > 0) {
+                    $("#mytab").append('<span class="col-md-6 col-xs-12 jtab chordonly left">' + unique[i] + '</span>');
+                }
+                else {
+                    $("#mytab").append('<span class="col-md-3 col-xs-6 jtab chordonly left">' + unique[i] + '</span>');
+                }
+            }
+            $("#mytab").append('<div class="clear"><div class="row"><span></span></div></div>');
+            jtab.renderimplicit();
+
+            //jtab.render($('#mytab'), repaceText);
+        }
+
+        ////tu dong truot
+        //var scrollValue = 1;
+        //var scrolldelay;
+
+        //function stopScroll() {
+        //    clearTimeout(scrolldelay);
+        //}
+
+        //function startScroll() {
+        //    window.scrollBy(0, 1);
+        //    if ($(window).scrollTop() > ($('#lyric').offset().top + $('#lyric').height() - $(window).height() / 4)) {
+        //        stopScroll();
+        //    } else {
+        //        scrolldelay = setTimeout('startScroll()', 200 / scrollValue);
+        //    }
+        //}
+    </script>
+    <script defer asp-append-version="true">
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.10&appId=1936754129675486";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <script defer asp-append-version="true" language="JavaScript">
+            if (top.location != self.location)
+            { top.location = self.location }
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script defer asp-append-version="true" src="https://www.googletagmanager.com/gtag/js?id=UA-81624325-5"></script>
+    <script defer asp-append-version="true">
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-81624325-5');
+    </script>
+    <script defer type="application/ld+json" asp-append-version="true">
+        {
+        "@@context": "https://schema.org",
+        "@@type": "Person",
+        "name": "Hop Am Nhac Thanh",
+        "url": "https://hopamnhacthanh.net",
+        "sameAs": [
+        "https://www.facebook.com/hopamnhacthanh/"
+        ]
+        }
+    </script>
+
+</body>
+</html>

@@ -9,22 +9,22 @@ using DoVuiHaiNao.Services;
 namespace HopAmNhacThanh.Areas.APIManager.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Audio")]
-    public class AudioController : Controller
+    [Route("api/Sheet")]
+    public class SheetController : Controller
     {
-        public readonly IAudioApiRepository _repository;
-        public AudioController(IAudioApiRepository repository)
+        public readonly ISheetApiRepository _repository;
+        public SheetController(ISheetApiRepository repository)
         {
             _repository = repository;
         }
 
         // GET: api/Home/5
         [HttpGet("{api_key}/{slug}")]
-        public JsonResult GetAudio(string api_key, string slug)
+        public JsonResult GetSheet(string api_key, string slug)
         {
             if (api_key == Global.API_KEY)
             {
-                return Json(_repository.GetAudio(slug));
+                return Json(_repository.GetSheet(slug));
             }
             return null;
         }

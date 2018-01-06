@@ -1,4 +1,5 @@
-﻿using HopAmNhacThanh.Models.HomeViewModels;
+﻿using HopAmNhacThanh.Models;
+using HopAmNhacThanh.Models.HomeViewModels;
 using HopAmNhacThanh.Services;
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,6 @@ namespace HopAmNhacThanh.Areas.APIManager.Data
     public interface IAudioApiRepository
     {
         Task<PaginatedList<SimpleLinkSongViewModel>> GetSearch(string searchString, int page, int pageSize);
+        Task<List<LinkSong>> GetAudio(string slug);
     }
 }

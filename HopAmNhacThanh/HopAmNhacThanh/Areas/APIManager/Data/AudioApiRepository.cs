@@ -1,5 +1,6 @@
 ﻿using DoVuiHaiNao.Services;
 using HopAmNhacThanh.Data;
+using HopAmNhacThanh.Models;
 using HopAmNhacThanh.Models.HomeViewModels;
 using HopAmNhacThanh.Services;
 using Microsoft.EntityFrameworkCore;
@@ -86,6 +87,20 @@ namespace HopAmNhacThanh.Areas.APIManager.Data
             var songPaginatedList = PaginatedList<SimpleLinkSongViewModel>.Create(listSong, page, pageSize);
 
             return songPaginatedList;
+        }
+
+        public async Task<List<LinkSong>> GetAudio(string slug)
+        {
+            var songContext = await _context.Song
+                .Where(p => p.Approved == Global.APPROVED)
+                .Where(p => p.CreateDT <= DateTime.Now)
+                .Where(p => !p.IsDeleted)
+                .FirstOrDefaultAsync(p => p.Slug == slug);
+            var audioDbContext = await _context.LinkSong
+                .Include(p => p.SingleSong)
+                .Where(p => p.SongID == songContext.ID)
+                .ToListAsync();
+            return audioDbContext;
         }
     }
 }

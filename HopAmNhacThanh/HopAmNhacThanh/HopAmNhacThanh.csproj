@@ -50,6 +50,7 @@
     <Folder Include="Areas\AutoGetTool\Views\NhanDienMau\" />
     <Folder Include="Views\Album\" />
     <Folder Include="Views\AuthorChords\" />
+    <Folder Include="Views\WebView\" />
     <Folder Include="Views\Sheet\" />
     <Folder Include="wwwroot\audio\" />
     <Folder Include="wwwroot\sheetmusic\" />
