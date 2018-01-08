@@ -1,4 +1,5 @@
 ﻿using HopAmNhacThanh.Models.HomeViewModels;
+using HopAmNhacThanh.Models.SheetMusicViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,8 @@ namespace HopAmNhacThanh.Data.HomeRepository
         Task<MainSearchViewModel> GetAphabet(char searchString, int page, int pageSize);
         Task IncreaseView(string slug);
         Task<String> FindSong(string slug);
+        Task<SingleSheetMusicViewModel> GetSheetMobile(string slug);
+        Task<List<SimpleLinkSongViewModel>> GetAudioMobile(string slug);
+        Task<List<SimpleVideoViewModel>> GetVideoMobile(string slug);
     }
 }

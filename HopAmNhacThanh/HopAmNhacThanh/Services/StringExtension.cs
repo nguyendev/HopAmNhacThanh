@@ -88,7 +88,7 @@ namespace DoVuiHaiNao.Services
         }
         public static string RemoveBr(string s)
         {
-            return Regex.Replace(s, @"(<br */>)|(\[br */\])", " ");
+            return Regex.Replace(s, @"(<br */>)|(\[br */\])|(<br>)", " ");
         }
 
     }

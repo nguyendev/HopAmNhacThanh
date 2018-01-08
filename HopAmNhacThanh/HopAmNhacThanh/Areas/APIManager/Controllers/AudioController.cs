@@ -20,13 +20,13 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
 
         // GET: api/Home/5
         [HttpGet("{api_key}/{slug}")]
-        public JsonResult GetAudio(string api_key, string slug)
+        public async Task<JsonResult> GetAudio(string api_key, string slug)
         {
             if (api_key == Global.API_KEY)
             {
-                return Json(_repository.GetAudio(slug));
+                return Json(await _repository.GetAudio(slug));
             }
-            return null;
+            return Json(null);
         }
     }
 }

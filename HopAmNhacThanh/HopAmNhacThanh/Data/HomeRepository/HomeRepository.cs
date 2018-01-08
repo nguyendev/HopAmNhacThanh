@@ -1,6 +1,7 @@
 ﻿using DoVuiHaiNao.Services;
 using HopAmNhacThanh.Models;
 using HopAmNhacThanh.Models.HomeViewModels;
+using HopAmNhacThanh.Models.SheetMusicViewModels;
 using HopAmNhacThanh.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,7 +14,10 @@ namespace HopAmNhacThanh.Data.HomeRepository
     public class HomeRepository : IHomeRepository
     {
         private readonly ApplicationDbContext _context;
-        
+        private const string JPG = ".jpg";
+        private const string PNG = ".png";
+        private const string PDF = ".pdf";
+
         public HomeRepository(ApplicationDbContext context)
         {
             _context = context;
@@ -102,7 +106,6 @@ namespace HopAmNhacThanh.Data.HomeRepository
 
 
         }
-
         public async Task<MainSingleViewModel> GetMainSingle(string slugSong, string slugVersion)
         {
             //try
@@ -186,7 +189,6 @@ namespace HopAmNhacThanh.Data.HomeRepository
             //    return null;
             //}
         }
-
         public async Task<MainSearchViewModel> GetSearch(string searchString, int page, int pageSize)
         {
             
@@ -308,7 +310,6 @@ namespace HopAmNhacThanh.Data.HomeRepository
             };
             return search;
         }
-
         public async Task<MainContentViewModel> GetMainHome(char slug, int page, int pageSize)
         {
             try
@@ -391,7 +392,6 @@ namespace HopAmNhacThanh.Data.HomeRepository
                 return null;
             }
         }
-
         public async Task IncreaseView(string slug)
         {
             var single = await _context.Song.SingleOrDefaultAsync(p => p.Slug == slug);
@@ -400,7 +400,6 @@ namespace HopAmNhacThanh.Data.HomeRepository
             _context.Song.Update(single);
             await _context.SaveChangesAsync();
         }
-
         public async Task<MainSearchViewModel> GetAphabet(char searchString, int page, int pageSize)
         {
             List<SimpleSongViewModel> listSong = new List<SimpleSongViewModel>();
@@ -489,7 +488,6 @@ namespace HopAmNhacThanh.Data.HomeRepository
             };
             return search;
         }
-
         public async Task<String> FindSong(string slug)
         {
             var songContext = await _context.Song
@@ -507,5 +505,119 @@ namespace HopAmNhacThanh.Data.HomeRepository
                 .FirstOrDefaultAsync(p => p.SongID == songContext.ID);
             return chordsContext.Slug;
         }
+
+        #region Single Song Mobile
+        public async Task<SingleSheetMusicViewModel> GetSheetMobile(string slug)
+        {
+            var songDbContext = await _context.Song
+                .Where(p => p.Approved == Global.APPROVED)
+                .Where(p => p.CreateDT <= DateTime.Now)
+                .Where(p => !p.IsDeleted)
+                                          .SingleOrDefaultAsync(p => p.Slug == slug);
+
+            var chordDbContext = await _context.Chords.FirstOrDefaultAsync(p => p.SongID == songDbContext.ID);
+
+            var sheetDbContext = await _context.SheetMusic
+                                           .Include(p => p.Song)
+                                           .Where(p => p.Approved == Global.APPROVED)
+                .Where(p => p.CreateDT <= DateTime.Now)
+                .Where(p => !p.IsDeleted)
+                                           .Where(p => p.SongID == songDbContext.ID)
+                                           .ToListAsync();
+            List<SimpleSheetMusicViewModel> listPNG = new List<SimpleSheetMusicViewModel>();
+            List<SimpleSheetMusicViewModel> listJPG = new List<SimpleSheetMusicViewModel>();
+            List<SimpleSheetMusicViewModel> listPDF = new List<SimpleSheetMusicViewModel>();
+            foreach (var item in sheetDbContext)
+            {
+                SimpleSheetMusicViewModel simpleSheetMusic = new SimpleSheetMusicViewModel
+                {
+                    Number = item.Number,
+                    Type = item.Type,
+                    Source = item.Source,
+                    Name = item.Name
+                };
+                switch (item.Type)
+                {
+                    case PNG:
+                        listPNG.Add(simpleSheetMusic);
+                        break;
+                    case JPG:
+                        listJPG.Add(simpleSheetMusic);
+                        break;
+                    case PDF:
+                        listPDF.Add(simpleSheetMusic);
+                        break;
+                };
+            }
+
+            SingleSheetMusicViewModel model = new SingleSheetMusicViewModel
+            {
+                Title = songDbContext.Name,
+                Slug = songDbContext.Slug,
+                SlugVersion = chordDbContext.Slug,
+                ListPNG = listPNG.OrderBy(p => p.Number).ToList(),
+                ListJPG = listJPG.OrderBy(p => p.Number).ToList(),
+                ListPDF = listPDF.OrderBy(p => p.Number).ToList(),
+            };
+
+            return model;
+        }
+        public async Task<List<SimpleLinkSongViewModel>> GetAudioMobile(string slug)
+        {
+            var songDbContext = await _context.Song
+                .Where(p => p.Approved == Global.APPROVED)
+                .Where(p => p.CreateDT <= DateTime.Now)
+                .Where(p => !p.IsDeleted)
+                                          .FirstOrDefaultAsync(p => p.Slug == slug);
+            var linkSongContext = await _context.LinkSong
+                .Include(p => p.SingleSong)
+                .Where(p => p.SongID == songDbContext.ID)
+                .ToListAsync();
+            List<SimpleLinkSongViewModel> listLinkSongs = new List<SimpleLinkSongViewModel>();
+            if (linkSongContext != null)
+            {
+
+                foreach (var item in linkSongContext)
+                {
+                    SimpleLinkSongViewModel simpleLinkSong = new SimpleLinkSongViewModel
+                    {
+                        Link = item.Link,
+                        SingleSong = item.SingleSong,
+                        Tone = item.Tone
+                    };
+                    listLinkSongs.Add(simpleLinkSong);
+                };
+            }
+            return listLinkSongs;
+        }
+        public async Task<List<SimpleVideoViewModel>> GetVideoMobile(string slug)
+        {
+            var songDbContext = await _context.Song
+                .Where(p => p.Approved == Global.APPROVED)
+                .Where(p => p.CreateDT <= DateTime.Now)
+                .Where(p => !p.IsDeleted)
+                                          .FirstOrDefaultAsync(p => p.Slug == slug);
+            var videoContext = await _context.Video
+                .Where(p => p.SongID == songDbContext.ID)
+                .Include(p => p.Image)
+                .ToListAsync();
+            List<SimpleVideoViewModel> listVideo = new List<SimpleVideoViewModel>();
+            foreach (var item in videoContext)
+            {
+                SimpleVideoViewModel simpleVideo = new SimpleVideoViewModel
+                {
+                    Link = item.Link,
+                    Name = item.Name,
+                    ID = item.ID,
+                    Images = item.Image
+
+                };
+                simpleVideo.Type = item.Type.HasValue ? item.Type.Value : 1;
+                listVideo.Add(simpleVideo);
+            };
+            return listVideo;
+        }
+
+        #endregion
     }
 }

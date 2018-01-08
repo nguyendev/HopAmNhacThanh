@@ -130,6 +130,9 @@ namespace HopAmNhacThanh.Controllers
             stringBuilder.AppendLine("User-agent: *");
             stringBuilder.AppendLine("Disallow: /quan-ly-web/");
             stringBuilder.AppendLine("Disallow: /WebManager/");
+            stringBuilder.AppendLine("Disallow: /sheet/mobile/");
+            stringBuilder.AppendLine("Disallow: /audio/mobile/");
+            stringBuilder.AppendLine("Disallow: /video/mobile/");
             stringBuilder.AppendLine("Disallow: /wwwroot");
             stringBuilder.AppendLine("User-agent: Googlebot-Image");
             stringBuilder.AppendLine("Allow: /wwwroot/images");

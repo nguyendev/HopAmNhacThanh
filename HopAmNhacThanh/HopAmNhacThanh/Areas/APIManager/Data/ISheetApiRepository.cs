@@ -1,4 +1,5 @@
 ﻿using HopAmNhacThanh.Models;
+using HopAmNhacThanh.Models.SheetMusicViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,6 @@ namespace HopAmNhacThanh.Areas.APIManager.Data
 {
     public interface ISheetApiRepository
     {
-        Task<List<SheetMusic>> GetSheet(string slug);
+        Task<SingleSheetMusicViewModel> GetSingle(string slug);
     }
 }

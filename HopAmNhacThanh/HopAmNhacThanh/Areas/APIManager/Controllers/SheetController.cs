@@ -20,13 +20,14 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
 
         // GET: api/Home/5
         [HttpGet("{api_key}/{slug}")]
-        public JsonResult GetSheet(string api_key, string slug)
+        public async Task<IActionResult> GetSheet(string api_key, string slug)
         {
             if (api_key == Global.API_KEY)
             {
-                return Json(_repository.GetSheet(slug));
+                var applicationDbContext = await _repository.GetSingle(slug);
+                return Json(applicationDbContext);
             }
-            return null;
+            return Json(null);
         }
     }
 }
