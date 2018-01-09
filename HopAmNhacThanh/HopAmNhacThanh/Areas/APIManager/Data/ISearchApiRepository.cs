@@ -1,4 +1,5 @@
-﻿using HopAmNhacThanh.Models;
+﻿using HopAmNhacThanh.Areas.APIManager.ViewModels;
+using HopAmNhacThanh.Models;
 using HopAmNhacThanh.Models.HomeViewModels;
 using HopAmNhacThanh.Services;
 using System;
@@ -10,7 +11,7 @@ namespace HopAmNhacThanh.Areas.APIManager.Data
 {
     public interface ISearchApiRepository
     {
-        Task<PaginatedList<SimpleSongViewModel>> GetSearch(string searchString, int page, int pageSize);
+        Task<PaginatedList<SimpleSongApiViewModel>> GetSearch(string searchString, int page, int pageSize);
         
     }
 }

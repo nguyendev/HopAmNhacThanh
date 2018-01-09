@@ -133,6 +133,7 @@ namespace HopAmNhacThanh
             services.AddScoped<ISongApiRepository, SongApiRepository>();
             services.AddScoped<IAudioApiRepository, AudioApiRepository>();
             services.AddScoped<ISheetApiRepository, SheetApiRepository>();
+            services.AddScoped<IAlbumApiRepository, AlbumApiRepository>();
             //services.AddSingleton();
             services.AddKendo();
         }

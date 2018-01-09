@@ -8,6 +8,8 @@ using HopAmNhacThanh.Data;
 using Microsoft.EntityFrameworkCore;
 using DoVuiHaiNao.Services;
 using HopAmNhacThanh.Models;
+using HopAmNhacThanh.Models.SidebarViewModels;
+using HopAmNhacThanh.Areas.APIManager.ViewModels;
 
 namespace HopAmNhacThanh.Areas.APIManager.Data
 {
@@ -18,9 +20,9 @@ namespace HopAmNhacThanh.Areas.APIManager.Data
         {
             _context = context;
         }
-        public async Task<PaginatedList<SimpleSongViewModel>> GetNews(int page, int pageSize)
+        public async Task<PaginatedList<SimpleSongApiViewModel>> GetNews(int page, int pageSize)
         {
-            List<SimpleSongViewModel> listSong = new List<SimpleSongViewModel>();
+            List<SimpleSongApiViewModel> listSong = new List<SimpleSongApiViewModel>();
 
             var songDbContext = from s in _context.Song
                     .Where(p => p.Approved == Global.APPROVED)
@@ -37,27 +39,23 @@ namespace HopAmNhacThanh.Areas.APIManager.Data
                             .Where(p => p.CreateDT <= DateTime.Now)
                             .Where(p => !p.IsDeleted)
                             .First();
-                    SimpleSongViewModel song = new SimpleSongViewModel
-                    {
+                SimpleSongApiViewModel song = new SimpleSongApiViewModel
+                {
                         Name = item.Name,
-                        Album = item.Album,
-                        AuthorSong = item.AuthorSong,
-                        OrtherName = item.OrtherName,
-                        View = item.Views,
                         Lyric = SEOExtension.GetStringToLengthNoEndLine(StringExtensions.RemoveBr(chords.Lyric), Global.LENGTH_LYRIC_MOBILE),
                         Slug = item.Slug,
                         VersionSlug = chords.Slug
                     };
                     listSong.Add(song);
                 }
-            var songPaginatedList = PaginatedList<SimpleSongViewModel>.Create(listSong, page, pageSize);
+            var songPaginatedList = PaginatedList<SimpleSongApiViewModel>.Create(listSong, page, pageSize);
 
             return songPaginatedList;
         }
 
-        public async Task<PaginatedList<SimpleSongViewModel>> GetPopulars(int page, int pageSize)
+        public async Task<PaginatedList<SimpleSongApiViewModel>> GetPopulars(int page, int pageSize)
         {
-            List<SimpleSongViewModel> listSong = new List<SimpleSongViewModel>();
+            List<SimpleSongApiViewModel> listSong = new List<SimpleSongApiViewModel>();
 
             var songDbContext = from s in _context.Song
                     .Where(p => p.Approved == Global.APPROVED)
@@ -74,20 +72,16 @@ namespace HopAmNhacThanh.Areas.APIManager.Data
                         .Where(p => p.CreateDT <= DateTime.Now)
                         .Where(p => !p.IsDeleted)
                         .First();
-                SimpleSongViewModel song = new SimpleSongViewModel
+                SimpleSongApiViewModel song = new SimpleSongApiViewModel
                 {
                     Name = item.Name,
-                    Album = item.Album,
-                    AuthorSong = item.AuthorSong,
-                    OrtherName = item.OrtherName,
-                    View = item.Views,
                     Lyric = SEOExtension.GetStringToLengthNoEndLine(StringExtensions.RemoveBr(chords.Lyric), Global.LENGTH_LYRIC_MOBILE),
                     Slug = item.Slug,
                     VersionSlug = chords.Slug
                 };
                 listSong.Add(song);
             }
-            var songPaginatedList = PaginatedList<SimpleSongViewModel>.Create(listSong, page, pageSize);
+            var songPaginatedList = PaginatedList<SimpleSongApiViewModel>.Create(listSong, page, pageSize);
 
             return songPaginatedList;
         }
@@ -120,11 +114,11 @@ namespace HopAmNhacThanh.Areas.APIManager.Data
                 .Where(p => p.CreateDT <= DateTime.Now)
                 .Where(p => !p.IsDeleted)
                 .ToListAsync();
-            List<SimpleChordsViewModel> simpleChords = new List<SimpleChordsViewModel>();
+            List<HopAmNhacThanh.Models.HomeViewModels.SimpleChordsViewModel> simpleChords = new List<HopAmNhacThanh.Models.HomeViewModels.SimpleChordsViewModel>();
             foreach (var item in chordsContext)
             {
                 bool selected = item.Slug == slugVersion ? true : false;
-                SimpleChordsViewModel simpleChord = new SimpleChordsViewModel
+                HopAmNhacThanh.Models.HomeViewModels.SimpleChordsViewModel simpleChord = new HopAmNhacThanh.Models.HomeViewModels.SimpleChordsViewModel
                 {
                     Name = item.Info,
                     Author = item.Author,
@@ -175,5 +169,6 @@ namespace HopAmNhacThanh.Areas.APIManager.Data
             //    return null;
             //}
         }
+        
     }
 }

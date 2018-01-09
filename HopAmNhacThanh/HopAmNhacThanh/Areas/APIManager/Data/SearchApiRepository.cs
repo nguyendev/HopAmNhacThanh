@@ -1,4 +1,5 @@
 ﻿using DoVuiHaiNao.Services;
+using HopAmNhacThanh.Areas.APIManager.ViewModels;
 using HopAmNhacThanh.Data;
 using HopAmNhacThanh.Models.HomeViewModels;
 using HopAmNhacThanh.Services;
@@ -17,10 +18,10 @@ namespace HopAmNhacThanh.Areas.APIManager.Data
         {
             _context = context;
         }
-        public async Task<PaginatedList<SimpleSongViewModel>> GetSearch(string searchString, int page, int pageSize)
+        public async Task<PaginatedList<SimpleSongApiViewModel>> GetSearch(string searchString, int page, int pageSize)
         {
 
-            List<SimpleSongViewModel> listSong = new List<SimpleSongViewModel>();
+            List<SimpleSongApiViewModel> listSong = new List<SimpleSongApiViewModel>();
 
             var songDbContext = from s in _context.Song
                                 .Include(p => p.Album)
@@ -43,13 +44,9 @@ namespace HopAmNhacThanh.Areas.APIManager.Data
                             .Where(p => p.CreateDT <= DateTime.Now)
                             .Where(p => !p.IsDeleted)
                             .First();
-                    SimpleSongViewModel song = new SimpleSongViewModel
+                    SimpleSongApiViewModel song = new SimpleSongApiViewModel
                     {
                         Name = item.Name,
-                        Album = item.Album,
-                        AuthorSong = item.AuthorSong,
-                        OrtherName = item.OrtherName,
-                        View = item.Views,
                         Lyric = SEOExtension.GetStringToLengthNoEndLine(StringExtensions.RemoveBr(chords.Lyric), Global.LENGTH_LYRIC_MOBILE),
                         Slug = item.Slug,
                         VersionSlug = chords.Slug
@@ -72,13 +69,9 @@ namespace HopAmNhacThanh.Areas.APIManager.Data
                             .Where(p => p.CreateDT <= DateTime.Now)
                             .Where(p => !p.IsDeleted)
                             .First();
-                    SimpleSongViewModel song = new SimpleSongViewModel
+                    SimpleSongApiViewModel song = new SimpleSongApiViewModel
                     {
                         Name = item.Name,
-                        Album = item.Album,
-                        AuthorSong = item.AuthorSong,
-                        OrtherName = item.OrtherName,
-                        View = item.Views,
                         Lyric = SEOExtension.GetStringToLengthNoEndLine(StringExtensions.RemoveBr(chords.Lyric), Global.LENGTH_LYRIC_MOBILE),
                         Slug = item.Slug,
                         VersionSlug = chords.Slug
@@ -99,14 +92,10 @@ namespace HopAmNhacThanh.Areas.APIManager.Data
                             .Where(p => p.CreateDT <= DateTime.Now)
                             .Where(p => !p.IsDeleted)
                             .First();
-                        SimpleSongViewModel song = new SimpleSongViewModel
+                        SimpleSongApiViewModel song = new SimpleSongApiViewModel
                         {
                             Name = item.Name,
-                            Album = item.Album,
-                            AuthorSong = item.AuthorSong,
-                            OrtherName = item.OrtherName,
-                            View = item.Views,
-                            Lyric = SEOExtension.GetStringToLength(chords.Lyric, Global.LENGTH_LYRIC),
+                            Lyric = SEOExtension.GetStringToLengthNoEndLine(StringExtensions.RemoveBr(chords.Lyric), Global.LENGTH_LYRIC_MOBILE),
                             Slug = item.Slug,
                             VersionSlug = chords.Slug
                         };
@@ -133,14 +122,10 @@ namespace HopAmNhacThanh.Areas.APIManager.Data
                             .SingleOrDefault();
                         if (songInItem != null)
                         {
-                            SimpleSongViewModel song = new SimpleSongViewModel
+                            SimpleSongApiViewModel song = new SimpleSongApiViewModel
                             {
                                 Name = songInItem.Name,
-                                Album = songInItem.Album,
-                                AuthorSong = songInItem.AuthorSong,
-                                OrtherName = songInItem.OrtherName,
-                                View = songInItem.Views,
-                                Lyric = SEOExtension.GetStringToLength(item.Lyric, Global.LENGTH_LYRIC),
+                                Lyric = SEOExtension.GetStringToLengthNoEndLine(StringExtensions.RemoveBr(item.Lyric), Global.LENGTH_LYRIC_MOBILE),
                                 Slug = songInItem.Slug,
                                 VersionSlug = item.Slug
                             };
@@ -151,7 +136,7 @@ namespace HopAmNhacThanh.Areas.APIManager.Data
 
                 #endregion
             }
-            var songPaginatedList = PaginatedList<SimpleSongViewModel>.Create(listSong, page, pageSize);
+            var songPaginatedList = PaginatedList<SimpleSongApiViewModel>.Create(listSong, page, pageSize);
             
             return songPaginatedList;
         }

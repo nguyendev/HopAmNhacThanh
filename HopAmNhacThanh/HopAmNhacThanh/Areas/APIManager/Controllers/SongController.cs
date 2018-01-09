@@ -24,7 +24,7 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
         {
             if (api_key == Global.API_KEY)
             {
-                int pageSize = 10;
+                int pageSize = Global.PAGE_SIZE_MOBILE;
                 return Json(await _repository.GetNews(1, pageSize));
             }
             return null;
@@ -43,7 +43,7 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
         {
             if (api_key == Global.API_KEY)
             {
-                int pageSize = 10;
+                int pageSize = Global.PAGE_SIZE_MOBILE;
                 return Json(await _repository.GetPopulars(1, pageSize));
             }
             return null;

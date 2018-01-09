@@ -69,7 +69,7 @@
             <div class="form-group text-center">
                 <a asp-controller="Sheet" asp-action="Download" asp-route-slug="@single.Slug" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-download"></i> Tải về</a>
             </div>
-            @if (!Model.Any())
+            @if (!single.ListJPG.Any() && !single.ListPNG.Any() && !single.ListPDF.Any())
             {
                 <div class="text-center">
                     <h3 class="text-primary">Xin lỗi bạn! Chưa có sheet bài hát này. Chúng tôi sẽ cập nhật sớm</h3>

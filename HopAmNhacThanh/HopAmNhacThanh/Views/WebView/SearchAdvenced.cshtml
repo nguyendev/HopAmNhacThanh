@@ -1,0 +1,62 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Hợp âm Anh - Hồ Quỳnh Hương - Hợp Âm Việt</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://hopamviet.vn/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://hopamviet.vn/assets/css/custom.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://hopamviet.vn/assets/js/bootstrap.min.js"></script>
+    <script src="https://hopamviet.vn/assets/js/custom.js"></script>
+</head>
+<body style="padding-top: 0px;">
+    <div class="ct-box">
+        <div id="toolbar" class="btn-toolbar">
+            <div class="btn-group">
+                <span class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" onclick="changeStyle(document.getElementById('lyric'), 'b');">b</span>
+                <span class="btn btn-default btn-sm disabled" data-toggle="tooltip" data-placement="top">[D]</span>
+                <span data-toggle="tooltip" data-placement="top" class="btn btn-default btn-sm" onclick="changeStyle(document.getElementById('lyric'), '#');">#</span>
+            </div>
+            <div class="btn-group">
+                <span class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" onclick="startScroll();"><i class="fa fa-arrow-down"></i></span>
+                <span class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" onclick="stopScroll();"><i class="fa fa-times"></i></span>
+            </div>
+            <div class="btn-group">
+                <span id="fontsize" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="fa fa-font fa-1x"></i></span>
+                <a href="https://hopamviet.vn/chord/printsong/anh/W8IUWOBF.html" target="_blank" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top"><i class="fa fa-print"></i></a>
+                <span id="clone" class="btn btn-default btn-sm">x2</span>
+            </div>
+        </div>
+        <br />
+        <div id="lyric">
+            @Html.Raw(ViewData["lyric"] as string);
+        </div>
+
+    </div>
+    <script>
+            //tu dong truot
+            var scrollValue = 1;
+            var scrolldelay;
+
+            function stopScroll() {
+                clearTimeout(scrolldelay);
+            }
+
+            function startScroll() {
+                window.scrollBy(0, 1);
+                if ($(window).scrollTop() > ($('#lyric').offset().top + $('#lyric').height() - $(window).height() / 4)) {
+                    stopScroll();
+                } else {
+                    scrolldelay = setTimeout('startScroll()', 200 / scrollValue);
+                }
+            }
+    </script>
+    <script src="https://hopamviet.vn/assets/js/raphael.js"></script>
+    <script src="https://hopamviet.vn/assets/js/jtab.js"></script>
+</body>
+</html>

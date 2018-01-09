@@ -11,8 +11,9 @@ namespace DoVuiHaiNao.Services
         public static string APPROVED = "A";
         public static string UNAPPROVED = "U";
         public static int LENGTH_LYRIC = 196;
-        public static int LENGTH_LYRIC_MOBILE = 45;
+        public static int LENGTH_LYRIC_MOBILE = 43;
         public static string API_KEY = "NGUYENIT";
+        public static int PAGE_SIZE_MOBILE = 40;
     }
     public enum TypeQuestion
     {

@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using HopAmNhacThanh.Data.HomeRepository;
 using HopAmNhacThanh.Models.HomeViewModels;
+using HopAmNhacThanh.Areas.AutoGetTool.Services;
+using HtmlAgilityPack;
 
 namespace HopAmNhacThanh.Controllers
 {
@@ -40,6 +42,27 @@ namespace HopAmNhacThanh.Controllers
         {
             List<SimpleLinkSongViewModel> applicationDbContext = await _repostitory.GetAudioMobile(slug);
             return View(applicationDbContext);
+        }
+        [Route("searchAdvenced/mobile/q={url}")]
+        public async Task<IActionResult> SearchAdvenced(string url)
+        {
+            url = url.Replace("-","/");
+            url = "https://hopamviet.vn/chord/song/" + url;
+            string source = await NhanDienMauServices.FormatHtml(url);
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(source);
+
+            string lyric = "";
+            try
+            {
+                string xpathLyric = ".//*[@id='lyric']";
+                var tagLyric = doc.DocumentNode.SelectSingleNode(xpathLyric);
+                lyric = tagLyric.InnerText;
+                lyric = lyric.Replace("\n", "<br />");
+            }
+            catch { }
+            ViewData["lyric"] = lyric;
+            return View();
         }
     }
 }
