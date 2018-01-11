@@ -9,7 +9,7 @@ using DoVuiHaiNao.Services;
 namespace HopAmNhacThanh.Areas.APIManager.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Audio")]
+    [Route(GlobalAPI.AUDIO_ROOT)]
     public class AudioController : Controller
     {
         public readonly IAudioApiRepository _repository;
@@ -19,8 +19,8 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
         }
 
         // GET: api/Home/5
-        [HttpGet("{api_key}/{slug}")]
-        public async Task<JsonResult> GetAudio(string api_key, string slug)
+        [HttpGet(GlobalAPI.GET_LIST_WITH_SLUG)]
+        public async Task<JsonResult> GetList(string api_key, string slug)
         {
             if (api_key == Global.API_KEY)
             {

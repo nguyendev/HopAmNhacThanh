@@ -10,14 +10,14 @@ using DoVuiHaiNao.Services;
 namespace HopAmNhacThanh.Areas.APIManager.Controllers
 {
     [Produces("application/json")]
-    [Route("api/SearchAdvanced")]
+    [Route(GlobalAPI.SEARCH_ADVANCED_ROOT)]
     public class SearchAdvancedController : Controller
     {
-        [HttpGet("{api_key}/q={search}")]
-        public async Task<IActionResult> Search(string search)
+        [HttpGet(GlobalAPI.GET_SEARCH)]
+        public async Task<IActionResult> Search(string searchString)
         {
             //search = search.Replace(" ", "-");
-            string url = "https://hopamviet.vn/chord/search.html?song=" + search;
+            string url = "https://hopamviet.vn/chord/search.html?song=" + searchString;
             return Json(await GetListSong(url));
         }
         
@@ -57,7 +57,7 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
             return list;
         }
 
-        [HttpGet("{api_key}/single&q={url}")]
+        [HttpGet(GlobalAPI.SEARCH_ADVANCED_GET_SINGLE)]
         public async Task<string> GetSingle(string url)
         {
             url = url.Replace("_", "/");

@@ -9,7 +9,7 @@ using DoVuiHaiNao.Services;
 namespace HopAmNhacThanh.Areas.APIManager.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Song")]
+    [Route(GlobalAPI.SONG_ROOT)]
     public class SongController : Controller
     {
         public readonly ISongApiRepository _repository;
@@ -19,7 +19,7 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
         }
         
         // GET: api/Home/5
-        [HttpGet("{api_key}/getNews")]
+        [HttpGet(GlobalAPI.S_GET_LIST_NEWS)]
         public async Task<JsonResult> GetNew(string api_key)
         {
             if (api_key == Global.API_KEY)
@@ -29,7 +29,7 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
             }
             return null;
         }
-        [HttpGet("{api_key}/getSingle/{slug}/{slugVersion}")]
+        [HttpGet(GlobalAPI.S_GET_SINGLE)]
         public async Task<JsonResult> GetSingle(string api_key, string slug, string slugVersion)
         {
             if (api_key == Global.API_KEY)
@@ -38,7 +38,7 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
             }
             return null;
         }
-        [HttpGet("{api_key}/getPopulars")]
+        [HttpGet(GlobalAPI.S_GET_LIST_POPULARS)]
         public async Task<JsonResult> Populars(string api_key)
         {
             if (api_key == Global.API_KEY)

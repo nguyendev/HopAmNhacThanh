@@ -9,7 +9,7 @@ using DoVuiHaiNao.Services;
 namespace HopAmNhacThanh.Areas.APIManager.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Search")]
+    [Route(GlobalAPI.SEARCH_ROOT)]
     public class SearchController : Controller
     {
         public readonly ISearchApiRepository _repository;
@@ -19,7 +19,7 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
         }
 
         // GET: api/Home/5
-        [HttpGet("{api_key}&q={searchString}")]
+        [HttpGet(GlobalAPI.GET_SEARCH)]
         public async Task<JsonResult> GetSearch(string api_key,string searchString)
         {
             if (api_key == Global.API_KEY)

@@ -9,7 +9,7 @@ using DoVuiHaiNao.Services;
 namespace HopAmNhacThanh.Areas.APIManager.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Sheet")]
+    [Route(GlobalAPI.SHEET_ROOT)]
     public class SheetController : Controller
     {
         public readonly ISheetApiRepository _repository;
@@ -19,7 +19,7 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
         }
 
         // GET: api/Home/5
-        [HttpGet("{api_key}/{slug}")]
+        [HttpGet(GlobalAPI.GET_LIST_WITH_SLUG)]
         public async Task<IActionResult> GetSheet(string api_key, string slug)
         {
             if (api_key == Global.API_KEY)

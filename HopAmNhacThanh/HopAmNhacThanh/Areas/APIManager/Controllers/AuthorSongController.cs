@@ -9,7 +9,7 @@ using DoVuiHaiNao.Services;
 namespace HopAmNhacThanh.Areas.APIManager.Controllers
 {
     [Produces("application/json")]
-    [Route("api/AuthorSong")]
+    [Route(GlobalAPI.AUTHOR_SONG_ROOT)]
     public class AuthorSongController : Controller
     {
         public readonly IAuthorSongApiRepository _repository;
@@ -17,7 +17,7 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
         {
             _repository = repository;
         }
-        [HttpGet("{api_key}")]
+        [HttpGet(GlobalAPI.GET_LIST)]
         public JsonResult GetList(string api_key)
         {
             if (api_key == Global.API_KEY)
@@ -26,7 +26,7 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
             }
             return null;
         }
-        [HttpGet("{api_key}/single&q={slug}")]
+        [HttpGet(GlobalAPI.GET_SINGLE)]
         public JsonResult GetSingle(string api_key, string slug)
         {
             if (api_key == Global.API_KEY)

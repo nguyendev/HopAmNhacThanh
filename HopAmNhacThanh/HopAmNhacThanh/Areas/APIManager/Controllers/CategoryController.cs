@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace HopAmNhacThanh.Areas.APIManager.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Category")]
+    [Route(GlobalAPI.CATEGORY_ROOT)]
     public class CategoryController : Controller
     {
         public readonly ICategoryApiRepository _repository;
@@ -19,7 +19,7 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
         }
 
         // GET: api/Home/5
-        [HttpGet("{api_key}/{slug}")]
+        [HttpGet(GlobalAPI.GET_LIST)]
         public async Task<JsonResult> GetList(string api_key)
         {
             if (api_key == Global.API_KEY)
@@ -29,7 +29,7 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
             return Json(null);
         }
 
-        [HttpGet("{api_key}/{slug}")]
+        [HttpGet(GlobalAPI.GET_SINGLE)]
         public async Task<JsonResult> GetSingle(string api_key, string slug)
         {
             if (api_key == Global.API_KEY)

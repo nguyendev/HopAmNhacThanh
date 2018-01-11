@@ -10,7 +10,7 @@ using DoVuiHaiNao.Services;
 namespace HopAmNhacThanh.Areas.APIManager.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Home")]
+    [Route(GlobalAPI.HOME_ROOT)]
     public class HomeController : Controller
     {
         public readonly IHomeRepository _repository;
@@ -20,8 +20,8 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
         }
 
         // GET: api/Home/5
-        [HttpGet("{api_key}")]
-        public JsonResult GetHome(string api_key)
+        [HttpGet(GlobalAPI.GET_LIST)]
+        public JsonResult GetList(string api_key)
         {
             if (api_key == Global.API_KEY)
             {
@@ -30,7 +30,7 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
             return null;
         }
 
-        [HttpGet("{api_key}/{slug}/{slugVersion}")]
+        [HttpGet(GlobalAPI.GET_SINGLE_WITH_SLUG_VERSION)]
         public JsonResult GetSingle(string api_key, string slug, string slugVersion)
         {
             if (api_key == Global.API_KEY)

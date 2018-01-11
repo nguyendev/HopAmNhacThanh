@@ -9,7 +9,7 @@ using HopAmNhacThanh.Areas.APIManager.Data;
 namespace HopAmNhacThanh.Areas.APIManager.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Album")]
+    [Route(GlobalAPI.ALBUM_ROOT)]
     public class AlbumController : Controller
     {
         private readonly IAlbumApiRepository _repository;
@@ -17,8 +17,8 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
         {
             _repository = repository;
         }
-        [HttpGet("{api_key}/getList")]
-        public async Task<JsonResult> ListAlbum(string api_key)
+        [HttpGet(GlobalAPI.GET_LIST)]
+        public async Task<JsonResult> GetList(string api_key)
         {
             if (api_key == Global.API_KEY)
             {
@@ -26,8 +26,8 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
             }
             return Json(null);
         }
-        [HttpGet("{api_key}/getSingle&slug={slug}")]
-        public async Task<JsonResult> SingleAlbum(string api_key,string slug)
+        [HttpGet(GlobalAPI.GET_SINGLE)]
+        public async Task<JsonResult> GetSingle(string api_key,string slug)
         {
             if (api_key == Global.API_KEY)
             {
@@ -35,7 +35,7 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
             }
             return Json(null);
         }
-        [HttpGet("{api_key}&q={searchString}&slug={slug}")]
+        [HttpGet(GlobalAPI.GET_SEARCH_WITH_SLUG)]
         public async Task<JsonResult> GetSearch(string api_key, string searchString, string slug)
         {
             if (api_key == Global.API_KEY)
