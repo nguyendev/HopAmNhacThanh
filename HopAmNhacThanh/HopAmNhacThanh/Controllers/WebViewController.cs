@@ -46,7 +46,7 @@ namespace HopAmNhacThanh.Controllers
         [Route("searchAdvenced/mobile/q={url}")]
         public async Task<IActionResult> SearchAdvenced(string url)
         {
-            url = url.Replace("-","/");
+            url = url.Replace("_","/");
             url = "https://hopamviet.vn/chord/song/" + url;
             string source = await NhanDienMauServices.FormatHtml(url);
             HtmlDocument doc = new HtmlDocument();

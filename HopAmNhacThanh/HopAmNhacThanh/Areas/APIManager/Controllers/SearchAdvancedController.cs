@@ -16,7 +16,7 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
         [HttpGet("{api_key}/q={search}")]
         public async Task<IActionResult> Search(string search)
         {
-            search = search.Replace(" ", "-");
+            //search = search.Replace(" ", "-");
             string url = "https://hopamviet.vn/chord/search.html?song=" + search;
             return Json(await GetListSong(url));
         }
@@ -49,7 +49,7 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
                     simpleSong.Title = simpleSong.Title.Replace("\n", "");
                     simpleSong.Description =SEOExtension.GetStringToLengthNoEndLine(simpleSong.Description.Replace("\n", ""), Global.LENGTH_LYRIC_MOBILE);
                     simpleSong.URL = simpleSong.URL.Replace("https://hopamviet.vn/chord/song/", "");
-                    simpleSong.URL = simpleSong.URL.Replace("/", "-");
+                    simpleSong.URL = simpleSong.URL.Replace("/", "_");
                     list.Add(simpleSong);
                 }
             }
@@ -60,7 +60,7 @@ namespace HopAmNhacThanh.Areas.APIManager.Controllers
         [HttpGet("{api_key}/single&q={url}")]
         public async Task<string> GetSingle(string url)
         {
-            url = url.Replace("-", "/");
+            url = url.Replace("_", "/");
             url = "https://hopamviet.vn/chord/song/" + url;
             string source = await NhanDienMauServices.FormatHtml(url);
             HtmlDocument doc = new HtmlDocument();

@@ -134,6 +134,8 @@ namespace HopAmNhacThanh
             services.AddScoped<IAudioApiRepository, AudioApiRepository>();
             services.AddScoped<ISheetApiRepository, SheetApiRepository>();
             services.AddScoped<IAlbumApiRepository, AlbumApiRepository>();
+            services.AddScoped<IAuthorSongApiRepository, AuthorSongApiRepository>();
+            services.AddScoped<ICategoryApiRepository, CategoryApiRepository>();
             //services.AddSingleton();
             services.AddKendo();
         }

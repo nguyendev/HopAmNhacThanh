@@ -62,7 +62,7 @@
         <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" asp-append-version="true"></script>
     </environment>
 </head>
-<body style="background-color: #f1f4f9 !important">
+<body style="background-color: #fff !important">
     <div class="panel panel-default">
         <div class="panel-heading" style="background-color: white">
             <h2 style="margin-bottom: 5px; font-size: 14px;  margin-top: 5px;">
@@ -94,7 +94,7 @@
                 @if (!Model.Any())
                 { 
                     <div class="text-center">
-                        <h3 class="text-primary">Xin lỗi bạn! Chưa có video bài hát này. Chúng tôi sẽ cập nhật sớm</h3>
+                        <p class="text-primary">Xin lỗi bạn! Chưa có video bài hát này. Chúng tôi sẽ cập nhật sớm</p>
                     </div>
                 }
                 @foreach (var item in Model)
